@@ -66,7 +66,7 @@
 ```
 이슈 작성 예시)
 
-제목 : [feat] add jump mechanic for player
+제목 : [Feat] add jump mechanic for player
 
 본문 : 
 **구현하고자 하는 기능**
@@ -82,6 +82,9 @@ X
 **추가 설명**
 플레이어가 점프하는 힘이 현재 속도에 비례하도록 구현 바람
 ```
+
+---
+
 ### Project 작성 룰셋
 #### 보드 구성
 | 컬럼          | 역할                     |
