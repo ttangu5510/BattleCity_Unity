@@ -66,7 +66,7 @@
 ```
 이슈 작성 예시)
 
-제목 : [Feat] add jump mechanic for player
+제목 : [Feat] 플레이어 점프 로직 추가
 
 본문 : 
 **구현하고자 하는 기능**
