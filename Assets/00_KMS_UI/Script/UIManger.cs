@@ -16,6 +16,14 @@ public class UIManager : MonoBehaviour
         {
             isPaused = !isPaused;
             gameCanvas.enabled = !gameCanvas.enabled; // 캔버스 활성/비활성
+            if(isPaused)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
         }
     }
 
