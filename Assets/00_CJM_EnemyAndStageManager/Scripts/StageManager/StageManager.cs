@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,24 +10,23 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     private static StageManager instance;
-    public static StageManager Instance;
+    public static StageManager Instance { get { return instance; } }
 
     private List<EnemySpawner> spawners;
     private List<Enemy> activateEnemys;
     private List<Enemy> slayedEnemys;
 
+    [Header("스테이지 기본 설정")]
+    [Tooltip("맵 안에 동시에 존재할 수 있는 최대 적 수")]
     [SerializeField] private int maxActiveEnemyCount;   // 맵 상에 동시에 존재할 수 있는 최대 적 수
+    [Tooltip("[스테이지 클리어] 까지 남은 적의 라이프 수")]
     [SerializeField] private int enemyLifeCount;        // 남은 적의 목숨
-
+    [Tooltip("현재 스테이지에서 얻은 점수")]
     [SerializeField] private int sumedScore;
 
-    [Header("몬스터 등급 별 점수")]
-    [SerializeField] private int normal_Point;
-    [SerializeField] private int elite_Point;
-    [SerializeField] private int boss_Point;
 
-    public UnityEvent StageStartEvent;
-    public UnityEvent StageCloseEvent;
+    [HideInInspector] public UnityEvent StageStartEvent;
+    [HideInInspector] public UnityEvent StageCloseEvent;
 
     private void Awake()
     {

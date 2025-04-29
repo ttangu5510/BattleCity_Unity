@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
         else
             dir = (transform.forward * inputDir.z).normalized;
 
-        Move();
         Rotate();
         #endregion
 
@@ -53,8 +52,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (dir == Vector3.zero) return;
         
+        Move();
     }
 
     private void Move()
@@ -69,13 +68,15 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+        // TODO : 불릿 스택 카운트 조건문
+
         GameObject gameObject = Instantiate(bulletPrefab); // 임시 / temp
         //GameObject gameObject = bulletPool.BulletOut().gameObject;
 
         gameObject.transform.position = muzzPoint.position;
         gameObject.transform.forward = muzzPoint.forward;
         gameObject.GetComponent<Rigidbody>().velocity = player.shotSpeed * gameObject.transform.forward;
-        
+
         gameObject.SetActive(true);
     }
 

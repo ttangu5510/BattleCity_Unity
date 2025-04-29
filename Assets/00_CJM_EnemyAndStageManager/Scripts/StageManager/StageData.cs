@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StageData : MonoBehaviour
 {
-    private StageManager sm;
-    private int maxActiveEnemyCount;    // 맵 상에 동시에 존재할 수 있는 최대 적 수
-    private int enemyLifeCount;         // 처치해야 되는 몬스터 수 / 승리 조건
+    [SerializeField] private StageManager sm;
+    [SerializeField] private int maxActiveEnemyCount;    // 맵 상에 동시에 존재할 수 있는 최대 적 수
+    [SerializeField] private int enemyLifeCount;         // 처치해야 되는 몬스터 수 / 승리 조건
 
     // 스테이지 매니저 싱글톤 인스턴스가 Awake에서 할당되므로 Start에서 정보 전달
     private void Start()

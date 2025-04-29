@@ -4,14 +4,5 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
