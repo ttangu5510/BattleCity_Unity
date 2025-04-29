@@ -14,6 +14,7 @@ public class PooledObject : MonoBehaviour
     {
         Instantiate(bulletExplosion, transform.position, transform.rotation).Play();
         // TODO : 레이어에 따라서 다른 결과 연산
+        
         returnPool.ReturnToPool(this);
     }
 
