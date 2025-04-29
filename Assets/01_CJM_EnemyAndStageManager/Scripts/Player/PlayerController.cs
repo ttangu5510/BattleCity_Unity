@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 dir;
 
-    //[SerializeField] private BulletObjectPool bulletPool;
+    [SerializeField] private BulletObjectPool bulletPool;
     [SerializeField] GameObject bulletPrefab; // 임시 / temp
 
     private void Awake()
@@ -69,9 +69,15 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         // TODO : 불릿 스택 카운트 조건문
+        /*if (bulletPool.PoolCount() <= 0)
+        {
+            Debug.Log("풀 오브젝트 모두 소진!");
+            return;
+        }*/
 
         GameObject gameObject = Instantiate(bulletPrefab); // 임시 / temp
         //GameObject gameObject = bulletPool.BulletOut().gameObject;
+
 
         gameObject.transform.position = muzzPoint.position;
         gameObject.transform.forward = muzzPoint.forward;

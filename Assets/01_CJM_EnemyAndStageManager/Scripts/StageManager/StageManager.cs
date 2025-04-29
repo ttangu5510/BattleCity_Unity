@@ -28,6 +28,8 @@ public class StageManager : MonoBehaviour
     [HideInInspector] public UnityEvent StageStartEvent;
     [HideInInspector] public UnityEvent StageCloseEvent;
 
+    private EnemyManager em;
+
     private void Awake()
     {
         // ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫ ª˝º∫
@@ -41,6 +43,11 @@ public class StageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        em = EnemyManager.Instance;
     }
 
     public void StageStart(Scene scene, LoadSceneMode mode)
@@ -108,15 +115,15 @@ public class StageManager : MonoBehaviour
         {
             if (slayedEnemys[i].grade == EnemyGrade.normal)
             {
-                normalSum += normal_Point;
+                normalSum += em.score_Normal;
             }
             else if (slayedEnemys[i].grade == EnemyGrade.elite)
             {
-                eliteSum += elite_Point;
+                eliteSum += em.score_Elite;
             }
             else if (slayedEnemys[i].grade == EnemyGrade.elite)
             {
-                bossSum += boss_Point;
+                bossSum += em.score_Boss;
             }
         }
 
