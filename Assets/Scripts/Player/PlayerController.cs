@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,8 +9,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 dir;
 
-    // private BulletObjectPool<Bullet> bulletPool;
-    [SerializeField] GameObject bulletPrefab; // 임시 / temp
+
+    // TODO : 테스트
+    [SerializeField] BulletObjectPool bulletPool;
+    //[SerializeField] GameObject bulletPrefab;
 
     private void Awake()
     {
@@ -34,7 +33,7 @@ public class PlayerController : MonoBehaviour
         // x방향 입력이 더 많으면 횡 입력 판정 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
         if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
             dir = (transform.right * inputDir.x).normalized;
-        else 
+        else
             dir = (transform.forward * inputDir.z).normalized;
 
         // rb로 이동 구현하려면 FixedUpdate로 옮기자
@@ -62,13 +61,13 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        GameObject gameObject = Instantiate(bulletPrefab); // 임시 / temp
-        //GameObject gameObject = bulletPool.BulletOut().gameObject;
+        // TODO : 테스트
+        //GameObject gameObject = Instantiate(bulletPrefab); // 임시 / temp
+        GameObject gameObject = bulletPool.BulletOut().gameObject;
 
         gameObject.transform.position = muzzPoint.position;
         gameObject.transform.forward = muzzPoint.forward;
-
-        gameObject.SetActive(true);
+        gameObject.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * player.shotSpeed;
     }
 
 }
