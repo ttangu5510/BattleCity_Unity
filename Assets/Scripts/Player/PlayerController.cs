@@ -67,9 +67,7 @@ public class PlayerController : MonoBehaviour
 
         gameObject.transform.position = muzzPoint.position;
         gameObject.transform.forward = muzzPoint.forward;
-        gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * Time.deltaTime, ForceMode.Impulse);
-
-        gameObject.SetActive(true);
+        gameObject.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * player.shotSpeed;
     }
 
 }
