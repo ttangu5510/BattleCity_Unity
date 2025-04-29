@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IDamagable
 
     [Header("현재 플레이어 정보")]
     [SerializeField] public UpgradeType grade;
+    [SerializeField] public PlayerState state;
     [SerializeField] private int life;
     [SerializeField] public float moveSpeed { get; private set; }
     [SerializeField] public float shotSpeed { get; private set; }
@@ -62,7 +63,6 @@ public class Player : MonoBehaviour, IDamagable
         // 초기 설정으로 저장
         pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, UpgradeType.normal, 0);
     }
-
 
     // 데미지 받음 => 죽음 판정
     public void TakeDamage()
@@ -117,8 +117,8 @@ public class Player : MonoBehaviour, IDamagable
         Debug.Log("플레이어 리스폰 완료");
     }
 
+    #region 아이템 & 환경 사용 호출 함수
 
-    // 아이템에서 호출 // 업그레이드 기능에서 체력도 넣자
     public void Upgrade(float moveSpeed, float shotSpeed)
     {
         if (grade == UpgradeType.boss)
@@ -131,13 +131,20 @@ public class Player : MonoBehaviour, IDamagable
         grade += 1;
     }
 
+    public void GetLife(int life)
+    {
+        this.life += life;
+    }
 
-    // 환경 오브젝트에서 사용하는 함수
     public void SpeedControl(float moveSpeed, float shotSpeed)
     {
         this.moveSpeed += moveSpeed;
         this.shotSpeed += shotSpeed;
     }
+
+    #endregion
+
+
 
     // 스테이지 종료 시 호출
     public void SavePlayerData()
@@ -148,5 +155,7 @@ public class Player : MonoBehaviour, IDamagable
 
 // 플레이어 & Enemy 업그레이드 등급
 public enum UpgradeType { normal, elite, boss }
+
+public enum PlayerState { General, Invincible } // {일반, 무적, ...상태가 더 필요하면 이곳에 추가}
 
 

@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 dir;
 
     [SerializeField] private BulletObjectPool bulletPool;
-    [SerializeField] GameObject bulletPrefab; // 임시 / temp
 
     private void Awake()
     {
@@ -25,40 +24,51 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        #region 방향키 입력, 이동 및 회전
+        // 입력을 4방향 단위벡터로 연산 후 dir에 저장
+        #region dir(입력)
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
         Vector3 inputDir = new Vector3(x, 0, z).normalized;
 
-        if (inputDir == Vector3.zero) return;
-
         // x방향 입력이 더 많으면 횡 입력 판정 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
-        if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
+        if (inputDir == Vector3.zero)
+        {
+            dir = Vector3.zero;
+        }
+        else if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
+        {
             dir = (transform.right * inputDir.x).normalized;
+        }
         else
+        {
             dir = (transform.forward * inputDir.z).normalized;
-
-        Rotate();
+        }
         #endregion
 
-        #region 공격키 입력, 공격
+        // 이동하길 원하는 각도로 회전
+        Rotate();
+
+        // 공격키 입력, 공격
         if (Input.GetKeyDown(KeyCode.X))
         {
             Attack();
         }
-        #endregion
     }
 
     private void FixedUpdate()
     {
-        
+        // 이동(물리)
         Move();
     }
 
     private void Move()
     {
-        transform.Translate(dir * player.moveSpeed * Time.deltaTime);
+        if (dir != Vector3.zero)
+        {
+            rb.velocity = dir * player.moveSpeed;
+        }
+        else rb.velocity = Vector3.zero;
     }
 
     private void Rotate()
@@ -69,14 +79,13 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         // TODO : 불릿 스택 카운트 조건문
-        /*if (bulletPool.PoolCount() <= 0)
+        if (bulletPool.PoolCount() <= 0)
         {
             Debug.Log("풀 오브젝트 모두 소진!");
             return;
-        }*/
+        }
 
-        GameObject gameObject = Instantiate(bulletPrefab); // 임시 / temp
-        //GameObject gameObject = bulletPool.BulletOut().gameObject;
+        GameObject gameObject = bulletPool.BulletOut().gameObject;
 
 
         gameObject.transform.position = muzzPoint.position;
