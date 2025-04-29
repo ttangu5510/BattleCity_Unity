@@ -4,45 +4,22 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    private int itemID;
-    private string itemName;
-    private Sprite icon;
-    private float timer;
-    public float duration;
-    private int effectValue;
+    public int itemID;
+    public string itemName;
+    public Sprite icon;
+    public int effectValue;
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other) //OnCollision을 사용하려고했으나 원작게임에선 벽위에도 아이템이 등장하기에 OnTrigger로 변경
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                EndEffect(); // 지속 시간이 끝나면 효과를 종료
-            }
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             Debug.Log($"Player collided with {itemName}");
-            //ApplyEffect(collision.gameObject.GetComponent<PlayerDate>());
-            Destroy(gameObject); // 아이템 소멸
+
+            // 아이템 효과 적용은 ItemManager가 담당
+            ItemManager.Instance.ApplyEffect(this, other.gameObject);
+
+            // 아이템은 역할이 끝났으니 소멸
+            Destroy(gameObject);
         }
-    }
-    private void EndEffect()
-    {
-        Debug.Log($"{itemName} effect ended.");
     }
 }
