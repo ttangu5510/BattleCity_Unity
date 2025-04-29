@@ -29,7 +29,13 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        dir = new Vector3(x,0,z).normalized;
+        Vector3 inputDir = new Vector3(x, 0, z).normalized;
+
+        // x방향 입력이 더 많으면 횡 입력 판정 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
+        if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
+            dir = (transform.right * inputDir.x).normalized;
+        else 
+            dir = (transform.forward * inputDir.z).normalized;
 
         // rb로 이동 구현하려면 FixedUpdate로 옮기자
         Move();

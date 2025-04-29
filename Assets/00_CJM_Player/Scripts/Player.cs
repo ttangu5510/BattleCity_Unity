@@ -31,6 +31,9 @@ public class Player : MonoBehaviour // : IDamagable, IMoveable(이건 플레이어 컨�
     private void Awake()
     {
         pd = PlayerData.Instance;
+
+        DataInit(); // 임시/테스트용, 첫 시작 판정에서 해줘야함
+
         grade = pd.grade;
         life = pd.life;
         moveSpeed = pd.moveSpeed;
@@ -52,12 +55,6 @@ public class Player : MonoBehaviour // : IDamagable, IMoveable(이건 플레이어 컨�
         pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, UpgradeType.normal, 0);
     }
 
-    // 테스트용 Start  
-    // GameManager.GameStartEvent로 호출/리스너 할당 예정
-    private void Start()
-    {
-        DataInit();
-    }
 
     // 데미지 받음 => 죽음 판정
     public void TakeDamage() // : IDamagable
