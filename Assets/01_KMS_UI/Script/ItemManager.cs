@@ -35,12 +35,12 @@ public class ItemManager : MonoBehaviour
         // Debug.Log($"[Load Sprite] invincibilityIcon: {(invincibilityIcon != null ? "OK" : "FAILED")}");
 
         //업그레이드
-        itemDataDictionary.Add(1, new ItemData(1, "Upgrade", (player) =>
-        {
-            player.GetComponent<Player>().Upgrade(10, 10); // 임시 +10 +10
-        }, 0f, upgradeIcon));
-        Debug.Log($"[Load Sprite] Upgrade: {(upgradeIcon != null ? "OK" : "FAILED")}");
-
+        //itemDataDictionary.Add(1, new ItemData(1, "Upgrade", (player) =>
+        //{
+        //    player.GetComponent<Player>().Upgrade(10, 10); // 임시 +10 +10
+        //}, 0f, upgradeIcon));
+        //Debug.Log($"[Load Sprite] Upgrade: {(upgradeIcon != null ? "OK" : "FAILED")}");
+        //
         // 목숨 + 1 
         // itemDataDictionary.Add(2, new ItemData(2, "LifeUp", (player) =>
         // {
