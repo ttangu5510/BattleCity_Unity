@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PooledObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public BulletObjectPool returnPool;
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        returnPool.ReturnToPool(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
