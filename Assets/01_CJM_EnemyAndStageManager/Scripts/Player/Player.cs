@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamagable
 {
     // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
     [Header("초기 설정")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 
 
     // 데미지 받음 => 죽음 판정
-    public void TakeDamage() // : IDamagable
+    public void TakeDamage()
     {
         if (grade > UpgradeType.normal) grade -= 1;
         else Dead();

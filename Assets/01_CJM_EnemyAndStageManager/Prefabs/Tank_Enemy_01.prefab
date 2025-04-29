@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2922446677797755024}
   - component: {fileID: 8744610881354099405}
   - component: {fileID: 6781506216855605234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TankChassis
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 2440913255826740185}
   - component: {fileID: 4471208854024795420}
   - component: {fileID: 4311975205647297698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TankTracksRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,9 +178,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4842661939057043596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TankRenderers
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,9 +216,9 @@ GameObject:
   - component: {fileID: 8275165137716473070}
   - component: {fileID: 6262765643727804775}
   - component: {fileID: 3000389116578607559}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TankTracksLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,9 +300,9 @@ GameObject:
   - component: {fileID: 7392508191133258820}
   - component: {fileID: 2530171779340456548}
   - component: {fileID: 3259572944562732613}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TankTurret
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,9 +385,9 @@ GameObject:
   - component: {fileID: 4496016935266109053}
   - component: {fileID: 1864216690123361531}
   - component: {fileID: 5271429439119018194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tank_Enemy_01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -468,10 +468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128d36183834a242bf05e18ee9fd6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grade: 0
   hp: 0
   moveSpeed: 0
   shotSpeed: 0
-  grade: 0
+  scorePoint: 0
   muzzPoint: {fileID: 0}
   body: {fileID: 0}
 --- !u!1 &8949807994739866211
@@ -483,9 +484,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3583457069992751068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MuzzPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

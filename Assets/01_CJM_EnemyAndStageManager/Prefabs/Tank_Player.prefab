@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4777239432822509773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MuzzPoint
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,9 +40,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 939213684387526577}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TankRenderers
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,9 +78,9 @@ GameObject:
   - component: {fileID: 939213684387526581}
   - component: {fileID: 939213684388853743}
   - component: {fileID: 939213684389950767}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TankTurret
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,9 +162,9 @@ GameObject:
   - component: {fileID: 939213684387526585}
   - component: {fileID: 939213684388853739}
   - component: {fileID: 939213684389950763}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TankTracksLeft
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,9 +246,9 @@ GameObject:
   - component: {fileID: 939213684387526587}
   - component: {fileID: 939213684388853733}
   - component: {fileID: 939213684389950757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TankTracksRight
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,9 +332,9 @@ GameObject:
   - component: {fileID: 4531993973291934332}
   - component: {fileID: 7090571018589957377}
   - component: {fileID: 2334757787021968706}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tank_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,6 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzPoint: {fileID: 4777239432822509773}
   body: {fileID: 939213684387526577}
+  bulletPool: {fileID: 0}
   bulletPrefab: {fileID: 792392180872622107, guid: 95ff221bfceef754ab79ab4c81737f32, type: 3}
 --- !u!114 &4531993973291934332
 MonoBehaviour:
@@ -448,9 +449,9 @@ GameObject:
   - component: {fileID: 939213684387526591}
   - component: {fileID: 939213684388853741}
   - component: {fileID: 939213684389950765}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TankChassis
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

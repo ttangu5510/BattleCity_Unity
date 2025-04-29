@@ -96,3 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73bb915428be5043af38a1991e58e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  EffectPrefab: {fileID: 1624714524768532, guid: 2d3de2b4682158944b27f76db5f8a556, type: 3}
+  EnemyPrefab: {fileID: 5271429439119018194, guid: a05992259e89fc44c834f4b30e91888a, type: 3}

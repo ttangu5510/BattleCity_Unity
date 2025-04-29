@@ -12,11 +12,11 @@ public class StageManager : MonoBehaviour
     private static StageManager instance;
     public static StageManager Instance { get { return instance; } }
 
-    private List<EnemySpawner> spawners;
-    private List<Enemy> activateEnemys;
-    private List<Enemy> slayedEnemys;
+    [SerializeField] private List<EnemySpawner> spawners;
+    [SerializeField] private List<Enemy> activateEnemys;
+    [SerializeField] private List<Enemy> slayedEnemys;
 
-    [Header("스테이지 기본 설정")]
+    [Header("현재 스테이지 정보")]
     [Tooltip("맵 안에 동시에 존재할 수 있는 최대 적 수")]
     [SerializeField] private int maxActiveEnemyCount;   // 맵 상에 동시에 존재할 수 있는 최대 적 수
     [Tooltip("[스테이지 클리어] 까지 남은 적의 라이프 수")]
@@ -68,9 +68,11 @@ public class StageManager : MonoBehaviour
         // TODO : 다음 스테이지로 이동 (씬전환에서 구현해야하는지 고민 중)
     }
 
+    // 스테이지 씬 불러올 때, StageData에서 초기화
     public void StageDataInit()
     {
         // 리스트 초기화
+        spawners = new List<EnemySpawner>();
         activateEnemys = new List<Enemy>();
         slayedEnemys = new List<Enemy>();
     }
@@ -80,6 +82,12 @@ public class StageManager : MonoBehaviour
     {
         this.maxActiveEnemyCount = maxActiveEnemyCount;
         this.enemyLifeCount = enemyLifeCount;
+    }
+
+    // 스테이지에 존재하는 EnemySpawner들을 리스트에 추가
+    public void SpawnerAddToList(EnemySpawner spawner)
+    {
+        spawners.Add(spawner);
     }
 
     // Enemy Spawn() 시 호출
@@ -103,6 +111,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    
 
     // 스테이지 종료 시, 처치한 적 등급별로 점수 환산
     public void SumScore(out int enemy_Normal, out int enemy_Elite, out int enemy_Boss, out int sumedScore)
@@ -113,15 +122,15 @@ public class StageManager : MonoBehaviour
         
         for (int i = 0; i < slayedEnemys.Count; i++)
         {
-            if (slayedEnemys[i].grade == EnemyGrade.normal)
+            if (slayedEnemys[i].Grade == EnemyGrade.normal)
             {
                 normalSum += em.score_Normal;
             }
-            else if (slayedEnemys[i].grade == EnemyGrade.elite)
+            else if (slayedEnemys[i].Grade == EnemyGrade.elite)
             {
                 eliteSum += em.score_Elite;
             }
-            else if (slayedEnemys[i].grade == EnemyGrade.elite)
+            else if (slayedEnemys[i].Grade == EnemyGrade.boss)
             {
                 bossSum += em.score_Boss;
             }
