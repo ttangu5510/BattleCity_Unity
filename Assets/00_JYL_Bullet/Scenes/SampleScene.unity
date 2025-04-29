@@ -528,11 +528,11 @@ Transform:
   m_GameObject: {fileID: 1127434055739556661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7157774, y: -1.5068316, z: 0.9827896}
+  m_LocalPosition: {x: -0.92577744, y: -1.5068316, z: 1.2827896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 939213684950575107}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &636207311970377991
 PrefabInstance:
@@ -592,17 +592,9 @@ PrefabInstance:
       objectReference: {fileID: 1057831191404735801}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6008153171696399368, guid: 035e1ab0ef71e384c9e718c93a3c49fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 429370667134455162}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 035e1ab0ef71e384c9e718c93a3c49fa, type: 3}
---- !u!4 &939213684950575107 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6008153171696399368, guid: 035e1ab0ef71e384c9e718c93a3c49fa, type: 3}
-  m_PrefabInstance: {fileID: 636207311970377991}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1057831191404735801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,7 +608,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4127168117923181070, guid: 95ff221bfceef754ab79ab4c81737f32, type: 3}
-  bulletOutEffect: {fileID: 195792, guid: 89e78efe92dfe5a42837b392cdb0bf9e, type: 3}
   poolSize: 3
 --- !u!1 &1127434055739556661
 GameObject:
@@ -644,3 +635,4 @@ SceneRoots:
   - {fileID: 1334801019}
   - {fileID: 636207311970377991}
   - {fileID: 1098702193}
+  - {fileID: 429370667134455162}

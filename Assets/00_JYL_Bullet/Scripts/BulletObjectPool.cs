@@ -5,15 +5,15 @@ public class BulletObjectPool : MonoBehaviour
 {
     private Stack<PooledObject> bulletStack;
     [SerializeField] PooledObject bulletPrefab;
-    [SerializeField] GameObject bulletOutEffect;
     [SerializeField] int poolSize;
+
     private void Awake()
     {
         bulletStack = new Stack<PooledObject>();
         for (int i = 0; i < poolSize; i++)
         {
             PooledObject bullet = Instantiate(bulletPrefab, transform);
-
+            // TODO : 발사자 정보 추가
             bullet.gameObject.SetActive(false);
             bulletStack.Push(bullet);
         }
@@ -33,9 +33,12 @@ public class BulletObjectPool : MonoBehaviour
 
     public void ReturnToPool(PooledObject bullet)
     {
-        Instantiate(bulletOutEffect,transform.position, transform.rotation,transform);
         bullet.transform.rotation = Quaternion.identity;
         bullet.gameObject.SetActive(false);
         bulletStack.Push(bullet);
+    }
+    public int PoolCount()
+    {
+        return bulletStack.Count;
     }
 }
