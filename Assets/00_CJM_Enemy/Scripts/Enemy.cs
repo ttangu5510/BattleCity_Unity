@@ -7,14 +7,20 @@ public class Enemy : MonoBehaviour // IDamagable
     [SerializeField] private int hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float shotSpeed;
-    [SerializeField] public UpgradeType grade;
+    [SerializeField] private EnemyType type;
+    [SerializeField] private int scorePoint;
+
+    // Item itemPossession
 
     // private BulletObjectPool<Bullet> bulletPool;
     [SerializeField] Transform muzzPoint;
     [SerializeField] Transform body;
     [SerializeField] GameObject bulletPrefab; // 임시 / temp
 
+    private void Start()
+    {
 
+    }
 
     // 데미지 받음 => 죽음 판정
     public void TakeDamage() // : IDamagable
@@ -59,13 +65,14 @@ public class Enemy : MonoBehaviour // IDamagable
     // 기본 이동
     private void Move_Basic()
     {
-
+        // 4방향 랜덤 이동
     }
 
     // 타겟 추적 이동
     private void Move_Chasing(GameObject target)
     {
-
+        // 4방향 한정 타겟 추적
+        // NaviMesh
     }
 
     private void Move(Vector3 dir)
@@ -80,6 +87,7 @@ public class Enemy : MonoBehaviour // IDamagable
 
     #endregion
 
+    
     private void Attack()
     {
         GameObject gameObject = Instantiate(bulletPrefab); // 임시 / temp
@@ -90,4 +98,9 @@ public class Enemy : MonoBehaviour // IDamagable
 
         gameObject.SetActive(true);
     }
+}
+
+public enum EnemyType
+{
+    normal, elite, boss // 추가 가능
 }

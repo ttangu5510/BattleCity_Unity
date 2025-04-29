@@ -413,7 +413,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5391325887465339941
+--- !u!1001 &1682476779
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -465,49 +465,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank_Player
       objectReference: {fileID: 0}
-    - target: {fileID: 939213684387687005, guid: 7b0f5ee923f3b194fbddbf2c0d3797f9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2783139259885976751, guid: 7b0f5ee923f3b194fbddbf2c0d3797f9, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 939213684387687005, guid: 7b0f5ee923f3b194fbddbf2c0d3797f9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5391325887465339945}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0f5ee923f3b194fbddbf2c0d3797f9, type: 3}
---- !u!1 &5391325887465339942 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 939213684387687005, guid: 7b0f5ee923f3b194fbddbf2c0d3797f9, type: 3}
-  m_PrefabInstance: {fileID: 5391325887465339941}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5391325887465339943 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 939213684387526577, guid: 7b0f5ee923f3b194fbddbf2c0d3797f9, type: 3}
-  m_PrefabInstance: {fileID: 5391325887465339941}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5391325887465339944 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4777239432822509773, guid: 7b0f5ee923f3b194fbddbf2c0d3797f9, type: 3}
-  m_PrefabInstance: {fileID: 5391325887465339941}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5391325887465339945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5391325887465339942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1be6e3b45f1898446af4d1cea0929d3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzPoint: {fileID: 5391325887465339944}
-  body: {fileID: 5391325887465339943}
-  bulletPrefab: {fileID: 9012093764035395878, guid: b70896dda02c5d84ebc7d94bfa4f8972, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -515,4 +477,4 @@ SceneRoots:
   - {fileID: 277624186}
   - {fileID: 140457479}
   - {fileID: 1417715882}
-  - {fileID: 5391325887465339941}
+  - {fileID: 1682476779}

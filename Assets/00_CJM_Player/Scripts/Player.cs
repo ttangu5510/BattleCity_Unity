@@ -1,8 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
+public class Player : MonoBehaviour
 {
+    // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
     [Header("초기 설정")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
     [SerializeField] private int life_Init;
     [SerializeField] private float moveSpeed_Init;
@@ -41,6 +42,11 @@ public class Player : MonoBehaviour // : IDamagable, IMoveable(이건 플레이어 컨�
         score = pd.score;
 
         // 스테이지매니저.스테이지 종료 이벤트.AddListener(SavePlayerData);
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void OnDestroy()
@@ -138,6 +144,7 @@ public class Player : MonoBehaviour // : IDamagable, IMoveable(이건 플레이어 컨�
     }
 }
 
-
 // 플레이어 & Enemy 업그레이드 등급
 public enum UpgradeType { normal, elite, boss }
+
+
