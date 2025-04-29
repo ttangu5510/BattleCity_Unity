@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     // 스테이지 진행 중에는 현재 객체가 정보를 담당. 스테이지 종료 시, PlayerData에 현재 객체 정보 저장하는 구조
     private void Awake()
     {
+        // 씬 불러와지고 바로 시작할지, 스테이지 시작 이벤트 받고 시작할지 고민 중
         pd = PlayerData.Instance;
 
         DataInit(); // 임시/테스트용, 첫 시작 판정에서 해줘야함
@@ -46,7 +47,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        
+        // 스테이지 종료 시 플레이어 데이터 저장
+        StageManager.Instance.StageCloseEvent.AddListener(SavePlayerData);
     }
 
     private void OnDestroy()
@@ -75,7 +77,7 @@ public class Player : MonoBehaviour
         // 라이프 감소
         life -= 1;
 
-        // 라이프가 0 아래로 떨어지면 게임 오버 판정
+        // 라이프가 0 아래로 떨어지면 패배 조건 체크
         if (life <= 0)
         {
             //GameManager.Instance.GameOver();
@@ -116,7 +118,7 @@ public class Player : MonoBehaviour
     }
 
 
-    // 아이템에서 호출
+    // 아이템에서 호출 // 업그레이드 기능에서 체력도 넣자
     public void Upgrade(float moveSpeed, float shotSpeed)
     {
         if (grade == UpgradeType.boss)
@@ -130,14 +132,14 @@ public class Player : MonoBehaviour
     }
 
 
-    // 환경 오브젝트에서 사용하는 함수.
+    // 환경 오브젝트에서 사용하는 함수
     public void SpeedControl(float moveSpeed, float shotSpeed)
     {
         this.moveSpeed += moveSpeed;
         this.shotSpeed += shotSpeed;
     }
 
-    // 스테이지 종료 시 호출.
+    // 스테이지 종료 시 호출
     public void SavePlayerData()
     {
         pd.SaveData(life, moveSpeed, shotSpeed, grade, score);

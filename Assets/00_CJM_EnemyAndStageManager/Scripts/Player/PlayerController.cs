@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 dir;
 
-    // private BulletObjectPool<Bullet> bulletPool;
+    //[SerializeField] private BulletObjectPool bulletPool;
     [SerializeField] GameObject bulletPrefab; // 임시 / temp
 
     private void Awake()
@@ -26,18 +26,19 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         #region 방향키 입력, 이동 및 회전
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
 
         Vector3 inputDir = new Vector3(x, 0, z).normalized;
+
+        if (inputDir == Vector3.zero) return;
 
         // x방향 입력이 더 많으면 횡 입력 판정 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
         if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
             dir = (transform.right * inputDir.x).normalized;
-        else 
+        else
             dir = (transform.forward * inputDir.z).normalized;
 
-        // rb로 이동 구현하려면 FixedUpdate로 옮기자
         Move();
         Rotate();
         #endregion
@@ -48,6 +49,12 @@ public class PlayerController : MonoBehaviour
             Attack();
         }
         #endregion
+    }
+
+    private void FixedUpdate()
+    {
+        if (dir == Vector3.zero) return;
+        
     }
 
     private void Move()
@@ -67,7 +74,8 @@ public class PlayerController : MonoBehaviour
 
         gameObject.transform.position = muzzPoint.position;
         gameObject.transform.forward = muzzPoint.forward;
-
+        gameObject.GetComponent<Rigidbody>().velocity = player.shotSpeed * gameObject.transform.forward;
+        
         gameObject.SetActive(true);
     }
 
