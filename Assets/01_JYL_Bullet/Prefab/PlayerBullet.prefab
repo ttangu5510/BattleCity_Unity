@@ -154,6 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnPool: {fileID: 0}
   bulletExplosion: {fileID: 19807510, guid: 89e78efe92dfe5a42837b392cdb0bf9e, type: 3}
+  bulletType: 0
+  Breakable:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &134146882247599964
 Rigidbody:
   m_ObjectHideFlags: 0

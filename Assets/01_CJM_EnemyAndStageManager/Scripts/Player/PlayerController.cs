@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        player = transform.parent.GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
 
         // Bullet Pool 생성자로 bulletPool 필드에 할당. 
@@ -88,7 +88,16 @@ public class PlayerController : MonoBehaviour
         }
 
         GameObject gameObject = bulletPool.BulletOut().gameObject;
-
+        
+        // Todo: 플레이어 등급에 따른 총알 타입 구분, 머지 후 활성화 합시다
+        if(player.grade == UpgradeType.Grade04)
+        {
+            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type2;
+        }
+        else
+        {
+            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type1;
+        }
 
         gameObject.transform.position = muzzPoint.position;
         gameObject.transform.forward = muzzPoint.forward;

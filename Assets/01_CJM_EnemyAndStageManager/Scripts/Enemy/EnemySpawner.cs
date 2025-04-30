@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private SpawnerState state;
+    [SerializeField] private Transform standByGroup;
     [SerializeField] private GameObject EffectPrefab;
-    [SerializeField] private Enemy EnemyPrefab;
     
     private StageManager sm;
 
@@ -27,9 +27,9 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        Enemy enemy = Instantiate(EnemyPrefab, transform.position, transform.rotation);
-        
-        
+        // 자식 활성화
+        if (!standByGroup.GetChild(0).gameObject.activeSelf)
+            standByGroup.GetChild(0).gameObject.SetActive(true);
     }
 
     // TODO:
