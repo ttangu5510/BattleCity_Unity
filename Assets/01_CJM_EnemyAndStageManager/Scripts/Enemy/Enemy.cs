@@ -39,11 +39,11 @@ public class Enemy : MonoBehaviour, IDamagable
     // => 범위 안에 플레이어가 들어오면 [플레이어 추적 상태], 범위 안에 타겟이 들어오면 [타겟 추적 상태], 아무것도 없으면 [일반 상태]
     // 3. StageManager에서 승리조건, 패배조건 테스트 필요
 
-    private void OnEnable()
+    private void Start()
     {
         sm = StageManager.Instance;
         em = EnemyManager.Instance;
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetChild(0).GetComponent<Rigidbody>();
 
         em.StatSetting(out hp, out moveSpeed, out shotSpeed, out scorePoint, grade);
         state = EnemyState.General;
@@ -75,6 +75,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void TakeDamage()
     {
+        Debug.Log("공격받음");
+
         hp -= 1;
         if (hp <= 0) Dead();
     }
@@ -82,7 +84,9 @@ public class Enemy : MonoBehaviour, IDamagable
     public void Dead()
     {
         sm.ActiveEnemyListRemove(this);
-        Destroy(gameObject);
+
+        gameObject.SetActive(false);
+        transform.SetSiblingIndex(transform.parent.childCount - 1);
     }
 
 
@@ -99,7 +103,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Rotate(Vector3 dir)
     {
-        body.LookAt(transform.position + dir);
+        body.LookAt(transform.GetChild(0).position + dir);
     }
 
 
@@ -151,7 +155,7 @@ public class Enemy : MonoBehaviour, IDamagable
         // 벽에 닿으면 방향 전환 고고
 
         Vector3 originPos = muzzPoint.position;
-        int layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // 적들 서로, 벽만 체크 되도록--- 벽 레이어 추가되면 여기 추가
+        LayerMask layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // 적들 서로, 벽만 체크 되도록--- 벽 레이어 추가되면 여기 추가
         if (Physics.Raycast(originPos, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(originPos, originPos + muzzPoint.forward * rayForwardDistance, Color.red);
@@ -184,7 +188,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
 public enum EnemyGrade
 {
-    normal, elite, boss
+    normal, elite, boss // 추가 가능
 }
 
 public enum EnemyState

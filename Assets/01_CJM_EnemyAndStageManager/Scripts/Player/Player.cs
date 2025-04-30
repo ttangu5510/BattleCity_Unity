@@ -1,18 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour, IDamagable
 {
-    // : IDamagable, IMoveable(ÀÌ°Ç ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯¿¡¼­ ¹Þ°Ú½À´Ï´Ù)
-    [Header("ÃÊ±â ¼³Á¤")] // ¸Ç Ã³À½ °ÔÀÓÀ» ½ÃÀÛÇÒ ¶§. ±âº» ¼³Á¤À» ÀÔ·ÂÇÏ´Â Ä­ÀÔ´Ï´Ù.
+    // : IDamagable, IMoveable(ï¿½Ì°ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ°Ú½ï¿½ï¿½Ï´ï¿½)
+    [Header("ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½")] // ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½. ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï´ï¿½ Ä­ï¿½Ô´Ï´ï¿½.
     [SerializeField] private int life_Init;
     [SerializeField] private float moveSpeed_Init;
     [SerializeField] private float shotSpeed_Init;
 
-    [Header("½ºÅ×ÀÌÁö º° ½ºÆù Æ÷ÀÎÆ®")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®")]
     [SerializeField] private Transform respawnPoint;
 
-    [Header("ÇöÀç ÇÃ·¹ÀÌ¾î Á¤º¸")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] public UpgradeType grade;
     [SerializeField] public PlayerState state;
     [SerializeField] private int life;
@@ -20,116 +21,163 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] public float shotSpeed { get; private set; }
     [SerializeField] private int score;
 
-    private PlayerData pd; // µî±Þ & ½ºÄÚ¾î Á¤º¸
-
-    public bool isDamagable { get; private set; } // ÇÇ°Ý °¡´É »óÅÂ ¿©ºÎ  (¸®½ºÆù Áß ¹«Àû, ¾ÆÀÌÅÛ »ç¿ëÀ¸·Î ÀÎÇÑ ¹«Àû »óÅÂ, µîµî)
-
-    // private Item itemPossession; ¾ÆÀÌÅÛÀ» ¼ÒÁöÇÒ ¼ö ÀÖ°Ô ¸¸µé°í ½Í´Ù¸é »ç¿ë
-    // public UnityEvent PlayerDeadEvent = new UnityEvent(); °ÔÀÓ ¿À¹ö ÀÌº¥Æ®·Î¸¸ ÇØµµ ÃæºÐÇÒ µí. ÇÃ·¹ÀÌ¾î »ç¸Á ½Ã Æ¯¼ö ÂüÁ¶ ÇÊ¿äÇÒ ½Ã È°¼ºÈ­
+    [Header("ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½")]
+    [SerializeField] private Transform groupRender;
 
 
-    // ½ºÅ×ÀÌÁö¸¶´Ù ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®°¡ È°¼ºÈ­ µÉ ¶§, ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ¸¦ µ¿±âÈ­ ½ÃÅ´
-    // ½ºÅ×ÀÌÁö ÁøÇà Áß¿¡´Â ÇöÀç °´Ã¼°¡ Á¤º¸¸¦ ´ã´ç. ½ºÅ×ÀÌÁö Á¾·á ½Ã, PlayerData¿¡ ÇöÀç °´Ã¼ Á¤º¸ ÀúÀåÇÏ´Â ±¸Á¶
+
+
+    private PlayerData pd; // ï¿½ï¿½ï¿½ & ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+    public bool isDamagable { get; private set; } // ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½)
+
+    // private Item itemPossession; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Í´Ù¸ï¿½ ï¿½ï¿½ï¿½
+    // public UnityEvent PlayerDeadEvent = new UnityEvent(); ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½Î¸ï¿½ ï¿½Øµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½. ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ È°ï¿½ï¿½È­
+
+
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½Å´
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, PlayerDataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void Awake()
     {
-        // ¾À ºÒ·¯¿ÍÁö°í ¹Ù·Î ½ÃÀÛÇÒÁö, ½ºÅ×ÀÌÁö ½ÃÀÛ ÀÌº¥Æ® ¹Þ°í ½ÃÀÛÇÒÁö °í¹Î Áß
+        // ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½Þ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         pd = PlayerData.Instance;
 
-        DataInit(); // ÀÓ½Ã/Å×½ºÆ®¿ë, Ã¹ ½ÃÀÛ ÆÇÁ¤¿¡¼­ ÇØÁà¾ßÇÔ
+        DataInit(); // ï¿½Ó½ï¿½/ï¿½×½ï¿½Æ®ï¿½ï¿½, Ã¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        grade = pd.grade;
+        // grade = pd.grade;
         life = pd.life;
         moveSpeed = pd.moveSpeed;
         shotSpeed = pd.shotSpeed;
         score = pd.score;
 
-        // ½ºÅ×ÀÌÁö¸Å´ÏÀú.½ºÅ×ÀÌÁö Á¾·á ÀÌº¥Æ®.AddListener(SavePlayerData);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®.AddListener(SavePlayerData);
     }
 
     private void Start()
     {
-        // ½ºÅ×ÀÌÁö Á¾·á ½Ã ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ ÀúÀå
-        //StageManager.Instance.StageCloseEvent.AddListener(SavePlayerData);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        StageManager.Instance.StageCloseEvent.AddListener(SavePlayerData);
+
+
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½.
+        UpdateRender();
     }
 
     private void OnDestroy()
     {
-        // ½ºÅ×ÀÌÁö¸Å´ÏÀú.½ºÅ×ÀÌÁö Á¾·á ÀÌº¥Æ®.RemoveListener(SavePlayerData);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®.RemoveListener(SavePlayerData);
     }
 
-    // ¸Ç Ã³À½ ÄÚÀÎÀ» ½ÃÀÛÇÏ´Â ½ÃÁ¡(GameStart)¿¡¼­¸¸ È£Ãâ       ***GameStart¿Í StageStart´Â ±¸ºÐµÇ¾î¾ß ÇÔ. 
+    // ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½(GameStart)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½       ***GameStartï¿½ï¿½ StageStartï¿½ï¿½ ï¿½ï¿½ï¿½ÐµÇ¾ï¿½ï¿½ ï¿½ï¿½. 
     private void DataInit()
     {
-        // ÃÊ±â ¼³Á¤À¸·Î ÀúÀå
-        pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, UpgradeType.normal, 0);
+        // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, 0, 0);
     }
 
-    // µ¥¹ÌÁö ¹ÞÀ½ => Á×À½ ÆÇÁ¤
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ => ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void TakeDamage()
     {
-        if (grade > UpgradeType.normal) grade -= 1;
+        Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+        if (grade > 0)
+        {
+            grade -= 1;
+            UpdateRender();
+        }
         else Dead();
     }
 
-    // Á×À½ => °ÔÀÓ¿À¹ö ÆÇÁ¤
+    // ï¿½ï¿½ï¿½ï¿½ => ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void Dead()
     {
-        // ¶óÀÌÇÁ °¨¼Ò
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         life -= 1;
 
-        // ¶óÀÌÇÁ°¡ 0 ¾Æ·¡·Î ¶³¾îÁö¸é ÆÐ¹è Á¶°Ç Ã¼Å©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0 ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¹ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
         if (life <= 0)
         {
             //GameManager.Instance.GameOver();
             return;
         }
-        // ¶óÀÌÇÁ°¡ ³²¾ÒÀ¸¸é ¸®½ºÆù
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         else
         {
             Respawn();
         }
     }
 
-    // ¸®½ºÆù => ÃÊ±â ¼³Á¤°ªÀ¸·Î ÇÃ·¹ÀÌ¾î ÃÊ±âÈ­, ½ºÆù Æ÷ÀÎÆ®·Î À§Ä¡ º¯°æ, ¸®½ºÆù È¿°ú ÄÚ·çÆ¾ ½ÇÇà
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ => ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ê±ï¿½È­, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
     public void Respawn()
     {
-        // ÇÃ·¹ÀÌ¾î À§Ä¡ ÀÌµ¿
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ ï¿½Ìµï¿½
         transform.position = respawnPoint.position;
 
-        // ÇÃ·¹ÀÌ¾î ÃÊ±â°ªÀ¸·Î Àç¼³Á¤
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ê±â°ªï¿½ï¿½ï¿½ï¿½ ï¿½ç¼³ï¿½ï¿½
         moveSpeed = moveSpeed_Init;
         shotSpeed = shotSpeed_Init;
-        grade = UpgradeType.normal;
+        grade = 0;
 
-        // ¸®½ºÆù ÀÌÆåÆ® ÄÚ·çÆ¾ ½ÇÇà
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(RespawnEffect());
     }
     public IEnumerator RespawnEffect()
     {
-        // 1ÃÊµ¿¾È È¿°ú ½ÇÇà or ¼ÎÀÌ´õ º¯°æ ÈÄ ÄÚ·çÆ¾ Á¾·á
+        // 1ï¿½Êµï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
 
-        // È¿°ú();
-        // ¼ÎÀÌ´õ();
-        Debug.Log("ÇÃ·¹ÀÌ¾î ¸®½ºÆù Áß... ¹«Àû »óÅÂ!");
+        // È¿ï¿½ï¿½();
+        // ï¿½ï¿½ï¿½Ì´ï¿½();
+        Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½... ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!");
         yield return new WaitForSeconds(1f);
-        // È¿°ú »èÁ¦();
-        // ¼ÎÀÌ´õ ÃÊ±âÈ­();
-        Debug.Log("ÇÃ·¹ÀÌ¾î ¸®½ºÆù ¿Ï·á");
+        // È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½();
+        // ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ê±ï¿½È­();
+        Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
     }
 
-    #region ¾ÆÀÌÅÛ & È¯°æ »ç¿ë È£Ãâ ÇÔ¼ö
+
+    public void UpdateRender()
+    {
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+        for (int i = 0; i < 4; i++)
+        {
+            groupRender.GetChild(i).gameObject.SetActive(false);
+        }
+
+        // ï¿½ï¿½Þ¿ï¿½ ï¿½Â´ï¿½ ï¿½×·ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
+        switch (grade)
+        {
+            case UpgradeType.Grade01:
+                groupRender.GetChild(0).gameObject.SetActive(true);
+                break;
+            case UpgradeType.Grade02:
+                groupRender.GetChild(1).gameObject.SetActive(true);
+                break;
+            case UpgradeType.Grade03:
+                groupRender.GetChild(2).gameObject.SetActive(true);
+                break;
+            case UpgradeType.Grade04:
+                groupRender.GetChild(3).gameObject.SetActive(true);
+                break;
+        }
+
+    }
+
+    
+
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ & È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ È£ï¿½ï¿½ ï¿½Ô¼ï¿½
 
     public void Upgrade(float moveSpeed, float shotSpeed)
     {
-        if (grade == UpgradeType.boss)
+        if (grade == UpgradeType.Grade04)
         {
-            Debug.Log("ÀÌ¹Ì ÃÖ°í µî±ÞÀÔ´Ï´Ù");
-            // Á¡¼ö ¾ò´Â°É·Î? ½´ÆÛ¸¶¸®¿À ¹ö¼¸ Ã³·³ ÀÌ¹Ì ÃÖÁ¾ ´Ü°è¸é Á¡¼ö·Î Ä¡È¯
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½");
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â°É·ï¿½? ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¡È¯
             return;
         }
         SpeedControl(moveSpeed, shotSpeed);
         grade += 1;
+        UpdateRender();
     }
+
 
     public void GetLife(int life)
     {
@@ -146,16 +194,16 @@ public class Player : MonoBehaviour, IDamagable
 
 
 
-    // ½ºÅ×ÀÌÁö Á¾·á ½Ã È£Ãâ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½
     public void SavePlayerData()
     {
         pd.SaveData(life, moveSpeed, shotSpeed, grade, score);
     }
 }
 
-// ÇÃ·¹ÀÌ¾î & Enemy ¾÷±×·¹ÀÌµå µî±Þ
-public enum UpgradeType { normal, elite, boss }
+// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ & Enemy ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½
+public enum UpgradeType { Grade01, Grade02, Grade03, Grade04 }
 
-public enum PlayerState { General, Invincible } // {ÀÏ¹Ý, ¹«Àû, ...»óÅÂ°¡ ´õ ÇÊ¿äÇÏ¸é ÀÌ°÷¿¡ Ãß°¡}
+public enum PlayerState { General, Invincible } // {ï¿½Ï¹ï¿½, ï¿½ï¿½ï¿½ï¿½, ...ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ï¸ï¿½ ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ß°ï¿½}
 
 
