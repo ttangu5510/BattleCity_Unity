@@ -13,12 +13,9 @@ public class BulletObjectPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             PooledObject bullet = Instantiate(bulletPrefab, transform);
-            // TODO : 발사자 정보 추가
             bullet.gameObject.SetActive(false);
             bulletStack.Push(bullet);
         }
-
-
     }
 
     public PooledObject BulletOut()
@@ -26,7 +23,6 @@ public class BulletObjectPool : MonoBehaviour
         PooledObject bulletOut = bulletStack.Pop();
         bulletOut.returnPool = this;
         bulletOut.gameObject.SetActive(true);
-        bulletOut.GetComponent<Rigidbody>();
 
         return bulletOut;
     }

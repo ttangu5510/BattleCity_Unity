@@ -4,42 +4,49 @@ using UnityEngine;
 
 public class FragmentAutoCleanup : MonoBehaviour
 {
-    private bool isScheduledForDestroy = false;
     private Rigidbody rb;
-    private bool grounded = true;
+    private bool isFalling = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
     }
 
     private void Update()
     {
         //if (rb == null || !rb.isKinematic) return;
-        //
-        //if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.7f))
+        //if (!isFalling)
         //{
-        //    Debug.Log(name + ":지지대 실종 중력 활성화");
-        //    rb.isKinematic = false;
+        //    if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.5f))
+        //    {
+        //        Debug.Log(name + ":지지대 실종 중력 활성화");
+        //        rb.isKinematic = false;
+        //        isFalling = true;
+        //    }
+        //}
+        //else
+        //{
+        //    fallTimer += Time.deltaTime;
+        //    if(fallTimer> 3f && !isScheduledForDestroy)
+        //    {
+        //        isScheduledForDestroy = true;
+        //        Destroy(gameObject);
+        //    }
         //}
     }
     private void OnCollisionEnter(Collision collision)
     {
-            if (isScheduledForDestroy) return;
-
-
-        if (collision.gameObject.CompareTag("Player"))
+            
+        if(!isFalling && collision.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("플레이어랑 충돌 확인 완료!");
-            isScheduledForDestroy = true;
+            Debug.Log("플레이어 충돌로 중력 적용");
             if (rb != null)
-            {
-                rb.isKinematic = false; 
-            }
-
-            Destroy(gameObject, 3f);
+                rb.isKinematic = false;
+            isFalling = true;
         }
-        
+
+        Destroy(gameObject);
+
+     
     }
 }
