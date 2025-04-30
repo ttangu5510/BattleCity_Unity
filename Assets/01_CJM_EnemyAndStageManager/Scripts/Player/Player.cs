@@ -9,11 +9,10 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private int life_Init;
     [SerializeField] private float moveSpeed_Init;
     [SerializeField] private float shotSpeed_Init;
-    [Tooltip("Player invincible time after spawned")]
-    [SerializeField] private float respawnInvincibleTime;
+    [Tooltip("Waiting time to respawn")]
+    [SerializeField] private float respawningTime;
 
-    [Header("RespawnPoint")]
-    [SerializeField] private Transform respawnPoint;
+    [SerializeField] private RespawnPoint respawnPoint;
 
     [Header("Current Player Data")]
     [SerializeField] public UpgradeType grade;
@@ -23,8 +22,9 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] public float shotSpeed { get; private set; }
     [SerializeField] private int score;
 
-    [Header("Render Field")]
+    [Header("Setting Field")]
     [SerializeField] private Transform groupRender;
+    [SerializeField] private PlayerController playerController;
 
 
 
@@ -125,9 +125,13 @@ public class Player : MonoBehaviour, IDamagable
     // 리스폰 => 초기 설정값으로 플레이어 초기화, 스폰 포인트로 위치 변경, 리스폰 효과 코루틴 실행
     public void Respawn()
     {
-        // 플레이어 위치 이동
-        transform.position = respawnPoint.position;
+        state = PlayerState.Respawning;
 
+        // 플레이어 위치 이동 & 정지
+        playerController.transform.position = respawnPoint.gameObject.transform.position;
+        playerController.dir = Vector3.zero;
+
+        Debug.Log(respawnPoint.gameObject.transform.position);
         // 플레이어 초기값으로 재설정
         moveSpeed = moveSpeed_Init;
         shotSpeed = shotSpeed_Init;
@@ -138,15 +142,14 @@ public class Player : MonoBehaviour, IDamagable
     }
     public IEnumerator RespawnEffect()
     {
-        // 1초동안 효과 실행 or 셰이더 변경 후 코루틴 종료
+        // 1초동안 이펙트 실행 or 셰이더 변경 후 코루틴 종료
 
-        // 효과();
-        // 셰이더();
-        Debug.Log("플레이어 리스폰 중... 무적 상태!");
-        state = PlayerState.Invincible;
-        yield return new WaitForSeconds(respawnInvincibleTime);
-        // 효과 삭제();
+        // 반짝이는 셰이더();
+        Debug.Log("플레이어 리스폰 중...");
+        respawnPoint.PlayerFBX(); // 이펙트 실행
+        yield return new WaitForSeconds(respawningTime);
         // 셰이더 초기화();
+        //respawnPoint.StopFBX(); // 이펙트 자동 종료 가능하니 주석처리함. 삭제해도 되면 삭제
         state = PlayerState.General;
         Debug.Log("플레이어 리스폰 완료");
     }
@@ -222,6 +225,6 @@ public class Player : MonoBehaviour, IDamagable
 // 플레이어 & Enemy 업그레이드 등급
 public enum UpgradeType { Grade01, Grade02, Grade03, Grade04 }
 
-public enum PlayerState { General, Invincible } // {일반, 무적, ...상태가 더 필요하면 이곳에 추가}
+public enum PlayerState { General, Invincible, Respawning } // {일반, 무적, ...상태가 더 필요하면 이곳에 추가}
 
 

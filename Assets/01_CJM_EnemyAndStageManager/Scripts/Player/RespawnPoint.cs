@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class RespawnPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject respawnFBX_Prefab;
+
+
+    public void PlayerFBX()
     {
-        
+        Instantiate(respawnFBX_Prefab);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StopFBX()
     {
-        
+
     }
 }
