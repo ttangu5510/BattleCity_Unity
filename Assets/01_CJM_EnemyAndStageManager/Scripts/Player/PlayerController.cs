@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -19,19 +19,19 @@ public class PlayerController : MonoBehaviour
         player = transform.parent.GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
 
-        // Bullet Pool »ı¼ºÀÚ·Î bulletPool ÇÊµå¿¡ ÇÒ´ç. 
+        // Bullet Pool ìƒì„±ìë¡œ bulletPool í•„ë“œì— í• ë‹¹. 
     }
 
     private void Update()
     {
-        // ÀÔ·ÂÀ» 4¹æÇâ ´ÜÀ§º¤ÅÍ·Î ¿¬»ê ÈÄ dir¿¡ ÀúÀå
-        #region dir(ÀÔ·Â)
+        // ì…ë ¥ì„ 4ë°©í–¥ ë‹¨ìœ„ë²¡í„°ë¡œ ì—°ì‚° í›„ dirì— ì €ì¥
+        #region dir(ì…ë ¥)
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
         Vector3 inputDir = new Vector3(x, 0, z).normalized;
 
-        // x¹æÇâ ÀÔ·ÂÀÌ ´õ ¸¹À¸¸é È¾ ÀÔ·Â ÆÇÁ¤ (Á¶ÀÌ½ºÆ½ ±âÁØ, Å°º¸µå´Â ÇöÀç ¹æÇâ À¯ÁöÇÏ´Â ÂÊÀ¸·Î)
+        // xë°©í–¥ ì…ë ¥ì´ ë” ë§ìœ¼ë©´ íš¡ ì…ë ¥ íŒì • (ì¡°ì´ìŠ¤í‹± ê¸°ì¤€, í‚¤ë³´ë“œëŠ” í˜„ì¬ ë°©í–¥ ìœ ì§€í•˜ëŠ” ìª½ìœ¼ë¡œ)
         if (inputDir == Vector3.zero)
         {
             dir = Vector3.zero;
@@ -50,9 +50,9 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
 
-        // ÀÌµ¿ÇÏ±æ ¿øÇÏ´Â °¢µµ·Î È¸Àü
+        // ì´ë™í•˜ê¸¸ ì›í•˜ëŠ” ê°ë„ë¡œ íšŒì „
 
-        // °ø°İÅ° ÀÔ·Â, °ø°İ
+        // ê³µê²©í‚¤ ì…ë ¥, ê³µê²©
         if (Input.GetKeyDown(KeyCode.X))
         {
             Attack();
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ÀÌµ¿(¹°¸®)
+        // ì´ë™(ë¬¼ë¦¬)
         Move();
     }
 
@@ -83,13 +83,13 @@ public class PlayerController : MonoBehaviour
     {
         if (bulletPool.PoolCount() <= 0)
         {
-            Debug.Log("Ç® ¿ÀºêÁ§Æ® ¸ğµÎ ¼ÒÁø!");
+            Debug.Log("í’€ ì˜¤ë¸Œì íŠ¸ ëª¨ë‘ ì†Œì§„!");
             return;
         }
 
         GameObject gameObject = bulletPool.BulletOut().gameObject;
         
-        // Todo: ÇÃ·¹ÀÌ¾î µî±Ş¿¡ µû¸¥ ÃÑ¾Ë Å¸ÀÔ ±¸ºĞ, ¸ÓÁö ÈÄ È°¼ºÈ­ ÇÕ½Ã´Ù
+        // Todo: í”Œë ˆì´ì–´ ë“±ê¸‰ì— ë”°ë¥¸ ì´ì•Œ íƒ€ì… êµ¬ë¶„, ë¨¸ì§€ í›„ í™œì„±í™” í•©ì‹œë‹¤
         if(player.grade == UpgradeType.Grade04)
         {
             // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type2;

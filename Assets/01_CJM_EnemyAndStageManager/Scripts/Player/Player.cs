@@ -1,21 +1,21 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour, IDamagable
 {
     // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
-    [Header("초기 설정")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
+    [Header("Init Setting")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
     [SerializeField] private int life_Init;
     [SerializeField] private float moveSpeed_Init;
     [SerializeField] private float shotSpeed_Init;
-    [Tooltip("리스폰 후 무적시간")]
+    [Tooltip("Player invincible time after spawned")]
     [SerializeField] private float respawnInvincibleTime;
 
-    [Header("스테이지 별 스폰 포인트")]
+    [Header("RespawnPoint")]
     [SerializeField] private Transform respawnPoint;
 
-    [Header("현재 플레이어 정보")]
+    [Header("Current Player Data")]
     [SerializeField] public UpgradeType grade;
     [SerializeField] public PlayerState state;
     [SerializeField] private int life;
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] public float shotSpeed { get; private set; }
     [SerializeField] private int score;
 
-    [Header("등급 별 렌더를 위한 필드")]
+    [Header("Render Field")]
     [SerializeField] private Transform groupRender;
 
 

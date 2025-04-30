@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,24 +8,24 @@ public class EnemyManager : MonoBehaviour
     private static EnemyManager instance;
     public static EnemyManager Instance { get { return instance; } }
 
-    [Header("[Normal] 등급 설정")]
+    [Header("[Normal] Grade Setting")]
     [SerializeField] public int hp_N;
     [SerializeField] public float moveSpeed_N;
     [SerializeField] public float shotSpeed_N;
 
-    [Header("[Elite] 등급 설정")]
+    [Header("[Elite] Grade Setting")]
     [SerializeField] public int hp_E;
     [SerializeField] public float moveSpeed_E;
     [SerializeField] public float shotSpeed_E;
 
 
-    [Header("[Boss] 등급 설정")]
+    [Header("[Boss] Grade Setting")]
     [SerializeField] public int hp_B;
     [SerializeField] public float moveSpeed_B;
     [SerializeField] public float shotSpeed_B;
 
 
-    [Header("적 등급 별, 처치 점수")]
+    [Header("ScoreData by Grade")]
     [SerializeField] public int score_Normal;
     [SerializeField] public int score_Elite;
     [SerializeField] public int score_Boss;

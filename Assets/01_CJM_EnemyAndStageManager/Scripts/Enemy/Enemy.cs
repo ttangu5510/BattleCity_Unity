@@ -1,23 +1,23 @@
-using UnityEditor.PackageManager;
+﻿using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
-    [Header("등급")]
+    [Header("Grade")]
     [SerializeField] private EnemyGrade grade;
     [HideInInspector] public EnemyGrade Grade { get; }
-    [Header("상태")]
+    [Header("State")]
     [SerializeField] private EnemyState state;
     [SerializeField] private GameObject target;
 
-    [Header("스펙")]
+    [Header("Spec")]
     [SerializeField] private int hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float shotSpeed;
     [SerializeField] private int scorePoint;
     // Item itmePossession;  // 아이템 소유 정보 추가
 
-    [Header("세팅")]
+    [Header("Setting")]
     [SerializeField] Transform muzzPoint;
     [SerializeField] Transform body;
     [SerializeField] Vector3 rayOffset;

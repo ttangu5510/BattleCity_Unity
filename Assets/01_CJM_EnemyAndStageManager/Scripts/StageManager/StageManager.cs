@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor.Experimental.GraphView;
@@ -16,12 +16,12 @@ public class StageManager : MonoBehaviour
     [SerializeField] private List<Enemy> activateEnemys;
     [SerializeField] private List<Enemy> slayedEnemys;
 
-    [Header("현재 스테이지 정보")]
-    [Tooltip("맵 안에 동시에 존재할 수 있는 최대 적 수")]
+    [Header("Now Stage Info")]
+    [Tooltip("Maximum count that can exist in map same time")]
     [SerializeField] private int maxActiveEnemyCount;   // 맵 상에 동시에 존재할 수 있는 최대 적 수
-    [Tooltip("[스테이지 클리어] 까지 남은 적의 라이프 수")]
+    [Tooltip("Count of lives of the enemy to clear")]
     [SerializeField] private int enemyLifeCount;        // 남은 적의 목숨
-    [Tooltip("현재 스테이지에서 얻은 점수")]
+    [Tooltip("Scores earned on the current stage")]
     [SerializeField] private int sumedScore;
 
 
