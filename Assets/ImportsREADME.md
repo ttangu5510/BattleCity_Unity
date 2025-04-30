@@ -27,10 +27,9 @@
 // 19. LowPoly Particle FX 효과모음 https://assetstore.unity.com/packages/vfx/particles/polygon-particle-fx-low-poly-3d-art-by-synty-168372
 // 20. Fog of war 시야제한 (기능) https://assetstore.unity.com/packages/tools/particles-effects/fog-of-war-51344
 // 22. Rocks 단순한 돌 (지형) https://assetstore.unity.com/packages/3d/environments/stylized-rocks-free-sample-283215
-
+ 23. Easy Destrutible Wall (부숴지는 벽) https://assetstore.unity.com/packages/tools/physics/easy-destructible-wall-331
 ---
 
 ## 필요에셋
 
-23. 물 에셋
-24. 
+물 에셋
