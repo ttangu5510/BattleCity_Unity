@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 242172929701071304}
   - component: {fileID: 242172929702169352}
   - component: {fileID: 5597799368357809212}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,9 +117,9 @@ GameObject:
   - component: {fileID: 6362029857481063881}
   - component: {fileID: 4127168117923181070}
   - component: {fileID: 134146882247599964}
-  m_Layer: 0
-  m_Name: Bullet
-  m_TagString: Untagged
+  m_Layer: 12
+  m_Name: EnemyBullet
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
