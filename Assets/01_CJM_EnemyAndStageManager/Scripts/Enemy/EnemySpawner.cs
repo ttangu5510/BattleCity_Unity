@@ -28,7 +28,8 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy()
     {
         // 자식 활성화
-        standByGroup.GetChild(0).gameObject.SetActive(true);
+        if (!standByGroup.GetChild(0).gameObject.activeSelf)
+            standByGroup.GetChild(0).gameObject.SetActive(true);
     }
 
     // TODO:

@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 4280612653482161513}
   - component: {fileID: 7911406577448185950}
   - component: {fileID: 8919381119681167022}
-  - component: {fileID: 3182244146581762539}
   m_Layer: 8
   m_Name: Tank_Enemy
   m_TagString: Enemy
@@ -167,30 +166,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7150676, y: 1.928067, z: 2.0766687}
   m_Center: {x: -0.007606983, y: 0.92045915, z: -0.020482242}
---- !u!114 &3182244146581762539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2643534120117538486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e128d36183834a242bf05e18ee9fd6c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grade: 0
-  state: 0
-  target: {fileID: 0}
-  hp: 0
-  moveSpeed: 0
-  shotSpeed: 0
-  scorePoint: 0
-  muzzPoint: {fileID: 5946720394417661796}
-  body: {fileID: 8872136204184130425}
-  rayOffset: {x: 0, y: 3, z: 0}
-  rayFarForwardDistance: 10
-  rayForwardDistance: 1
 --- !u!1 &2836778503951367998
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +291,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2627946796999697193}
-  m_Layer: 0
+  - component: {fileID: 796339671937243563}
+  m_Layer: 8
   m_Name: Enemy_Nomal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,6 +316,30 @@ Transform:
   - {fileID: 5066036519072157711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &796339671937243563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424341070634194018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e128d36183834a242bf05e18ee9fd6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grade: 0
+  state: 0
+  target: {fileID: 0}
+  hp: 0
+  moveSpeed: 0
+  shotSpeed: 0
+  scorePoint: 0
+  muzzPoint: {fileID: 5946720394417661796}
+  body: {fileID: 8872136204184130425}
+  rayOffset: {x: 0, y: 3, z: 0}
+  rayFarForwardDistance: 10
+  rayForwardDistance: 1
 --- !u!1 &5329543362099395181
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5066036519072157711}
   - component: {fileID: 1738091210636194271}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BulletPool_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

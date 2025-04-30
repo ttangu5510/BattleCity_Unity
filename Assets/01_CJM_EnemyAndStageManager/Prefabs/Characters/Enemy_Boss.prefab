@@ -46,7 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3116650896512244892}
   - component: {fileID: 1959106903218819436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BulletPool_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,6 @@ GameObject:
   - component: {fileID: 5511726576476268746}
   - component: {fileID: 6973302235425650030}
   - component: {fileID: 9049426727235110441}
-  - component: {fileID: 5258767454614223255}
   m_Layer: 8
   m_Name: Tank_Enemy
   m_TagString: Enemy
@@ -333,30 +332,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7150676, y: 1.928067, z: 2.0766687}
   m_Center: {x: -0.007606983, y: 0.92045915, z: -0.020482242}
---- !u!114 &5258767454614223255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1716098769644430485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e128d36183834a242bf05e18ee9fd6c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grade: 2
-  state: 0
-  target: {fileID: 0}
-  hp: 0
-  moveSpeed: 0
-  shotSpeed: 0
-  scorePoint: 0
-  muzzPoint: {fileID: 9197627379203485545}
-  body: {fileID: 3588318820733941147}
-  rayOffset: {x: 0, y: 3, z: 0}
-  rayFarForwardDistance: 10
-  rayForwardDistance: 1
 --- !u!1 &2696966804512784325
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +341,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3462143003246491102}
-  m_Layer: 0
+  - component: {fileID: 6304383722420518991}
+  m_Layer: 8
   m_Name: Enemy_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,6 +366,30 @@ Transform:
   - {fileID: 3116650896512244892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6304383722420518991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2696966804512784325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e128d36183834a242bf05e18ee9fd6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grade: 2
+  state: 0
+  target: {fileID: 0}
+  hp: 0
+  moveSpeed: 0
+  shotSpeed: 0
+  scorePoint: 0
+  muzzPoint: {fileID: 9197627379203485545}
+  body: {fileID: 3588318820733941147}
+  rayOffset: {x: 0, y: 3, z: 0}
+  rayFarForwardDistance: 10
+  rayForwardDistance: 1
 --- !u!1 &4537578763207879197
 GameObject:
   m_ObjectHideFlags: 0

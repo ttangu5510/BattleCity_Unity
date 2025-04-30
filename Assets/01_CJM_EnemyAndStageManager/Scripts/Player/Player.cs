@@ -44,7 +44,7 @@ public class Player : MonoBehaviour, IDamagable
 
         DataInit(); // 임시/테스트용, 첫 시작 판정에서 해줘야함
 
-        grade = pd.grade;
+        // grade = pd.grade;
         life = pd.life;
         moveSpeed = pd.moveSpeed;
         shotSpeed = pd.shotSpeed;
@@ -57,6 +57,10 @@ public class Player : MonoBehaviour, IDamagable
     {
         // 스테이지 종료 시 플레이어 데이터 저장
         StageManager.Instance.StageCloseEvent.AddListener(SavePlayerData);
+
+
+        // 등급 상태 테스트용.
+        UpdateRender();
     }
 
     private void OnDestroy()
@@ -74,6 +78,7 @@ public class Player : MonoBehaviour, IDamagable
     // 데미지 받음 => 죽음 판정
     public void TakeDamage()
     {
+        Debug.Log("플레이어 공격 판정");
         if (grade > 0)
         {
             grade -= 1;

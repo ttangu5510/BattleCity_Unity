@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         sm = StageManager.Instance;
         em = EnemyManager.Instance;
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetChild(0).GetComponent<Rigidbody>();
 
         em.StatSetting(out hp, out moveSpeed, out shotSpeed, out scorePoint, grade);
         state = EnemyState.General;
@@ -84,7 +84,9 @@ public class Enemy : MonoBehaviour, IDamagable
     public void Dead()
     {
         sm.ActiveEnemyListRemove(this);
-        Destroy(transform.parent.gameObject);
+
+        gameObject.SetActive(false);
+        transform.SetSiblingIndex(transform.parent.childCount - 1);
     }
 
 
@@ -101,7 +103,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Rotate(Vector3 dir)
     {
-        body.LookAt(transform.position + dir);
+        body.LookAt(transform.GetChild(0).position + dir);
     }
 
 
