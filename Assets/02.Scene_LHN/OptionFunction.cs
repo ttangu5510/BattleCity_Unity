@@ -14,13 +14,7 @@ public class OptionFunction : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < Screen.resolutions.Length; i++)
-        {
-            //if (Screen.resolutions[i].refreshRateRatio == 60)
-            // 여기서 지금 오류가 나고 있음 나중에 여쭤보기
-            
-                resolutions.Add(Screen.resolutions[i]);
-        }
+        resolutions.AddRange(Screen.resolutions);
         resolutionsDropdown.options.Clear();
 
         int optionNum = 0;
