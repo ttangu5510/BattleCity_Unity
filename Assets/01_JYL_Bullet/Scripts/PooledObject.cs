@@ -31,12 +31,13 @@ public class PooledObject : MonoBehaviour
         Instantiate(bulletExplosion, transform.position, transform.rotation).Play();
         // TODO : 레이어에 따라서 다른 결과 연산
         
-        if (collision is IDamagable damagable)
+        IDamagable damagable = GetComponent<IDamagable>();
+        if (damagable != null)
         {
             damagable.TakeDamage();
         }
 
+
         returnPool.ReturnToPool(this);
     }
-
 }

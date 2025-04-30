@@ -49,7 +49,7 @@ public class Player : MonoBehaviour, IDamagable
     private void Start()
     {
         // 스테이지 종료 시 플레이어 데이터 저장
-        StageManager.Instance.StageCloseEvent.AddListener(SavePlayerData);
+        //StageManager.Instance.StageCloseEvent.AddListener(SavePlayerData);
     }
 
     private void OnDestroy()
