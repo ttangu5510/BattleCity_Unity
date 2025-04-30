@@ -36,18 +36,21 @@ public class PlayerController : MonoBehaviour
         {
             dir = Vector3.zero;
         }
-        else if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
-        {
-            dir = (transform.right * inputDir.x).normalized;
-        }
         else
         {
-            dir = (transform.forward * inputDir.z).normalized;
+            if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
+            {
+                dir = (transform.right * inputDir.x).normalized;
+            }
+            else
+            {
+                dir = (transform.forward * inputDir.z).normalized;
+            }
+            Rotate();
         }
         #endregion
 
         // 이동하길 원하는 각도로 회전
-        Rotate();
 
         // 공격키 입력, 공격
         if (Input.GetKeyDown(KeyCode.X))
