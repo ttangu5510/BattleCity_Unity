@@ -9,6 +9,8 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private int life_Init;
     [SerializeField] private float moveSpeed_Init;
     [SerializeField] private float shotSpeed_Init;
+    [Tooltip("리스폰 후 무적시간")]
+    [SerializeField] private float respawnInvincibleTime;
 
     [Header("스테이지 별 스폰 포인트")]
     [SerializeField] private Transform respawnPoint;
@@ -34,6 +36,20 @@ public class Player : MonoBehaviour, IDamagable
     // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
     // public UnityEvent PlayerDeadEvent = new UnityEvent(); 게임 오버 이벤트로만 해도 충분할 듯. 플레이어 사망 시 특수 참조 필요할 시 활성화
 
+    //*******************************************************//
+    // 테스트용. 테스트 후 삭제할 예정
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Upgrade(0, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            TakeDamage();
+        }
+    }
+    //*****************************************************//
 
     // 스테이지마다 플레이어 오브젝트가 활성화 될 때, 플레이어 데이터를 동기화 시킴
     // 스테이지 진행 중에는 현재 객체가 정보를 담당. 스테이지 종료 시, PlayerData에 현재 객체 정보 저장하는 구조
@@ -127,9 +143,11 @@ public class Player : MonoBehaviour, IDamagable
         // 효과();
         // 셰이더();
         Debug.Log("플레이어 리스폰 중... 무적 상태!");
-        yield return new WaitForSeconds(1f);
+        state = PlayerState.Invincible;
+        yield return new WaitForSeconds(respawnInvincibleTime);
         // 효과 삭제();
         // 셰이더 초기화();
+        state = PlayerState.General;
         Debug.Log("플레이어 리스폰 완료");
     }
 

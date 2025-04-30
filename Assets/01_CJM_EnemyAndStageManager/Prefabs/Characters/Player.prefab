@@ -2986,6 +2986,7 @@ MonoBehaviour:
   life_Init: 10
   moveSpeed_Init: 5
   shotSpeed_Init: 10
+  respawnInvincibleTime: 2
   respawnPoint: {fileID: 0}
   grade: 0
   state: 0

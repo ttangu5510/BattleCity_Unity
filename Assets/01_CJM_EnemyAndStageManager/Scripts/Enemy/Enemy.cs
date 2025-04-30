@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
-    [Header("µî±Ş")]
+    [Header("ë“±ê¸‰")]
     [SerializeField] private EnemyGrade grade;
     [HideInInspector] public EnemyGrade Grade { get; }
-    [Header("»óÅÂ")]
+    [Header("ìƒíƒœ")]
     [SerializeField] private EnemyState state;
     [SerializeField] private GameObject target;
 
-    [Header("½ºÆå (µî±Şº° ½ºÆå Á¤º¸´Â EnemyManager¿¡¼­ ÀÏ°ı ¼öÁ¤)")]
+    [Header("ìŠ¤í™")]
     [SerializeField] private int hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float shotSpeed;
     [SerializeField] private int scorePoint;
-    // Item itmePossession;  // ¾ÆÀÌÅÛ ¼ÒÀ¯ Á¤º¸ Ãß°¡
+    // Item itmePossession;  // ì•„ì´í…œ ì†Œìœ  ì •ë³´ ì¶”ê°€
 
-    [Header("¼¼ÆÃ")]
+    [Header("ì„¸íŒ…")]
     [SerializeField] Transform muzzPoint;
     [SerializeField] Transform body;
     [SerializeField] Vector3 rayOffset;
@@ -30,14 +30,14 @@ public class Enemy : MonoBehaviour, IDamagable
      
     private Vector3 dir;
 
-    public bool isDamagable { get; private set; } // ÇÇ°İ °¡´É »óÅÂ ¿©ºÎ  (¸®½ºÆù Áß ¹«Àû, ¾ÆÀÌÅÛ »ç¿ëÀ¸·Î ÀÎÇÑ ¹«Àû »óÅÂ, µîµî)
+    public bool isDamagable { get; private set; } // í”¼ê²© ê°€ëŠ¥ ìƒíƒœ ì—¬ë¶€  (ë¦¬ìŠ¤í° ì¤‘ ë¬´ì , ì•„ì´í…œ ì‚¬ìš©ìœ¼ë¡œ ì¸í•œ ë¬´ì  ìƒíƒœ, ë“±ë“±)
 
 
     // Todo 0430
-    // 1. Àû ÀÌµ¿ ·ÎÁ÷ (»óÅÂ¿¡ µû¸¥ ÀÌµ¿ ±¸Çö)
-    // 2. ¹üÀ§(Äİ¶óÀÌ´õ) ÆÇÁ¤À¸·Î »óÅÂ ¾÷µ¥ÀÌÆ®
-    // => ¹üÀ§ ¾È¿¡ ÇÃ·¹ÀÌ¾î°¡ µé¾î¿À¸é [ÇÃ·¹ÀÌ¾î ÃßÀû »óÅÂ], ¹üÀ§ ¾È¿¡ Å¸°ÙÀÌ µé¾î¿À¸é [Å¸°Ù ÃßÀû »óÅÂ], ¾Æ¹«°Íµµ ¾øÀ¸¸é [ÀÏ¹İ »óÅÂ]
-    // 3. StageManager¿¡¼­ ½Â¸®Á¶°Ç, ÆĞ¹èÁ¶°Ç Å×½ºÆ® ÇÊ¿ä
+    // 1. ì  ì´ë™ ë¡œì§ (ìƒíƒœì— ë”°ë¥¸ ì´ë™ êµ¬í˜„)
+    // 2. ë²”ìœ„(ì½œë¼ì´ë”) íŒì •ìœ¼ë¡œ ìƒíƒœ ì—…ë°ì´íŠ¸
+    // => ë²”ìœ„ ì•ˆì— í”Œë ˆì´ì–´ê°€ ë“¤ì–´ì˜¤ë©´ [í”Œë ˆì´ì–´ ì¶”ì  ìƒíƒœ], ë²”ìœ„ ì•ˆì— íƒ€ê²Ÿì´ ë“¤ì–´ì˜¤ë©´ [íƒ€ê²Ÿ ì¶”ì  ìƒíƒœ], ì•„ë¬´ê²ƒë„ ì—†ìœ¼ë©´ [ì¼ë°˜ ìƒíƒœ]
+    // 3. StageManagerì—ì„œ ìŠ¹ë¦¬ì¡°ê±´, íŒ¨ë°°ì¡°ê±´ í…ŒìŠ¤íŠ¸ í•„ìš”
 
     private void Start()
     {
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         //TargetChecking();
 
-        // ÀÌµ¿ ·ÎÁ÷ ¿©±â¿¡
+        // ì´ë™ ë¡œì§ ì—¬ê¸°ì—
         switch (state)
         {
             case EnemyState.General:
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void TakeDamage()
     {
-        Debug.Log("°ø°İ¹ŞÀ½");
+        Debug.Log("ê³µê²©ë°›ìŒ");
 
         hp -= 1;
         if (hp <= 0) Dead();
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
 
 
-    #region Àû ÀÌµ¿ °ü·Ã ·ÎÁ÷
+    #region ì  ì´ë™ ê´€ë ¨ ë¡œì§
 
     private void Move(Vector3 dir)
     {
@@ -108,14 +108,14 @@ public class Enemy : MonoBehaviour, IDamagable
     }
 
 
-    // Á¤¸é ±ä ·¹ÀÌ ¹ß»ç, ÇÃ·¹ÀÌ¾îorÅ¸°Ù À¯¹«¿¡ µû¶ó EnemyState ½ºÀ§Äª
+    // ì •ë©´ ê¸´ ë ˆì´ ë°œì‚¬, í”Œë ˆì´ì–´oríƒ€ê²Ÿ ìœ ë¬´ì— ë”°ë¼ EnemyState ìŠ¤ìœ„ì¹­
     private void TargetChecking()
     {
         Vector3 originPos = muzzPoint.position + rayOffset;
         int layerMask = ~LayerMask.GetMask("PlayerBullet", "EnemyBullet");
         if (Physics.Raycast(originPos, muzzPoint.forward, out RaycastHit hitInfo, rayFarForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
         {
-            // ÇÃ·¹ÀÌ¾î°¡ ÀÎ½ÄµÈ´Ù¸é
+            // í”Œë ˆì´ì–´ê°€ ì¸ì‹ëœë‹¤ë©´
             if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 Debug.DrawLine(originPos, hitInfo.point, Color.red);
@@ -123,15 +123,15 @@ public class Enemy : MonoBehaviour, IDamagable
                 target = hitInfo.collider.gameObject;
                 state = EnemyState.ChasingPlayaer;
             }
-            // Todo : °ÔÀÓ¿À¹öÁ¶°Ç ·¹ÀÌ¾î Ãß°¡ ÇÊ¿äÇÕ´Ï´Ù
-            // °ÔÀÓ ¿À¹ö Á¶°ÇÀÌ ÀÎ½ÄµÈ´Ù¸é
-            else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("°ÔÀÓ¿À¹öÁ¶°Ç"))
+            // Todo : ê²Œì„ì˜¤ë²„ì¡°ê±´ ë ˆì´ì–´ ì¶”ê°€ í•„ìš”í•©ë‹ˆë‹¤
+            // ê²Œì„ ì˜¤ë²„ ì¡°ê±´ì´ ì¸ì‹ëœë‹¤ë©´
+            else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("ê²Œì„ì˜¤ë²„ì¡°ê±´"))
             {
-                // ¿©±â´Â ¹üÀ§·Î ¼³Á¤ÇÕ½Ã´Ù. ForwardChecking ¸»°í
+                // ì—¬ê¸°ëŠ” ë²”ìœ„ë¡œ ì„¤ì •í•©ì‹œë‹¤. ForwardChecking ë§ê³ 
                 target = hitInfo.collider.gameObject;
                 state = EnemyState.ChasingTarget;
             }
-            // ¾Æ¹«°Íµµ ¾ø´Ù¸é
+            // ì•„ë¬´ê²ƒë„ ì—†ë‹¤ë©´
             else
             {
                 Debug.DrawLine(originPos, hitInfo.point, Color.red);
@@ -148,20 +148,20 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void GeneralMove()
     {
-        // ÇöÀç »óÅÂ : ·£´ı ¹éÅÍ 4¹æÇâÀ¸·Î ÀÌµ¿
-        // ¸ñÇ¥ : ·£´ı º¤ÅÍ 4¹æÇâ Áß ÇÏ³ª ¼±ÅÃÇØ¼­ Âß ÀÌµ¿, º®ÀÌ »ı±â¸é ´Ù¸¥ ¹æÇâ º¤ÅÍ·Î ¹Ù²ãÁÖ±â
+        // í˜„ì¬ ìƒíƒœ : ëœë¤ ë°±í„° 4ë°©í–¥ìœ¼ë¡œ ì´ë™
+        // ëª©í‘œ : ëœë¤ ë²¡í„° 4ë°©í–¥ ì¤‘ í•˜ë‚˜ ì„ íƒí•´ì„œ ì­‰ ì´ë™, ë²½ì´ ìƒê¸°ë©´ ë‹¤ë¥¸ ë°©í–¥ ë²¡í„°ë¡œ ë°”ê¿”ì£¼ê¸°
         if (dir == Vector3.zero) dir = transform.forward;
 
-        // ÂªÀº ·¹ÀÌ ¹ß»ç
-        // º®¿¡ ´êÀ¸¸é ¹æÇâ ÀüÈ¯ °í°í
+        // ì§§ì€ ë ˆì´ ë°œì‚¬
+        // ë²½ì— ë‹¿ìœ¼ë©´ ë°©í–¥ ì „í™˜ ê³ ê³ 
 
         Vector3 originPos = muzzPoint.position;
-        LayerMask layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // Àûµé ¼­·Î, º®¸¸ Ã¼Å© µÇµµ·Ï--- º® ·¹ÀÌ¾î Ãß°¡µÇ¸é ¿©±â Ãß°¡
+        LayerMask layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // ì ë“¤ ì„œë¡œ, ë²½ë§Œ ì²´í¬ ë˜ë„ë¡--- ë²½ ë ˆì´ì–´ ì¶”ê°€ë˜ë©´ ì—¬ê¸° ì¶”ê°€
         if (Physics.Raycast(originPos, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(originPos, originPos + muzzPoint.forward * rayForwardDistance, Color.red);
-            Debug.Log("º®¿¡ ´êÀ½");
-            // 4¹æÇâ Áß ÇÏ³ª ·£´ıÀ¸·Î ¹İÈ¯
+            Debug.Log("ë²½ì— ë‹¿ìŒ");
+            // 4ë°©í–¥ ì¤‘ í•˜ë‚˜ ëœë¤ìœ¼ë¡œ ë°˜í™˜
             Vector3[] directions = new Vector3[]
             {
                 transform.forward,
@@ -184,12 +184,12 @@ public class Enemy : MonoBehaviour, IDamagable
     #endregion
 
 
-    // EnemyState¿¡ µû¶ó¼­ ÀÌµ¿·ÎÁ÷ ±¸ºĞ
+    // EnemyStateì— ë”°ë¼ì„œ ì´ë™ë¡œì§ êµ¬ë¶„
 }
 
 public enum EnemyGrade
 {
-    normal, elite, boss // Ãß°¡ °¡´É
+    normal, elite, boss // ì¶”ê°€ ê°€ëŠ¥
 }
 
 public enum EnemyState
