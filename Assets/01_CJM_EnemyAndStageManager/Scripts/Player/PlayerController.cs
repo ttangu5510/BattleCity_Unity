@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        // TODO : 불릿 스택 카운트 조건문
         if (bulletPool.PoolCount() <= 0)
         {
             Debug.Log("풀 오브젝트 모두 소진!");

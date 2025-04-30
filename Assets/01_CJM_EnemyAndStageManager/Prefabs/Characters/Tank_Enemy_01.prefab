@@ -469,12 +469,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grade: 0
+  state: 0
+  target: {fileID: 0}
   hp: 0
   moveSpeed: 0
   shotSpeed: 0
   scorePoint: 0
-  muzzPoint: {fileID: 0}
-  body: {fileID: 0}
+  muzzPoint: {fileID: 3583457069992751068}
+  body: {fileID: 4842661939057043596}
+  rayOffset: {x: 0, y: 3, z: 0}
+  rayFarForwardDistance: 10
+  rayForwardDistance: 1
 --- !u!1 &8949807994739866211
 GameObject:
   m_ObjectHideFlags: 0

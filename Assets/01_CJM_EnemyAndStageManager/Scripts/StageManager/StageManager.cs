@@ -50,8 +50,25 @@ public class StageManager : MonoBehaviour
         em = EnemyManager.Instance;
     }
 
+    public void StageClear()
+    {
+        // 클리어 UI 보여줌(점수 합산 장면)
+        Debug.Log("스테이지 클리어");
+
+        StageClose();
+    }
+
+    public void StageFail()
+    {
+        Debug.Log("스테이지 실패");
+        // 이어서 진행할건지 여부 판단 후 안한다면 게임 오버 판정
+
+        StageClose();
+    }
+
     public void StageStart(Scene scene, LoadSceneMode mode)
     {
+        // Todo
         if (true /*씬 이름에 Stage가 들어간다면*/)
         {
             // 스테이지 시작 이벤트 발생
@@ -65,7 +82,9 @@ public class StageManager : MonoBehaviour
         StageCloseEvent?.Invoke();
         StageCloseEvent.RemoveAllListeners();
         
-        // TODO : 다음 스테이지로 이동 (씬전환에서 구현해야하는지 고민 중)
+        // TODO : 스테이지 닫을 때,
+        // 스테이지 클리어 상태면 -> 다음 스테이지로
+        // 스테이지 실패 상태면 -> 게임 매니저.게임 오버 이벤트
     }
 
     // 스테이지 씬 불러올 때, StageData에서 초기화
@@ -107,7 +126,7 @@ public class StageManager : MonoBehaviour
         // 승리조건 체크
         if (enemyLifeCount <= 0)
         {
-            // 승리!
+            StageClear();
         }
     }
 
