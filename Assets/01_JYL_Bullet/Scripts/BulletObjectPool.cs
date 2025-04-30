@@ -26,7 +26,6 @@ public class BulletObjectPool : MonoBehaviour
         PooledObject bulletOut = bulletStack.Pop();
         bulletOut.returnPool = this;
         bulletOut.gameObject.SetActive(true);
-        bulletOut.GetComponent<Rigidbody>();
 
         return bulletOut;
     }
