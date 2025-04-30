@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour, IDamagable
 {
@@ -19,6 +20,12 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] public float moveSpeed { get; private set; }
     [SerializeField] public float shotSpeed { get; private set; }
     [SerializeField] private int score;
+
+    [Header("등급 별 렌더를 위한 필드")]
+    [SerializeField] private Transform groupRender;
+
+
+
 
     private PlayerData pd; // 등급 & 스코어 정보
 
@@ -61,13 +68,17 @@ public class Player : MonoBehaviour, IDamagable
     private void DataInit()
     {
         // 초기 설정으로 저장
-        pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, UpgradeType.normal, 0);
+        pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, 0, 0);
     }
 
     // 데미지 받음 => 죽음 판정
     public void TakeDamage()
     {
-        if (grade > UpgradeType.normal) grade -= 1;
+        if (grade > 0)
+        {
+            grade -= 1;
+            UpdateRender();
+        }
         else Dead();
     }
 
@@ -99,7 +110,7 @@ public class Player : MonoBehaviour, IDamagable
         // 플레이어 초기값으로 재설정
         moveSpeed = moveSpeed_Init;
         shotSpeed = shotSpeed_Init;
-        grade = UpgradeType.normal;
+        grade = 0;
 
         // 리스폰 이펙트 코루틴 실행
         StartCoroutine(RespawnEffect());
@@ -117,11 +128,41 @@ public class Player : MonoBehaviour, IDamagable
         Debug.Log("플레이어 리스폰 완료");
     }
 
+
+    public void UpdateRender()
+    {
+        // 렌더러 초기화
+        foreach (Transform child in groupRender)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        // 등급에 맞는 그래픽 활성화
+        switch (grade)
+        {
+            case UpgradeType.Grade01:
+                groupRender.GetChild(0).gameObject.SetActive(true);
+                break;
+            case UpgradeType.Grade02:
+                groupRender.GetChild(1).gameObject.SetActive(true);
+                break;
+            case UpgradeType.Grade03:
+                groupRender.GetChild(2).gameObject.SetActive(true);
+                break;
+            case UpgradeType.Grade04:
+                groupRender.GetChild(3).gameObject.SetActive(true);
+                break;
+        }
+
+    }
+
+    
+
     #region 아이템 & 환경 사용 호출 함수
 
     public void Upgrade(float moveSpeed, float shotSpeed)
     {
-        if (grade == UpgradeType.boss)
+        if (grade == UpgradeType.Grade04)
         {
             Debug.Log("이미 최고 등급입니다");
             // 점수 얻는걸로? 슈퍼마리오 버섯 처럼 이미 최종 단계면 점수로 치환
@@ -129,7 +170,9 @@ public class Player : MonoBehaviour, IDamagable
         }
         SpeedControl(moveSpeed, shotSpeed);
         grade += 1;
+        UpdateRender();
     }
+
 
     public void GetLife(int life)
     {
@@ -154,7 +197,7 @@ public class Player : MonoBehaviour, IDamagable
 }
 
 // 플레이어 & Enemy 업그레이드 등급
-public enum UpgradeType { normal, elite, boss }
+public enum UpgradeType { Grade01, Grade02, Grade03, Grade04 }
 
 public enum PlayerState { General, Invincible } // {일반, 무적, ...상태가 더 필요하면 이곳에 추가}
 

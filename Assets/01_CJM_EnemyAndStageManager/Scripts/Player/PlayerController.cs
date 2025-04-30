@@ -88,7 +88,16 @@ public class PlayerController : MonoBehaviour
         }
 
         GameObject gameObject = bulletPool.BulletOut().gameObject;
-
+        
+        // Todo: 플레이어 등급에 따른 총알 타입 구분, 머지 후 활성화 합시다
+        if(player.grade == UpgradeType.Grade04)
+        {
+            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type2;
+        }
+        else
+        {
+            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type1;
+        }
 
         gameObject.transform.position = muzzPoint.position;
         gameObject.transform.forward = muzzPoint.forward;
