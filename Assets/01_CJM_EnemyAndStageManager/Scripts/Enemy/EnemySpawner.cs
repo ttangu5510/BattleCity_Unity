@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private SpawnerState state;
     [SerializeField] private Transform standByGroup;
     [SerializeField] private GameObject EffectPrefab;
+    [SerializeField] private List<GameObject> standByEnemys;
     
     private StageManager sm;
 
@@ -27,14 +28,19 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        // ÀÚ½Ä È°¼ºÈ­
+        // ìì‹ í™œì„±í™”
         if (!standByGroup.GetChild(0).gameObject.activeSelf)
             standByGroup.GetChild(0).gameObject.SetActive(true);
+
+
+        // ìˆ˜ì •í•´ë³´ì.
+
+
     }
 
     // TODO:
-    // Äİ¶óÀÌ´õ·Î ½ºÆ÷³Ê ¿µ¿ª ³» Àû/ÇÃ·¹ÀÌ¾î ÅÊÅ© µé¾î¿À¸é ½ºÆù ºÒ°¡ »óÅÂ·Î º¯°æ
-    // ½ºÆ÷³Ê ¿µ¿ª ³» ¾Æ¹«µµ ¾øÀ¸¸é ½ºÆù°¡´É »óÅÂ·Î º¯°æ
+    // ì½œë¼ì´ë”ë¡œ ìŠ¤í¬ë„ˆ ì˜ì—­ ë‚´ ì /í”Œë ˆì´ì–´ íƒ±í¬ ë“¤ì–´ì˜¤ë©´ ìŠ¤í° ë¶ˆê°€ ìƒíƒœë¡œ ë³€ê²½
+    // ìŠ¤í¬ë„ˆ ì˜ì—­ ë‚´ ì•„ë¬´ë„ ì—†ìœ¼ë©´ ìŠ¤í°ê°€ëŠ¥ ìƒíƒœë¡œ ë³€ê²½
 }
 
 public enum SpawnerState { Spawning, Spawnable, Disable }
