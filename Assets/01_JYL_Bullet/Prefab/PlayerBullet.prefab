@@ -157,7 +157,7 @@ MonoBehaviour:
   bulletType: 0
   Breakable:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 0
 --- !u!54 &134146882247599964
 Rigidbody:
   m_ObjectHideFlags: 0
