@@ -4,13 +4,14 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading;
+using TMPro;
 
 public class MySceneManager : MonoBehaviour
 {
 
     [SerializeField] Image fadeImage;
     [SerializeField] float fadeTime;
-    [SerializeField] Text loadingText;
+    [SerializeField] TMP_Text loadingText;
     public static MySceneManager Instance
     {
         get
@@ -25,7 +26,7 @@ public class MySceneManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DestroyImmediate(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -52,6 +53,7 @@ public class MySceneManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+        
         loadingText.gameObject.SetActive(true);
         yield return null;
 
