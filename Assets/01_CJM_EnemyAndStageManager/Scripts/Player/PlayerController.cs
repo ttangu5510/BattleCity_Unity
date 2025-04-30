@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        player = transform.parent.GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
 
         // Bullet Pool 생성자로 bulletPool 필드에 할당. 

@@ -132,9 +132,9 @@ public class Player : MonoBehaviour, IDamagable
     public void UpdateRender()
     {
         // 렌더러 초기화
-        foreach (Transform child in groupRender)
+        for (int i = 0; i < 4; i++)
         {
-            child.gameObject.SetActive(false);
+            groupRender.GetChild(i).gameObject.SetActive(false);
         }
 
         // 등급에 맞는 그래픽 활성화

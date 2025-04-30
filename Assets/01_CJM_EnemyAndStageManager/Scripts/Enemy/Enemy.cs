@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour, IDamagable
         // 벽에 닿으면 방향 전환 고고
 
         Vector3 originPos = muzzPoint.position;
-        LayerMask layerMask = ~LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // 적들 서로, 벽만 체크 되도록--- 벽 레이어 추가되면 여기 추가
+        LayerMask layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // 적들 서로, 벽만 체크 되도록--- 벽 레이어 추가되면 여기 추가
         if (Physics.Raycast(originPos, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(originPos, originPos + muzzPoint.forward * rayForwardDistance, Color.red);
