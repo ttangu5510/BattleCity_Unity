@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private Player player;
     private Rigidbody rb;
-    public Vector3 dir;
+    private Vector3 dir;
 
     [SerializeField] private BulletObjectPool bulletPool;
 
@@ -19,27 +19,23 @@ public class PlayerController : MonoBehaviour
         player = transform.parent.GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
 
-        // Bullet Pool ìƒì„±ìë¡œ bulletPool í•„ë“œì— í• ë‹¹. 
+        // Bullet Pool »ı¼ºÀÚ·Î bulletPool ÇÊµå¿¡ ÇÒ´ç. 
     }
 
     private void Update()
     {
-        // ì£½ê³  ë¦¬ìŠ¤í°ë˜ê¸° ì „ê¹Œì§€ ì´ë™ ì…ë ¥ ë©ˆì¶¤
-        if (player.state == PlayerState.Respawning) return;
-
-        // ì…ë ¥ì„ 4ë°©í–¥ ë‹¨ìœ„ë²¡í„°ë¡œ ì—°ì‚° í›„ dirì— ì €ì¥
-        #region dir(ì…ë ¥)
+        // ÀÔ·ÂÀ» 4¹æÇâ ´ÜÀ§º¤ÅÍ·Î ¿¬»ê ÈÄ dir¿¡ ÀúÀå
+        #region dir(ÀÔ·Â)
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
         Vector3 inputDir = new Vector3(x, 0, z).normalized;
 
-        // xë°©í–¥ ì…ë ¥ì´ ë” ë§ìœ¼ë©´ íš¡ ì…ë ¥ íŒì • (ì¡°ì´ìŠ¤í‹± ê¸°ì¤€, í‚¤ë³´ë“œëŠ” í˜„ì¬ ë°©í–¥ ìœ ì§€í•˜ëŠ” ìª½ìœ¼ë¡œ)
+        // x¹æÇâ ÀÔ·ÂÀÌ ´õ ¸¹À¸¸é È¾ ÀÔ·Â ÆÇÁ¤ (Á¶ÀÌ½ºÆ½ ±âÁØ, Å°º¸µå´Â ÇöÀç ¹æÇâ À¯ÁöÇÏ´Â ÂÊÀ¸·Î)
         if (inputDir == Vector3.zero)
         {
             dir = Vector3.zero;
         }
-
         else
         {
             if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
@@ -54,9 +50,9 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
 
-        // ì´ë™í•˜ê¸¸ ì›í•˜ëŠ” ê°ë„ë¡œ íšŒì „
+        // ÀÌµ¿ÇÏ±æ ¿øÇÏ´Â °¢µµ·Î È¸Àü
 
-        // ê³µê²©í‚¤ ì…ë ¥, ê³µê²©
+        // °ø°İÅ° ÀÔ·Â, °ø°İ
         if (Input.GetKeyDown(KeyCode.X))
         {
             Attack();
@@ -65,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ì´ë™(ë¬¼ë¦¬)
+        // ÀÌµ¿(¹°¸®)
         Move();
     }
 
@@ -87,20 +83,20 @@ public class PlayerController : MonoBehaviour
     {
         if (bulletPool.PoolCount() <= 0)
         {
-            Debug.Log("í’€ ì˜¤ë¸Œì íŠ¸ ëª¨ë‘ ì†Œì§„!");
+            Debug.Log("Ç® ¿ÀºêÁ§Æ® ¸ğµÎ ¼ÒÁø!");
             return;
         }
 
         GameObject gameObject = bulletPool.BulletOut().gameObject;
         
-        // Todo: í”Œë ˆì´ì–´ ë“±ê¸‰ì— ë”°ë¥¸ ì´ì•Œ íƒ€ì… êµ¬ë¶„, ë¨¸ì§€ í›„ í™œì„±í™” í•©ì‹œë‹¤
+        // Todo: ÇÃ·¹ÀÌ¾î µî±Ş¿¡ µû¸¥ ÃÑ¾Ë Å¸ÀÔ ±¸ºĞ, ¸ÓÁö ÈÄ È°¼ºÈ­ ÇÕ½Ã´Ù
         if(player.grade == UpgradeType.Grade04)
         {
-            gameObject.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type2;
+            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type2;
         }
         else
         {
-            gameObject.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type1;
+            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type1;
         }
 
         gameObject.transform.position = muzzPoint.position;

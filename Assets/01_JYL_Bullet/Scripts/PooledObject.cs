@@ -18,6 +18,21 @@ public class PooledObject : MonoBehaviour
         rangeLevel2 = new Vector3(5, 5, 1.5f);
         Breakable = LayerMask.GetMask("Brick", "SolidBlock");
     }
+    private void FixedUpdate()
+    {
+        if (Mathf.Abs(transform.forward.x) > Mathf.Abs(transform.forward.z))
+        {
+            rangeLevel1 = new Vector3(0.5f, 5, 5);
+            rangeLevel2 = new Vector3(1.5f, 5, 5);
+
+        }
+        else
+        {
+            rangeLevel1 = new Vector3(5, 5, 0.5f);
+            rangeLevel2 = new Vector3(5, 5, 1.5f);
+
+        }
+    }
     private void Update()
     {
         if (rigid.velocity.magnitude > 3)
@@ -33,6 +48,7 @@ public class PooledObject : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Instantiate(bulletExplosion, transform.position, transform.rotation).Play();
+        goPosition = gameObject.transform.position;
         // 비트시프트를 사용해서 찾는 방법과, NameToLayer를 통해서 찾을 수 있다
         // layer는 LayerMask와 같지 않다. 이것을 이해해야 해결되는 문제
         // if((1 << collision.gameObject.layer & Breakable.value) == 1 << collision.gameObject.layer)
@@ -41,7 +57,6 @@ public class PooledObject : MonoBehaviour
             if (collision.gameObject.layer == LayerMask.NameToLayer("Brick"))
             {
                 Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel1, Quaternion.identity, LayerMask.GetMask("Brick"));
-                goPosition = gameObject.transform.position;
                 foreach (var collide in colliders)
                 {
                     BrickAction ba = collide.gameObject.GetComponent<BrickAction>();
@@ -57,7 +72,9 @@ public class PooledObject : MonoBehaviour
                 Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel2, Quaternion.identity, Breakable);
                 foreach (var collide in colliders)
                 {
-                    //collide.gameObject.GetComponent<BrickAction>().BrickDestroy();
+                    BrickAction ba = collide.gameObject.GetComponent<BrickAction>();
+                    if (ba != null)
+                        ba.BrickDestroy(goPosition);
                 }
             }
         }
