@@ -1170,7 +1170,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3300749540816814337, guid: 64fbef0e852b251449696696b0cd5af3, type: 3}
       propertyPath: m_Name
-      value: StageData (1)
+      value: StageData
       objectReference: {fileID: 0}
     - target: {fileID: 6325053148005216482, guid: 64fbef0e852b251449696696b0cd5af3, type: 3}
       propertyPath: m_LocalPosition.x

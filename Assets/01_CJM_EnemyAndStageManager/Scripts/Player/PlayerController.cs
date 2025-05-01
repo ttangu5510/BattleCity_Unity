@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private Player player;
     private Rigidbody rb;
-    private Vector3 dir;
+    public Vector3 dir;
 
     [SerializeField] private BulletObjectPool bulletPool;
 
