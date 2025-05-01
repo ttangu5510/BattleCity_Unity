@@ -77,7 +77,7 @@ public class EnemyManager : MonoBehaviour
     }
 
 
-    public int SumPointByGrade(int slayCount, EnemyGrade grade)
+    public int GetSumPointByGrade(int slayCount, EnemyGrade grade)
     {
         int sumedScore = 0;
         switch (grade)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour, IDamagable
@@ -9,11 +10,14 @@ public class EnemySpawner : MonoBehaviour, IDamagable
     [SerializeField] private GameObject EffectPrefab;
     [SerializeField] private List<float> standByTimeToSpawn;
     [SerializeField] private int standByIndex;
-    
+
+    Coroutine spPattern;
+
     private StageManager sm;
 
     private void Start()
     {
+        StopAllCoroutines();
         sm = StageManager.Instance;
         sm.SpawnerAddToList(this);
         standByIndex = 0;
@@ -21,7 +25,15 @@ public class EnemySpawner : MonoBehaviour, IDamagable
         // StandByGroup에 추가된 적 count와 스폰 시간을 정해준 적 count가 일치하는지 체크
         if (standByGroup.childCount != standByTimeToSpawn.Count)
             Debug.LogError($"StandByGroup에 추가된 적 count와 스폰 시간을 정해준 적 count가 일치하지 않습니다. \n오브젝트 이름 : {name}");
-        else StartCoroutine(SpawnPattern());
+        else 
+        {
+            spPattern = StartCoroutine(SpawnPattern());
+        } 
+    }
+
+    private void OnDestroy()
+    {
+        StopCoroutine(spPattern);
     }
 
     IEnumerator SpawnPattern()

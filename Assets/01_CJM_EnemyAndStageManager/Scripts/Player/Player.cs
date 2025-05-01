@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private int life;
     [SerializeField] public float moveSpeed { get; private set; }
     [SerializeField] public float shotSpeed { get; private set; }
-    [SerializeField] private int score;
+    [SerializeField] public int score { get; private set; }
 
     [Header("Setting Field")]
     [SerializeField] private Transform groupRender;
@@ -42,11 +42,15 @@ public class Player : MonoBehaviour, IDamagable
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Upgrade(0, 0);
+            Upgrade(0, 0, 0);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             TakeDamage();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Debug.Log( StageManager.Instance.GetSlayeeEnemyCountByGrade(EnemyGrade.normal));
         }
     }
     //*****************************************************//
@@ -64,7 +68,7 @@ public class Player : MonoBehaviour, IDamagable
         life = pd.life;
         moveSpeed = pd.moveSpeed;
         shotSpeed = pd.shotSpeed;
-        score = pd.score;
+        // score = pd.score; 스코어는 실시간으로 업데이트 해야함
 
         // 스테이지매니저.스테이지 종료 이벤트.AddListener(SavePlayerData);
     }
@@ -77,6 +81,9 @@ public class Player : MonoBehaviour, IDamagable
 
         // 등급 상태 테스트용.
         UpdateRender();
+
+        // 필수 에러 디버깅
+        if (respawnPoint == null) Debug.LogError("리스폰 포인트를 설정해주세요.");
     }
 
     private void OnDestroy()
@@ -88,7 +95,8 @@ public class Player : MonoBehaviour, IDamagable
     private void DataInit()
     {
         // 초기 설정으로 저장
-        pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, 0, 0);
+        pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, 0);
+        pd.UpdateScore(0);
     }
 
     // 데미지 받음 => 죽음 판정
@@ -129,6 +137,7 @@ public class Player : MonoBehaviour, IDamagable
 
         // 플레이어 위치 이동 & 정지
         playerController.transform.position = respawnPoint.gameObject.transform.position;
+        playerController.transform.rotation = respawnPoint.gameObject.transform.rotation;
         playerController.dir = Vector3.zero;
 
         Debug.Log(respawnPoint.gameObject.transform.position);
@@ -179,18 +188,18 @@ public class Player : MonoBehaviour, IDamagable
                 groupRender.GetChild(3).gameObject.SetActive(true);
                 break;
         }
-
     }
 
 
 
     #region 아이템 & 환경 사용 호출 함수
 
-    public void Upgrade(float moveSpeed, float shotSpeed)
+    public void Upgrade(float moveSpeed, float shotSpeed, int score)
     {
         if (grade == UpgradeType.Grade04)
         {
             Debug.Log("이미 최고 등급입니다");
+            pd.UpdateScore(score);
             // 점수 얻는걸로? 슈퍼마리오 버섯 처럼 이미 최종 단계면 점수로 치환
             return;
         }
@@ -218,7 +227,7 @@ public class Player : MonoBehaviour, IDamagable
     // 스테이지 종료 시 호출
     public void SavePlayerData()
     {
-        pd.SaveData(life, moveSpeed, shotSpeed, grade, score);
+        pd.SaveData(life, moveSpeed, shotSpeed, grade);
     }
 }
 

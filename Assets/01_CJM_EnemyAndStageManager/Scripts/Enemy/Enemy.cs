@@ -87,6 +87,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
         gameObject.SetActive(false);
         transform.SetSiblingIndex(transform.parent.childCount - 1);
+        PlayerData.Instance.UpdateScore(scorePoint);
     }
 
 

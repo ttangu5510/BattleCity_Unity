@@ -127,4 +127,17 @@ public class StageManager : MonoBehaviour
             StageClear();
         }
     }
+
+    public int GetSlayeeEnemyCountByGrade(EnemyGrade grade)
+    {
+        int count = 0;
+        
+        foreach (Enemy enemy in slayedEnemys)
+        {
+            if (enemy.Grade == grade)
+                count += 1;
+        }
+
+        return count;
+    }
 }

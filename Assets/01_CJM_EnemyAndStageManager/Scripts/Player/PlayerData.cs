@@ -15,13 +15,17 @@ public class PlayerData
 
 
 
-    public void SaveData(int life, float moveSpeed, float shotSpeed, UpgradeType grade, int score)
+    public void SaveData(int life, float moveSpeed, float shotSpeed, UpgradeType grade)
     {
         this.grade = grade;
-        this.score = score;
         this.life = life;
         this.moveSpeed = moveSpeed;
         this.shotSpeed = shotSpeed;
+    }
+
+    public void UpdateScore(int score)
+    {
+        this.score = score;
     }
 
 }

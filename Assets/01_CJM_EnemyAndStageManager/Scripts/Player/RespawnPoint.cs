@@ -9,7 +9,7 @@ public class RespawnPoint : MonoBehaviour
 
     public void PlayerFBX()
     {
-        Instantiate(respawnFBX_Prefab);
+        Instantiate(respawnFBX_Prefab, transform);
     }
 
     public void StopFBX()
