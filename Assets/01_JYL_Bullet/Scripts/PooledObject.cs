@@ -79,7 +79,7 @@ public class PooledObject : MonoBehaviour
             }
         }
 
-        IDamagable damagable = collision.gameObject.transform.root.GetComponent<IDamagable>();
+        IDamagable damagable = collision.gameObject.transform.GetComponent<IDamagable>();
         if (damagable != null)
         {
             damagable.TakeDamage();
