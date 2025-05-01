@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,24 +8,24 @@ public class EnemyManager : MonoBehaviour
     private static EnemyManager instance;
     public static EnemyManager Instance { get { return instance; } }
 
-    [Header("[Normal] µÓ±ﬁ º≥¡§")]
+    [Header("[Normal] Grade Setting")]
     [SerializeField] public int hp_N;
     [SerializeField] public float moveSpeed_N;
     [SerializeField] public float shotSpeed_N;
 
-    [Header("[Elite] µÓ±ﬁ º≥¡§")]
+    [Header("[Elite] Grade Setting")]
     [SerializeField] public int hp_E;
     [SerializeField] public float moveSpeed_E;
     [SerializeField] public float shotSpeed_E;
 
 
-    [Header("[Boss] µÓ±ﬁ º≥¡§")]
+    [Header("[Boss] Grade Setting")]
     [SerializeField] public int hp_B;
     [SerializeField] public float moveSpeed_B;
     [SerializeField] public float shotSpeed_B;
 
 
-    [Header("¿˚ µÓ±ﬁ ∫∞, √≥ƒ° ¡°ºˆ")]
+    [Header("ScoreData by Grade")]
     [SerializeField] public int score_Normal;
     [SerializeField] public int score_Elite;
     [SerializeField] public int score_Boss;
@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
-        // ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫ ª˝º∫
+        // Ïã±Í∏ÄÌÜ§ Ïù∏Ïä§ÌÑ¥Ïä§ ÏÉùÏÑ±
         if (instance == null)
         {
             instance = this;
@@ -76,4 +76,22 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+
+    public int SumPointByGrade(int slayCount, EnemyGrade grade)
+    {
+        int sumedScore = 0;
+        switch (grade)
+        {
+            case EnemyGrade.normal:
+                sumedScore = slayCount * score_Normal;
+                break;
+            case EnemyGrade.elite:
+                sumedScore = slayCount * score_Elite;
+                break;
+            case EnemyGrade.boss:
+                sumedScore = slayCount * score_Boss;
+                break;
+        }
+        return sumedScore;
+    }
 }

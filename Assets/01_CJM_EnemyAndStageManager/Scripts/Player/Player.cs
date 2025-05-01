@@ -1,19 +1,20 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour, IDamagable
 {
     // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
-    [Header("초기 설정")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
+    [Header("Init Setting")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
     [SerializeField] private int life_Init;
     [SerializeField] private float moveSpeed_Init;
     [SerializeField] private float shotSpeed_Init;
+    [Tooltip("Waiting time to respawn")]
+    [SerializeField] private float respawningTime;
 
-    [Header("스테이지 별 스폰 포인트")]
-    [SerializeField] private Transform respawnPoint;
+    [SerializeField] private RespawnPoint respawnPoint;
 
-    [Header("현재 플레이어 정보")]
+    [Header("Current Player Data")]
     [SerializeField] public UpgradeType grade;
     [SerializeField] public PlayerState state;
     [SerializeField] private int life;
@@ -21,8 +22,9 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] public float shotSpeed { get; private set; }
     [SerializeField] private int score;
 
-    [Header("등급 별 렌더를 위한 필드")]
+    [Header("Setting Field")]
     [SerializeField] private Transform groupRender;
+    [SerializeField] private PlayerController playerController;
 
 
 
@@ -34,6 +36,20 @@ public class Player : MonoBehaviour, IDamagable
     // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
     // public UnityEvent PlayerDeadEvent = new UnityEvent(); 게임 오버 이벤트로만 해도 충분할 듯. 플레이어 사망 시 특수 참조 필요할 시 활성화
 
+    //*******************************************************//
+    // 테스트용. 테스트 후 삭제할 예정
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Upgrade(0, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            TakeDamage();
+        }
+    }
+    //*****************************************************//
 
     // 스테이지마다 플레이어 오브젝트가 활성화 될 때, 플레이어 데이터를 동기화 시킴
     // 스테이지 진행 중에는 현재 객체가 정보를 담당. 스테이지 종료 시, PlayerData에 현재 객체 정보 저장하는 구조
@@ -109,9 +125,13 @@ public class Player : MonoBehaviour, IDamagable
     // 리스폰 => 초기 설정값으로 플레이어 초기화, 스폰 포인트로 위치 변경, 리스폰 효과 코루틴 실행
     public void Respawn()
     {
-        // 플레이어 위치 이동
-        transform.position = respawnPoint.position;
+        state = PlayerState.Respawning;
 
+        // 플레이어 위치 이동 & 정지
+        playerController.transform.position = respawnPoint.gameObject.transform.position;
+        playerController.dir = Vector3.zero;
+
+        Debug.Log(respawnPoint.gameObject.transform.position);
         // 플레이어 초기값으로 재설정
         moveSpeed = moveSpeed_Init;
         shotSpeed = shotSpeed_Init;
@@ -122,14 +142,15 @@ public class Player : MonoBehaviour, IDamagable
     }
     public IEnumerator RespawnEffect()
     {
-        // 1초동안 효과 실행 or 셰이더 변경 후 코루틴 종료
+        // 1초동안 이펙트 실행 or 셰이더 변경 후 코루틴 종료
 
-        // 효과();
-        // 셰이더();
-        Debug.Log("플레이어 리스폰 중... 무적 상태!");
-        yield return new WaitForSeconds(1f);
-        // 효과 삭제();
+        // 반짝이는 셰이더();
+        Debug.Log("플레이어 리스폰 중...");
+        respawnPoint.PlayerFBX(); // 이펙트 실행
+        yield return new WaitForSeconds(respawningTime);
         // 셰이더 초기화();
+        //respawnPoint.StopFBX(); // 이펙트 자동 종료 가능하니 주석처리함. 삭제해도 되면 삭제
+        state = PlayerState.General;
         Debug.Log("플레이어 리스폰 완료");
     }
 
@@ -204,6 +225,6 @@ public class Player : MonoBehaviour, IDamagable
 // 플레이어 & Enemy 업그레이드 등급
 public enum UpgradeType { Grade01, Grade02, Grade03, Grade04 }
 
-public enum PlayerState { General, Invincible } // {일반, 무적, ...상태가 더 필요하면 이곳에 추가}
+public enum PlayerState { General, Invincible, Respawning } // {일반, 무적, ...상태가 더 필요하면 이곳에 추가}
 
 

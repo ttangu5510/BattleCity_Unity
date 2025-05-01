@@ -1,24 +1,24 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StageData : MonoBehaviour
 {
     private StageManager sm;
-    [Header("½ºÅ×ÀÌÁö Á¶°Ç ÀúÀå")]
-    [Tooltip("¸Ê ¾È¿¡ µ¿½Ã¿¡ Á¸ÀçÇÒ ¼ö ÀÖ´Â ÃÖ´ë Àû ¼ö")]
-    [SerializeField] private int maxActiveEnemyCount;    // ¸Ê »ó¿¡ µ¿½Ã¿¡ Á¸ÀçÇÒ ¼ö ÀÖ´Â ÃÖ´ë Àû ¼ö
-    [Tooltip("Ã³Ä¡ÇØ¾ß µÇ´Â ¸ó½ºÅÍ ¼ö / ½Â¸® Á¶°Ç")]
-    [SerializeField] private int enemyLifeCount;         // Ã³Ä¡ÇØ¾ß µÇ´Â ¸ó½ºÅÍ ¼ö / ½Â¸® Á¶°Ç
+    [Header("Save Stage Conditions")]
+    [Tooltip("Maximum number that can exist in map at the same time")]
+    [SerializeField] private int maxActiveEnemyCount;    // ë§µ ìƒì— ë™ì‹œì— ì¡´ì¬í•  ìˆ˜ ìˆëŠ” ìµœëŒ€ ì  ìˆ˜
+    [Tooltip("Number of enemies to kill / winning conditions")]
+    [SerializeField] private int enemyLifeCount;         // ì²˜ì¹˜í•´ì•¼ ë˜ëŠ” ëª¬ìŠ¤í„° ìˆ˜ / ìŠ¹ë¦¬ ì¡°ê±´
 
-    // ½ºÅ×ÀÌÁö ¸Å´ÏÀú ½Ì±ÛÅæ ÀÎ½ºÅÏ½º°¡ Awake¿¡¼­ ÇÒ´çµÇ¹Ç·Î Start¿¡¼­ Á¤º¸ Àü´Ş
-    private void OnEnable()
+    // ìŠ¤í…Œì´ì§€ ë§¤ë‹ˆì € ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ê°€ Awakeì—ì„œ í• ë‹¹ë˜ë¯€ë¡œ Startì—ì„œ ì •ë³´ ì „ë‹¬
+    private void Start()
     {
         sm = StageManager.Instance;
 
-        // ½ºÅ×ÀÌÁö ¸Å´ÏÀú µ¥ÀÌÅÍ ÃÊ±âÈ­ (ÀÌÀü ½ºÅ×ÀÌÁö Àû ¸®½ºÆ® Á¤º¸)
+        // ìŠ¤í…Œì´ì§€ ë§¤ë‹ˆì € ë°ì´í„° ì´ˆê¸°í™” (ì´ì „ ìŠ¤í…Œì´ì§€ ì  ë¦¬ìŠ¤íŠ¸ ì •ë³´)
         sm.StageDataInit();
-        // ½ºÅ×ÀÌÁö ¸Å´ÏÀú¿¡ ÇöÀç µ¥ÀÌÅÍ µ¿±âÈ­
+        // ìŠ¤í…Œì´ì§€ ë§¤ë‹ˆì €ì— í˜„ì¬ ë°ì´í„° ë™ê¸°í™”
         sm.SynchronizeStageData(maxActiveEnemyCount, enemyLifeCount);
     }
 }

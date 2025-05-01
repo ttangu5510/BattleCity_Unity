@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor.Experimental.GraphView;
@@ -16,23 +16,21 @@ public class StageManager : MonoBehaviour
     [SerializeField] private List<Enemy> activateEnemys;
     [SerializeField] private List<Enemy> slayedEnemys;
 
-    [Header("ÇöÀç ½ºÅ×ÀÌÁö Á¤º¸")]
-    [Tooltip("¸Ê ¾È¿¡ µ¿½Ã¿¡ Á¸ÀçÇÒ ¼ö ÀÖ´Â ÃÖ´ë Àû ¼ö")]
-    [SerializeField] private int maxActiveEnemyCount;   // ¸Ê »ó¿¡ µ¿½Ã¿¡ Á¸ÀçÇÒ ¼ö ÀÖ´Â ÃÖ´ë Àû ¼ö
-    [Tooltip("[½ºÅ×ÀÌÁö Å¬¸®¾î] ±îÁö ³²Àº ÀûÀÇ ¶óÀÌÇÁ ¼ö")]
-    [SerializeField] private int enemyLifeCount;        // ³²Àº ÀûÀÇ ¸ñ¼û
-    [Tooltip("ÇöÀç ½ºÅ×ÀÌÁö¿¡¼­ ¾òÀº Á¡¼ö")]
+    [Header("Now Stage Info")]
+    [Tooltip("Maximum count that can exist in map same time")]
+    [SerializeField] private int maxActiveEnemyCount;   // ë§µ ìƒì— ë™ì‹œì— ì¡´ì¬í•  ìˆ˜ ìˆëŠ” ìµœëŒ€ ì  ìˆ˜
+    [Tooltip("Count of lives of the enemy to clear")]
+    [SerializeField] private int enemyLifeCount;        // ë‚¨ì€ ì ì˜ ëª©ìˆ¨
+    [Tooltip("Scores earned on the current stage")]
     [SerializeField] private int sumedScore;
 
 
     [HideInInspector] public UnityEvent StageStartEvent;
     [HideInInspector] public UnityEvent StageCloseEvent;
 
-    private EnemyManager em;
-
     private void Awake()
     {
-        // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º »ı¼º
+        // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
         if (instance == null)
         {
             instance = this;
@@ -47,21 +45,21 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-        em = EnemyManager.Instance;
+
     }
 
     public void StageClear()
     {
-        // Å¬¸®¾î UI º¸¿©ÁÜ(Á¡¼ö ÇÕ»ê Àå¸é)
-        Debug.Log("½ºÅ×ÀÌÁö Å¬¸®¾î");
+        // í´ë¦¬ì–´ UI ë³´ì—¬ì¤Œ(ì ìˆ˜ í•©ì‚° ì¥ë©´)
+        Debug.Log("ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´");
 
         StageClose();
     }
 
     public void StageFail()
     {
-        Debug.Log("½ºÅ×ÀÌÁö ½ÇÆĞ");
-        // ÀÌ¾î¼­ ÁøÇàÇÒ°ÇÁö ¿©ºÎ ÆÇ´Ü ÈÄ ¾ÈÇÑ´Ù¸é °ÔÀÓ ¿À¹ö ÆÇÁ¤
+        Debug.Log("ìŠ¤í…Œì´ì§€ ì‹¤íŒ¨");
+        // ì´ì–´ì„œ ì§„í–‰í• ê±´ì§€ ì—¬ë¶€ íŒë‹¨ í›„ ì•ˆí•œë‹¤ë©´ ê²Œì„ ì˜¤ë²„ íŒì •
 
         StageClose();
     }
@@ -69,11 +67,11 @@ public class StageManager : MonoBehaviour
     public void StageStart(Scene scene, LoadSceneMode mode)
     {
         // Todo
-        if (true /*¾À ÀÌ¸§¿¡ Stage°¡ µé¾î°£´Ù¸é*/)
+        if (true /*ì”¬ ì´ë¦„ì— Stageê°€ ë“¤ì–´ê°„ë‹¤ë©´*/)
         {
-            // ½ºÅ×ÀÌÁö ½ÃÀÛ ÀÌº¥Æ® ¹ß»ı
+            // ìŠ¤í…Œì´ì§€ ì‹œì‘ ì´ë²¤íŠ¸ ë°œìƒ
             StageStartEvent?.Invoke();
-            // ÀÌ°Å ¸®½º³Ê´Â ¾îµğ¼­ ÃÊ±âÈ­ÇÒ Áö °í¹Î ÇÊ¿ä.
+            // ì´ê±° ë¦¬ìŠ¤ë„ˆëŠ” ì–´ë””ì„œ ì´ˆê¸°í™”í•  ì§€ ê³ ë¯¼ í•„ìš”.
         }
     }
 
@@ -82,85 +80,51 @@ public class StageManager : MonoBehaviour
         StageCloseEvent?.Invoke();
         StageCloseEvent.RemoveAllListeners();
         
-        // TODO : ½ºÅ×ÀÌÁö ´İÀ» ¶§,
-        // ½ºÅ×ÀÌÁö Å¬¸®¾î »óÅÂ¸é -> ´ÙÀ½ ½ºÅ×ÀÌÁö·Î
-        // ½ºÅ×ÀÌÁö ½ÇÆĞ »óÅÂ¸é -> °ÔÀÓ ¸Å´ÏÀú.°ÔÀÓ ¿À¹ö ÀÌº¥Æ®
+        // TODO : ìŠ¤í…Œì´ì§€ ë‹«ì„ ë•Œ,
+        // ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ìƒíƒœë©´ -> ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ
+        // ìŠ¤í…Œì´ì§€ ì‹¤íŒ¨ ìƒíƒœë©´ -> ê²Œì„ ë§¤ë‹ˆì €.ê²Œì„ ì˜¤ë²„ ì´ë²¤íŠ¸
     }
 
-    // ½ºÅ×ÀÌÁö ¾À ºÒ·¯¿Ã ¶§, StageData¿¡¼­ ÃÊ±âÈ­
+    // ìŠ¤í…Œì´ì§€ ì”¬ ë¶ˆëŸ¬ì˜¬ ë•Œ, StageDataì—ì„œ ì´ˆê¸°í™”
     public void StageDataInit()
     {
-        // ¸®½ºÆ® ÃÊ±âÈ­
+        // ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         spawners = new List<EnemySpawner>();
         activateEnemys = new List<Enemy>();
         slayedEnemys = new List<Enemy>();
     }
 
-    // ½ºÅ×ÀÌÁö ¾À ºÒ·¯¿Ã ¶§, StageData¿¡¼­ µ¿±âÈ­
+    // ìŠ¤í…Œì´ì§€ ì”¬ ë¶ˆëŸ¬ì˜¬ ë•Œ, StageDataì—ì„œ ë™ê¸°í™”
     public void SynchronizeStageData(int maxActiveEnemyCount, int enemyLifeCount)
     {
         this.maxActiveEnemyCount = maxActiveEnemyCount;
         this.enemyLifeCount = enemyLifeCount;
     }
 
-    // ½ºÅ×ÀÌÁö¿¡ Á¸ÀçÇÏ´Â EnemySpawnerµéÀ» ¸®½ºÆ®¿¡ Ãß°¡
+    // ìŠ¤í…Œì´ì§€ì— ì¡´ì¬í•˜ëŠ” EnemySpawnerë“¤ì„ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
     public void SpawnerAddToList(EnemySpawner spawner)
     {
         spawners.Add(spawner);
     }
 
-    // Enemy Spawn() ½Ã È£Ãâ
+    // Enemy Spawn() ì‹œ í˜¸ì¶œ
     public void ActiveEnemyAdd(Enemy instance)
     {
-        activateEnemys.Add(instance);   // È°¼ºÈ­µÈ Àû ¸®½ºÆ®¿¡¼­ »èÁ¦
+        activateEnemys.Add(instance);   // í™œì„±í™”ëœ ì  ë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œ
     }
 
-    // Enemy Dead() ½Ã È£Ãâ
+    // Enemy Dead() ì‹œ í˜¸ì¶œ
     public void ActiveEnemyListRemove(Enemy instance)
     {
         
-        activateEnemys.Remove(instance);    // È°¼ºÈ­µÈ Àû ¸®½ºÆ®¿¡¼­ »èÁ¦
-        slayedEnemys.Add(instance);         // Á×Àº Àû ¸®½ºÆ®¿¡ Ãß°¡
+        activateEnemys.Remove(instance);    // í™œì„±í™”ëœ ì  ë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œ
+        slayedEnemys.Add(instance);         // ì£½ì€ ì  ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
 
         enemyLifeCount -= 1;
-        // ½Â¸®Á¶°Ç Ã¼Å©
+        // ìŠ¹ë¦¬ì¡°ê±´ ì²´í¬
         if (enemyLifeCount <= 0)
         {
             StageClear();
         }
     }
-
-    
-
-    // ½ºÅ×ÀÌÁö Á¾·á ½Ã, Ã³Ä¡ÇÑ Àû µî±Şº°·Î Á¡¼ö È¯»ê
-    public void SumScore(out int enemy_Normal, out int enemy_Elite, out int enemy_Boss, out int sumedScore)
-    {
-        int normalSum = 0;
-        int eliteSum = 0;
-        int bossSum = 0;
-        
-        for (int i = 0; i < slayedEnemys.Count; i++)
-        {
-            if (slayedEnemys[i].Grade == EnemyGrade.normal)
-            {
-                normalSum += em.score_Normal;
-            }
-            else if (slayedEnemys[i].Grade == EnemyGrade.elite)
-            {
-                eliteSum += em.score_Elite;
-            }
-            else if (slayedEnemys[i].Grade == EnemyGrade.boss)
-            {
-                bossSum += em.score_Boss;
-            }
-        }
-
-        enemy_Normal = normalSum;
-        enemy_Elite = eliteSum;
-        enemy_Boss = bossSum;
-
-        sumedScore = normalSum + eliteSum + bossSum;
-        this.sumedScore = sumedScore;
-    }
-
 }
