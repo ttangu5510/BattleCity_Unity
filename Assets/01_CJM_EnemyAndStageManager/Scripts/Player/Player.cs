@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IDamagable
     [Tooltip("Waiting time to respawn")]
     [SerializeField] private float respawningTime;
 
+
     [SerializeField] private RespawnPoint respawnPoint;
 
     [Header("Current Player Data")]

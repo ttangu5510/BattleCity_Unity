@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // 죽고 리스폰되기 전까지 이동 입력 멈춤
+        if (player.state == PlayerState.Respawning) return;
+
         // 입력을 4방향 단위벡터로 연산 후 dir에 저장
         #region dir(입력)
         float x = Input.GetAxisRaw("Horizontal");
@@ -92,11 +95,11 @@ public class PlayerController : MonoBehaviour
         // Todo: 플레이어 등급에 따른 총알 타입 구분, 머지 후 활성화 합시다
         if(player.grade == UpgradeType.Grade04)
         {
-            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type2;
+            gameObject.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type2;
         }
         else
         {
-            // gameObject.GetComponent<PooledObject>().bulletType = bulletType.Type1;
+            gameObject.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type1;
         }
 
         gameObject.transform.position = muzzPoint.position;
