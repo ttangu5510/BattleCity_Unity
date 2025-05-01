@@ -1361,6 +1361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzPoint: {fileID: 6945602100495388538}
   body: {fileID: 3964733842802139400}
+  dir: {x: 0, y: 0, z: 0}
   bulletPool: {fileID: 3612683141485623043}
 --- !u!54 &4209452293808471160
 Rigidbody:
@@ -2949,7 +2950,7 @@ GameObject:
   - component: {fileID: 5882837748649778195}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2986,12 +2987,13 @@ MonoBehaviour:
   life_Init: 10
   moveSpeed_Init: 5
   shotSpeed_Init: 10
+  respawningTime: 1
   respawnPoint: {fileID: 0}
   grade: 0
   state: 0
   life: 0
-  score: 0
   groupRender: {fileID: 3964733842802139400}
+  playerController: {fileID: 1450063888894356612}
 --- !u!1 &6628160134178698326
 GameObject:
   m_ObjectHideFlags: 0
