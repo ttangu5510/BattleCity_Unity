@@ -12,7 +12,7 @@ public class StageData : MonoBehaviour
     [SerializeField] private int enemyLifeCount;         // 처치해야 되는 몬스터 수 / 승리 조건
 
     // 스테이지 매니저 싱글톤 인스턴스가 Awake에서 할당되므로 Start에서 정보 전달
-    private void OnEnable()
+    private void Start()
     {
         sm = StageManager.Instance;
 
