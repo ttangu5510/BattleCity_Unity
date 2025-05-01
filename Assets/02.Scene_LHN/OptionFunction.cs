@@ -7,8 +7,9 @@ using static UnityEditor.Progress;
 
 public class OptionFunction : MonoBehaviour
 {
-
+    FullScreenMode screenMode;
     public TMP_Dropdown resolutionsDropdown;
+    public Toggle fullScreenButton;
     List<Resolution> resolutions = new List<Resolution>();
     public int resolutionNum;
 
@@ -35,10 +36,20 @@ public class OptionFunction : MonoBehaviour
         resolutionsDropdown.options.Add(option1);
 
         resolutionsDropdown.RefreshShownValue();
+
+        fullScreenButton.isOn = Screen.fullScreenMode.Equals(FullScreenMode.FullScreenWindow) ? true : false;
     }
 
     public void DropboxOptionChange(int x)
     {
         resolutionNum = x;
+    }
+    public void FullScreenButton(bool isFull)
+    {
+        screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+    }
+    public void OkButtonClick()
+    {
+        Screen.SetResolution(resolutions[resolutionNum].width, resolutions[resolutionNum].height, screenMode);
     }
 }
