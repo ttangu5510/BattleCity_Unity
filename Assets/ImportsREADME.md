@@ -28,6 +28,7 @@
 // 20. Fog of war 시야제한 (기능) https://assetstore.unity.com/packages/tools/particles-effects/fog-of-war-51344
 // 22. Rocks 단순한 돌 (지형) https://assetstore.unity.com/packages/3d/environments/stylized-rocks-free-sample-283215
  23. Easy Destrutible Wall (부숴지는 벽) https://assetstore.unity.com/packages/tools/physics/easy-destructible-wall-331
+ 24. Quick Outline (아웃라인 그리기) https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488?locale=ko-KR&gad_source=1&gad_campaignid=22451834332&gbraid=0AAAAADdkVOse1a4w1_dL9S_H0He53wy0r&gclid=Cj0KCQjwt8zABhDKARIsAHXuD7ZFSD4CWJCxSVwmi45EEPb4G9pcLUM79xs3ir9Lbxpd8pWVGCKQLjYaAopaEALw_wcB&gclsrc=aw.ds
 ---
 
 ## 필요에셋
