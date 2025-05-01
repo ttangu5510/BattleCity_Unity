@@ -17,7 +17,6 @@ public class EnemySpawner : MonoBehaviour, IDamagable
 
     private void Start()
     {
-        StopAllCoroutines();
         sm = StageManager.Instance;
         sm.SpawnerAddToList(this);
         standByIndex = 0;
@@ -33,23 +32,21 @@ public class EnemySpawner : MonoBehaviour, IDamagable
 
     private void OnDestroy()
     {
-        StopCoroutine(spPattern);
+        if (spPattern != null)
+            StopCoroutine(spPattern);
     }
 
     IEnumerator SpawnPattern()
     {
-        float time = 0;
-        while (true)
+        while (standByIndex < standByGroup.childCount)
         {
-            time = Mathf.Round(Time.time * 10f) / 10f;
-            if (time >= standByTimeToSpawn[standByIndex])
+            if (Time.time >= standByTimeToSpawn[standByIndex])
             {
                 standByGroup.GetChild(standByIndex).gameObject.SetActive(true);
                 standByIndex += 1;
             }
-
-            if (standByIndex >= standByGroup.childCount)
-                yield break;
+            
+            yield return null;
         }
     }
 
