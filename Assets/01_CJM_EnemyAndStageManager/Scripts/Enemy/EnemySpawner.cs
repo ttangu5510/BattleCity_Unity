@@ -7,7 +7,8 @@ public class EnemySpawner : MonoBehaviour, IDamagable
     [SerializeField] private SpawnerState state;
     [SerializeField] private Transform standByGroup;
     [SerializeField] private GameObject EffectPrefab;
-    [SerializeField] private List<GameObject> standByEnemys;
+    [SerializeField] private List<float> standByTimeToSpawn;
+    [SerializeField] private int standByIndex;
     
     private StageManager sm;
 
@@ -15,22 +16,29 @@ public class EnemySpawner : MonoBehaviour, IDamagable
     {
         sm = StageManager.Instance;
         sm.SpawnerAddToList(this);
+        standByIndex = 0;
+
+        // StandByGroup에 추가된 적 count와 스폰 시간을 정해준 적 count가 일치하는지 체크
+        if (standByGroup.childCount != standByTimeToSpawn.Count)
+            Debug.LogError($"StandByGroup에 추가된 적 count와 스폰 시간을 정해준 적 count가 일치하지 않습니다. \n오브젝트 이름 : {name}");
+        else StartCoroutine(SpawnPattern());
     }
 
-    public void Update()
+    IEnumerator SpawnPattern()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        float time = 0;
+        while (true)
         {
-            SpawnEnemy();
-        }
-    }
-    
+            time = Mathf.Round(Time.time * 10f) / 10f;
+            if (time >= standByTimeToSpawn[standByIndex])
+            {
+                standByGroup.GetChild(standByIndex).gameObject.SetActive(true);
+                standByIndex += 1;
+            }
 
-    public void SpawnEnemy()
-    {
-        // 자식 활성화
-        if (!standByGroup.GetChild(0).gameObject.activeSelf)
-            standByGroup.GetChild(0).gameObject.SetActive(true);
+            if (standByIndex >= standByGroup.childCount)
+                yield break;
+        }
     }
 
     public void TakeDamage() 
