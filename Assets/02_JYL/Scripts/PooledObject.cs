@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PooledObject : MonoBehaviour
 {
@@ -9,35 +9,58 @@ public class PooledObject : MonoBehaviour
     public BulletType bulletType;
     private Vector3 rangeLevel1;
     private Vector3 rangeLevel2;
+    private Quaternion rotation;
     [SerializeField] private LayerMask Breakable;
     private Vector3 goPosition;
     private void Awake()
     {
         rigid ??= GetComponent<Rigidbody>();
-        rangeLevel1 = new Vector3(5, 5, 0.5f);
-        rangeLevel2 = new Vector3(5, 5, 1.5f);
+
+        rotation = Quaternion.LookRotation(transform.forward);
         Breakable = LayerMask.GetMask("Brick", "SolidBlock");
     }
     private void Update()
     {
         if (rigid.velocity.magnitude > 3)
         {
-            //Æ÷ÅºÀÌ °î¼±À» ±×¸®¸ç ³¯¾Æ°£´Ù
+            //í¬íƒ„ì´ ê³¡ì„ ì„ ê·¸ë¦¬ë©° ë‚ ì•„ê°„ë‹¤
             transform.forward = rigid.velocity;
-            // ¿ÀºêÁ§Æ®ÀÇ È¸Àü ¹æ¹ı Áß ÇÏ³ª´Ù
-            // transform.forward = º¤ÅÍ
-            // º¤ÅÍ ¹æÇâÀ» ¹Ù¶óº¸µµ·Ï(forward ¾ÕÀÌ ±×ÂÊÀ» ÇâÇÏµµ·Ï) È¸ÀüÇÔ
+            // ì˜¤ë¸Œì íŠ¸ì˜ íšŒì „ ë°©ë²• ì¤‘ í•˜ë‚˜ë‹¤
+            // transform.forward = ë²¡í„°
+            // ë²¡í„° ë°©í–¥ì„ ë°”ë¼ë³´ë„ë¡(forward ì•ì´ ê·¸ìª½ì„ í–¥í•˜ë„ë¡) íšŒì „í•¨
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (Mathf.Abs(transform.forward.x) > Mathf.Abs(transform.forward.z))
+        {
+            rangeLevel1 = new Vector3(0.5f, 5, 5);
+
+        }
+        else
+        {
+            rangeLevel1 = new Vector3(5, 5, 0.5f);
+
+        }
+        if (Mathf.Abs(transform.forward.x) > Mathf.Abs(transform.forward.z))
+        {
+            rangeLevel2 = new Vector3(1.5f, 5, 5);
+        }
+        else
+        {
+            rangeLevel2 = new Vector3(5, 5, 1.5f);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Instantiate(bulletExplosion, transform.position, transform.rotation).Play();
-        // ºñÆ®½ÃÇÁÆ®¸¦ »ç¿ëÇØ¼­ Ã£´Â ¹æ¹ı°ú, NameToLayer¸¦ ÅëÇØ¼­ Ã£À» ¼ö ÀÖ´Ù
-        // layer´Â LayerMask¿Í °°Áö ¾Ê´Ù. ÀÌ°ÍÀ» ÀÌÇØÇØ¾ß ÇØ°áµÇ´Â ¹®Á¦
+        // ë¹„íŠ¸ì‹œí”„íŠ¸ë¥¼ ì‚¬ìš©í•´ì„œ ì°¾ëŠ” ë°©ë²•ê³¼, NameToLayerë¥¼ í†µí•´ì„œ ì°¾ì„ ìˆ˜ ìˆë‹¤
+        // layerëŠ” LayerMaskì™€ ê°™ì§€ ì•Šë‹¤. ì´ê²ƒì„ ì´í•´í•´ì•¼ í•´ê²°ë˜ëŠ” ë¬¸ì œ
         // if((1 << collision.gameObject.layer & Breakable.value) == 1 << collision.gameObject.layer)
         if (bulletType == BulletType.Type1)
         {
+
             if (collision.gameObject.layer == LayerMask.NameToLayer("Brick"))
             {
                 Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel1, Quaternion.identity, LayerMask.GetMask("Brick"));
@@ -52,12 +75,16 @@ public class PooledObject : MonoBehaviour
         }
         else
         {
+
             if (collision.gameObject.layer == LayerMask.NameToLayer("Brick") || collision.gameObject.layer == LayerMask.NameToLayer("SolidBlock"))
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel2, Quaternion.identity, Breakable);
+                Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel1, Quaternion.identity, Breakable);
+                goPosition = gameObject.transform.position;
                 foreach (var collide in colliders)
                 {
-                    //collide.gameObject.GetComponent<BrickAction>().BrickDestroy();
+                    BrickAction ba = collide.gameObject.GetComponent<BrickAction>();
+                    if (ba != null)
+                        ba.BrickDestroy(goPosition);
                 }
             }
         }
