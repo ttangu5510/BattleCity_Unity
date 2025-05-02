@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ItemManager02 : MonoBehaviour
 {
     public static ItemManager02 Instance { get; private set; }
 
+    [SerializeField] private GameObject itemPrefab;
     private Dictionary<int, ItemData> itemDataDictionary = new Dictionary<int, ItemData>();
+
 
     private void Awake()
     {
@@ -20,61 +23,61 @@ public class ItemManager02 : MonoBehaviour
 
     private void InitializeItems()
     {
-        Sprite invincibilityIcon = Resources.Load<Sprite>("Sprites/Invincibility"); //일단 기본적인 리소스폴더의 스프라이트를 참조하게 만듦
-        Sprite upgradeIcon = Resources.Load<Sprite>("Sprites/Upgrade"); //주소는 대략적으로 Assets/Resources/Sprites.파일명.png
-        Sprite lifeUpIcon = Resources.Load<Sprite>("Sprites/LifeUp"); //필요시 주소를 변경하여 사용가능
-        Sprite speedUpIcon = Resources.Load<Sprite>("Sprites/SpeedUp");
-        Sprite stopEnemiesIcon = Resources.Load<Sprite>("Sprites/StopEnemies");
-        Sprite destroyAllIcon = Resources.Load<Sprite>("Sprites/DestroyAllEnemies");
-        Sprite baseUpIcon = Resources.Load<Sprite>("Sprites/BaseUp");
+        GameObject invincibilityIcon = Resources.Load<GameObject>("Sprites/Invincibility"); //일단 기본적인 리소스폴더의 스프라이트를 참조하게 만듦
+        GameObject upgradeIcon = Resources.Load<GameObject>("Sprites/Upgrade"); //주소는 대략적으로 Assets/Resources/Sprites.파일명.png
+        GameObject lifeUpIcon = Resources.Load<GameObject>("Sprites/LifeUp"); //필요시 주소를 변경하여 사용가능
+        GameObject speedUpIcon = Resources.Load<GameObject>("Sprites/SpeedUp");
+        GameObject stopEnemiesIcon = Resources.Load<GameObject>("Sprites/StopEnemies");
+        GameObject destroyAllIcon = Resources.Load<GameObject>("Sprites/DestroyAllEnemies");
+        GameObject baseUpIcon = Resources.Load<GameObject>("Sprites/BaseUp");
 
         //무적
-        // itemDataDictionary.Add(0, new ItemData(0, "Invincibility", (player) => 
-        // {
-        //     player.GetComponent<Player>().EnableInvincibility(5);
-        // }, 5f, invincibilityIcon));
-        // Debug.Log($"[Load Sprite] invincibilityIcon: {(invincibilityIcon != null ? "OK" : "FAILED")}");
+        itemDataDictionary.Add(0, new ItemData(0, "Invincibility", (player) =>
+        {
+            EnableInvincibility(player, 5f);
+        }, 5f));
+        Debug.Log($"[Load Sprite] invincibilityIcon: {(invincibilityIcon != null ? "OK" : "FAILED")}");
 
         //업그레이드
-        //itemDataDictionary.Add(1, new ItemData(1, "Upgrade", (player) =>
-        //{
-        //    player.GetComponent<Player>().Upgrade(10, 10); // 임시 +10 +10
-        //}, 0f, upgradeIcon));
-        //Debug.Log($"[Load Sprite] Upgrade: {(upgradeIcon != null ? "OK" : "FAILED")}");
-        //
+        itemDataDictionary.Add(1, new ItemData(1, "Upgrade", (player) =>
+        {
+            player.GetComponent<Player>().Upgrade(10, 10, 1000); // 임시 +10 +10 1000점
+        }, 0f));
+        Debug.Log($"[Load Sprite] Upgrade: {(upgradeIcon != null ? "OK" : "FAILED")}");
+
         // 목숨 + 1 
-        // itemDataDictionary.Add(2, new ItemData(2, "LifeUp", (player) =>
-        // {
-        //     player.GetComponent<Player>().GetLife(1); //player에 GetLife 추가예정
-        // }, 0f, lifeUpIcon));
-        // Debug.Log($"[Load Sprite] LifeUpIcon: {(lifeUpIcon != null ? "OK" : "FAILED")}");
+        itemDataDictionary.Add(2, new ItemData(2, "LifeUp", (player) =>
+        {
+            player.GetComponent<Player>().GetLife(1); //player에 GetLife 추가예정
+        }, 0f));
+        Debug.Log($"[Load Sprite] LifeUpIcon: {(lifeUpIcon != null ? "OK" : "FAILED")}");
 
         // 스피드업
-        // itemDataDictionary.Add(3, new ItemData(3, "SpeedUp", (player) =>
-        // {
-        //     player.GetComponent<PlayerController>().(1);
-        // }, 0f, speedUpIcon));
-        // Debug.Log($"[Load Sprite] SpeedUpIcon: {(speedUpIcon != null ? "OK" : "FAILED")}");
+        itemDataDictionary.Add(3, new ItemData(3, "SpeedUp", (player) =>
+        {
+            player.GetComponent<Player>().SpeedControl(3, 3); // 임시 +3 /+3
+        }, 0f));
+        Debug.Log($"[Load Sprite] SpeedUpIcon: {(speedUpIcon != null ? "OK" : "FAILED")}");
 
         // 모든 적 멈춤
         // itemDataDictionary.Add(4, new ItemData(4, "StopEnemies", (player) =>
         // {
         //     StopEnemies(5f); // 5초 동안 적 정지
-        // }, 0f, stopEnemiesIcon));
+        // }, 0f));
         // Debug.Log($"[Load Sprite] StopEnemies: {(stopEnemiesIcon != null ? "OK" : "FAILED")}");
 
         // 모든 적 파괴
         itemDataDictionary.Add(5, new ItemData(5, "DestroyAllEnemies", (player) =>
         {
             DestroyAllEnemies(); // 모든 몬스터 파괴
-        }, 0f, destroyAllIcon));
+        }, 0f));
         Debug.Log($"[Load Sprite] DestroyAll: {(destroyAllIcon != null ? "OK" : "FAILED")}");
 
         //기지 강화 //좌표 설정방식에 따라 수정 필요
-       itemDataDictionary.Add(6, new ItemData(6, "BaseUp", (player) =>
-       {
-           StartFortification(8f);
-       }, 8f, baseUpIcon));
+        itemDataDictionary.Add(6, new ItemData(6, "BaseUp", (player) =>
+        {
+            StartFortification(8f);
+        }, 8f));
 
         Debug.Log($"[Load Sprite] BaseUp: {(baseUpIcon != null ? "OK" : "FAILED")}");
 
@@ -142,7 +145,7 @@ public class ItemManager02 : MonoBehaviour
             baseList.Add((baseObj, baseObj.layer));
             baseObj.layer = forificationLayer;
         }
-        Debug.Log($"[BaseUp] Changed layer of { baseList.Count} bases to fortificationBase");
+        Debug.Log($"[BaseUp] Changed layer of {baseList.Count} bases to fortificationBase");
 
         yield return new WaitForSeconds(duration);
 
@@ -151,7 +154,36 @@ public class ItemManager02 : MonoBehaviour
             if (obj != null)
                 obj.layer = originalLayer;
         }
-
         Debug.Log("[BaseUp] Reverted base layers to original");
+    }
+    #region DropItem
+    public void DropItemFromEnemy()
+    {
+        Vector3 spawnPos = GetRandomPositionInMap();
+        Instantiate(itemPrefab, spawnPos, Quaternion.identity);
+    }
+
+    private Vector3 GetRandomPositionInMap() // 랜덤위치에 아이템 생성
+    {
+        float x = Random.Range(-8f, 8f);
+        float y = Random.Range(-8f, 8f);
+
+        return new Vector3(x, 0f, y);
+    }
+    #endregion
+    private void EnableInvincibility(GameObject player, float duration)
+    {
+        StartCoroutine(InvincibilityCoroutine(player, duration));
+    }
+
+    private IEnumerator InvincibilityCoroutine(GameObject player, float duration)
+    {
+        Player playerScript = player.GetComponent<Player>();
+
+        playerScript.state = PlayerState.Invincible;
+
+        yield return new WaitForSeconds(duration);
+
+        playerScript.state = PlayerState.General;
     }
 }

@@ -26,14 +26,6 @@ public class UIManager02 : MonoBehaviour
             }
         }
     }
-
-    public void ShowIconOnUI(Image uiElement, Sprite icon)
-    {
-        // UI 요소에 특정 아이콘 표시
-        uiElement.sprite = icon;
-        uiElement.enabled = true;
-    }
-
     public void ShowEnemyLife()
     {
         foreach (GameObject icon in enemyIcons)
@@ -49,11 +41,13 @@ public class UIManager02 : MonoBehaviour
             icon.SetActive(false); // 적 아이콘 비활성화
         }
     }
+
     public void ShowPlayerLife(int life)
     {
         // 플레이어의 라이프를 UI에 표시
 
     }
+
     public void ShowScore(int score)
     {
         // 점수 표시
