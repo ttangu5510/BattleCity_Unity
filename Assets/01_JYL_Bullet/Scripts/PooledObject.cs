@@ -22,20 +22,20 @@ public class PooledObject : MonoBehaviour
     {
         if (Mathf.Abs(transform.forward.x) > Mathf.Abs(transform.forward.z))
         {
-            rangeLevel1 = new Vector3(0.5f, 5, 5);
-            rangeLevel2 = new Vector3(1.5f, 5, 5);
+            rangeLevel1 = new Vector3(0.1f, 1.5f, 0.8f);
+            rangeLevel2 = new Vector3(0.5f, 1.5f, 0.8f);
 
         }
         else
         {
-            rangeLevel1 = new Vector3(5, 5, 0.5f);
-            rangeLevel2 = new Vector3(5, 5, 1.5f);
+            rangeLevel1 = new Vector3(0.8f, 1.5f, 0.1f);
+            rangeLevel2 = new Vector3(0.8f, 1.5f, 0.5f);
 
         }
     }
     private void Update()
     {
-        if (rigid.velocity.magnitude > 3)
+        if (rigid.velocity.magnitude > 1)
         {
             //포탄이 곡선을 그리며 날아간다
             transform.forward = rigid.velocity;
@@ -56,7 +56,7 @@ public class PooledObject : MonoBehaviour
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Brick"))
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel1, Quaternion.identity, LayerMask.GetMask("Brick"));
+                Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * 0.5f, rangeLevel1, Quaternion.identity, LayerMask.GetMask("Brick"));
                 foreach (var collide in colliders)
                 {
                     BrickAction ba = collide.gameObject.GetComponent<BrickAction>();
@@ -69,7 +69,7 @@ public class PooledObject : MonoBehaviour
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Brick") || collision.gameObject.layer == LayerMask.NameToLayer("SolidBlock"))
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel2, Quaternion.identity, Breakable);
+                Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * 0.5f, rangeLevel2, Quaternion.identity, Breakable);
                 foreach (var collide in colliders)
                 {
                     BrickAction ba = collide.gameObject.GetComponent<BrickAction>();
@@ -79,7 +79,7 @@ public class PooledObject : MonoBehaviour
             }
         }
 
-        IDamagable damagable = collision.gameObject.transform.root.GetComponent<IDamagable>();
+        IDamagable damagable = collision.gameObject.transform.GetComponent<IDamagable>();
         if (damagable != null)
         {
             damagable.TakeDamage();
@@ -92,13 +92,13 @@ public class PooledObject : MonoBehaviour
         if (bulletType == BulletType.Type1)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(transform.position + transform.forward, rangeLevel1);
+            Gizmos.DrawCube(transform.position + transform.forward * 0.5f, rangeLevel1*2);
 
         }
         else
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(transform.position + transform.forward, rangeLevel2);
+            Gizmos.DrawCube(transform.position + transform.forward * 0.5f, rangeLevel2*2);
         }
 
     }
