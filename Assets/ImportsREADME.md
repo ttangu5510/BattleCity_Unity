@@ -9,6 +9,12 @@
 /*동기화 완료*/ 18. Toon Water 물 표현 (지형) https://assetstore.unity.com/packages/3d/environments/toon-water-8143
 /*동기화 완료*/ 21. Autumnal Nature 나무 (지형) https://assetstore.unity.com/packages/3d/environments/fantasy/autumnal-nature-level-set-69314
 
+
+---
+
+## 동기화 필요!
+LowPoly Particle (FX 효과모음) https://assetstore.unity.com/packages/vfx/particles/polygon-particle-fx-low-poly-3d-art-by-synty-168372
+Quick Outline (아웃라인 셰이더) https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488?locale=ko-KR&gad_source=1&gad_campaignid=22451834332&gbraid=0AAAAADdkVOse1a4w1_dL9S_H0He53wy0r&gclid=Cj0KCQjwt8zABhDKARIsAHXuD7ZFSD4CWJCxSVwmi45EEPb4G9pcLUM79xs3ir9Lbxpd8pWVGCKQLjYaAopaEALw_wcB&gclsrc=aw.ds
 ---
 
 ## 에셋 추가 후보
@@ -24,7 +30,6 @@
 // 14. LowPoly Icon 로우폴리 아이콘 https://assetstore.unity.com/packages/2d/gui/icons/low-poly-icon-pack-183824
 // 16. Cube World 마인크래프트 느낌 큐브 (지형) https://assetstore.unity.com/packages/3d/environments/cube-world-proto-series-144159
 // 17. Cube World 마인크래프트 느낌 큐브 (지형) https://assetstore.unity.com/packages/3d/environments/kubikos-3d-cube-world-117341
-// 19. LowPoly Particle FX 효과모음 https://assetstore.unity.com/packages/vfx/particles/polygon-particle-fx-low-poly-3d-art-by-synty-168372
 // 20. Fog of war 시야제한 (기능) https://assetstore.unity.com/packages/tools/particles-effects/fog-of-war-51344
 // 22. Rocks 단순한 돌 (지형) https://assetstore.unity.com/packages/3d/environments/stylized-rocks-free-sample-283215
  23. Easy Destrutible Wall (부숴지는 벽) https://assetstore.unity.com/packages/tools/physics/easy-destructible-wall-331
