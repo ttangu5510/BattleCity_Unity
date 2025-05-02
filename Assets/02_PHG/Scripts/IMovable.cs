@@ -10,5 +10,5 @@ public interface IMovable
 
 public enum MoveType
 {
-    normal, iceSlide, bushSlow, lavarDotDamaged, Stun, sandSlow
+    none,normal, iceSlide, bushSlow, lavarDotDamaged, Stun, sandSlow
 }
