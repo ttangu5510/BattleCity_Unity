@@ -71,7 +71,8 @@ public class UIManager02 : MonoBehaviour
     {
         if (playerLifePointText == null) return;
 
-        //[TEST-ONLY] int lifeToShow = (useMockPlayerLife || player == null) ? mockLife : player.Life;
+        //[TEST-ONLY]
+        //int lifeToShow = (useMockPlayerLife || player == null) ? mockLife : player.Life;
         playerLifePointText.text = $"X {player.Life}";
     }
 
@@ -79,7 +80,8 @@ public class UIManager02 : MonoBehaviour
     {
         if (scoreText == null) return;
 
-        //[TEST-ONLY] int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
+        //[TEST-ONLY]
+        //int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
         scoreText.text = $"SCORE : {player.score}";
     }
    //public void ShowHighScore()
