@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrapTile : MonoBehaviour
 {
     [SerializeField] private GameObject triggeredTrapPrefab;
-    [SerializeField] private float damageDelay = 0.05f;
+    [SerializeField] private float damageDelay = 0.01f;
     [SerializeField] private LayerMask obstacleMask;
     [SerializeField] private float pushForce = 45f;
     [SerializeField] private GameObject explosionEffectPrefab;
@@ -23,7 +23,7 @@ public class TrapTile : MonoBehaviour
     private void CheckAndDamage()
     {
         // 1. 먼저 데미지 검사
-        Collider[] hits = Physics.OverlapSphere(transform.position + Vector3.up * 1f, 1f);
+        Collider[] hits = Physics.OverlapSphere(transform.position + Vector3.up * 5f, 5f);
         foreach (var hit in hits)
         {
             IDamagable dmg = hit.GetComponentInParent<IDamagable>();
