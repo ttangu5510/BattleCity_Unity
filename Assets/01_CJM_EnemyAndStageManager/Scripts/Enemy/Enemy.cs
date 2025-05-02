@@ -62,7 +62,9 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         switch (state)
         {
             case EnemyState.General:
-                GeneralMove();
+                //GeneralMove();
+                Move(dir);
+                Rotate(dir);
                 break;
             case EnemyState.ChasingPlayaer:
 
@@ -146,7 +148,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         }
     }
 
-    private void GeneralMove()
+    /*private void GeneralMove()
     {
         // 현재 상태 : 랜덤 백터 4방향으로 이동
         // 목표 : 랜덤 벡터 4방향 중 하나 선택해서 쭉 이동, 벽이 생기면 다른 방향 벡터로 바꿔주기
@@ -180,9 +182,26 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
         Move(dir);
         Rotate(dir);
-    }
+    }*/
     #endregion
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("암거나 들어옴");
+
+        LayerMask layerMask = LayerMask.NameToLayer("Player");
+
+        if (other.gameObject.layer == layerMask)
+        {
+            Debug.Log("플레이어 들어옴");
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("Stay");
+    }
 
     // 바닥 타일 연관 함수
     public void MoveTypeUpdate()

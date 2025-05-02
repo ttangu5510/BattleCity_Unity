@@ -11,7 +11,6 @@ public class MagmaTile : TileEnviorment
     {
         if (damageCyclePattern == null && canHeat)
         {
-            Debug.LogError("에러 에러 에러");
             damageCyclePattern = StartCoroutine(DotDamageCycle(damagable));
         }
 
