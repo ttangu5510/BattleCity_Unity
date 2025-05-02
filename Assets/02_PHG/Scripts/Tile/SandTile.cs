@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class SandTile : TileEnviorment
 {
-    [SerializeField] private float slowFactor=0.8f;
+    [SerializeField] private float slowFactor = 0.8f;
 
-    protected override void StayTile_EffectRun(Rigidbody rb)
+    protected override void StayTile_EffectRun(Rigidbody rb, IDamagable damagable)
     {
         if (rb != null)
         {
@@ -18,6 +15,6 @@ public class SandTile : TileEnviorment
     protected override void SendTileType(IMovable movable)
     {
         movable.moveType = MoveType.sandSlow;
-        
+
     }
 }
