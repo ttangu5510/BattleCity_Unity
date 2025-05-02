@@ -18,12 +18,16 @@ public class MagmaTile : TileEnviorment
 
     IEnumerator DotDamageCycle(IDamagable damagable)
     {
+
+        Instantiate(burnEffectPrefab, ((MonoBehaviour)damagable).transform.position + Vector3.up * 1.5f, Quaternion.identity);
         damagable.TakeDamage();
         canHeat = false;
         Debug.Log("데미지 받고 대기 중");
         yield return new WaitForSeconds(damageCycleTime);
         canHeat = true;
+        damageCyclePattern = null;
         Debug.Log("쿨타임 완료");
+
     }
 
     protected override void SendTileType(IMovable movable)
