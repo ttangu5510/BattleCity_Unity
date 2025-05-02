@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IMovable
 {
     public MoveType moveType { get; set; }
-    public void MoveTypeUpate();
+    public void MoveTypeUpdate();
 }
 
 public enum MoveType
