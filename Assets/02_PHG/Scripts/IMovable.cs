@@ -5,9 +5,10 @@ using UnityEngine;
 public interface IMovable
 {
     public MoveType moveType { get; set; }
+    public void MoveTypeUpdate();
 }
 
 public enum MoveType
 {
-    normal, slide, slow, dotDamaged
+    normal, iceSlide, bushSlow, lavarDotDamaged, Stun, sandSlow
 }
