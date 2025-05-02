@@ -97,21 +97,23 @@ public class ItemManager02 : MonoBehaviour
         }
     }
 
-    //private void StopEnemies(float duration)
-    //{
-    //    LayerMask enemyLayer = LayerMask.GetMask("Enemy");
-    //
-    //    // "Enemy" 레이어에 속한 적 찾기
-    //    Collider[] enemies = Physics.OverlapSphere(Vector3.zero, 100f, enemyLayer);
-    //    foreach (Collider enemy in enemies)
-    //    {
-    //        if //적컨트롤러에대한 참조 찾기 추가
-    //        {
-    //            //enemyController.StopMovement(duration); // 적 멈춤 처리
-    //            Debug.Log($"Stopped enemy: {enemy.name} for {duration} seconds");
-    //        }
-    //    }
-    //}
+   // private void StopEnemies(float duration)
+   // {
+   //     // Enemy 레이어만 골라서 스피어로 탐지
+   //     LayerMask enemyLayer = LayerMask.GetMask("Enemy");
+   //     Collider[] enemies = Physics.OverlapSphere(Vector3.zero, 100f, enemyLayer);
+   //
+   //     foreach (Collider col in enemies)
+   //     {
+   //         if (col.TryGetComponent<Enemy>(out var enemyController))
+   //         {
+   //             // (1) 해당 Enemy에 멈춤 명령
+   //             enemyController.StopMovement(duration);
+   //             // (2) 디버그 로그
+   //             Debug.Log($"Stopped enemy: {enemyController.name} for {duration} seconds");
+   //         }
+   //     }
+   // }
 
     private void DestroyAllEnemies()
     {
