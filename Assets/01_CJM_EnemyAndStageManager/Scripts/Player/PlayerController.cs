@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 inputDir = new Vector3(x, 0, z).normalized;
 
-        // x방향 입력이 더 많으면 횡 입력 판정 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
+        // 가장 큰 입력 방향으로 축 정함 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
         if (inputDir == Vector3.zero)
         {
             dir = Vector3.zero;

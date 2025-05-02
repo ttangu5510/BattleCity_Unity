@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamagable
+public class Player : MonoBehaviour, IDamagable, IMovable
 {
     // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
     [Header("Init Setting")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private float moveSpeed_Init;
     [SerializeField] private float shotSpeed_Init;
     [Tooltip("Waiting time to respawn")]
+    [SerializeField] private float DamagedCoolTime;
     [SerializeField] private float respawningTime;
 
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] public UpgradeType grade;
     [SerializeField] public PlayerState state;
     [SerializeField] private int life;
+    [SerializeField] public int Life { get { return life; } }
     [SerializeField] public float moveSpeed { get; private set; }
     [SerializeField] public float shotSpeed { get; private set; }
     [SerializeField] public int score { get; private set; }
@@ -31,7 +33,7 @@ public class Player : MonoBehaviour, IDamagable
 
     private PlayerData pd; // 등급 & 스코어 정보
 
-    public bool isDamagable { get; private set; } // 피격 가능 상태 여부  (리스폰 중 무적, 아이템 사용으로 인한 무적 상태, 등등)
+    public MoveType moveType { get; set; }
 
     // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
     // public UnityEvent PlayerDeadEvent = new UnityEvent(); 게임 오버 이벤트로만 해도 충분할 듯. 플레이어 사망 시 특수 참조 필요할 시 활성화
@@ -91,9 +93,12 @@ public class Player : MonoBehaviour, IDamagable
         // 스테이지매니저.스테이지 종료 이벤트.RemoveListener(SavePlayerData);
     }
 
+
+    // Todo: 플레이어 데이터에서 구현하는걸로 변경
     // 맨 처음 코인을 시작하는 시점(GameStart)에서만 호출       ***GameStart와 StageStart는 구분되어야 함. 
     private void DataInit()
     {
+        // 게임매니저 상태가 == 첫시작 return;
         // 초기 설정으로 저장
         pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, 0);
         pd.UpdateScore(0);
@@ -102,13 +107,32 @@ public class Player : MonoBehaviour, IDamagable
     // 데미지 받음 => 죽음 판정
     public void TakeDamage()
     {
+        if (state == PlayerState.Invincible)
+        {
+            Debug.Log("플레이어 무적 상태! 데미지 안받음.");
+            return;
+        }
+
         Debug.Log("플레이어 공격 판정");
         if (grade > 0)
         {
             grade -= 1;
             UpdateRender();
+
+            // 무적 시간 추가
+            StartCoroutine(TakeDamageCooling());
+
+            // 피격 상태 이펙트
+
         }
         else Dead();
+    }
+
+    public IEnumerator TakeDamageCooling()
+    {
+        state = PlayerState.Invincible;
+        yield return new WaitForSeconds(DamagedCoolTime);
+        state = PlayerState.General;
     }
 
     // 죽음 => 게임오버 판정
@@ -228,6 +252,16 @@ public class Player : MonoBehaviour, IDamagable
     public void SavePlayerData()
     {
         pd.SaveData(life, moveSpeed, shotSpeed, grade);
+    }
+
+
+    // 바닥 타일 연관 함수
+    public void MoveTypeUpdate()
+    {
+        // 움직임 타입에 따라 이펙트&효과 업데이트
+        // 이펙트는 플레이어 프리펩 안에 자식 오브젝트 폴더로 정리
+        // 효과는 케이스별로 수치만 변경하면 됨
+        Debug.Log(moveType);
     }
 }
 
