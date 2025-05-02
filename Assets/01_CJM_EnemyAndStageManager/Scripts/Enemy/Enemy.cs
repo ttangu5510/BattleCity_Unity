@@ -1,7 +1,7 @@
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamagable
+public class Enemy : MonoBehaviour, IDamagable, IMovable
 {
     [Header("등급")]
     [SerializeField] private EnemyGrade grade;
@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour, IDamagable
     private Vector3 dir;
 
     public bool isDamagable { get; private set; } // 피격 가능 상태 여부  (리스폰 중 무적, 아이템 사용으로 인한 무적 상태, 등등)
+    public MoveType moveType { get; set; }
 
 
     // Todo 0430
