@@ -42,7 +42,6 @@ public class GroundTile : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         var rb = other.GetComponentInParent<Rigidbody>();
-        var ctrl = other.GetComponentInParent<IceSlideController>();
 
         if (rb == null) return;
 
