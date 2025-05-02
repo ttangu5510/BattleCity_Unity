@@ -18851,7 +18851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5756603384593609581, guid: 9c4984cd2e8d3bb4eb781c502c60a760, type: 3}
       propertyPath: pushForce
-      value: 150
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 5756603384593609581, guid: 9c4984cd2e8d3bb4eb781c502c60a760, type: 3}
       propertyPath: damageDelay
@@ -18860,7 +18860,7 @@ PrefabInstance:
     - target: {fileID: 5756603384593609581, guid: 9c4984cd2e8d3bb4eb781c502c60a760, type: 3}
       propertyPath: triggeredTrapPrefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8572021436731180921, guid: 1ca65dbe60b421740877f49534c259ed, type: 3}
     - target: {fileID: 5756603384593609581, guid: 9c4984cd2e8d3bb4eb781c502c60a760, type: 3}
       propertyPath: explosionEffectPrefab
       value: 

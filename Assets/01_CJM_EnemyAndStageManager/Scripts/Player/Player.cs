@@ -230,6 +230,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     {
         pd.SaveData(life, moveSpeed, shotSpeed, grade);
     }
+
 }
 
 // 플레이어 & Enemy 업그레이드 등급

@@ -9,6 +9,7 @@ public class GroundTile : MonoBehaviour
 
     [Header("Sand Settings")]
     [SerializeField] private float slowFactor = 0.5f;
+    [SerializeField] private GameObject sandTrailEffect;
 
     [Header("Magma Settings")]
     [SerializeField] private float burnDamagePerSecond = 10f;
@@ -27,15 +28,21 @@ public class GroundTile : MonoBehaviour
             case TileType.Ice:
                 if (movable != null)
                 {
-                    movable.moveType = MoveType.slide;
+                    movable.moveType = MoveType.iceSlide;
+                    movable.MoveTypeUpate();
+                }
+                break;
+            case TileType.Sand:
+                if (rb != null)
+                {
+
+                    movable.moveType = MoveType.sandSlow;
+                    movable.MoveTypeUpate();
+ 
+                    Debug.Log("샌드 타일에서 속도 조정 시도");
                 }
                 break;
 
-            case TileType.Sand:
-                if (rb != null)
-                    Debug.Log("플레이어감지 Sand 와 샌드다!");
-                rb.velocity *= slowFactor;
-                break;
 
         }
     }
@@ -54,6 +61,7 @@ public class GroundTile : MonoBehaviour
                 if (rb != null)
                 {
                     Vector3 cancel = -rb.velocity * (1f - slowFactor); // 역방향 힘
+                    Instantiate(sandTrailEffect, other.transform.position, Quaternion.identity);
                     rb.AddForce(cancel, ForceMode.VelocityChange);
                     Debug.Log("샌드 타일에서 속도 조정 시도");
                 }
