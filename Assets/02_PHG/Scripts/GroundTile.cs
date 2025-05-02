@@ -21,8 +21,6 @@ public class GroundTile : MonoBehaviour
         var rb = other.GetComponentInParent<Rigidbody>();
         IMovable movable = other.GetComponentInParent<IMovable>();
 
-
-
         switch (tileType)
         {
             case TileType.Ice:
@@ -90,7 +88,6 @@ public class GroundTile : MonoBehaviour
                 break;
         }
     }
-
 
     private void OnTriggerExit(Collider other)
     {
