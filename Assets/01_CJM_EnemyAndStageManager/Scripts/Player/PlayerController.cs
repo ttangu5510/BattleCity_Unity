@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform muzzPoint;
     [SerializeField] Transform body;
+    public Transform Body { get { return body; } }
 
     private Player player;
     private Rigidbody rb;
