@@ -11,7 +11,7 @@ public class MySceneManager : MonoBehaviour
 
     [SerializeField] Image fadeImage;
     [SerializeField] float fadeTime;
-    public TMP_Text loadingText;
+    [SerializeField] public TMP_Text loadingText;
     public static MySceneManager Instance
     {
         get
