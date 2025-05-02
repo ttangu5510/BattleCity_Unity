@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,11 @@ public class UIManager02 : MonoBehaviour
     public bool isPaused; // 게임의 Pause 상태를 관리
     public Canvas gameCanvas; // UI 요소가 포함된 Canvas
     public GameObject[] enemyIcons; // 적의 아이콘 배열
-    public GameObject playerIcon; // 플레이어의 상태 아이콘
-    public Sprite itemIcon; // 아이템 아이콘(Sprite)
+    public Sprite playerIcon; // 플레이어의 상태 아이콘
+
+    [SerializeField] private Image targetImage;
+    [SerializeField] private TextMeshProUGUI playerLifePointText;
+    [SerializeField] private Player player;
 
     private void Update()
     {
@@ -16,7 +20,7 @@ public class UIManager02 : MonoBehaviour
         {
             isPaused = !isPaused;
             gameCanvas.enabled = !gameCanvas.enabled; // 캔버스 활성/비활성
-            if(isPaused)
+            if (isPaused)
             {
                 Time.timeScale = 0;
             }
@@ -25,6 +29,9 @@ public class UIManager02 : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
+
+        ShowPlayerLife();
+
     }
     public void ShowEnemyLife()
     {
@@ -42,15 +49,30 @@ public class UIManager02 : MonoBehaviour
         }
     }
 
-    public void ShowPlayerLife(int life)
+    public void ShowPlayerLife()
     {
-        // 플레이어의 라이프를 UI에 표시
-
+        if (player != null && playerLifePointText != null)
+        {
+            playerLifePointText.text = $"x {player.Life}";
+        }
     }
 
     public void ShowScore(int score)
     {
         // 점수 표시
 
+    }
+
+    public void ChangeImage()
+    {
+        Sprite newSprite = Resources.Load<Sprite>("Sprites/playerTank"); // Resources 폴더 기준
+        if (newSprite != null)
+        {
+            targetImage.sprite = newSprite;
+        }
+        else
+        {
+            Debug.LogWarning("Sprite 로드 실패!");
+        }
     }
 }
