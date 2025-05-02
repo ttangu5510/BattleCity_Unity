@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private float moveSpeed_Init;
     [SerializeField] private float shotSpeed_Init;
     [Tooltip("Waiting time to respawn")]
+    [SerializeField] private float DamagedCoolTime;
     [SerializeField] private float respawningTime;
 
 
@@ -31,7 +32,6 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     private PlayerData pd; // 등급 & 스코어 정보
 
-    public bool isDamagable { get; private set; } // 피격 가능 상태 여부  (리스폰 중 무적, 아이템 사용으로 인한 무적 상태, 등등)
     public MoveType moveType { get; set; }
 
     // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
@@ -103,13 +103,32 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     // 데미지 받음 => 죽음 판정
     public void TakeDamage()
     {
+        if (state == PlayerState.Invincible)
+        {
+            Debug.Log("플레이어 무적 상태! 데미지 안받음.");
+            return;
+        }
+
         Debug.Log("플레이어 공격 판정");
         if (grade > 0)
         {
             grade -= 1;
             UpdateRender();
+
+            // 무적 시간 추가
+            StartCoroutine(TakeDamageCooling());
+
+            // 피격 상태 이펙트
+
         }
         else Dead();
+    }
+
+    public IEnumerator TakeDamageCooling()
+    {
+        state = PlayerState.Invincible;
+        yield return new WaitForSeconds(DamagedCoolTime);
+        state = PlayerState.General;
     }
 
     // 죽음 => 게임오버 판정
