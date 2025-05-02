@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8753660031005283944}
   - component: {fileID: 8753660030996462920}
   - component: {fileID: 8753660031009480872}
+  - component: {fileID: 8423637655906034204}
   m_Layer: 4
   m_Name: WaterTile
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 35.284977, y: 0, z: 21.007568}
-  m_LocalScale: {x: 0.048, y: 0, z: 0.048}
+  m_LocalScale: {x: 0.048, y: 0.01, z: 0.048}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -125,9 +126,31 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 0, z: 20}
+  m_Size: {x: 20.000002, y: 300, z: 20.000002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &8423637655906034204
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8753660031007213736}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300070, guid: 395ab82d1270d7145a572664f7b709ab, type: 3}
