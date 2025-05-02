@@ -80,6 +80,11 @@ public class GameManager : MonoBehaviour
     public void StageComplete()
     {
         StartCoroutine(StageCompleteRoutine());
+        // 남은 스테이지가 없을 경우
+        if(stageSceneName.Count==0)
+        {
+            GameComplete();
+        }
     }
     IEnumerator StageCompleteRoutine()
     {
@@ -145,6 +150,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        // 이름을 스트링으로 입력받기
         // 게임 오버 시 수행
         // 게임 오버 UI -> 점수 합산 창 씬 -> 게임 오버 씬 -> 점수 씬(뉴레코드 일 때) -> 타이틀 씬
         // 1. 게임 오버 UI
@@ -153,6 +159,8 @@ public class GameManager : MonoBehaviour
         // 4. 점수 씬(뉴 레코드 일 때)
         // 5. 타이틀 씬
     }
+
+    
     public void SortScore(ScoreBoard[] scores)
     {
         Array.Sort(scores, (scoreA, scoreB) => scoreB.score.CompareTo(scoreA.score));
