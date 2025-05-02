@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour, IDamagable
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private SpawnerState state;
     [SerializeField] private Transform standByGroup;
@@ -49,16 +49,8 @@ public class EnemySpawner : MonoBehaviour, IDamagable
         }
     }
 
-    public void TakeDamage() 
-    {
-        // 어차피 콜라이더 없어서 직접적인 충돌은 없고
-        // 자식 오브젝트로 들어갈 Enemy들의 Damagable을 전달하는 방식
-        IDamagable damagable = standByGroup.GetChild(0).gameObject.GetComponent<Enemy>();
-        damagable?.TakeDamage();
-    }
-
     // TODO:
-    // 콜라이더로 스포너 영역 내 적/플레이어 탱크 들어오면 스폰 불가 상태로 변경
+    // 콜라이더로 스포너 영역 내 적/플레이어 탱크 들어오면 스폰 불가 상태로 변경? 필요하면 추가
     // 스포너 영역 내 아무도 없으면 스폰가능 상태로 변경
 }
 
