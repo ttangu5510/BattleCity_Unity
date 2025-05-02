@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamagable
+public class Player : MonoBehaviour, IDamagable, IMovable
 {
     // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
     [Header("Init Setting")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
@@ -32,6 +32,7 @@ public class Player : MonoBehaviour, IDamagable
     private PlayerData pd; // 등급 & 스코어 정보
 
     public bool isDamagable { get; private set; } // 피격 가능 상태 여부  (리스폰 중 무적, 아이템 사용으로 인한 무적 상태, 등등)
+    public MoveType moveType { get; set; }
 
     // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
     // public UnityEvent PlayerDeadEvent = new UnityEvent(); 게임 오버 이벤트로만 해도 충분할 듯. 플레이어 사망 시 특수 참조 필요할 시 활성화
