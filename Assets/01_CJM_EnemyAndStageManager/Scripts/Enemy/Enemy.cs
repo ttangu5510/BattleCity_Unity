@@ -75,8 +75,6 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void TakeDamage()
     {
-        Debug.Log("공격받음");
-
         hp -= 1;
         if (hp <= 0) Dead();
     }

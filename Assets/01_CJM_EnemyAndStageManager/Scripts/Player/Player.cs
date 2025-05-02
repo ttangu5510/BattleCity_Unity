@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour, IDamagable
 {
@@ -138,7 +137,7 @@ public class Player : MonoBehaviour, IDamagable
 
         // 플레이어 위치 이동 & 정지
         playerController.transform.position = respawnPoint.gameObject.transform.position;
-        playerController.transform.rotation = respawnPoint.gameObject.transform.rotation;
+        playerController.Body.transform.forward = respawnPoint.gameObject.transform.forward;
         playerController.dir = Vector3.zero;
 
         Debug.Log(respawnPoint.gameObject.transform.position);
