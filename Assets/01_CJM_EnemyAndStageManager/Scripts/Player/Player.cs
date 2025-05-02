@@ -250,6 +250,15 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     {
         pd.SaveData(life, moveSpeed, shotSpeed, grade);
     }
+
+
+    // 바닥 타일 연관 함수
+    public void MoveTypeUpdate()
+    {
+        // 움직임 타입에 따라 이펙트&효과 업데이트
+        // 이펙트는 플레이어 프리펩 안에 자식 오브젝트 폴더로 정리
+        // 효과는 케이스별로 수치만 변경하면 됨
+    }
 }
 
 // 플레이어 & Enemy 업그레이드 등급
