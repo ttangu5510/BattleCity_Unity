@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 1933481582499543952}
   - component: {fileID: 4409565032274579290}
   - component: {fileID: 8817409840382927383}
-  - component: {fileID: 6155233900314192861}
   - component: {fileID: 840489932011186978}
   m_Layer: 0
-  m_Name: Dungeon-3-L0-V1
+  m_Name: TrapTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 2751998957098528399}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.67, y: -0.02, z: 28.36}
-  m_LocalScale: {x: 0.275, y: 1, z: 0.3}
+  m_LocalPosition: {x: 42.03, y: -0.02, z: 29.05}
+  m_LocalScale: {x: 0.1, y: 1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,31 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flag: 0
-  triggeredTrapPrefab: {fileID: 8572021436731180921, guid: fb65d06559f1eea469f431691d6c7057, type: 3}
+  triggeredTrapPrefab: {fileID: 8572021436731180921, guid: 36484895a8bf41f479d6af03a523c874, type: 3}
   explosionEffectPrefab: {fileID: 1437185546178868805, guid: 450b8dd0ee985334e81ac70f43e07e2a, type: 3}
   pushForce: 100
---- !u!64 &6155233900314192861
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2751998957098528399}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -629719859055844128, guid: 8fe430b2aefd5c74eb5ed5049a917f9f, type: 3}
 --- !u!65 &840489932011186978
 BoxCollider:
   m_ObjectHideFlags: 0

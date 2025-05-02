@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8753660030996462920}
   - component: {fileID: 8753660031009480872}
   m_Layer: 4
-  m_Name: ToonWater - Water - Solid 800Tris
+  m_Name: WaterTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 8753660031007213736}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 13.320001, y: 0.1, z: 10.81}
-  m_LocalScale: {x: 0.41036937, y: 0.10259234, z: 0.41036937}
+  m_LocalPosition: {x: 35.284977, y: 0, z: 21.007568}
+  m_LocalScale: {x: 0.048, y: 0, z: 0.048}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f76f138f124f84b8f1dd149260e8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMaterial1: 2
+  tileMaterial1: 1
   tileMaterial2: 1
   splashPS: {fileID: 100000, guid: 0a5d284add1d6404796c829f19daace5, type: 3}
   ripplePS: {fileID: 100000, guid: 76243b047f615d745a30d2006aa693c9, type: 3}
@@ -106,7 +106,7 @@ MonoBehaviour:
   maxCurrent: 7
   waveForce: 0
   waveForceHeight: 0
-  waveForceSpeed: 1.2
+  waveForceSpeed: 0.8
   autoAddFloat: 1
   wave: 1
   waveScale: 0
@@ -129,5 +129,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 24.37918, z: 20}
-  m_Center: {x: 0, y: 12.121719, z: 0}
+  m_Size: {x: 20, y: 0, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
