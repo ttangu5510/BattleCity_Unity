@@ -68,7 +68,6 @@ public class GroundTile : MonoBehaviour
 
                 float timeSinceEnter = Time.time - lastTime;
 
-                Instantiate(gameObject, transform.position, transform.rotation, transform.parent);
                 if (!magmaDamageTimers.ContainsKey(other.gameObject))
                 {
                     magmaDamageTimers[other.gameObject] = Time.time;
@@ -77,6 +76,7 @@ public class GroundTile : MonoBehaviour
                 else if (timeSinceEnter >= 1f)
                 {
                     magmaDamageTimers[other.gameObject] = Time.time;
+                    Instantiate(burnEffectPrefab, other.transform.position+ Vector3.up * 1.5f, Quaternion.identity);
                     damageable.TakeDamage();
                 }
                 break;
