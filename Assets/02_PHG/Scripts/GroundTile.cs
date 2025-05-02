@@ -29,7 +29,7 @@ public class GroundTile : MonoBehaviour
                 if (movable != null)
                 {
                     movable.moveType = MoveType.iceSlide;
-                    movable.MoveTypeUpate();
+                    movable.MoveTypeUpdate();
                 }
                 break;
             case TileType.Sand:
@@ -37,7 +37,7 @@ public class GroundTile : MonoBehaviour
                 {
 
                     movable.moveType = MoveType.sandSlow;
-                    movable.MoveTypeUpate();
+                    movable.MoveTypeUpdate();
  
                     Debug.Log("샌드 타일에서 속도 조정 시도");
                 }
