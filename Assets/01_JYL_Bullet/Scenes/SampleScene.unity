@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c436aae1d78cbde40820698fc4915d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnFBX_Prefab: {fileID: 0}
+  respawnFBX_Prefab: {fileID: 1624714524768532, guid: 2d3de2b4682158944b27f76db5f8a556, type: 3}
 --- !u!4 &767148200
 Transform:
   m_ObjectHideFlags: 0
@@ -683,7 +683,7 @@ Transform:
   m_GameObject: {fileID: 767148198}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.098, y: 7.1559687, z: -10.708}
+  m_LocalPosition: {x: 0.13, y: 0, z: -3.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

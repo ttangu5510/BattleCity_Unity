@@ -22,14 +22,14 @@ public class PooledObject : MonoBehaviour
     {
         if (Mathf.Abs(transform.forward.x) > Mathf.Abs(transform.forward.z))
         {
-            rangeLevel1 = new Vector3(0.1f, 1.5f, 0.8f);
-            rangeLevel2 = new Vector3(0.5f, 1.5f, 0.8f);
+            rangeLevel1 = new Vector3(0.1f, 2f, 0.8f);
+            rangeLevel2 = new Vector3(0.5f, 2f, 0.8f);
 
         }
         else
         {
-            rangeLevel1 = new Vector3(0.8f, 1.5f, 0.1f);
-            rangeLevel2 = new Vector3(0.8f, 1.5f, 0.5f);
+            rangeLevel1 = new Vector3(0.8f, 2f, 0.1f);
+            rangeLevel2 = new Vector3(0.8f, 2f, 0.5f);
 
         }
     }

@@ -51,8 +51,10 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < scores.Length; i++)
         {
             scores[i].name = "BattleCity";
-            scores[i].score = 500 * (i * i);
+            scores[i].score = 500 * ((i+1) * (i+1));
         }
+        SortScore();
+        isInput = false;
     }
     public GameManager CreateGameManager()
     {
@@ -74,13 +76,14 @@ public class GameManager : MonoBehaviour
     private Coroutine waitRoutine;
     private YieldInstruction waitSec;
     public ScoreBoard[] scores;
+    public bool isInput;
     // 씬 큐
     private Queue<string> stageSceneName;
     // 싱글톤 함수
     public void StageComplete()
     {
         // 남은 스테이지가 없을 경우
-        if(stageSceneName.Count==0)
+        if (stageSceneName.Count == 0)
         {
             GameComplete();
         }
@@ -94,6 +97,15 @@ public class GameManager : MonoBehaviour
         // 씬 전환
         // 1. 점수 합산 창 씬 -> 2. 로딩창 함수 -> 3. 다음 스테이지 씬
         // 1. 점수 합산 창 씬 불러오기
+
+        // TODO : InputRecord Test
+        PlayerData.Instance.UpdateScore(30000);
+        SceneManager.LoadSceneAsync("JYL_InputRecordScene");
+        while (!isInput)
+        {
+            yield return waitSec;
+        }
+        isInput = false;
         SceneManager.LoadSceneAsync("JYL_StageResultScene");
         // 1-1 로딩 결과 좀 보다가 넘어가기
         yield return waitSec;
@@ -109,7 +121,6 @@ public class GameManager : MonoBehaviour
     public void GameComplete()
     {
         StartCoroutine(GameCompleteRoutine());
-
     }
     IEnumerator GameCompleteRoutine()
     {
@@ -131,12 +142,7 @@ public class GameManager : MonoBehaviour
         {
             InputNewScore();
         }
-        yield return waitSec;
-        // 4. 레코드 씬
-        // 이름과 점수를 1위부터 10위까지 나열해서 표시하는 씬
-        SceneManager.LoadSceneAsync("JYL_RecordScene");
-        yield return waitSec;
-        SceneManager.LoadSceneAsync("TitleScene");
+
     }
 
     // 점수 합산 씬
@@ -163,7 +169,7 @@ public class GameManager : MonoBehaviour
         // 5. 타이틀 씬
     }
 
-    
+
     public void SortScore()
     {
         Array.Sort(scores, (scoreA, scoreB) => scoreB.score.CompareTo(scoreA.score));
