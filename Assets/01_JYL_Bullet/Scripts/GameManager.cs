@@ -79,11 +79,14 @@ public class GameManager : MonoBehaviour
     // 싱글톤 함수
     public void StageComplete()
     {
-        StartCoroutine(StageCompleteRoutine());
         // 남은 스테이지가 없을 경우
         if(stageSceneName.Count==0)
         {
             GameComplete();
+        }
+        else
+        {
+            StartCoroutine(StageCompleteRoutine());
         }
     }
     IEnumerator StageCompleteRoutine()
@@ -161,7 +164,7 @@ public class GameManager : MonoBehaviour
     }
 
     
-    public void SortScore(ScoreBoard[] scores)
+    public void SortScore()
     {
         Array.Sort(scores, (scoreA, scoreB) => scoreB.score.CompareTo(scoreA.score));
     }
