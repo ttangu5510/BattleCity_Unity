@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public struct ScoreBoard
 {
     public string name;
     public int score;
+
 }
 public class GameManager : MonoBehaviour
 {
@@ -32,15 +34,20 @@ public class GameManager : MonoBehaviour
         scores = new ScoreBoard[10];
         for(int i = 2; i <= lastStageNum;i++)
         {
-            stageSceneName.Enqueue($"STAGE {i}");
+            //TODO: 스테이지 만들고 추가
+            //stageSceneName.Enqueue($"STAGE {i}");
         }
         for(int i =0;i<scores.Length;i++)
         {
-            scores[i].name = "BattleCity";
-            scores[i].score = 10+10*i;
+            scores[i].name = $"BattleCity{i+1}";
+            scores[i].score = 500*(i+1);
         }
     }
-
+    // TODO : Test SortScore
+    private void Start()
+    {
+        SortScore(scores);
+    }
     public GameManager CreateGameManager()
     {
         if (instance == null)
@@ -130,5 +137,13 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitSecondsRoutine()
     {
         yield return waitSec;
+    }
+    public void SortScore(ScoreBoard[] scores)
+    {
+        Array.Sort(scores,(scoreA,scoreB)=>scoreB.score.CompareTo(scoreA.score));
+        for (int i = 0; i < scores.Length; i++)
+        {
+            Debug.Log($"{i+1}위 {scores[i].name}  점수: {scores[i].score}");
+        }
     }
 }
