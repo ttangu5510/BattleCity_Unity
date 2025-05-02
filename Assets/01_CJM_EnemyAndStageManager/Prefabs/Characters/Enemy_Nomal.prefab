@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8430693032787935907}
   m_Layer: 7
   m_Name: MuzzPoint (1)
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8992971360751706498}
+  m_Father: {fileID: 5677397170011966624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2314998853974707613
 GameObject:
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 4242073392027523436}
   m_Layer: 8
   m_Name: Enemy_Nomal
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -338,10 +338,10 @@ MonoBehaviour:
   shotSpeed: 0
   scorePoint: 0
   muzzPoint: {fileID: 8430693032787935907}
-  body: {fileID: 5677397170011966624}
+  body: {fileID: 8992971360751706498}
   rayOffset: {x: 0, y: 3, z: 0}
   rayFarForwardDistance: 10
-  rayForwardDistance: 1
+  rayForwardDistance: 0.4
 --- !u!1 &4398809596173916687
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +491,7 @@ Transform:
   m_Children:
   - {fileID: 8667907246670724626}
   - {fileID: 1400181009730458352}
+  - {fileID: 8430693032787935907}
   m_Father: {fileID: 8992971360751706498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8182164765013133091
@@ -552,6 +553,7 @@ GameObject:
   - component: {fileID: 2900532251516663756}
   - component: {fileID: 27815005023471102}
   - component: {fileID: 5956120996457677799}
+  - component: {fileID: 6721993624893804794}
   m_Layer: 8
   m_Name: Tank_Enemy
   m_TagString: Enemy
@@ -573,7 +575,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5677397170011966624}
-  - {fileID: 8430693032787935907}
   m_Father: {fileID: 5876393954299057526}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2472442689296303514
@@ -643,7 +644,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 2, z: 0.5}
+  m_Size: {x: 1.6, y: 1.6, z: 0.5}
   m_Center: {x: 0, y: 1, z: 1.25}
 --- !u!114 &5956120996457677799
 MonoBehaviour:
@@ -658,3 +659,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+--- !u!114 &6721993624893804794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8246936915419709043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d95ff80c01db8d459798120943cb514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerObj: {fileID: 0}

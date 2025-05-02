@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 520324621147855868}
   m_Layer: 7
   m_Name: MuzzPoint
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -739,7 +739,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2955157715720539740}
+  m_Father: {fileID: 8358132687073090052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2194658826966339404
 GameObject:
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 310926649424270293}
   m_Layer: 7
   m_Name: Player_Tank _GO-07 | Turret
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1172,6 +1172,7 @@ GameObject:
   - component: {fileID: 1699759060604655772}
   - component: {fileID: 2451771029643752946}
   - component: {fileID: 825654687924166734}
+  - component: {fileID: 7547249947143989955}
   m_Layer: 8
   m_Name: Tank_Enemy
   m_TagString: Enemy
@@ -1193,7 +1194,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8358132687073090052}
-  - {fileID: 520324621147855868}
   m_Father: {fileID: 3133654895397156638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5079434655150241800
@@ -1263,7 +1263,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 2, z: 0.5}
+  m_Size: {x: 1.8, y: 1.6, z: 0.5}
   m_Center: {x: 0, y: 1, z: 1.25}
 --- !u!114 &825654687924166734
 MonoBehaviour:
@@ -1278,6 +1278,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+--- !u!114 &7547249947143989955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097369975904412819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d95ff80c01db8d459798120943cb514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggerObj: {fileID: 0}
 --- !u!1 &3467948203925682365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,6 +1820,7 @@ Transform:
   m_Children:
   - {fileID: 4548788229967472017}
   - {fileID: 610229533859937786}
+  - {fileID: 520324621147855868}
   m_Father: {fileID: 2955157715720539740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5689002619285918690
@@ -2154,7 +2168,7 @@ GameObject:
   - component: {fileID: 3111179763799579312}
   m_Layer: 7
   m_Name: SM_Veh_Tank_USA_01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2256,7 +2270,7 @@ GameObject:
   - component: {fileID: 3477017870999252746}
   m_Layer: 8
   m_Name: Enemy_Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2298,10 +2312,10 @@ MonoBehaviour:
   shotSpeed: 0
   scorePoint: 0
   muzzPoint: {fileID: 520324621147855868}
-  body: {fileID: 8358132687073090052}
+  body: {fileID: 2955157715720539740}
   rayOffset: {x: 0, y: 3, z: 0}
   rayFarForwardDistance: 10
-  rayForwardDistance: 1
+  rayForwardDistance: 0.4
 --- !u!1 &9062387706269083987
 GameObject:
   m_ObjectHideFlags: 0

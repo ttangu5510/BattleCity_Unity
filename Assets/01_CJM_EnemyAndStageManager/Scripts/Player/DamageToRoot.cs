@@ -14,5 +14,6 @@ public class DamageToParent : MonoBehaviour, IDamagable
         else if (type == ParentType.Root)
             transform.root.GetComponent<IDamagable>().TakeDamage();
 
+
     }
 }
