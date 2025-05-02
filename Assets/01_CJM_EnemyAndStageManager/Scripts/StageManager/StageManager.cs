@@ -52,6 +52,8 @@ public class StageManager : MonoBehaviour
     {
         // 클리어 UI 보여줌(점수 합산 장면)
         Debug.Log("스테이지 클리어");
+        
+        //GameManager.Instance.스테이지 클리어
 
         StageClose();
     }
