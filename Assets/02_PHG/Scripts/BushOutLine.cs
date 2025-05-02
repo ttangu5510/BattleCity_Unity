@@ -6,7 +6,7 @@ public class BushTrigger : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"Trigger µé¾î¿È: {other.name}");
+        
 
         if (other.transform.root.CompareTag("Player"))
         {

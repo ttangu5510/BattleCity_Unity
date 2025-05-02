@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         body.LookAt(transform.position + dir);
     }
 
-    private void Attack()
+    public void Attack()
     {
         if (bulletPool.PoolCount() <= 0)
         {
