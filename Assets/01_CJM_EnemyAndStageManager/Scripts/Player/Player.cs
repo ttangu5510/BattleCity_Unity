@@ -19,6 +19,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     [SerializeField] public UpgradeType grade;
     [SerializeField] public PlayerState state;
     [SerializeField] private int life;
+    [SerializeField] public int Life { get { return life; } }
     [SerializeField] public float moveSpeed { get; private set; }
     [SerializeField] public float shotSpeed { get; private set; }
     [SerializeField] public int score { get; private set; }
