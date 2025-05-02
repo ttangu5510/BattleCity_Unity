@@ -2,15 +2,7 @@ using UnityEngine;
 
 public class IceSlideController : MonoBehaviour
 {
-    public Vector3 lastMoveDir { get; private set; } = Vector3.zero;
 
-    private PlayerController playerController;
-    private float slideStartTime;
-    private float collisionIgnoreDuration = 0.2f;
-    private float slideCooldownEndTime = 0f;
-    public bool IsSliding { get; private set; } = false;
-    private bool canChooseDirection = false;
-    private Rigidbody rb;
 
     private void Awake()
     {
@@ -21,7 +13,7 @@ public class IceSlideController : MonoBehaviour
     private void Update()
     {
         // 슬라이딩 중 → 막혀서 정지한 경우만 방향 선택 허용
-        if (IsSliding && rb.velocity.magnitude < 0.1f && !canChooseDirection)
+        if (IsSliding && !canChooseDirection)
         {
             // Ray로 진행 방향에 장애물 있는지 검사
             Ray ray = new Ray(transform.position, lastMoveDir);

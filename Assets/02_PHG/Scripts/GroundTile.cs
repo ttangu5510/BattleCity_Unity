@@ -17,22 +17,23 @@ public class GroundTile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var rb = other.GetComponentInParent<Rigidbody>();
+        IMovable movable = other.GetComponentInParent<IMovable>();
+
+
 
         switch (tileType)
         {
             case TileType.Ice:
-                var ctrl = other.GetComponentInParent<IceSlideController>();
-                if (ctrl != null && !ctrl.IsSliding)
+                if (movable != null)
                 {
-                    ctrl.StartSliding();
-                    Debug.Log("빙판 진입 즉시 미끄러짐");
+                    movable.moveType = MoveType.slide;
                 }
                 break;
 
             case TileType.Sand:
                 if (rb != null)
                     Debug.Log("플레이어감지 Sand 와 샌드다!");
-                    rb.velocity *= slowFactor;
+                rb.velocity *= slowFactor;
                 break;
 
         }
@@ -47,19 +48,7 @@ public class GroundTile : MonoBehaviour
 
         switch (tileType)
         {
-            case TileType.Ice:
-                if (ctrl == null) return;
 
-                if (ctrl.IsSliding)
-                {
-                    rb.velocity = ctrl.lastMoveDir.normalized * slideForce;
-                }
-                else
-                {
-                    ctrl.StartSliding();
-                    Debug.Log("빙판 위 감지 → 슬라이딩 재시작");
-                }
-                break;
 
             case TileType.Sand:
                 if (rb != null)
@@ -82,9 +71,9 @@ public class GroundTile : MonoBehaviour
                 if (!magmaDamageTimers.ContainsKey(other.gameObject))
                 {
                     magmaDamageTimers[other.gameObject] = Time.time;
-                    
+
                 }
-                else if (timeSinceEnter>=1f)
+                else if (timeSinceEnter >= 1f)
                 {
                     magmaDamageTimers[other.gameObject] = Time.time;
                     damageable.TakeDamage();
@@ -96,11 +85,13 @@ public class GroundTile : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var ctrl = other.GetComponentInParent<IceSlideController>();
-        if (tileType == TileType.Ice && ctrl != null)
+        IMovable movable = other.GetComponentInParent<IMovable>();
+
+        if (movable != null)
         {
-            ctrl.StopSliding();
+            movable.moveType = MoveType.normal;
         }
+
 
         if (tileType == TileType.Magma)
         {
