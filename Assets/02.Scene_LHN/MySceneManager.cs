@@ -53,12 +53,12 @@ public class MySceneManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        
-        loadingText.gameObject.SetActive(true);
-        yield return null;
 
         AsyncOperation oper = SceneManager.LoadSceneAsync(sceneName);
-        Thread.Sleep(2000);
+        loadingText.text = $"{sceneName}";
+        loadingText.gameObject.SetActive(true);
+        yield return null;
+        Thread.Sleep(1000);
         loadingText.gameObject.SetActive(false);
 
         timer = 0;
