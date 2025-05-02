@@ -1,33 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MagmaTile : TileEnviorment
 {
-    [SerializeField] private float burnDamagePerSecond = 10f;
     [SerializeField] private GameObject burnEffectPrefab;
-    private Dictionary<GameObject, float> magmaDamageTimers = new Dictionary<GameObject, float>();
+    [SerializeField] private float damageCycleTime;
+    [SerializeField] private bool canHeat = true;
+    Coroutine damageCyclePattern;
     protected override void StayTile_EffectRun(Rigidbody rb, IDamagable damagable)
     {
-        var damageable = rb.GetComponentInParent<IDamagable>();
-        if (damageable == null) return;
-
-        float lastTime;
-        magmaDamageTimers.TryGetValue(rb.gameObject, out lastTime);
-
-        float timeSinceEnter = Time.time - lastTime;
-
-        if (!magmaDamageTimers.ContainsKey(rb.gameObject))
+        if (damageCyclePattern == null && canHeat)
         {
-            magmaDamageTimers[rb.gameObject] = Time.time;
+            Debug.LogError("에러 에러 에러");
+            damageCyclePattern = StartCoroutine(DotDamageCycle(damagable));
+        }
 
-        }
-        else if (timeSinceEnter >= 1f)
-        {
-            magmaDamageTimers[rb.gameObject] = Time.time;
-            Instantiate(burnEffectPrefab, rb.transform.position + Vector3.up * 1.5f, Quaternion.identity);
-            damageable.TakeDamage();
-        }
+    }
+
+    IEnumerator DotDamageCycle(IDamagable damagable)
+    {
+        damagable.TakeDamage();
+        canHeat = false;
+        Debug.Log("데미지 받고 대기 중");
+        yield return new WaitForSeconds(damageCycleTime);
+        canHeat = true;
+        Debug.Log("쿨타임 완료");
     }
 
     protected override void SendTileType(IMovable movable)
@@ -35,4 +32,11 @@ public class MagmaTile : TileEnviorment
         movable.moveType = MoveType.lavarDotDamaged;
     }
 
+    private void OnDisable()
+    {
+        if (damageCyclePattern != null)
+        {
+            StopCoroutine(damageCyclePattern);
+        }
+    }
 }
