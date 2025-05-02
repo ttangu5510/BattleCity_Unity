@@ -1,40 +1,65 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IDamagable
 {
     [SerializeField] private SpawnerState state;
     [SerializeField] private Transform standByGroup;
     [SerializeField] private GameObject EffectPrefab;
-    
+    [SerializeField] private List<float> standByTimeToSpawn;
+    [SerializeField] private int standByIndex;
+
+    Coroutine spPattern;
+
     private StageManager sm;
 
     private void Start()
     {
         sm = StageManager.Instance;
         sm.SpawnerAddToList(this);
+        standByIndex = 0;
+
+        // StandByGroupì— ì¶”ê°€ëœ ì  countì™€ ìŠ¤í° ì‹œê°„ì„ ì •í•´ì¤€ ì  countê°€ ì¼ì¹˜í•˜ëŠ”ì§€ ì²´í¬
+        if (standByGroup.childCount != standByTimeToSpawn.Count)
+            Debug.LogError($"StandByGroupì— ì¶”ê°€ëœ ì  countì™€ ìŠ¤í° ì‹œê°„ì„ ì •í•´ì¤€ ì  countê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. \nì˜¤ë¸Œì íŠ¸ ì´ë¦„ : {name}");
+        else 
+        {
+            spPattern = StartCoroutine(SpawnPattern());
+        } 
     }
 
-    public void Update()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (spPattern != null)
+            StopCoroutine(spPattern);
+    }
+
+    IEnumerator SpawnPattern()
+    {
+        while (standByIndex < standByGroup.childCount)
         {
-            SpawnEnemy();
+            if (Time.time >= standByTimeToSpawn[standByIndex])
+            {
+                standByGroup.GetChild(standByIndex).gameObject.SetActive(true);
+                standByIndex += 1;
+            }
+            
+            yield return null;
         }
     }
-    
 
-    public void SpawnEnemy()
+    public void TakeDamage() 
     {
-        // ÀÚ½Ä È°¼ºÈ­
-        if (!standByGroup.GetChild(0).gameObject.activeSelf)
-            standByGroup.GetChild(0).gameObject.SetActive(true);
+        // ì–´ì°¨í”¼ ì½œë¼ì´ë” ì—†ì–´ì„œ ì§ì ‘ì ì¸ ì¶©ëŒì€ ì—†ê³ 
+        // ìì‹ ì˜¤ë¸Œì íŠ¸ë¡œ ë“¤ì–´ê°ˆ Enemyë“¤ì˜ Damagableì„ ì „ë‹¬í•˜ëŠ” ë°©ì‹
+        IDamagable damagable = standByGroup.GetChild(0).gameObject.GetComponent<Enemy>();
+        damagable?.TakeDamage();
     }
 
     // TODO:
-    // Äİ¶óÀÌ´õ·Î ½ºÆ÷³Ê ¿µ¿ª ³» Àû/ÇÃ·¹ÀÌ¾î ÅÊÅ© µé¾î¿À¸é ½ºÆù ºÒ°¡ »óÅÂ·Î º¯°æ
-    // ½ºÆ÷³Ê ¿µ¿ª ³» ¾Æ¹«µµ ¾øÀ¸¸é ½ºÆù°¡´É »óÅÂ·Î º¯°æ
+    // ì½œë¼ì´ë”ë¡œ ìŠ¤í¬ë„ˆ ì˜ì—­ ë‚´ ì /í”Œë ˆì´ì–´ íƒ±í¬ ë“¤ì–´ì˜¤ë©´ ìŠ¤í° ë¶ˆê°€ ìƒíƒœë¡œ ë³€ê²½
+    // ìŠ¤í¬ë„ˆ ì˜ì—­ ë‚´ ì•„ë¬´ë„ ì—†ìœ¼ë©´ ìŠ¤í°ê°€ëŠ¥ ìƒíƒœë¡œ ë³€ê²½
 }
 
 public enum SpawnerState { Spawning, Spawnable, Disable }
