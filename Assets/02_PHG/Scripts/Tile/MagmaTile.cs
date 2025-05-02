@@ -11,7 +11,6 @@ public class MagmaTile : TileEnviorment
     {
         if (damageCyclePattern == null && canHeat)
         {
-            Debug.LogError("에러 에러 에러");
             damageCyclePattern = StartCoroutine(DotDamageCycle(damagable));
         }
 
@@ -20,10 +19,12 @@ public class MagmaTile : TileEnviorment
     IEnumerator DotDamageCycle(IDamagable damagable)
     {
         damagable.TakeDamage();
+        Instantiate(burnEffectPrefab, ((MonoBehaviour)damagable).transform.position + Vector3.up * 1.5f, Quaternion.identity);
         canHeat = false;
         Debug.Log("데미지 받고 대기 중");
         yield return new WaitForSeconds(damageCycleTime);
         canHeat = true;
+        damageCyclePattern = null;
         Debug.Log("쿨타임 완료");
     }
 
