@@ -20,12 +20,18 @@ public class EnemySpawner : MonoBehaviour
         sm.SpawnerAddToList(this);
         standByIndex = 0;
 
+        for (int i = 0; i < standByGroup.childCount; i++)
+        {
+            standByGroup.GetChild(i).gameObject.SetActive(false);
+        }
+
         // StandByGroup에 추가된 적 count와 스폰 시간을 정해준 적 count가 일치하는지 체크
         if (standByGroup.childCount != standByTimeToSpawn.Count)
             Debug.LogError($"StandByGroup에 추가된 적 count와 스폰 시간을 정해준 적 count가 일치하지 않습니다. \n오브젝트 이름 : {name}");
         else 
         {
-            spPattern = StartCoroutine(SpawnPattern());
+            if (state == SpawnerState.Spawnable)
+                spPattern = StartCoroutine(SpawnPattern());
         } 
     }
 

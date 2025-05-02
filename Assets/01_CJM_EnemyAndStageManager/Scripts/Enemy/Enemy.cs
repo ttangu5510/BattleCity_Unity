@@ -1,5 +1,5 @@
-using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour, IDamagable, IMovable
 {
@@ -27,11 +27,13 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     private StageManager sm;
     private EnemyManager em;
     private Rigidbody rb;
-     
+
     private Vector3 dir;
 
     public bool isDamagable { get; private set; } // 피격 가능 상태 여부  (리스폰 중 무적, 아이템 사용으로 인한 무적 상태, 등등)
     public MoveType moveType { get; set; }
+
+    private Vector3 rangeLevel;
 
 
     // Todo 0430
@@ -50,8 +52,12 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         state = EnemyState.General;
 
         sm.ActiveEnemyAdd(this);
+
+        // 시작 방향
+        dir = body.forward;
     }
 
+    
 
 
     void Update()
@@ -62,7 +68,13 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         switch (state)
         {
             case EnemyState.General:
-                GeneralMove();
+                //GeneralMove();
+                /*if (rb.velocity.magnitude <= 2.99f)
+                {
+                    RandomDirSet();
+                }*/
+                Move(dir);
+                Rotate(dir);
                 break;
             case EnemyState.ChasingPlayaer:
 
@@ -92,6 +104,19 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
 
     #region 적 이동 관련 로직
+    public void RandomDirSet()
+    {
+        // 4방향 중 하나 랜덤으로 반환
+        Vector3[] directions = new Vector3[]
+        {
+                -body.forward,
+                body.right,
+                -body.right
+        };
+
+        int R = Random.Range(0, 3);
+        dir = directions[R];
+    }
 
     private void Move(Vector3 dir)
     {
@@ -146,6 +171,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         }
     }
 
+
     private void GeneralMove()
     {
         // 현재 상태 : 랜덤 백터 4방향으로 이동
@@ -155,19 +181,34 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         // 짧은 레이 발사
         // 벽에 닿으면 방향 전환 고고
 
-        Vector3 originPos = muzzPoint.position;
-        LayerMask layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // 적들 서로, 벽만 체크 되도록--- 벽 레이어 추가되면 여기 추가
-        if (Physics.Raycast(originPos, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
+        Vector3 right;
+        if (Mathf.Abs(dir.x) > 0)
         {
-            Debug.DrawLine(originPos, originPos + muzzPoint.forward * rayForwardDistance, Color.red);
+            // 횡 이동 중
+            right = transform.forward * 0.7f;
+        }
+        else
+        {
+            // 열 이동 중
+            right = transform.right * 0.7f;
+        }
+
+        Vector3 originPos1 = muzzPoint.position + right;
+        Vector3 originPos2 = muzzPoint.position - right;
+        LayerMask layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // 적들 서로, 벽만 체크 되도록--- 벽 레이어 추가되면 여기 추가
+        if (Physics.Raycast(originPos1, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(originPos2, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawLine(originPos1, originPos1 + muzzPoint.forward * rayForwardDistance, Color.red);
+            Debug.DrawLine(originPos2, originPos2 + muzzPoint.forward * rayForwardDistance, Color.red);
             Debug.Log("벽에 닿음");
             // 4방향 중 하나 랜덤으로 반환
             Vector3[] directions = new Vector3[]
             {
-                transform.forward,
-                -transform.forward,
-                transform.right,
-                -transform.right
+               transform.forward,
+               -transform.forward,
+               transform.right,
+               -transform.right
             };
 
             int R = Random.Range(0, 4);
@@ -175,13 +216,16 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         }
         else
         {
-            Debug.DrawLine(originPos, originPos + muzzPoint.forward * rayForwardDistance, Color.green);
+            Debug.DrawLine(originPos1, originPos1 + muzzPoint.forward * rayForwardDistance, Color.green);
+            Debug.DrawLine(originPos2, originPos2 + muzzPoint.forward * rayForwardDistance, Color.green);
         }
 
         Move(dir);
         Rotate(dir);
     }
     #endregion
+
+
 
 
     // 바닥 타일 연관 함수
