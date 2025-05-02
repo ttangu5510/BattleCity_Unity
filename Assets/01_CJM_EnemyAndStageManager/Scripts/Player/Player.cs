@@ -93,9 +93,12 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         // 스테이지매니저.스테이지 종료 이벤트.RemoveListener(SavePlayerData);
     }
 
+
+    // Todo: 플레이어 데이터에서 구현하는걸로 변경
     // 맨 처음 코인을 시작하는 시점(GameStart)에서만 호출       ***GameStart와 StageStart는 구분되어야 함. 
     private void DataInit()
     {
+        // 게임매니저 상태가 == 첫시작 return;
         // 초기 설정으로 저장
         pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, 0);
         pd.UpdateScore(0);

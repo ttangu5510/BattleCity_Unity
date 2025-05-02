@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StageData : MonoBehaviour
@@ -20,5 +21,7 @@ public class StageData : MonoBehaviour
         sm.StageDataInit();
         // 스테이지 매니저에 현재 데이터 동기화
         sm.SynchronizeStageData(maxActiveEnemyCount, enemyLifeCount);
+
+        // Todo : 민수님 사용하실 수 있게 처치 해야할 몬스터 수 정보 전달하기
     }
 }
