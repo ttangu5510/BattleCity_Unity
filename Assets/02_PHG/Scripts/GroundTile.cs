@@ -12,6 +12,7 @@ public class GroundTile : MonoBehaviour
 
     [Header("Magma Settings")]
     [SerializeField] private float burnDamagePerSecond = 10f;
+    [SerializeField] private GameObject burnEffectPrefab;
     private Dictionary<GameObject, float> magmaDamageTimers = new Dictionary<GameObject, float>();
 
     private void OnTriggerEnter(Collider other)
@@ -67,6 +68,7 @@ public class GroundTile : MonoBehaviour
 
                 float timeSinceEnter = Time.time - lastTime;
 
+                Instantiate(gameObject, transform.position, transform.rotation, transform.parent);
                 if (!magmaDamageTimers.ContainsKey(other.gameObject))
                 {
                     magmaDamageTimers[other.gameObject] = Time.time;

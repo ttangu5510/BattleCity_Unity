@@ -9,5 +9,5 @@ public interface IMovable
 
 public enum MoveType
 {
-    normal, slide, slow, dotDamaged
+    normal, slide, slow, dotDamaged, Stun
 }
