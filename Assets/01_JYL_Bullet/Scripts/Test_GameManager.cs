@@ -2,14 +2,7 @@ using UnityEngine;
 
 public class Test_GameManager : MonoBehaviour
 {
- 
-    void Start()
-    {
 
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.F))
