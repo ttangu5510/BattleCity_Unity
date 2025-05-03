@@ -1251,7 +1251,7 @@ Transform:
   m_GameObject: {fileID: 3012191070961002008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.52, y: 0, z: -10.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1271,17 +1271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7e5a219aa0c0546b731899182b0ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life_Init: 10
-  moveSpeed_Init: 5
-  shotSpeed_Init: 10
-  DamagedCoolTime: 0
-  respawningTime: 1
   respawnPoint: {fileID: 0}
-  grade: 0
-  state: 0
-  life: 0
   groupRender: {fileID: 6832138716215278271}
   playerController: {fileID: 4666248481160038405}
+  explosionFBX: {fileID: 1056904543853562, guid: 4cf45cdce36e66e4a93614abb5ae7821, type: 3}
 --- !u!1 &3458815752954981442
 GameObject:
   m_ObjectHideFlags: 0

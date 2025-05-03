@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     [Header("Setting Field")]
     [SerializeField] private Transform groupRender;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private GameObject explosionFBX;
 
     private PlayerManager pm;
     private StageManager sm;
@@ -113,11 +114,13 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     {
         // 라이프 감소
         pm.CalculateLife(-1);
-        
-        // TODO: 플레이어 피격 이펙트
-        // 펑 터지는 효과 실행
-        // 플레이어 잠깐 비활성화?
 
+        // TODO: 펑 터지는 효과 실행 [도전과제]
+        // 플레이어 잠깐 비활성화?
+        GameObject explosion =  Instantiate(explosionFBX);
+        explosion.transform.position = playerController.transform.position;
+        groupRender.gameObject.SetActive(false);
+        playerController.gameObject.SetActive(false);
 
         // 라이프가 0 아래로 떨어지면 패배 조건 체크
         if (pm.Life <= 0)
@@ -135,6 +138,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     // 리스폰 => 초기 설정값으로 플레이어 초기화, 스폰 포인트로 위치 변경, 리스폰 효과 코루틴 실행
     public void Respawn()
     {
+        
 
         // 플레이어 초기값으로 재설정
         pm.PlayerInit();
@@ -153,9 +157,14 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
         // 반짝이는 셰이더();
         pm.PlayerStateUpdate(PlayerState.Respawning);
+        
         respawnPoint.PlayerFBX(); // 이펙트 실행
         yield return new WaitForSeconds(respawningTime);
         // 셰이더 초기화();
+
+        // 소환
+        groupRender.gameObject.SetActive(true);
+        playerController.gameObject.SetActive(true);
         //respawnPoint.StopFBX(); // 이펙트 자동 종료 가능하니 주석처리함. 삭제해도 되면 삭제
         pm.PlayerStateUpdate(PlayerState.General);
     }
