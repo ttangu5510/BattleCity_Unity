@@ -22,6 +22,8 @@ public class ItemManager02 : MonoBehaviour
     private Dictionary<int, GameObject> _itemPrefabDict;
     private Dictionary<int, ItemData> itemDataDictionary = new Dictionary<int, ItemData>();
 
+    PlayerManager pm;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -36,6 +38,11 @@ public class ItemManager02 : MonoBehaviour
         }
 
         InitializeItems();  // 아이템 데이터 초기화
+    }
+
+    private void Start()
+    {
+        pm = PlayerManager.Instance;
     }
 
     private void InitializeItems()
@@ -67,7 +74,7 @@ public class ItemManager02 : MonoBehaviour
         // 목숨 +1
         itemDataDictionary.Add(2, new ItemData(
             2, "LifeUp",
-            player => player.GetComponent<Player>().GetLife(1),
+            player => pm.CalculateLife(+1),
             0f
         ));
         Debug.Log($"[Load Sprite] LifeUp: {(lifeUpIcon != null ? "OK" : "FAILED")}");
@@ -75,7 +82,7 @@ public class ItemManager02 : MonoBehaviour
         // 스피드업
         itemDataDictionary.Add(3, new ItemData(
             3, "SpeedUp",
-            player => player.GetComponent<Player>().SpeedControl(3, 3),
+            player => pm.SpeedControl(3, 3),
             0f
         ));
         Debug.Log($"[Load Sprite] SpeedUp: {(speedUpIcon != null ? "OK" : "FAILED")}");
@@ -173,9 +180,8 @@ public class ItemManager02 : MonoBehaviour
 
     private IEnumerator InvincibilityCoroutine(GameObject player, float duration)
     {
-        var ps = player.GetComponent<Player>();
-        ps.state = PlayerState.Invincible;
+        pm.PlayerStateUpdate(PlayerState.Invincible);
         yield return new WaitForSeconds(duration);
-        ps.state = PlayerState.General;
+        pm.PlayerStateUpdate(PlayerState.General);
     }
 }

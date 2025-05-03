@@ -3,35 +3,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable, IMovable
 {
-    // : IDamagable, IMoveable(이건 플레이어 컨트롤러에서 받겠습니다)
-    [Header("Init Setting")] // 맨 처음 게임을 시작할 때. 기본 설정을 입력하는 칸입니다.
-    [SerializeField] private int life_Init;
-    [SerializeField] private float moveSpeed_Init;
-    [SerializeField] private float shotSpeed_Init;
-    [Tooltip("Waiting time to respawn")]
-    [SerializeField] private float DamagedCoolTime;
-    [SerializeField] private float respawningTime;
-
-
+    private float DamagedCoolTime;
+    private float respawningTime;
     [SerializeField] private RespawnPoint respawnPoint;
 
     [Header("Current Player Data")]
-    [SerializeField] public UpgradeType grade;
-    [SerializeField] public PlayerState state;
+    //[SerializeField] public UpgradeType grade;
+    //[SerializeField] public PlayerState state;
+    /*[SerializeField] public int Life { get { return life; } }
     [SerializeField] private int life;
-    [SerializeField] public int Life { get { return life; } }
-    [SerializeField] public float moveSpeed { get; private set; }
-    [SerializeField] public float shotSpeed { get; private set; }
-    [SerializeField] public int score { get; private set; }
+    [SerializeField] public float MoveSpeed { get { return moveSpeed; } }
+    [SerializeField] private float moveSpeed;
+    [SerializeField] public float ShotSpeed { get { return shotSpeed; } }
+    [SerializeField] private float shotSpeed;*/
 
     [Header("Setting Field")]
     [SerializeField] private Transform groupRender;
     [SerializeField] private PlayerController playerController;
 
-
-
-
-    private PlayerData pd; // 등급 & 스코어 정보
+    private PlayerManager pm; 
 
     public MoveType moveType { get; set; }
 
@@ -58,29 +48,19 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     //*****************************************************//
 
     // 스테이지마다 플레이어 오브젝트가 활성화 될 때, 플레이어 데이터를 동기화 시킴
-    // 스테이지 진행 중에는 현재 객체가 정보를 담당. 스테이지 종료 시, PlayerData에 현재 객체 정보 저장하는 구조
+    // 스테이지 진행 중에는 현재 객체가 정보를 담당. 스테이지 종료 시, PlayerManager에 현재 객체 정보 저장하는 구조
     private void Awake()
     {
         // 씬 불러와지고 바로 시작할지, 스테이지 시작 이벤트 받고 시작할지 고민 중
-        pd = PlayerData.Instance;
-
-        DataInit(); // 임시/테스트용, 첫 시작 판정에서 해줘야함
-
-        // grade = pd.grade;
-        life = pd.life;
-        moveSpeed = pd.moveSpeed;
-        shotSpeed = pd.shotSpeed;
-        // score = pd.score; 스코어는 실시간으로 업데이트 해야함
-
-        // 스테이지매니저.스테이지 종료 이벤트.AddListener(SavePlayerData);
+        pm = PlayerManager.Instance;
+                
+        // 초기값 그대로
+        DamagedCoolTime = pm.DamagedCoolTime;
+        respawningTime = pm.RespawningTime;
     }
 
     private void Start()
     {
-        // 스테이지 종료 시 플레이어 데이터 저장
-        StageManager.Instance.StageCloseEvent.AddListener(SavePlayerData);
-
-
         // 등급 상태 테스트용.
         UpdateRender();
 
@@ -90,33 +70,22 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     private void OnDestroy()
     {
-        // 스테이지매니저.스테이지 종료 이벤트.RemoveListener(SavePlayerData);
-    }
 
-
-    // Todo: 플레이어 데이터에서 구현하는걸로 변경
-    // 맨 처음 코인을 시작하는 시점(GameStart)에서만 호출       ***GameStart와 StageStart는 구분되어야 함. 
-    private void DataInit()
-    {
-        // 게임매니저 상태가 == 첫시작 return;
-        // 초기 설정으로 저장
-        pd.SaveData(life_Init, moveSpeed_Init, shotSpeed_Init, 0);
-        pd.UpdateScore(0);
     }
 
     // 데미지 받음 => 죽음 판정
     public void TakeDamage()
     {
-        if (state == PlayerState.Invincible)
+        if (pm.State == PlayerState.Invincible)
         {
             Debug.Log("플레이어 무적 상태! 데미지 안받음.");
             return;
         }
 
         Debug.Log("플레이어 공격 판정");
-        if (grade > 0)
+        if (pm.Grade > 0)
         {
-            grade -= 1;
+            pm.PlayerGradeUpdate(-1);
             UpdateRender();
 
             // 무적 시간 추가
@@ -130,19 +99,21 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     public IEnumerator TakeDamageCooling()
     {
-        state = PlayerState.Invincible;
+        pm.PlayerStateUpdate(PlayerState.Invincible);
+        // TODO : 플레이어 피격 이펙트 or 셰이더 실행
         yield return new WaitForSeconds(DamagedCoolTime);
-        state = PlayerState.General;
+        pm.PlayerStateUpdate(PlayerState.General);
+        // TODO : 플레이어 피격 이펙트 or 셰이더 초기화
     }
 
     // 죽음 => 게임오버 판정
     public void Dead()
     {
         // 라이프 감소
-        life -= 1;
+        pm.CalculateLife(-1);
 
         // 라이프가 0 아래로 떨어지면 패배 조건 체크
-        if (life <= 0)
+        if (pm.Life <= 0)
         {
             //GameManager.Instance.GameOver();
             return;
@@ -157,18 +128,14 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     // 리스폰 => 초기 설정값으로 플레이어 초기화, 스폰 포인트로 위치 변경, 리스폰 효과 코루틴 실행
     public void Respawn()
     {
-        state = PlayerState.Respawning;
+
+        // 플레이어 초기값으로 재설정
+        pm.PlayerInit();
 
         // 플레이어 위치 이동 & 정지
         playerController.transform.position = respawnPoint.gameObject.transform.position;
         playerController.Body.transform.forward = respawnPoint.gameObject.transform.forward;
         playerController.dir = Vector3.zero;
-
-        Debug.Log(respawnPoint.gameObject.transform.position);
-        // 플레이어 초기값으로 재설정
-        moveSpeed = moveSpeed_Init;
-        shotSpeed = shotSpeed_Init;
-        grade = 0;
 
         // 리스폰 이펙트 코루틴 실행
         StartCoroutine(RespawnEffect());
@@ -178,13 +145,12 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         // 1초동안 이펙트 실행 or 셰이더 변경 후 코루틴 종료
 
         // 반짝이는 셰이더();
-        Debug.Log("플레이어 리스폰 중...");
+        pm.PlayerStateUpdate(PlayerState.Respawning);
         respawnPoint.PlayerFBX(); // 이펙트 실행
         yield return new WaitForSeconds(respawningTime);
         // 셰이더 초기화();
         //respawnPoint.StopFBX(); // 이펙트 자동 종료 가능하니 주석처리함. 삭제해도 되면 삭제
-        state = PlayerState.General;
-        Debug.Log("플레이어 리스폰 완료");
+        pm.PlayerStateUpdate(PlayerState.General);
     }
 
 
@@ -197,7 +163,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         }
 
         // 등급에 맞는 그래픽 활성화
-        switch (grade)
+        switch (pm.Grade)
         {
             case UpgradeType.Grade01:
                 groupRender.GetChild(0).gameObject.SetActive(true);
@@ -220,39 +186,25 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     public void Upgrade(float moveSpeed, float shotSpeed, int score)
     {
-        if (grade == UpgradeType.Grade04)
+        if (pm.Grade == UpgradeType.Grade04)
         {
             Debug.Log("이미 최고 등급입니다");
-            pd.UpdateScore(score);
+            pm.ScoreUpdate(score);
             // 점수 얻는걸로? 슈퍼마리오 버섯 처럼 이미 최종 단계면 점수로 치환
             return;
         }
-        SpeedControl(moveSpeed, shotSpeed);
-        grade += 1;
+        pm.SpeedControl(moveSpeed, shotSpeed);
+        pm.PlayerGradeUpdate(+1);
         UpdateRender();
     }
 
 
-    public void GetLife(int life)
-    {
-        this.life += life;
-    }
+    
 
-    public void SpeedControl(float moveSpeed, float shotSpeed)
-    {
-        this.moveSpeed += moveSpeed;
-        this.shotSpeed += shotSpeed;
-    }
+    
 
     #endregion
 
-
-
-    // 스테이지 종료 시 호출
-    public void SavePlayerData()
-    {
-        pd.SaveData(life, moveSpeed, shotSpeed, grade);
-    }
 
 
     // 바닥 타일 연관 함수
@@ -266,8 +218,6 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 }
 
 // 플레이어 & Enemy 업그레이드 등급
-public enum UpgradeType { Grade01, Grade02, Grade03, Grade04 }
 
-public enum PlayerState { General, Invincible, Respawning } // {일반, 무적, ...상태가 더 필요하면 이곳에 추가}
 
 
