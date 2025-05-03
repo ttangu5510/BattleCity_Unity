@@ -122,6 +122,8 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         // 라이프가 0 아래로 떨어지면 패배 조건 체크
         if (pm.Life <= 0)
         {
+            // TODO: For Test of TestScene
+            gameObject.SetActive(false);
             sm.StageFail();
             return;
         }
