@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
     [SerializeField] public GameObject onTriggerObj;
 
+    //[SerializeField] private Item item;
     // Todo 0430
     // 1. 적 이동 로직 (상태에 따른 이동 구현)
     // 2. 범위(콜라이더) 판정으로 상태 업데이트
