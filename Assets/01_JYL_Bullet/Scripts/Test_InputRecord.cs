@@ -13,7 +13,7 @@ public class Test_InputRecord : MonoBehaviour
     private void Awake()
     {
         scoreBoard.name = "YOU";
-        scoreBoard.score = PlayerData.Instance.score;
+        scoreBoard.score = PlayerManager.Instance.Score;
         for (int i = 0; i < GameManager.Instance.scores.Length; i++)
         {
             if (GameManager.Instance.scores[i].score < scoreBoard.score)

@@ -1,20 +1,23 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour, IDamagable, IMovable
 {
     [Header("등급")]
     [SerializeField] private EnemyGrade grade;
-    [HideInInspector] public EnemyGrade Grade { get; }
+    [HideInInspector] public EnemyGrade Grade { get { return grade; } }
     [Header("상태")]
     [SerializeField] private EnemyState state;
     [SerializeField] private GameObject target;
 
-    [Header("스펙 (등급별 스펙 정보는 EnemyManager에서 일괄 수정)")]
+    [Header("스펙 (확인용)")]
     [SerializeField] private int hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float shotSpeed;
     [SerializeField] private int scorePoint;
+    [SerializeField] public float shotCycleRandomSeed_min;
+    [SerializeField] public float shotCycleRandomSeed_max;
     // Item itmePossession;  // 아이템 소유 정보 추가
 
     [Header("세팅")]
@@ -23,18 +26,29 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] Vector3 rayOffset;
     [SerializeField] float rayFarForwardDistance;
     [SerializeField] float rayForwardDistance;
+    [SerializeField] private BulletObjectPool bulletPool;
+
 
     private StageManager sm;
     private EnemyManager em;
     private Rigidbody rb;
 
     private Vector3 dir;
+    private Vector3 rotDir;
 
     public bool isDamagable { get; private set; } // 피격 가능 상태 여부  (리스폰 중 무적, 아이템 사용으로 인한 무적 상태, 등등)
     public MoveType moveType { get; set; }
 
     private Vector3 rangeLevel;
 
+    Coroutine coroutine_Attack;
+    Coroutine coroutine_MovePatter_A;
+
+
+    [SerializeField] private float seedMin_A;
+    [SerializeField] private float seedMax_A;
+
+    [SerializeField] public GameObject onTriggerObj;
 
     // Todo 0430
     // 1. 적 이동 로직 (상태에 따른 이동 구현)
@@ -48,16 +62,22 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         em = EnemyManager.Instance;
         rb = transform.GetChild(0).GetComponent<Rigidbody>();
 
-        em.StatSetting(out hp, out moveSpeed, out shotSpeed, out scorePoint, grade);
+        em.StatSetting(out hp, out moveSpeed, out shotSpeed, out scorePoint, out shotCycleRandomSeed_min, out shotCycleRandomSeed_max, grade);
         state = EnemyState.General;
 
         sm.ActiveEnemyAdd(this);
 
         // 시작 방향
         dir = body.forward;
+
+        if (coroutine_Attack == null)
+            coroutine_Attack = StartCoroutine(AttackCycle());
+
+        if (coroutine_MovePatter_A == null)
+            coroutine_MovePatter_A = StartCoroutine(MovePattern_A(seedMin_A, seedMax_A));
     }
 
-    
+
 
 
     void Update()
@@ -68,13 +88,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         switch (state)
         {
             case EnemyState.General:
-                //GeneralMove();
-                /*if (rb.velocity.magnitude <= 2.99f)
-                {
-                    RandomDirSet();
-                }*/
                 Move(dir);
-                Rotate(dir);
+                Rotate(rotDir);
                 break;
             case EnemyState.ChasingPlayaer:
 
@@ -96,12 +111,18 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     {
         sm.ActiveEnemyListRemove(this);
 
+        // 재사용해야한다면 스폰포인트로 위치,각도 조정 후 비활성화
         gameObject.SetActive(false);
-        transform.SetSiblingIndex(transform.parent.childCount - 1);
-        PlayerData.Instance.UpdateScore(scorePoint);
+        PlayerManager.Instance.ScoreUpdate(scorePoint);
+
+        StopCoroutine(coroutine_Attack);
+        StopCoroutine(coroutine_MovePatter_A);
     }
 
-
+    private void OnDisable()
+    {
+        StopCoroutine(coroutine_Attack);
+    }
 
     #region 적 이동 관련 로직
     public void RandomDirSet()
@@ -115,7 +136,14 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         };
 
         int R = Random.Range(0, 3);
-        dir = directions[R];
+        rotDir = directions[R];
+        
+        if (moveType == MoveType.iceSlide)
+        {
+            if (rb.velocity.magnitude < 0.1f) dir = rotDir;
+            else return;
+        }
+        else dir = rotDir;
     }
 
     private void Move(Vector3 dir)
@@ -133,7 +161,60 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     }
 
 
-    // 정면 긴 레이 발사, 플레이어or타겟 유무에 따라 EnemyState 스위칭
+    // 코루틴으로 이동
+    IEnumerator MovePattern_A(float seed_min, float seed_max)
+    {
+        while (true)
+        {
+            float r = Random.Range(seed_min, seed_max);
+            yield return new WaitForSeconds(r);
+            if (onTriggerObj != null)
+            {
+                yield return new WaitUntil(() => onTriggerObj == null);
+                continue;
+            }
+            RandomDirSet();
+        }
+    }
+    #endregion
+
+
+    // 적 공격 로직
+    // 랜덤 공격 코루틴 구현 고고
+    public void Attack()
+    {
+        PooledObject bullet = bulletPool.BulletOut();
+        if (bullet == null) return;
+
+        bullet.bulletType = PooledObject.BulletType.Type1;
+
+        bullet.transform.position = muzzPoint.position;
+        bullet.transform.forward = muzzPoint.forward;
+        bullet.GetComponent<Rigidbody>().velocity = shotSpeed * bullet.transform.forward;
+
+        bullet.gameObject.SetActive(true);
+    }
+
+    public IEnumerator AttackCycle()
+    {
+        while (true)
+        {
+            float r = Random.Range(shotCycleRandomSeed_min, shotCycleRandomSeed_max);
+            yield return new WaitForSeconds(r);
+            Attack();
+        }
+    }
+
+    // 바닥 타일 연관 함수
+    public void MoveTypeUpdate()
+    {
+        // 움직임 타입에 따라 이펙트&효과 업데이트
+        // 이펙트는 플레이어 프리펩 안에 자식 오브젝트 폴더로 정리
+        // 효과는 케이스별로 수치만 변경하면 됨
+    }
+
+    // EnemyState에 따라서 이동로직 구분
+    /*// 정면 긴 레이 발사, 플레이어or타겟 유무에 따라 EnemyState 스위칭
     private void TargetChecking()
     {
         Vector3 originPos = muzzPoint.position + rayOffset;
@@ -171,72 +252,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         }
     }
 
-
-    private void GeneralMove()
-    {
-        // 현재 상태 : 랜덤 백터 4방향으로 이동
-        // 목표 : 랜덤 벡터 4방향 중 하나 선택해서 쭉 이동, 벽이 생기면 다른 방향 벡터로 바꿔주기
-        if (dir == Vector3.zero) dir = transform.forward;
-
-        // 짧은 레이 발사
-        // 벽에 닿으면 방향 전환 고고
-
-        Vector3 right;
-        if (Mathf.Abs(dir.x) > 0)
-        {
-            // 횡 이동 중
-            right = transform.forward * 0.7f;
-        }
-        else
-        {
-            // 열 이동 중
-            right = transform.right * 0.7f;
-        }
-
-        Vector3 originPos1 = muzzPoint.position + right;
-        Vector3 originPos2 = muzzPoint.position - right;
-        LayerMask layerMask = LayerMask.GetMask("SolidBlock", "Brick", "Enemy"); // 적들 서로, 벽만 체크 되도록--- 벽 레이어 추가되면 여기 추가
-        if (Physics.Raycast(originPos1, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore) ||
-            Physics.Raycast(originPos2, muzzPoint.forward, rayForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
-        {
-            Debug.DrawLine(originPos1, originPos1 + muzzPoint.forward * rayForwardDistance, Color.red);
-            Debug.DrawLine(originPos2, originPos2 + muzzPoint.forward * rayForwardDistance, Color.red);
-            Debug.Log("벽에 닿음");
-            // 4방향 중 하나 랜덤으로 반환
-            Vector3[] directions = new Vector3[]
-            {
-               transform.forward,
-               -transform.forward,
-               transform.right,
-               -transform.right
-            };
-
-            int R = Random.Range(0, 4);
-            dir = directions[R];
-        }
-        else
-        {
-            Debug.DrawLine(originPos1, originPos1 + muzzPoint.forward * rayForwardDistance, Color.green);
-            Debug.DrawLine(originPos2, originPos2 + muzzPoint.forward * rayForwardDistance, Color.green);
-        }
-
-        Move(dir);
-        Rotate(dir);
-    }
-    #endregion
-
-
-
-
-    // 바닥 타일 연관 함수
-    public void MoveTypeUpdate()
-    {
-        // 움직임 타입에 따라 이펙트&효과 업데이트
-        // 이펙트는 플레이어 프리펩 안에 자식 오브젝트 폴더로 정리
-        // 효과는 케이스별로 수치만 변경하면 됨
-    }
-
-    // EnemyState에 따라서 이동로직 구분
+*/
 }
 
 public enum EnemyGrade

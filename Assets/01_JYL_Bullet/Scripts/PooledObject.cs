@@ -11,6 +11,9 @@ public class PooledObject : MonoBehaviour
     private Vector3 rangeLevel2;
     [SerializeField] private LayerMask Breakable;
     private Vector3 goPosition;
+
+    private bool isFirstInit = true;
+
     private void Awake()
     {
         rigid ??= GetComponent<Rigidbody>();
@@ -33,7 +36,10 @@ public class PooledObject : MonoBehaviour
 
         }
     }
-    private void Update()
+    
+    // 포탄 프리펩에서 RigidBody Constrains에서 각도 회전 잠궈두었습니다.
+    // 기능 중복으로 삭제해도 되지만, 혹시 모르니 주석처리 해둡니다. (곡사포를 추가로 만들 수도 있으니 남겨둘게요)
+    /*private void Update()
     {
         if (rigid.velocity.magnitude > 1)
         {
@@ -43,7 +49,7 @@ public class PooledObject : MonoBehaviour
             // transform.forward = 벡터
             // 벡터 방향을 바라보도록(forward 앞이 그쪽을 향하도록) 회전함
         }
-    }
+    }*/
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -85,8 +91,18 @@ public class PooledObject : MonoBehaviour
             damagable.TakeDamage();
         }
 
-        returnPool.ReturnToPool(this);
+        gameObject.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        if (isFirstInit)
+        {
+            isFirstInit = false;
+        }
+        else returnPool.ReturnToPool(this);
+    }
+
     private void OnDrawGizmos()
     {
         if (bulletType == BulletType.Type1)

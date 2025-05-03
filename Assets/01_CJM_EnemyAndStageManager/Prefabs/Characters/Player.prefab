@@ -294,7 +294,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7397394162986621442}
   - component: {fileID: 1996618830820749441}
-  - component: {fileID: 2518546428864151412}
   - component: {fileID: 3067736952683925098}
   m_Layer: 7
   m_Name: Grade02
@@ -341,19 +340,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2518546428864151412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119151016441485392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16f5c3562c5244c90cdcaecddbf8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
 --- !u!114 &3067736952683925098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1638,7 +1624,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1199857985041635018}
   - component: {fileID: 1945377708270799442}
-  - component: {fileID: 5904889636247919076}
   - component: {fileID: 6204732663249617072}
   m_Layer: 7
   m_Name: Grade04
@@ -1685,19 +1670,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5904889636247919076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5193840064509351134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16f5c3562c5244c90cdcaecddbf8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
 --- !u!114 &6204732663249617072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1931,6 +1903,7 @@ GameObject:
   - component: {fileID: 142979994634857650}
   - component: {fileID: 6953376135483651819}
   - component: {fileID: 8014050902188738237}
+  - component: {fileID: 8486974160260738963}
   m_Layer: 7
   m_Name: Tank_Player
   m_TagString: Player
@@ -2057,6 +2030,18 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8486974160260738963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547084663447668752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb16f5c3562c5244c90cdcaecddbf8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5653739464378299647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,7 +2455,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1154304369849698440}
   - component: {fileID: 5550291109667491559}
-  - component: {fileID: 3513747672670822076}
   - component: {fileID: 4241215315754383633}
   m_Layer: 7
   m_Name: Grade01
@@ -2517,19 +2501,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &3513747672670822076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6624295887734582818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16f5c3562c5244c90cdcaecddbf8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
 --- !u!114 &4241215315754383633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2687,7 +2658,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8389637713605226063}
   - component: {fileID: 2342565006561261135}
-  - component: {fileID: 6662530512018098020}
   - component: {fileID: 5298695609612763813}
   m_Layer: 7
   m_Name: Grade03
@@ -2734,19 +2704,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6662530512018098020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409819842812275008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16f5c3562c5244c90cdcaecddbf8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
 --- !u!114 &5298695609612763813
 MonoBehaviour:
   m_ObjectHideFlags: 0

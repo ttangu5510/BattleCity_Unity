@@ -44,7 +44,7 @@ public class TrapTile : TileEnviorment
 
             Vector3 pushDir = -moveDir;
 
-            if (rb.gameObject.GetComponentInParent<Player>().state == PlayerState.Respawning)
+            if (PlayerManager.Instance.State == PlayerState.Respawning)
             {
                 rb.velocity = Vector3.zero;
             }
