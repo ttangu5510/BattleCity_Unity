@@ -48,4 +48,8 @@ public class Test_InputRecord : MonoBehaviour
         }
 
     }
+    private void OnDisable()
+    {
+        rank[rankNum].color = Color.white;
+    }
 }

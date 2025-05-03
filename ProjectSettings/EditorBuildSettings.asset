@@ -15,16 +15,16 @@ EditorBuildSettings:
     path: Assets/01_JYL_Bullet/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/JYL_GameClearScene.unity
+    path: Assets/01_JYL_Bullet/Scenes/GameClearScene.unity
     guid: c21c73d83c2954244b934d1deef02d90
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/JYL_InputRecordScene.unity
+    path: Assets/01_JYL_Bullet/Scenes/InputRecordScene.unity
     guid: c6b338cd347db2643a8ecdb48c1eb5e7
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/JYL_RecordScene.unity
+    path: Assets/01_JYL_Bullet/Scenes/RecordScene.unity
     guid: 7e2471822dcc3504aa9ec4584c79d857
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/JYL_StageResultScene.unity
+    path: Assets/01_JYL_Bullet/Scenes/StageResultScene.unity
     guid: 20f5fa580470290458ac04643df9e0fd
   - enabled: 1
     path: Assets/01_JYL_Bullet/Scenes/JYL_STAGE 2.unity

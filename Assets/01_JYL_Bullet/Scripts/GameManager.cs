@@ -126,8 +126,13 @@ public class GameManager : MonoBehaviour
         // 스테이지 큐 다시 채우기
 
         // 1. 점수 합산 창
-        SceneManager.LoadSceneAsync("StageResultScene");
         yield return waitSec;
+        SceneManager.LoadSceneAsync("StageResultScene");
+        while (!isScored)
+        {
+            yield return waitSec;
+        }
+        isScored = false;
         // 2. 게임 클리어 씬
         SceneManager.LoadSceneAsync("GameClearScene");
         yield return waitSec;
@@ -135,7 +140,15 @@ public class GameManager : MonoBehaviour
         // 3. 점수 입력 씬 (뉴레코드 일 때)
         // 이름과 점수를 게임매니저에 저장함
         // while로 이름 입력이 끝나거나, 카운트다운 코루틴이 끝났을 시 다음으로 진행
-        StartCoroutine(InputNewScore());
+        if (PlayerData.Instance.score >= scores[9].score)
+        {
+            SceneManager.LoadSceneAsync("InputRecordScene");
+        }
+        while (!isInput)
+        {
+            yield return waitSec;
+        }
+        isInput = false;
 
         // 4. 레코드 씬 탑10 나열
         SceneManager.LoadSceneAsync("RecordScene");
@@ -146,41 +159,55 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        StartCoroutine(GameOverRoutine());
+    }
+    IEnumerator GameOverRoutine()
+    {
         // 이름을 스트링으로 입력받기
         // 게임 오버 시 수행
-        // 게임 오버 UI -> 점수 합산 창 씬 -> 게임 오버 씬 -> 점수 씬(뉴레코드 일 때) -> 타이틀 씬
+        // 게임 오버 UI -> 점수 합산 창 씬 -> 게임 오버 씬 -> 점수 씬(뉴레코드 일 때) -> 레코드 씬 -> 타이틀 씬
+
         // 1. 게임 오버 UI
-        // 게임 오버 UI는 UIManager에서 실행시킨다. 
+        // 게임 오버 UI는 UIManager에서 실행시킨다.
+        //UIManager.GameOverUI.SetActive(true);
+        yield return waitSec;
 
         // 2. 점수 합산 창 씬
         // 게임 오버 UI는 종료한다
-        //UI
+        yield return waitSec;
+        //UIManager.GameOverUI.SetActive(false);
         SceneManager.LoadSceneAsync("StageResultScene");
-
-        // 3. 게임 오버 씬
-
-        // 4. 점수 씬(뉴 레코드 일 때)
-
-        // 5. 타이틀 씬
-
-    }
-
-
-    public void SortScore()
-    {
-        Array.Sort(scores, (scoreA, scoreB) => scoreB.score.CompareTo(scoreA.score));
-    }
-
-    IEnumerator InputNewScore()
-    {
-        if (PlayerData.Instance.score >= scores[9].score)
-        {
-            SceneManager.LoadSceneAsync("InputRecordScene");
-        }
         while (!isScored)
         {
             yield return waitSec;
         }
         isScored = false;
+
+        // 3. 게임 오버 씬
+        SceneManager.LoadSceneAsync("GameOverScene");
+        yield return waitSec;
+        yield return waitSec;
+
+        // 4. 점수 씬(뉴 레코드 일 때)
+        if (PlayerData.Instance.score >= scores[9].score)
+        {
+            SceneManager.LoadSceneAsync("InputRecordScene");
+        }
+        while (!isInput)
+        {
+            yield return waitSec;
+        }
+        isInput = false;
+
+        // 5. 레코드 씬
+        SceneManager.LoadSceneAsync("RecordScene");
+        yield return waitSec;
+        // 6. 타이틀 씬
+        MySceneManager.Instance.ChangeScene("TitleScene");
+    }
+
+    public void SortScore()
+    {
+        Array.Sort(scores, (scoreA, scoreB) => scoreB.score.CompareTo(scoreA.score));
     }
 }
