@@ -11,10 +11,12 @@ public class UIManager02 : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI playerLifePointText;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private Player player;
     [SerializeField] private Image[] enemyIcons;
     [SerializeField] private Sprite fullSprite;
     [SerializeField] private Sprite emptySprite;
+
+    PlayerManager pm;
+
 
     //[TEST-ONLY]
     //[SerializeField] private bool useMockPlayerLife = true; //UI 테스트용
@@ -35,6 +37,12 @@ public class UIManager02 : MonoBehaviour
         else
             Destroy(gameObject);
     }
+
+    private void Start()
+    {
+        pm = PlayerManager.Instance;
+    }
+
     private void Update()
     {
         HandlePauseToggle();
@@ -73,7 +81,7 @@ public class UIManager02 : MonoBehaviour
 
         //[TEST-ONLY]
         //int lifeToShow = (useMockPlayerLife || player == null) ? mockLife : player.Life;
-        playerLifePointText.text = $"X {player.Life}";
+        playerLifePointText.text = $"X {pm.Life}";
     }
 
     public void ShowCurrentScore()
@@ -82,7 +90,7 @@ public class UIManager02 : MonoBehaviour
 
         //[TEST-ONLY]
         //int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
-        scoreText.text = $"SCORE : {player.score}";
+        scoreText.text = $"SCORE : {pm.Score}";
     }
    //public void ShowHighScore()
    //{

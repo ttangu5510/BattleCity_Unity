@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         // 1. 점수 합산 창 씬 불러오기
 
         // TODO : InputRecord Test
-        PlayerData.Instance.UpdateScore(30000);
+        PlayerManager.Instance.ScoreUpdate(30000);
         SceneManager.LoadSceneAsync("JYL_InputRecordScene");
         while (!isInput)
         {
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         // 3. 점수 입력 씬 (뉴레코드 일 때)
         // 이름과 점수를 게임매니저에 저장함
         // while로 이름 입력이 끝나거나, 카운트다운 코루틴이 끝났을 시 다음으로 진행
-        if (PlayerData.Instance.score >= scores[9].score)
+        if (PlayerManager.Instance.Score >= scores[9].score)
         {
             InputNewScore();
         }
