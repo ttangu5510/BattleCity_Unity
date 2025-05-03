@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb16f5c3562c5244c90cdcaecddbf8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
 --- !u!114 &7272784606468841080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d95ff80c01db8d459798120943cb514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTriggerObj: {fileID: 0}
 --- !u!1 &869797707413122443
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,11 +799,17 @@ MonoBehaviour:
   moveSpeed: 0
   shotSpeed: 0
   scorePoint: 0
+  shotCycleRandomSeed_min: 0
+  shotCycleRandomSeed_max: 0
   muzzPoint: {fileID: 3578505882840861221}
   body: {fileID: 8529340622530738747}
   rayOffset: {x: 0, y: 3, z: 0}
   rayFarForwardDistance: 10
   rayForwardDistance: 0.4
+  bulletPool: {fileID: 2705676859586342144}
+  seedMin_A: 3
+  seedMax_A: 5
+  onTriggerObj: {fileID: 0}
 --- !u!1 &4998191283294259240
 GameObject:
   m_ObjectHideFlags: 0

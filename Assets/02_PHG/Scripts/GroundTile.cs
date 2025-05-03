@@ -5,14 +5,14 @@ public class GroundTile : MonoBehaviour
 {
     [SerializeField] private TileType tileType;
     [Header("Ice Settings")]
-    [SerializeField] private float slideForce = 5f;
+    //[SerializeField] private float slideForce = 5f;
 
     [Header("Sand Settings")]
     [SerializeField] private float slowFactor = 0.5f;
     [SerializeField] private GameObject sandTrailEffect;
 
     [Header("Magma Settings")]
-    [SerializeField] private float burnDamagePerSecond = 10f;
+    //[SerializeField] private float burnDamagePerSecond = 10f;
     [SerializeField] private GameObject burnEffectPrefab;
     private Dictionary<GameObject, float> magmaDamageTimers = new Dictionary<GameObject, float>();
 

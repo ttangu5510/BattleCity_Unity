@@ -46,13 +46,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp_N: 1
   moveSpeed_N: 2
-  shotSpeed_N: 2
+  shotSpeed_N: 10
+  shotCycleRandomSeed_min_N: 5
+  shotCycleRandomSeed_max_N: 2
   hp_E: 2
   moveSpeed_E: 3
-  shotSpeed_E: 3
+  shotSpeed_E: 10
+  shotCycleRandomSeed_min_E: 4
+  shotCycleRandomSeed_max_E: 1
   hp_B: 4
-  moveSpeed_B: 1
-  shotSpeed_B: 5
+  moveSpeed_B: 5
+  shotSpeed_B: 13
+  shotCycleRandomSeed_min_B: 1
+  shotCycleRandomSeed_max_B: 3
   score_Normal: 100
   score_Elite: 200
   score_Boss: 300

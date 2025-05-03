@@ -342,8 +342,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -548,6 +548,7 @@ GameObject:
   - component: {fileID: 153243761625536149}
   - component: {fileID: 3081054816885637877}
   - component: {fileID: 1705549410858284590}
+  - component: {fileID: 7962111299432246049}
   m_Layer: 5
   m_Name: RecordBoard
   m_TagString: Untagged
@@ -647,6 +648,29 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7962111299432246049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518636950057638862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91859edde786984ca4eedb6fb892855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rank:
+  - {fileID: 8610274973583668452}
+  - {fileID: 3840123513866756500}
+  - {fileID: 8892120053084124319}
+  - {fileID: 97127609629240173}
+  - {fileID: 5507043727137679364}
+  - {fileID: 2546546398931002282}
+  - {fileID: 7151799916756603028}
+  - {fileID: 7431526156369411892}
+  - {fileID: 374260196846289041}
+  - {fileID: 4565496507631172081}
 --- !u!1 &3038230915303016979
 GameObject:
   m_ObjectHideFlags: 0

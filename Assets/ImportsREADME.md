@@ -15,6 +15,7 @@
 ## 동기화 필요!
 LowPoly Particle (FX 효과모음) https://assetstore.unity.com/packages/vfx/particles/polygon-particle-fx-low-poly-3d-art-by-synty-168372
 Quick Outline (아웃라인 셰이더) https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488?locale=ko-KR&gad_source=1&gad_campaignid=22451834332&gbraid=0AAAAADdkVOse1a4w1_dL9S_H0He53wy0r&gclid=Cj0KCQjwt8zABhDKARIsAHXuD7ZFSD4CWJCxSVwmi45EEPb4G9pcLUM79xs3ir9Lbxpd8pWVGCKQLjYaAopaEALw_wcB&gclsrc=aw.ds
+3D Cartoon Road Warning Sign (경고판) https://assetstore.unity.com/packages/3d/props/exterior/3d-cartoon-road-warning-signs-260531
 ---
 
 ## 에셋 추가 후보
@@ -25,7 +26,7 @@ Quick Outline (아웃라인 셰이더) https://assetstore.unity.com/packages/too
 // 9. Fragmented Objects 부서지는 벽(기능) https://assetstore.unity.com/packages/3d/props/fragmented-objects-25699
 // 10. Toy Pack 사물 모음 (사물) https://assetstore.unity.com/packages/3d/props/toy-pack-230-toys-objects-all-in-one-toy-mega-pack-low-mid-poly-291591
 // 11. Amazing UI (아이콘, UI) https://assetstore.unity.com/packages/2d/gui/amazing-ui-85198
-// 12. Shiny Items 아이템 https://assetstore.unity.com/packages/vfx/shiny-items-vfx-for-urp-207966
+// 12. Shiny Items (Collectable item VFX) 아이템 https://assetstore.unity.com/packages/vfx/shiny-items-vfx-for-urp-207966
 // 13. LowPoly Item Icon 로우폴리 (아이콘, 아이템) https://assetstore.unity.com/packages/3d/props/lowpoly-collectible-items-and-icons-191199
 // 14. LowPoly Icon 로우폴리 아이콘 https://assetstore.unity.com/packages/2d/gui/icons/low-poly-icon-pack-183824
 // 16. Cube World 마인크래프트 느낌 큐브 (지형) https://assetstore.unity.com/packages/3d/environments/cube-world-proto-series-144159
