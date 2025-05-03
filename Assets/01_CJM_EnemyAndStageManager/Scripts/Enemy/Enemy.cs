@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 {
     [Header("등급")]
     [SerializeField] private EnemyGrade grade;
-    [HideInInspector] public EnemyGrade Grade { get; }
+    [HideInInspector] public EnemyGrade Grade { get { return grade; } }
     [Header("상태")]
     [SerializeField] private EnemyState state;
     [SerializeField] private GameObject target;
@@ -68,7 +68,6 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
 
 
-
     void Update()
     {
         //TargetChecking();
@@ -107,7 +106,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
         gameObject.SetActive(false);
         transform.SetSiblingIndex(transform.parent.childCount - 1);
-        PlayerData.Instance.UpdateScore(scorePoint);
+        PlayerManager.Instance.ScoreUpdate(scorePoint);
     }
 
     private void OnDisable()

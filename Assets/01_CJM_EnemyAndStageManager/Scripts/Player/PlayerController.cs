@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform body;
     public Transform Body { get { return body; } }
 
-    private Player player;
+    private PlayerManager pm;
     private Rigidbody rb;
     public Vector3 dir;
 
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        player = transform.parent.GetComponent<Player>();
+        pm = PlayerManager.Instance;
         rb = GetComponent<Rigidbody>();
 
         // Bullet Pool 생성자로 bulletPool 필드에 할당. 
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // 죽고 리스폰되기 전까지 이동 입력 멈춤
-        if (player.state == PlayerState.Respawning) return;
+        if (pm.State == PlayerState.Respawning) return;
 
         // 입력을 4방향 단위벡터로 연산 후 dir에 저장
         #region dir(입력)
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dir != Vector3.zero)
         {
-            rb.velocity = dir * player.moveSpeed;
+            rb.velocity = dir * pm.MoveSpeed;
         }
         else rb.velocity = Vector3.zero;
     }
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (bullet == null) return;
         
         // Todo: 플레이어 등급에 따른 총알 타입 구분, 머지 후 활성화 합시다
-        if(player.grade == UpgradeType.Grade04)
+        if(pm.Grade == UpgradeType.Grade04)
         {
             bullet.bulletType = PooledObject.BulletType.Type2;
         }
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
         bullet.transform.position = muzzPoint.position;
         bullet.transform.forward = muzzPoint.forward;
-        bullet.GetComponent<Rigidbody>().velocity = player.shotSpeed * bullet.transform.forward;
+        bullet.GetComponent<Rigidbody>().velocity = pm.ShotSpeed * bullet.transform.forward;
 
         bullet.gameObject.SetActive(true);
     }
