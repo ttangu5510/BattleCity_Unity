@@ -57,8 +57,6 @@ public class StageManager : MonoBehaviour
         Debug.Log("스테이지 클리어");
 
         gm.StageComplete();
-        
-
         StageClose();
     }
 
@@ -67,6 +65,7 @@ public class StageManager : MonoBehaviour
         Debug.Log("스테이지 실패");
         // 이어서 진행할건지 여부 판단 후 안한다면 게임 오버 판정
 
+        gm.GameOver();
         StageClose();
     }
 
@@ -85,6 +84,8 @@ public class StageManager : MonoBehaviour
     {
         StageCloseEvent?.Invoke();
         StageCloseEvent.RemoveAllListeners();
+
+        //Time.timeScale = 0;
         
         // TODO : 스테이지 닫을 때,
         // 스테이지 클리어 상태면 -> 다음 스테이지로
