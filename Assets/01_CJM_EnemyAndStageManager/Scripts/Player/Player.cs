@@ -21,8 +21,10 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private Transform groupRender;
     [SerializeField] private PlayerController playerController;
 
-    private PlayerManager pm; 
+    private PlayerManager pm;
 
+    /*private MoveType ontileMove;
+    public MoveType moveType { get { return ontileMove; } set { ontileMove = value; } }*/
     public MoveType moveType { get; set; }
 
     // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
@@ -49,18 +51,17 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     // 스테이지마다 플레이어 오브젝트가 활성화 될 때, 플레이어 데이터를 동기화 시킴
     // 스테이지 진행 중에는 현재 객체가 정보를 담당. 스테이지 종료 시, PlayerManager에 현재 객체 정보 저장하는 구조
-    private void Awake()
+    private void Start()
     {
         // 씬 불러와지고 바로 시작할지, 스테이지 시작 이벤트 받고 시작할지 고민 중
         pm = PlayerManager.Instance;
-                
+
         // 초기값 그대로
         DamagedCoolTime = pm.DamagedCoolTime;
         respawningTime = pm.RespawningTime;
-    }
 
-    private void Start()
-    {
+        //////
+
         // 등급 상태 테스트용.
         UpdateRender();
 

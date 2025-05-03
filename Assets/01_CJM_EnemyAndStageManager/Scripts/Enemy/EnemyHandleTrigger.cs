@@ -6,7 +6,7 @@ public class EnemyHandleTrigger : MonoBehaviour
 {
 
     Enemy enemy;
-    [SerializeField] GameObject onTriggerObj;
+    //[SerializeField] GameObject onTriggerObj;
 
     private void Awake()
     {
@@ -17,9 +17,9 @@ public class EnemyHandleTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
         {
-            if (onTriggerObj == null) enemy.RandomDirSet();
+            if (enemy.onTriggerObj == null) enemy.RandomDirSet();
 
-            onTriggerObj = other.gameObject;
+            enemy.onTriggerObj = other.gameObject;
         }
     }
 
@@ -27,7 +27,7 @@ public class EnemyHandleTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
         {
-            onTriggerObj = null;
+            enemy.onTriggerObj = null;
         }
     }
 }
