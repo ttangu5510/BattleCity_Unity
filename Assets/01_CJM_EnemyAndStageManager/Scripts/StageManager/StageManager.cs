@@ -28,6 +28,8 @@ public class StageManager : MonoBehaviour
     [HideInInspector] public UnityEvent StageStartEvent;
     [HideInInspector] public UnityEvent StageCloseEvent;
 
+    private GameManager gm;
+
     private void Awake()
     {
         // 싱글톤 인스턴스 생성
@@ -46,15 +48,16 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-
+        gm = GameManager.Instance;
     }
 
     public void StageClear()
     {
         // 클리어 UI 보여줌(점수 합산 장면)
         Debug.Log("스테이지 클리어");
+
+        gm.StageComplete();
         
-        //GameManager.Instance.스테이지 클리어
 
         StageClose();
     }
@@ -142,6 +145,14 @@ public class StageManager : MonoBehaviour
         }
 
         return count;
+    }
+
+    public bool GetSpawnable()
+    {
+        if (activateEnemys.Count >= maxActiveEnemyCount)
+            return false;
+        else
+            return true;
     }
 
 }

@@ -43,14 +43,25 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnPattern()
     {
+        float startTime = Time.time;
         while (standByIndex < standByGroup.childCount)
         {
-            if (Time.time >= standByTimeToSpawn[standByIndex])
+            float nowtime = Time.time;
+            if (nowtime - startTime >= standByTimeToSpawn[standByIndex])
             {
+                // 밸런싱 용. 최대 맵 안에 존재하는 몬스터 수 제한하려면 활성화
+                // 만약 정해진 시간에 패턴별로 몬스터 딱딱 소환하려면 비활성화 (like 메탈슬러그)
+                // 연산 다시해야됨
+                if (!sm.GetSpawnable())
+                {
+                    yield return new WaitUntil(() => sm.GetSpawnable());
+                    yield return new WaitForSeconds(standByTimeToSpawn[standByIndex]);
+                    continue;
+                }
                 standByGroup.GetChild(standByIndex).gameObject.SetActive(true);
+                startTime += standByTimeToSpawn[standByIndex];
                 standByIndex += 1;
             }
-            
             yield return null;
         }
     }

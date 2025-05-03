@@ -22,6 +22,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private PlayerController playerController;
 
     private PlayerManager pm;
+    private StageManager sm;
 
     /*private MoveType ontileMove;
     public MoveType moveType { get { return ontileMove; } set { ontileMove = value; } }*/
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     {
         // 씬 불러와지고 바로 시작할지, 스테이지 시작 이벤트 받고 시작할지 고민 중
         pm = PlayerManager.Instance;
+        sm = StageManager.Instance;
 
         // 초기값 그대로
         DamagedCoolTime = pm.DamagedCoolTime;
@@ -83,7 +85,6 @@ public class Player : MonoBehaviour, IDamagable, IMovable
             return;
         }
 
-        Debug.Log("플레이어 공격 판정");
         if (pm.Grade > 0)
         {
             pm.PlayerGradeUpdate(-1);
@@ -112,11 +113,16 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     {
         // 라이프 감소
         pm.CalculateLife(-1);
+        
+        // TODO: 플레이어 피격 이펙트
+        // 펑 터지는 효과 실행
+        // 플레이어 잠깐 비활성화?
+
 
         // 라이프가 0 아래로 떨어지면 패배 조건 체크
         if (pm.Life <= 0)
         {
-            //GameManager.Instance.GameOver();
+            sm.StageFail();
             return;
         }
         // 라이프가 남았으면 리스폰

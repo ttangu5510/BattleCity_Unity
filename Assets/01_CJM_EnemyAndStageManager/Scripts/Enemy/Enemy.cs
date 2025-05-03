@@ -111,10 +111,9 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     {
         sm.ActiveEnemyListRemove(this);
 
+        // 재사용해야한다면 스폰포인트로 위치,각도 조정 후 비활성화
         gameObject.SetActive(false);
-        transform.SetSiblingIndex(transform.parent.childCount - 1);
         PlayerManager.Instance.ScoreUpdate(scorePoint);
-
 
         StopCoroutine(coroutine_Attack);
         StopCoroutine(coroutine_MovePatter_A);
