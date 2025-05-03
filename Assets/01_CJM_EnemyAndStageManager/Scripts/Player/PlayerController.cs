@@ -85,30 +85,24 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        if (bulletPool.PoolCount() <= 0)
-        {
-            Debug.Log("풀 오브젝트 모두 소진!");
-            return;
-        }
-
-        GameObject bullet = bulletPool.BulletOut().gameObject;
+        PooledObject bullet = bulletPool.BulletOut();
         if (bullet == null) return;
         
         // Todo: 플레이어 등급에 따른 총알 타입 구분, 머지 후 활성화 합시다
         if(player.grade == UpgradeType.Grade04)
         {
-            bullet.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type2;
+            bullet.bulletType = PooledObject.BulletType.Type2;
         }
         else
         {
-            bullet.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type1;
+            bullet.bulletType = PooledObject.BulletType.Type1;
         }
 
         bullet.transform.position = muzzPoint.position;
         bullet.transform.forward = muzzPoint.forward;
         bullet.GetComponent<Rigidbody>().velocity = player.shotSpeed * bullet.transform.forward;
 
-        bullet.SetActive(true);
+        bullet.gameObject.SetActive(true);
     }
 
 }
