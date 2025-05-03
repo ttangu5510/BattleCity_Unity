@@ -14,9 +14,7 @@ public class UIManager02 : MonoBehaviour
     [SerializeField] private Image[] enemyIcons;
     [SerializeField] private Sprite fullSprite;
     [SerializeField] private Sprite emptySprite;
-
-    PlayerManager pm;
-
+    public GameObject gameOverUI;
 
     //[TEST-ONLY]
     //[SerializeField] private bool useMockPlayerLife = true; //UI 테스트용
@@ -25,7 +23,7 @@ public class UIManager02 : MonoBehaviour
     //[SerializeField] private int mockScore = 9999;
     // 테스트 완료
 
-
+    PlayerManager pm;
     private int currentIndex = 0;
 
 
@@ -36,6 +34,8 @@ public class UIManager02 : MonoBehaviour
 
         else
             Destroy(gameObject);
+
+        gameOverUI.SetActive(false);
     }
 
     private void Start()
@@ -136,6 +136,18 @@ public class UIManager02 : MonoBehaviour
             {
                 icon.CrossFadeAlpha(1f, 0f, false);
             }
+        }
+    }
+
+    public void GameOverUIPlay()
+    {
+        if(gameOverUI.activeSelf==true)
+        {
+            gameOverUI.SetActive(false);
+        }
+        else
+        {
+            gameOverUI.SetActive(true);
         }
     }
 }

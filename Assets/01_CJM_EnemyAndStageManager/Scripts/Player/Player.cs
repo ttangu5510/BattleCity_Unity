@@ -20,9 +20,13 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     [Header("Setting Field")]
     [SerializeField] private Transform groupRender;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private GameObject explosionFBX;
 
-    private PlayerManager pm; 
+    private PlayerManager pm;
+    private StageManager sm;
 
+    /*private MoveType ontileMove;
+    public MoveType moveType { get { return ontileMove; } set { ontileMove = value; } }*/
     public MoveType moveType { get; set; }
 
     // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
@@ -49,18 +53,18 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     // 스테이지마다 플레이어 오브젝트가 활성화 될 때, 플레이어 데이터를 동기화 시킴
     // 스테이지 진행 중에는 현재 객체가 정보를 담당. 스테이지 종료 시, PlayerManager에 현재 객체 정보 저장하는 구조
-    private void Awake()
+    private void Start()
     {
         // 씬 불러와지고 바로 시작할지, 스테이지 시작 이벤트 받고 시작할지 고민 중
         pm = PlayerManager.Instance;
-                
+        sm = StageManager.Instance;
+
         // 초기값 그대로
         DamagedCoolTime = pm.DamagedCoolTime;
         respawningTime = pm.RespawningTime;
-    }
 
-    private void Start()
-    {
+        //////
+
         // 등급 상태 테스트용.
         UpdateRender();
 
@@ -82,7 +86,6 @@ public class Player : MonoBehaviour, IDamagable, IMovable
             return;
         }
 
-        Debug.Log("플레이어 공격 판정");
         if (pm.Grade > 0)
         {
             pm.PlayerGradeUpdate(-1);
@@ -112,10 +115,19 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         // 라이프 감소
         pm.CalculateLife(-1);
 
+        // TODO: 펑 터지는 효과 실행 [도전과제]
+        // 플레이어 잠깐 비활성화?
+        GameObject explosion =  Instantiate(explosionFBX);
+        explosion.transform.position = playerController.transform.position;
+        groupRender.gameObject.SetActive(false);
+        playerController.gameObject.SetActive(false);
+
         // 라이프가 0 아래로 떨어지면 패배 조건 체크
         if (pm.Life <= 0)
         {
-            //GameManager.Instance.GameOver();
+            // TODO: For Test of TestScene
+            gameObject.SetActive(false);
+            sm.StageFail();
             return;
         }
         // 라이프가 남았으면 리스폰
@@ -128,6 +140,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     // 리스폰 => 초기 설정값으로 플레이어 초기화, 스폰 포인트로 위치 변경, 리스폰 효과 코루틴 실행
     public void Respawn()
     {
+        
 
         // 플레이어 초기값으로 재설정
         pm.PlayerInit();
@@ -146,9 +159,14 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
         // 반짝이는 셰이더();
         pm.PlayerStateUpdate(PlayerState.Respawning);
+        
         respawnPoint.PlayerFBX(); // 이펙트 실행
         yield return new WaitForSeconds(respawningTime);
         // 셰이더 초기화();
+
+        // 소환
+        groupRender.gameObject.SetActive(true);
+        playerController.gameObject.SetActive(true);
         //respawnPoint.StopFBX(); // 이펙트 자동 종료 가능하니 주석처리함. 삭제해도 되면 삭제
         pm.PlayerStateUpdate(PlayerState.General);
     }

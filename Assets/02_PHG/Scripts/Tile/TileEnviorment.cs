@@ -44,6 +44,7 @@ public class TileEnviorment : MonoBehaviour
         {
             IMovable movable = other.GetComponentInParent<IMovable>();
             ExitTile_EffectOff();
+            movable.moveType = MoveType.none;
             flag = false;
         }
     }

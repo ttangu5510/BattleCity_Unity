@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class Test_InputRecord : MonoBehaviour
 {
-    Coroutine InputRoutine;
     ScoreBoard scoreBoard;
     public TMP_Text inputText;
-    bool isInput = false;
     int rankNum;
     #region 순위별 텍스트
     public TMP_Text[] rank = new TMP_Text[10];
@@ -49,5 +47,9 @@ public class Test_InputRecord : MonoBehaviour
             GameManager.Instance.isInput = true;
         }
 
+    }
+    private void OnDisable()
+    {
+        rank[rankNum].color = Color.white;
     }
 }

@@ -7,6 +7,10 @@ using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 
+
+public enum InGameState { InGameRun, InGamePause }
+
+
 public class StageManager : MonoBehaviour
 {
     private static StageManager instance;
@@ -28,6 +32,12 @@ public class StageManager : MonoBehaviour
     [HideInInspector] public UnityEvent StageStartEvent;
     [HideInInspector] public UnityEvent StageCloseEvent;
 
+    private GameManager gm;
+
+    //private InGameState inGameState;
+
+    bool isStageClose;
+
     private void Awake()
     {
         // 싱글톤 인스턴스 생성
@@ -46,16 +56,16 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-
+        gm = GameManager.Instance;
     }
 
     public void StageClear()
     {
         // 클리어 UI 보여줌(점수 합산 장면)
         Debug.Log("스테이지 클리어");
-        
-        //GameManager.Instance.스테이지 클리어
 
+
+        gm.StageComplete();
         StageClose();
     }
 
@@ -64,17 +74,21 @@ public class StageManager : MonoBehaviour
         Debug.Log("스테이지 실패");
         // 이어서 진행할건지 여부 판단 후 안한다면 게임 오버 판정
 
+        gm.GameOver();
         StageClose();
     }
 
     public void StageStart(Scene scene, LoadSceneMode mode)
     {
-        // Todo
-        if (true /*씬 이름에 Stage가 들어간다면*/)
+        isStageClose = false;
+        if (scene.name.Contains("STAGE"))
         {
             // 스테이지 시작 이벤트 발생
             StageStartEvent?.Invoke();
             // 이거 리스너는 어디서 초기화할 지 고민 필요.
+         
+            // TODO : 이거 게임매니저에서 하는걸로 리펙토링 예정
+            //Time.timeScale = 1;
         }
     }
 
@@ -82,6 +96,10 @@ public class StageManager : MonoBehaviour
     {
         StageCloseEvent?.Invoke();
         StageCloseEvent.RemoveAllListeners();
+
+        isStageClose = true;
+        // TODO : 이거 게임매니저에서 하는걸로 리펙토링 예정
+        //Time.timeScale = 0;
         
         // TODO : 스테이지 닫을 때,
         // 스테이지 클리어 상태면 -> 다음 스테이지로
@@ -127,7 +145,8 @@ public class StageManager : MonoBehaviour
         // 승리조건 체크
         if (enemyLifeCount <= 0)
         {
-            StageClear();
+            if(!isStageClose)
+                StageClear();
         }
     }
 
@@ -142,6 +161,14 @@ public class StageManager : MonoBehaviour
         }
 
         return count;
+    }
+
+    public bool GetSpawnable()
+    {
+        if (activateEnemys.Count >= maxActiveEnemyCount)
+            return false;
+        else
+            return true;
     }
 
 }

@@ -14,9 +14,10 @@ public struct ScoreBoard
 
 public class GameManager : MonoBehaviour
 {
+
+    #region 싱글톤 설정, 필드
     private static GameManager instance;
     public static GameManager Instance
-    #region 싱글톤 설정
     {
         get
         {
@@ -32,29 +33,17 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         CreateGameManager();
-        lastStageNum = 2;
-        waitSec = new WaitForSeconds(2f);
-        stageSceneName = new Queue<string>();
-        // TODO: Test GameManager
+        lastStageNum = 3;
+        waitSec = new WaitForSecondsRealtime(2f);
         scores = new ScoreBoard[10];
-        // TODO :Test GameManager
-        for (int i = 1; i <= 2; i++)
-        {
-            stageSceneName.Enqueue($"JYL_STAGE {i}");
-        }
-        //TODO: 스테이지 만들고 추가
-        //for(int i = 2; i <= lastStageNum;i++)
-        //{
-        //    //stageSceneName.Enqueue($"STAGE {i}");
-
-        //}
         for (int i = 0; i < scores.Length; i++)
         {
             scores[i].name = "BattleCity";
-            scores[i].score = 500 * ((i+1) * (i+1));
+            scores[i].score = 500 * ((i + 1) * (i + 1));
         }
         SortScore();
         isInput = false;
+        isScored = false;
     }
     public GameManager CreateGameManager()
     {
@@ -69,21 +58,26 @@ public class GameManager : MonoBehaviour
         }
         return instance;
     }
-    #endregion
 
     // 싱글톤 필드
     private int lastStageNum;
     private Coroutine waitRoutine;
-    private YieldInstruction waitSec;
+    private WaitForSecondsRealtime waitSec;
     public ScoreBoard[] scores;
     public bool isInput;
-    // 씬 큐
-    private Queue<string> stageSceneName;
+    public bool isScored;
+    int stageIndex = 2;
+
+    #endregion
+
+
+
+
     // 싱글톤 함수
     public void StageComplete()
     {
         // 남은 스테이지가 없을 경우
-        if (stageSceneName.Count == 0)
+        if (stageIndex > lastStageNum)
         {
             GameComplete();
         }
@@ -94,32 +88,28 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator StageCompleteRoutine()
     {
-        // 씬 전환
-        // 1. 점수 합산 창 씬 -> 2. 로딩창 함수 -> 3. 다음 스테이지 씬
-        // 1. 점수 합산 창 씬 불러오기
-
-        // TODO : InputRecord Test
-        PlayerManager.Instance.ScoreUpdate(30000);
-        SceneManager.LoadSceneAsync("JYL_InputRecordScene");
-        while (!isInput)
+        yield return waitSec;
+        SceneManager.LoadSceneAsync("StageResultScene");
+        while (!isScored)
         {
             yield return waitSec;
         }
-        isInput = false;
-        SceneManager.LoadSceneAsync("JYL_StageResultScene");
+        isScored = false;
         // 1-1 로딩 결과 좀 보다가 넘어가기
-        yield return waitSec;
         // 2. 로딩창 자동 - 씬의 이름을 넣어야함(해결)
         // 3. 다음 스테이지 씬 불러오기
         // 기존 씬 기준으로 다음 씬 판단이 필요함
         // 씬 큐가 필요 -> stageSceneName
         // TODO: Test ChangeScene by GameManager
         //SceneManager.LoadSceneAsync(stageSceneName.Dequeue());
-        MySceneManager.Instance.ChangeScene(stageSceneName.Dequeue());
+        MySceneManager.Instance.ChangeScene($"STAGE {stageIndex}");
+        stageIndex++;
         // 플레이어 정보를 기준으로 다음 스테이지 씬에서 리스폰 포인트에 생성(씬 자체에 기능적으로 구현 되어 있음)
     }
+
     public void GameComplete()
     {
+        stageIndex = 2;
         StartCoroutine(GameCompleteRoutine());
     }
     IEnumerator GameCompleteRoutine()
@@ -130,52 +120,89 @@ public class GameManager : MonoBehaviour
         // 스테이지 큐 다시 채우기
 
         // 1. 점수 합산 창
-        SceneManager.LoadSceneAsync("JYL_StageResultScene");
         yield return waitSec;
+        SceneManager.LoadSceneAsync("StageResultScene");
+        while (!isScored)
+        {
+            yield return waitSec;
+        }
+        isScored = false;
         // 2. 게임 클리어 씬
-        SceneManager.LoadSceneAsync("JYL_GameClearScene");
+        SceneManager.LoadSceneAsync("GameClearScene");
+        yield return waitSec;
         yield return waitSec;
         // 3. 점수 입력 씬 (뉴레코드 일 때)
         // 이름과 점수를 게임매니저에 저장함
         // while로 이름 입력이 끝나거나, 카운트다운 코루틴이 끝났을 시 다음으로 진행
         if (PlayerManager.Instance.Score >= scores[9].score)
         {
-            InputNewScore();
+            SceneManager.LoadSceneAsync("InputRecordScene");
+            while (!isInput)
+            {
+                yield return waitSec;
+            }
+            isInput = false;
         }
-
+        // 4. 레코드 씬 탑10 나열
+        SceneManager.LoadSceneAsync("RecordScene");
+        yield return waitSec;
+        // 5. 타이틀 씬으로 복귀 및 초기화(알아서 됨)
+        PlayerManager.Instance.DataInit();
+        SceneManager.LoadSceneAsync("TitleScene");
     }
-
-    // 점수 합산 씬
-    // 필요 요소
-
-    // UI  각 적 모양마다 이미지 X 점수 = 합점수
-    // 각 적 모양마다 이미지= StageManager.Instance.GetSlayeeEnemyCountByGrade(EnemyGrade grade) == 적 등급(grade)을 한 스테이지에서 잡은 숫자(int)
-    // EnemyManager 싱글톤 스크립트 == 등급마다 점수, 아예 등급 X 점수 = 합점수 함수가 있음
-    // 몬스터 갯수만큼
-    // -----------
-    // 최종점수
-
-
 
     public void GameOver()
     {
+        stageIndex = 2;
+        StartCoroutine(GameOverRoutine());
+    }
+    IEnumerator GameOverRoutine()
+    {
         // 이름을 스트링으로 입력받기
         // 게임 오버 시 수행
-        // 게임 오버 UI -> 점수 합산 창 씬 -> 게임 오버 씬 -> 점수 씬(뉴레코드 일 때) -> 타이틀 씬
-        // 1. 게임 오버 UI
-        // 2. 점수 합산 창 씬
-        // 3. 게임 오버 씬
-        // 4. 점수 씬(뉴 레코드 일 때)
-        // 5. 타이틀 씬
-    }
+        // 게임 오버 UI -> 점수 합산 창 씬 -> 게임 오버 씬 -> 점수 씬(뉴레코드 일 때) -> 레코드 씬 -> 타이틀 씬
 
+        // 1. 게임 오버 UI
+        // 게임 오버 UI는 UIManager에서 실행시킨다.
+        //UIManager.GameOverUI.SetActive(true);
+        yield return waitSec;
+
+        // 2. 점수 합산 창 씬
+        // 게임 오버 UI는 종료한다
+        yield return waitSec;
+        //UIManager.GameOverUI.SetActive(false);
+        SceneManager.LoadSceneAsync("StageResultScene");
+        while (!isScored)
+        {
+            yield return waitSec;
+        }
+        isScored = false;
+
+        // 3. 게임 오버 씬
+        SceneManager.LoadSceneAsync("GameOverScene");
+        yield return waitSec;
+        yield return waitSec;
+
+        // 4. 점수 씬(뉴 레코드 일 때)
+        if (PlayerManager.Instance.Score >= scores[9].score)
+        {
+            SceneManager.LoadSceneAsync("InputRecordScene");
+            while (!isInput)
+            {
+                yield return waitSec;
+            }
+            isInput = false;
+        }
+        // 5. 레코드 씬
+        SceneManager.LoadSceneAsync("RecordScene");
+        yield return waitSec;
+        // 6. 타이틀 씬
+        PlayerManager.Instance.DataInit();
+        SceneManager.LoadSceneAsync("TitleScene");
+    }
 
     public void SortScore()
     {
         Array.Sort(scores, (scoreA, scoreB) => scoreB.score.CompareTo(scoreA.score));
-    }
-    public void InputNewScore()
-    {
-        SceneManager.LoadSceneAsync("JYL_InputRecordScene");
     }
 }
