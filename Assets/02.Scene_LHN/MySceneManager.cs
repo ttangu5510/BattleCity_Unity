@@ -11,7 +11,7 @@ public class MySceneManager : MonoBehaviour
 
     [SerializeField] Image fadeImage;
     [SerializeField] float fadeTime;
-    [SerializeField] TMP_Text loadingText;
+    [SerializeField] public TMP_Text loadingText;
     public static MySceneManager Instance
     {
         get
@@ -53,12 +53,12 @@ public class MySceneManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        
-        loadingText.gameObject.SetActive(true);
-        yield return null;
 
         AsyncOperation oper = SceneManager.LoadSceneAsync(sceneName);
-        Thread.Sleep(2000);
+        loadingText.text = $"{sceneName}";
+        loadingText.gameObject.SetActive(true);
+        yield return null;
+        Thread.Sleep(1000);
         loadingText.gameObject.SetActive(false);
 
         timer = 0;
