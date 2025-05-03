@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private EnemyGrade grade;
     [HideInInspector] public EnemyGrade Grade { get { return grade; } }
     [Header("상태")]
-    [SerializeField] private EnemyState state;
+    [SerializeField] public EnemyState state;
     [SerializeField] private GameObject target;
 
     [Header("스펙 (확인용)")]
@@ -96,6 +96,10 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
                 break;
             case EnemyState.ChasingTarget:
+
+                break;
+
+            case EnemyState.Stop:
 
                 break;
         }
@@ -202,6 +206,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         {
             float r = Random.Range(shotCycleRandomSeed_min, shotCycleRandomSeed_max);
             yield return new WaitForSeconds(r);
+            if (state == EnemyState.Stop) yield return new WaitUntil(() => state != EnemyState.Stop);
             Attack();
         }
     }
@@ -263,6 +268,6 @@ public enum EnemyGrade
 
 public enum EnemyState
 {
-    General, ChasingPlayaer, ChasingTarget
+    General, ChasingPlayaer, ChasingTarget, Stop
 }
 
