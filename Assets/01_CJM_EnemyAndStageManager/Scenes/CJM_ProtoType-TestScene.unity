@@ -3968,6 +3968,14 @@ PrefabInstance:
       propertyPath: moveSpeed_N
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
+      propertyPath: shotCycleRandomSeed_max_N
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
+      propertyPath: shotCycleRandomSeed_min_N
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2878476232528589979, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.969604

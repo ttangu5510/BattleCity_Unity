@@ -71,6 +71,8 @@ public class StageManager : MonoBehaviour
 
     public void StageFail()
     {
+        if (isStageClose) return;
+        
         Debug.Log("스테이지 실패");
         // 이어서 진행할건지 여부 판단 후 안한다면 게임 오버 판정
 
