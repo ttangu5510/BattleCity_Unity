@@ -35,13 +35,7 @@ public class GameManager : MonoBehaviour
         CreateGameManager();
         lastStageNum = 3;
         waitSec = new WaitForSeconds(2f);
-        stageSceneName = new Queue<string>();
         scores = new ScoreBoard[10];
-        for (int i = 2; i <= lastStageNum; i++)
-        {
-            stageSceneName.Enqueue($"STAGE {i}");
-
-        }
         for (int i = 0; i < scores.Length; i++)
         {
             scores[i].name = "BattleCity";
@@ -72,10 +66,8 @@ public class GameManager : MonoBehaviour
     public ScoreBoard[] scores;
     public bool isInput;
     public bool isScored;
-    
+    int stageIndex = 2;
 
-    // 씬 큐
-    private Queue<string> stageSceneName;
     #endregion
 
 
@@ -85,7 +77,7 @@ public class GameManager : MonoBehaviour
     public void StageComplete()
     {
         // 남은 스테이지가 없을 경우
-        if (stageSceneName.Count == 0)
+        if (stageIndex > lastStageNum)
         {
             GameComplete();
         }
@@ -110,12 +102,14 @@ public class GameManager : MonoBehaviour
         // 씬 큐가 필요 -> stageSceneName
         // TODO: Test ChangeScene by GameManager
         //SceneManager.LoadSceneAsync(stageSceneName.Dequeue());
-        MySceneManager.Instance.ChangeScene(stageSceneName.Dequeue());
+        MySceneManager.Instance.ChangeScene($"STAGE {stageIndex}");
+        stageIndex++;
         // 플레이어 정보를 기준으로 다음 스테이지 씬에서 리스폰 포인트에 생성(씬 자체에 기능적으로 구현 되어 있음)
     }
 
     public void GameComplete()
     {
+        stageIndex = 2;
         StartCoroutine(GameCompleteRoutine());
     }
     IEnumerator GameCompleteRoutine()
@@ -143,22 +137,23 @@ public class GameManager : MonoBehaviour
         if (PlayerManager.Instance.Score >= scores[9].score)
         {
             SceneManager.LoadSceneAsync("InputRecordScene");
+            while (!isInput)
+            {
+                yield return waitSec;
+            }
+            isInput = false;
         }
-        while (!isInput)
-        {
-            yield return waitSec;
-        }
-        isInput = false;
-
         // 4. 레코드 씬 탑10 나열
         SceneManager.LoadSceneAsync("RecordScene");
         yield return waitSec;
         // 5. 타이틀 씬으로 복귀 및 초기화(알아서 됨)
-        MySceneManager.Instance.ChangeScene("TitleScene");
+        PlayerManager.Instance.DataInit();
+        SceneManager.LoadSceneAsync("TitleScene");
     }
 
     public void GameOver()
     {
+        stageIndex = 2;
         StartCoroutine(GameOverRoutine());
     }
     IEnumerator GameOverRoutine()
@@ -192,18 +187,18 @@ public class GameManager : MonoBehaviour
         if (PlayerManager.Instance.Score >= scores[9].score)
         {
             SceneManager.LoadSceneAsync("InputRecordScene");
+            while (!isInput)
+            {
+                yield return waitSec;
+            }
+            isInput = false;
         }
-        while (!isInput)
-        {
-            yield return waitSec;
-        }
-        isInput = false;
-
         // 5. 레코드 씬
         SceneManager.LoadSceneAsync("RecordScene");
         yield return waitSec;
         // 6. 타이틀 씬
-        MySceneManager.Instance.ChangeScene("TitleScene");
+        PlayerManager.Instance.DataInit();
+        SceneManager.LoadSceneAsync("TitleScene");
     }
 
     public void SortScore()
