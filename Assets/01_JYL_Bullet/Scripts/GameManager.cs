@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         CreateGameManager();
-        lastStageNum = 2;
+        lastStageNum = 3;
         waitSec = new WaitForSeconds(2f);
         stageSceneName = new Queue<string>();
         scores = new ScoreBoard[10];
