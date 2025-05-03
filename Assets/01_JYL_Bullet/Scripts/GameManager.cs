@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         CreateGameManager();
         lastStageNum = 3;
-        waitSec = new WaitForSeconds(2f);
+        waitSec = new WaitForSecondsRealtime(2f);
         scores = new ScoreBoard[10];
         for (int i = 0; i < scores.Length; i++)
         {
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     // ½Ì±ÛÅæ ÇÊµå
     private int lastStageNum;
     private Coroutine waitRoutine;
-    private YieldInstruction waitSec;
+    private WaitForSecondsRealtime waitSec;
     public ScoreBoard[] scores;
     public bool isInput;
     public bool isScored;
