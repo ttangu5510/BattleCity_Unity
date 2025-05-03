@@ -15,7 +15,7 @@ public class UIManager02 : MonoBehaviour
     [SerializeField] private Sprite fullSprite;
     [SerializeField] private Sprite emptySprite;
     public GameObject gameOverUI;
-    
+
     //[TEST-ONLY]
     //[SerializeField] private bool useMockPlayerLife = true; //UI 테스트용
     //[SerializeField] private int mockLife = 5; //UI 테스트용
@@ -23,7 +23,7 @@ public class UIManager02 : MonoBehaviour
     //[SerializeField] private int mockScore = 9999;
     // 테스트 완료
 
-
+    PlayerManager pm;
     private int currentIndex = 0;
 
 

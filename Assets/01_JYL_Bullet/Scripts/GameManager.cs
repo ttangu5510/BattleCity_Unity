@@ -173,7 +173,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator InputNewScore()
     {
-        if (PlayerData.Instance.score >= scores[9].score)
+        // PlayerData클래스 리팩토링 후 PlayerManager로 바뀌었습니다. 수정하겠습니다.
+        if (PlayerManager.Instance.Score >= scores[9].score)
         {
             SceneManager.LoadSceneAsync("InputRecordScene");
         }
