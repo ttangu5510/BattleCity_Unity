@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour, IDamagable, IMovable
 {
@@ -10,11 +10,13 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private EnemyState state;
     [SerializeField] private GameObject target;
 
-    [Header("스펙 (등급별 스펙 정보는 EnemyManager에서 일괄 수정)")]
+    [Header("스펙 (확인용)")]
     [SerializeField] private int hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float shotSpeed;
     [SerializeField] private int scorePoint;
+    [SerializeField] public float shotCycleRandomSeed_min;
+    [SerializeField] public float shotCycleRandomSeed_max;
     // Item itmePossession;  // 아이템 소유 정보 추가
 
     [Header("세팅")]
@@ -23,6 +25,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] Vector3 rayOffset;
     [SerializeField] float rayFarForwardDistance;
     [SerializeField] float rayForwardDistance;
+    [SerializeField] private BulletObjectPool bulletPool;
+
 
     private StageManager sm;
     private EnemyManager em;
@@ -35,6 +39,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
     private Vector3 rangeLevel;
 
+    Coroutine coroutine_Attack;
 
     // Todo 0430
     // 1. 적 이동 로직 (상태에 따른 이동 구현)
@@ -48,16 +53,20 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         em = EnemyManager.Instance;
         rb = transform.GetChild(0).GetComponent<Rigidbody>();
 
-        em.StatSetting(out hp, out moveSpeed, out shotSpeed, out scorePoint, grade);
+        em.StatSetting(out hp, out moveSpeed, out shotSpeed, out scorePoint, out shotCycleRandomSeed_min, out shotCycleRandomSeed_max, grade);
         state = EnemyState.General;
 
         sm.ActiveEnemyAdd(this);
 
         // 시작 방향
         dir = body.forward;
+
+        if (coroutine_Attack == null)
+            coroutine_Attack = StartCoroutine(AttackCycle());
     }
 
-    
+
+
 
 
     void Update()
@@ -101,7 +110,10 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         PlayerData.Instance.UpdateScore(scorePoint);
     }
 
-
+    private void OnDisable()
+    {
+        StopCoroutine(coroutine_Attack);
+    }
 
     #region 적 이동 관련 로직
     public void RandomDirSet()
@@ -225,8 +237,31 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     }
     #endregion
 
+    // 적 공격 로직
+    // 랜덤 공격 코루틴 구현 고고
+    public void Attack()
+    {
+        PooledObject bullet = bulletPool.BulletOut();
+        if (bullet == null) return;
 
+        bullet.bulletType = PooledObject.BulletType.Type1;
 
+        bullet.transform.position = muzzPoint.position;
+        bullet.transform.forward = muzzPoint.forward;
+        bullet.GetComponent<Rigidbody>().velocity = shotSpeed * bullet.transform.forward;
+
+        bullet.gameObject.SetActive(true);
+    }
+
+    public IEnumerator AttackCycle()
+    {
+        while (true)
+        {
+            float r = Random.Range(shotCycleRandomSeed_min, shotCycleRandomSeed_max);
+            yield return new WaitForSeconds(r);
+            Attack();
+        }
+    }
 
     // 바닥 타일 연관 함수
     public void MoveTypeUpdate()

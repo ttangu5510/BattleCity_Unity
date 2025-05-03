@@ -17,8 +17,6 @@ public class EnemyHandleTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
         {
-            Debug.Log("º® Ã³¸®");
-
             if (onTriggerObj == null) enemy.RandomDirSet();
 
             onTriggerObj = other.gameObject;

@@ -12,17 +12,23 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] public int hp_N;
     [SerializeField] public float moveSpeed_N;
     [SerializeField] public float shotSpeed_N;
+    [SerializeField] public float shotCycleRandomSeed_min_N;
+    [SerializeField] public float shotCycleRandomSeed_max_N;
 
     [Header("[Elite] Grade Setting")]
     [SerializeField] public int hp_E;
     [SerializeField] public float moveSpeed_E;
     [SerializeField] public float shotSpeed_E;
+    [SerializeField] public float shotCycleRandomSeed_min_E;
+    [SerializeField] public float shotCycleRandomSeed_max_E;
 
 
     [Header("[Boss] Grade Setting")]
     [SerializeField] public int hp_B;
     [SerializeField] public float moveSpeed_B;
     [SerializeField] public float shotSpeed_B;
+    [SerializeField] public float shotCycleRandomSeed_min_B;
+    [SerializeField] public float shotCycleRandomSeed_max_B;
 
 
     [Header("ScoreData by Grade")]
@@ -45,7 +51,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void StatSetting(out int hp, out float moveSpeed, out float shotSpeed, out int score, EnemyGrade grade)
+    public void StatSetting(out int hp, out float moveSpeed, out float shotSpeed, out int score, out float seed1, out float seed2, EnemyGrade grade)
     {
         switch (grade)
         {
@@ -54,24 +60,32 @@ public class EnemyManager : MonoBehaviour
                 moveSpeed = moveSpeed_N;
                 shotSpeed = shotSpeed_N;
                 score = score_Normal;
+                seed1 = shotCycleRandomSeed_min_N;
+                seed2 = shotCycleRandomSeed_max_N;
                 break;
             case EnemyGrade.elite:
                 hp = hp_E;
                 moveSpeed = moveSpeed_E;
                 shotSpeed = shotSpeed_E;
                 score = score_Elite;
+                seed1 = shotCycleRandomSeed_min_E;
+                seed2 = shotCycleRandomSeed_max_E;
                 break;
             case EnemyGrade.boss:
                 hp = hp_B;
                 moveSpeed = moveSpeed_B;
                 shotSpeed = shotSpeed_B;
                 score = score_Boss;
+                seed1 = shotCycleRandomSeed_min_B;
+                seed2 = shotCycleRandomSeed_max_B;
                 break;
             default:
                 hp = 0;
                 moveSpeed = 0;
                 shotSpeed = 0;
                 score = 0;
+                seed1 = 0;
+                seed2 = 1;
                 break;
         }
     }

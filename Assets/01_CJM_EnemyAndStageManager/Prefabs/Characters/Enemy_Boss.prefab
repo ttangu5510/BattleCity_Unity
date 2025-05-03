@@ -2311,11 +2311,14 @@ MonoBehaviour:
   moveSpeed: 0
   shotSpeed: 0
   scorePoint: 0
+  shotCycleRandomSeed_min: 0
+  shotCycleRandomSeed_max: 0
   muzzPoint: {fileID: 520324621147855868}
   body: {fileID: 2955157715720539740}
   rayOffset: {x: 0, y: 3, z: 0}
   rayFarForwardDistance: 10
   rayForwardDistance: 0.4
+  bulletPool: {fileID: 8450548440062074675}
 --- !u!1 &9062387706269083987
 GameObject:
   m_ObjectHideFlags: 0
