@@ -10,7 +10,6 @@ public class BushTrigger : MonoBehaviour
 
         if (other.transform.root.CompareTag("Player"))
         {
-            Debug.Log("플레이어 감지 (루트 확인)");
             foreach (Outline outline in other.transform.root.GetComponentsInChildren<Outline>())
             {
                 outline.enabled = true;

@@ -4869,7 +4869,7 @@ GameObject:
   - component: {fileID: 8817409840382927383}
   - component: {fileID: 840489932011186978}
   m_Layer: 0
-  m_Name: TrapTile (1)
+  m_Name: TrapTile (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4884,7 +4884,7 @@ Transform:
   m_GameObject: {fileID: 2751998957098528399}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 0.01, z: -8.5}
+  m_LocalPosition: {x: 1.5, y: 0.1, z: -2.5}
   m_LocalScale: {x: 0.3, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4970,9 +4970,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flag: 0
-  triggeredTrapPrefab: {fileID: 0}
+  triggeredTrapPrefab: {fileID: 8572021436731180921, guid: f832a636e5de4ab4f8ec87bf680fb44d, type: 3}
   explosionEffectPrefab: {fileID: 1437185546178868805, guid: 450b8dd0ee985334e81ac70f43e07e2a, type: 3}
-  pushForce: 150
+  pushForce: 10
 --- !u!65 &840489932011186978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4992,5 +4992,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 5.045542, z: 9.999999}
-  m_Center: {x: 0, y: 1.477229, z: 0}
+  m_Size: {x: 13.5, y: 6, z: 13.5}
+  m_Center: {x: 0, y: 2, z: 0}
