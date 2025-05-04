@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class BrickAction : MonoBehaviour
 {
@@ -14,13 +14,20 @@ public class BrickAction : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("BrokenBrick");
 
         Vector3 dir = (transform.position - point).normalized;
-        rb.AddForce(dir * 20, ForceMode.Impulse);
+        rb.AddForce(dir * 12, ForceMode.Impulse);
 
         // Y축 꺼짐 방지: 물리적은 반응하되 아래로 안 빠지게 하려면 옵션 선택 가능
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         StartCoroutine(SwitchToTriggerAfterDelay(0.2f));
-        Destroy(gameObject, 0.5f);
+        if (gameObject.transform.position.y < 1f)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject, 2f);
+        }
     }
 
     private IEnumerator SwitchToTriggerAfterDelay(float delay)
