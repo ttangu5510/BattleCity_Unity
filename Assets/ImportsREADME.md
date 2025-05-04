@@ -16,6 +16,7 @@
 LowPoly Particle (FX 효과모음) https://assetstore.unity.com/packages/vfx/particles/polygon-particle-fx-low-poly-3d-art-by-synty-168372
 Quick Outline (아웃라인 셰이더) https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488?locale=ko-KR&gad_source=1&gad_campaignid=22451834332&gbraid=0AAAAADdkVOse1a4w1_dL9S_H0He53wy0r&gclid=Cj0KCQjwt8zABhDKARIsAHXuD7ZFSD4CWJCxSVwmi45EEPb4G9pcLUM79xs3ir9Lbxpd8pWVGCKQLjYaAopaEALw_wcB&gclsrc=aw.ds
 3D Cartoon Road Warning Sign (경고판) https://assetstore.unity.com/packages/3d/props/exterior/3d-cartoon-road-warning-signs-260531
+Stylize Water Texture (물 텍스쳐) https://assetstore.unity.com/packages/2d/textures-materials/water/stylize-water-texture-153577
 ---
 
 ## 에셋 추가 후보

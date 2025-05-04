@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class UIManager02 : MonoBehaviour
 {
-    public static UIManager02 Instance { get; private set; }
+    private static UIManager02 instance;
+    public static UIManager02 Instance { get { return instance; } }
 
     public bool isPaused; // 게임의 Pause 상태를 관리
     public Canvas gameCanvas; // UI 요소가 포함된 Canvas
@@ -14,6 +15,7 @@ public class UIManager02 : MonoBehaviour
     [SerializeField] private Image[] enemyIcons;
     [SerializeField] private Sprite fullSprite;
     [SerializeField] private Sprite emptySprite;
+
     public GameObject gameOverUI;
 
     //[TEST-ONLY]
@@ -24,16 +26,21 @@ public class UIManager02 : MonoBehaviour
     // 테스트 완료
 
     PlayerManager pm;
+    StageManager sm;
     private int currentIndex = 0;
 
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
+        {
             Destroy(gameObject);
+        }
 
         gameOverUI.SetActive(false);
     }
@@ -41,13 +48,17 @@ public class UIManager02 : MonoBehaviour
     private void Start()
     {
         pm = PlayerManager.Instance;
+        sm = StageManager.Instance;
+
+        //ShowPlayerLife();
+        //ShowCurrentScore();
     }
 
     private void Update()
     {
         HandlePauseToggle();
-        ShowPlayerLife();
-        ShowCurrentScore();
+        //ShowPlayerLife();
+        //ShowCurrentScore();
         //ShowHighScore(); //하이스코어 부분은 어디에 저장될건지 이야기해봐야할듯.
 
         //[TEST-ONLY]
@@ -57,11 +68,11 @@ public class UIManager02 : MonoBehaviour
         //    OnEnemyKill();
         //}
     }
-    public void ShowEnemyLife(int count)
+    public void ShowEnemyLife()
     {
         for (int i = 0; i < enemyIcons.Length; i++)
         {
-            enemyIcons[i].sprite = (i < count) ? fullSprite : emptySprite;
+            enemyIcons[i].sprite = (i < sm.EnemyLifeCount) ? fullSprite : emptySprite;
         }
         currentIndex = 0;
     }
@@ -90,15 +101,15 @@ public class UIManager02 : MonoBehaviour
 
         //[TEST-ONLY]
         //int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
-        scoreText.text = $"SCORE : {pm.Score}";
+        scoreText.text = $"SCORE\n{pm.Score}";
     }
-   //public void ShowHighScore()
-   //{
-   //    if (scoreText == null) return;
-   //
-   //    int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
-   //    scoreText.text = $"SCORE : {scoreToShow}";
-   //}
+    //public void ShowHighScore()
+    //{
+    //    if (scoreText == null) return;
+    //
+    //    int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
+    //    scoreText.text = $"SCORE : {scoreToShow}";
+    //}
 
 
     public void OnEnemyKill()
@@ -141,7 +152,7 @@ public class UIManager02 : MonoBehaviour
 
     public void GameOverUIPlay()
     {
-        if(gameOverUI.activeSelf==true)
+        if (gameOverUI.activeSelf == true)
         {
             gameOverUI.SetActive(false);
         }

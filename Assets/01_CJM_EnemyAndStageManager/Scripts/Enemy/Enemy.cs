@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private EnemyGrade grade;
     [HideInInspector] public EnemyGrade Grade { get { return grade; } }
     [Header("상태")]
-    [SerializeField] private EnemyState state;
+    [SerializeField] public EnemyState state;
     [SerializeField] private GameObject target;
 
     [Header("스펙 (확인용)")]
@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
     [SerializeField] public GameObject onTriggerObj;
 
+    [SerializeField] private GameObject item;
     // Todo 0430
     // 1. 적 이동 로직 (상태에 따른 이동 구현)
     // 2. 범위(콜라이더) 판정으로 상태 업데이트
@@ -97,6 +98,10 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
             case EnemyState.ChasingTarget:
 
                 break;
+
+            case EnemyState.Stop:
+
+                break;
         }
     }
 
@@ -114,6 +119,12 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         // 재사용해야한다면 스폰포인트로 위치,각도 조정 후 비활성화
         gameObject.SetActive(false);
         PlayerManager.Instance.ScoreUpdate(scorePoint);
+
+        if (item != null)
+        {
+            Instantiate(item);
+            item.transform.position = body.transform.position;
+        }
 
         StopCoroutine(coroutine_Attack);
         StopCoroutine(coroutine_MovePatter_A);
@@ -201,6 +212,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         {
             float r = Random.Range(shotCycleRandomSeed_min, shotCycleRandomSeed_max);
             yield return new WaitForSeconds(r);
+            if (state == EnemyState.Stop) yield return new WaitUntil(() => state != EnemyState.Stop);
             Attack();
         }
     }
@@ -262,6 +274,6 @@ public enum EnemyGrade
 
 public enum EnemyState
 {
-    General, ChasingPlayaer, ChasingTarget
+    General, ChasingPlayaer, ChasingTarget, Stop
 }
 
