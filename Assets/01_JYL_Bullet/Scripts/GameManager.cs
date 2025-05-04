@@ -164,13 +164,12 @@ public class GameManager : MonoBehaviour
 
         // 1. 게임 오버 UI
         // 게임 오버 UI는 UIManager에서 실행시킨다.
-        //UIManager.GameOverUI.SetActive(true);
+        UIManager02.Instance.GameOverUIPlay();
         yield return waitSec;
 
         // 2. 점수 합산 창 씬
         // 게임 오버 UI는 종료한다
         yield return waitSec;
-        //UIManager.GameOverUI.SetActive(false);
         SceneManager.LoadSceneAsync("StageResultScene");
         while (!isScored)
         {
