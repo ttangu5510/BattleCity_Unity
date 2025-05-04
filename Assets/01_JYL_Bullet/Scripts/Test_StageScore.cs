@@ -35,6 +35,10 @@ public class Test_StageScore : MonoBehaviour
     }
     IEnumerator ScoreAnimation()
     {
+        for(int i = 0;i<3;i++)
+        {
+            enemyScore[i].text = "";
+        }
         for (int i = 0; i < n_Enemy_Slayed; i++)
         {
             enemyScore[0].text = $"[Normal Enemy] X {i + 1} = {EnemyManager.Instance.score_Normal * (i + 1)}";

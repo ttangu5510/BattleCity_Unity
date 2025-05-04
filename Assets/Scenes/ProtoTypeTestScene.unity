@@ -2328,6 +2328,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInput: 0
   isScored: 0
+  isChoice: 0
+  isContinue: 0
+  stageIndex: 2
 --- !u!4 &423475410
 Transform:
   m_ObjectHideFlags: 0
@@ -4119,6 +4122,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
+      propertyPath: score_Boss
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
       propertyPath: moveSpeed_B
       value: 5
       objectReference: {fileID: 0}
@@ -4129,6 +4136,14 @@ PrefabInstance:
     - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
       propertyPath: moveSpeed_N
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
+      propertyPath: score_Elite
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
+      propertyPath: score_Normal
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2878476232528589979, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9364,7 +9379,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 100
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 14
   m_Depth: -1
   m_CullingMask:
