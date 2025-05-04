@@ -30,11 +30,13 @@ public class UIManager02 : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-
+        }
         else
+        {
             Destroy(gameObject);
-
+        }
         gameOverUI.SetActive(false);
     }
 
@@ -92,13 +94,13 @@ public class UIManager02 : MonoBehaviour
         //int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
         scoreText.text = $"SCORE : {pm.Score}";
     }
-   //public void ShowHighScore()
-   //{
-   //    if (scoreText == null) return;
-   //
-   //    int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
-   //    scoreText.text = $"SCORE : {scoreToShow}";
-   //}
+    //public void ShowHighScore()
+    //{
+    //    if (scoreText == null) return;
+    //
+    //    int scoreToShow = (useMockScore || player == null) ? mockScore : player.score;
+    //    scoreText.text = $"SCORE : {scoreToShow}";
+    //}
 
 
     public void OnEnemyKill()
@@ -141,7 +143,7 @@ public class UIManager02 : MonoBehaviour
 
     public void GameOverUIPlay()
     {
-        if(gameOverUI.activeSelf==true)
+        if (gameOverUI.activeSelf == true)
         {
             gameOverUI.SetActive(false);
         }
