@@ -4,7 +4,6 @@ public class TrapTile : TileEnviorment
 {
     [SerializeField] private GameObject triggeredTrapPrefab;
     [SerializeField] private GameObject explosionEffectPrefab;
-    [SerializeField] private float pushForce = 45f;
 
     private bool hasTriggered = false;
 
