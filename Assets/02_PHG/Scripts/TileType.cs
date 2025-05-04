@@ -6,9 +6,6 @@ public enum TileType
 {
     Ice,
     Sand,
-    Bush,
     Magma,
-    Warter,
-    BreakableWall
 }
   

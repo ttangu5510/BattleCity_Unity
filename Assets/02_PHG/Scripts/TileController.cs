@@ -47,7 +47,7 @@ public class TileController : MonoBehaviour
                     break;
 
                 case TileType.Sand:
-                    if (rb != null ); 
+                    if (rb != null )
                     {
                         Debug.Log("모래진 입 이속저하~~");
                         rb.velocity *= slowMultiplier;

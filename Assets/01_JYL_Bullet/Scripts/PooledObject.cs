@@ -11,6 +11,9 @@ public class PooledObject : MonoBehaviour
     private Vector3 rangeLevel2;
     [SerializeField] private LayerMask Breakable;
     private Vector3 goPosition;
+
+    private bool isFirstInit = true;
+
     private void Awake()
     {
         rigid ??= GetComponent<Rigidbody>();
@@ -22,20 +25,23 @@ public class PooledObject : MonoBehaviour
     {
         if (Mathf.Abs(transform.forward.x) > Mathf.Abs(transform.forward.z))
         {
-            rangeLevel1 = new Vector3(0.5f, 5, 5);
-            rangeLevel2 = new Vector3(1.5f, 5, 5);
+            rangeLevel1 = new Vector3(0.1f, 2f, 0.8f);
+            rangeLevel2 = new Vector3(0.5f, 2f, 0.8f);
 
         }
         else
         {
-            rangeLevel1 = new Vector3(5, 5, 0.5f);
-            rangeLevel2 = new Vector3(5, 5, 1.5f);
+            rangeLevel1 = new Vector3(0.8f, 2f, 0.1f);
+            rangeLevel2 = new Vector3(0.8f, 2f, 0.5f);
 
         }
     }
-    private void Update()
+    
+    // 포탄 프리펩에서 RigidBody Constrains에서 각도 회전 잠궈두었습니다.
+    // 기능 중복으로 삭제해도 되지만, 혹시 모르니 주석처리 해둡니다. (곡사포를 추가로 만들 수도 있으니 남겨둘게요)
+    /*private void Update()
     {
-        if (rigid.velocity.magnitude > 3)
+        if (rigid.velocity.magnitude > 1)
         {
             //포탄이 곡선을 그리며 날아간다
             transform.forward = rigid.velocity;
@@ -43,7 +49,7 @@ public class PooledObject : MonoBehaviour
             // transform.forward = 벡터
             // 벡터 방향을 바라보도록(forward 앞이 그쪽을 향하도록) 회전함
         }
-    }
+    }*/
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -56,7 +62,7 @@ public class PooledObject : MonoBehaviour
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Brick"))
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel1, Quaternion.identity, LayerMask.GetMask("Brick"));
+                Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * 0.5f, rangeLevel1, Quaternion.identity, LayerMask.GetMask("Brick"));
                 foreach (var collide in colliders)
                 {
                     BrickAction ba = collide.gameObject.GetComponent<BrickAction>();
@@ -69,7 +75,7 @@ public class PooledObject : MonoBehaviour
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Brick") || collision.gameObject.layer == LayerMask.NameToLayer("SolidBlock"))
             {
-                Collider[] colliders = Physics.OverlapBox(transform.position, rangeLevel2, Quaternion.identity, Breakable);
+                Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * 0.5f, rangeLevel2, Quaternion.identity, Breakable);
                 foreach (var collide in colliders)
                 {
                     BrickAction ba = collide.gameObject.GetComponent<BrickAction>();
@@ -79,26 +85,36 @@ public class PooledObject : MonoBehaviour
             }
         }
 
-        IDamagable damagable = collision.gameObject.transform.root.GetComponent<IDamagable>();
+        IDamagable damagable = collision.gameObject.transform.GetComponent<IDamagable>();
         if (damagable != null)
         {
             damagable.TakeDamage();
         }
 
-        returnPool.ReturnToPool(this);
+        gameObject.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        if (isFirstInit)
+        {
+            isFirstInit = false;
+        }
+        else returnPool.ReturnToPool(this);
+    }
+
     private void OnDrawGizmos()
     {
         if (bulletType == BulletType.Type1)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(transform.position + transform.forward, rangeLevel1);
+            Gizmos.DrawCube(transform.position + transform.forward * 0.5f, rangeLevel1*2);
 
         }
         else
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(transform.position + transform.forward, rangeLevel2);
+            Gizmos.DrawCube(transform.position + transform.forward * 0.5f, rangeLevel2*2);
         }
 
     }

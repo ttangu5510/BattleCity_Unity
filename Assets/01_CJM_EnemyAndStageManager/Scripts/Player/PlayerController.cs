@@ -7,8 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform muzzPoint;
     [SerializeField] Transform body;
+    public Transform Body { get { return body; } }
 
     private Player player;
+    private PlayerManager pm;
     private Rigidbody rb;
     public Vector3 dir;
 
@@ -16,42 +18,21 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        player = transform.parent.GetComponent<Player>();
+        player = GetComponentInParent<Player>();
         rb = GetComponent<Rigidbody>();
 
         // Bullet Pool 생성자로 bulletPool 필드에 할당. 
     }
 
+    private void Start()
+    {
+        pm = PlayerManager.Instance;
+    }
+
     private void Update()
     {
         // 죽고 리스폰되기 전까지 이동 입력 멈춤
-        if (player.state == PlayerState.Respawning) return;
-
-        // 입력을 4방향 단위벡터로 연산 후 dir에 저장
-        #region dir(입력)
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
-
-        Vector3 inputDir = new Vector3(x, 0, z).normalized;
-
-        // x방향 입력이 더 많으면 횡 입력 판정 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
-        if (inputDir == Vector3.zero)
-        {
-            dir = Vector3.zero;
-        }
-        else
-        {
-            if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
-            {
-                dir = (transform.right * inputDir.x).normalized;
-            }
-            else
-            {
-                dir = (transform.forward * inputDir.z).normalized;
-            }
-            Rotate();
-        }
-        #endregion
+        if (pm.State == PlayerState.Respawning) return;
 
         // 이동하길 원하는 각도로 회전
 
@@ -60,6 +41,45 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
+
+        // 얼음장판이면 dir 고정
+        
+
+        // 입력을 4방향 단위벡터로 연산 후 dir에 저장
+        #region dir(입력)
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+
+        Vector3 inputDir = new Vector3(x, 0, z).normalized;
+        Vector3 rotDir;
+
+        // 가장 큰 입력 방향으로 축 정함 (조이스틱 기준, 키보드는 현재 방향 유지하는 쪽으로)
+        if (inputDir == Vector3.zero)
+        {
+            rotDir = Vector3.zero;
+        }
+        else
+        {
+            if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.z))
+            {
+                rotDir = (transform.right * inputDir.x).normalized;
+            }
+            else
+            {
+                rotDir = (transform.forward * inputDir.z).normalized;
+            }
+            Rotate(rotDir);
+        }
+
+        // 아이스 타일 위에 있으면 dir 설정 안함, 이동방향은 고정
+        if (player.moveType == MoveType.iceSlide)
+        {
+            if (rb.velocity.magnitude < 0.1f) dir = rotDir;
+            else return;
+        }
+        else dir = rotDir;
+
+        #endregion
     }
 
     private void FixedUpdate()
@@ -72,41 +92,36 @@ public class PlayerController : MonoBehaviour
     {
         if (dir != Vector3.zero)
         {
-            rb.velocity = dir * player.moveSpeed;
+            rb.velocity = dir * pm.MoveSpeed;
         }
         else rb.velocity = Vector3.zero;
     }
 
-    private void Rotate()
+    private void Rotate(Vector3 dir)
     {
         body.LookAt(transform.position + dir);
     }
 
-    private void Attack()
+    public void Attack()
     {
-        if (bulletPool.PoolCount() <= 0)
-        {
-            Debug.Log("풀 오브젝트 모두 소진!");
-            return;
-        }
-
-        GameObject gameObject = bulletPool.BulletOut().gameObject;
+        PooledObject bullet = bulletPool.BulletOut();
+        if (bullet == null) return;
         
         // Todo: 플레이어 등급에 따른 총알 타입 구분, 머지 후 활성화 합시다
-        if(player.grade == UpgradeType.Grade04)
+        if(pm.Grade == UpgradeType.Grade04)
         {
-            gameObject.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type2;
+            bullet.bulletType = PooledObject.BulletType.Type2;
         }
         else
         {
-            gameObject.GetComponent<PooledObject>().bulletType = PooledObject.BulletType.Type1;
+            bullet.bulletType = PooledObject.BulletType.Type1;
         }
 
-        gameObject.transform.position = muzzPoint.position;
-        gameObject.transform.forward = muzzPoint.forward;
-        gameObject.GetComponent<Rigidbody>().velocity = player.shotSpeed * gameObject.transform.forward;
+        bullet.transform.position = muzzPoint.position;
+        bullet.transform.forward = muzzPoint.forward;
+        bullet.GetComponent<Rigidbody>().velocity = pm.ShotSpeed * bullet.transform.forward;
 
-        gameObject.SetActive(true);
+        bullet.gameObject.SetActive(true);
     }
 
 }
