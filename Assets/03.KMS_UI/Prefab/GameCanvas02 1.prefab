@@ -1957,6 +1957,14 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2274854876436278180, guid: 94752b289394cd843937b98c24e5438a, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274854876436278180, guid: 94752b289394cd843937b98c24e5438a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5133428347296046155, guid: 94752b289394cd843937b98c24e5438a, type: 3}
       propertyPath: m_Name
       value: scoreText

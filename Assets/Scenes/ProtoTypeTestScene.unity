@@ -703,6 +703,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7709277937085681064, guid: 5c296b6f92190c141962b395f62595b8, type: 3}
+      propertyPath: m_fontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709277937085681064, guid: 5c296b6f92190c141962b395f62595b8, type: 3}
+      propertyPath: m_margin.z
+      value: 99.667465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709277937085681064, guid: 5c296b6f92190c141962b395f62595b8, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709277937085681064, guid: 5c296b6f92190c141962b395f62595b8, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709277937085681064, guid: 5c296b6f92190c141962b395f62595b8, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8728096296284915073, guid: 5c296b6f92190c141962b395f62595b8, type: 3}
       propertyPath: m_Name
       value: GameCanvas02 1
