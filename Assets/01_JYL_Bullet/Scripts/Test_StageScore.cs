@@ -12,10 +12,10 @@ public class Test_StageScore : MonoBehaviour
     int e_Enemy_ScoreSum;
     int b_Enemy_ScoreSum;
     Coroutine ScoreRoutine;
-    YieldInstruction waitSec;
+    WaitForSecondsRealtime waitSec;
     private void Awake()
     {
-        waitSec = new WaitForSeconds(0.5f);
+        waitSec = new WaitForSecondsRealtime(0.5f);
         GetScore();
     }
     private void Start()
@@ -35,6 +35,10 @@ public class Test_StageScore : MonoBehaviour
     }
     IEnumerator ScoreAnimation()
     {
+        for(int i = 0;i<3;i++)
+        {
+            enemyScore[i].text = "";
+        }
         for (int i = 0; i < n_Enemy_Slayed; i++)
         {
             enemyScore[0].text = $"[Normal Enemy] X {i + 1} = {EnemyManager.Instance.score_Normal * (i + 1)}";
@@ -50,6 +54,10 @@ public class Test_StageScore : MonoBehaviour
             enemyScore[2].text = $"[Boss Enemy] X {i + 1} = {EnemyManager.Instance.score_Boss * (i + 1)}";
             yield return waitSec;
         }
+        yield return waitSec;
+        yield return waitSec;
+        yield return waitSec;
+        yield return waitSec;
         enemyScore[3].text = $"Total = {n_Enemy_ScoreSum + e_Enemy_ScoreSum + b_Enemy_ScoreSum}";
         GameManager.Instance.isScored = true;
     }
