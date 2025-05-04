@@ -32,6 +32,7 @@ public class BrickAction : MonoBehaviour
 
     private IEnumerator SwitchToTriggerAfterDelay(float delay)
     {
+        gameObject.transform.parent = null;
         yield return new WaitForSeconds(delay);
 
         // 추가 대기: 충분히 떨어질 때까지 대기

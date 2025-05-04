@@ -154,7 +154,9 @@ public class ItemManager02 : MonoBehaviour
         }
     }
 
-    private void StartFortification(float duration)
+    // TODO : Test Fortify BaseBlock
+    //private void StartFortification(float duration)
+    public void StartFortification(float duration)
     {
         StartCoroutine(FortificationCoroutine(duration));
     }
