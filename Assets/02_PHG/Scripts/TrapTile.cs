@@ -4,7 +4,6 @@ public class TrapTile : TileEnviorment
 {
     [SerializeField] private GameObject triggeredTrapPrefab;
     [SerializeField] private GameObject explosionEffectPrefab;
-    [SerializeField] private float pushForce = 45f;
 
     private bool hasTriggered = false;
 
@@ -29,33 +28,7 @@ public class TrapTile : TileEnviorment
         }
 
         // 3. 이동 방향 기준 반대로 밀기
-        if (rb != null)
-        {
-            Vector3 moveDir = rb.velocity;
-            moveDir.y = 0f; // 위로 튀는 원인 제거
-            moveDir = moveDir.normalized;
 
-            if (moveDir == Vector3.zero)
-            {
-                moveDir = rb.transform.forward;
-                moveDir.y = 0f;
-                moveDir = moveDir.normalized;
-            }
-
-            Vector3 pushDir = -moveDir;
-
-            if (PlayerManager.Instance.State == PlayerState.Respawning)
-            {
-                rb.velocity = Vector3.zero;
-            }
-            else
-            {
-                rb.velocity = Vector3.zero;
-                rb.AddForce(pushDir * pushForce, ForceMode.VelocityChange);
-
-            }
-
-        }
         // 4. 벽 타일 생성
         if (triggeredTrapPrefab != null)
         {

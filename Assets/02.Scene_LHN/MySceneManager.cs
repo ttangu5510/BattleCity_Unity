@@ -14,8 +14,18 @@ public class MySceneManager : MonoBehaviour
     [SerializeField] public TMP_Text loadingText;
     public static MySceneManager Instance
     {
+        /*get
+        {
+            return instance;
+        }*/
         get
         {
+            // Lazy Initialization
+            if (instance == null)
+            {
+                GameObject go = new GameObject("SceneLoadingManager");
+                instance = go.AddComponent<MySceneManager>();
+            }
             return instance;
         }
     }
@@ -43,6 +53,7 @@ public class MySceneManager : MonoBehaviour
     Coroutine loadingRoutine;
     IEnumerator LoadingRoutine(string sceneName)
     {
+        Debug.Log(sceneName);
         float timer = 0;
         while (timer<fadeTime)
         {
@@ -55,6 +66,7 @@ public class MySceneManager : MonoBehaviour
         }
 
         AsyncOperation oper = SceneManager.LoadSceneAsync(sceneName);
+        Debug.Log($"LoadingText : {loadingText}");
         loadingText.text = $"{sceneName}";
         loadingText.gameObject.SetActive(true);
         yield return null;

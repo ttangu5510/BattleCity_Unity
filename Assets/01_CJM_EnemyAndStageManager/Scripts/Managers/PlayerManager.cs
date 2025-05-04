@@ -43,6 +43,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float shotSpeed;
     public float ShotSpeed { get { return shotSpeed; } }
 
+    private UIManager um;
+
     private void Awake()
     {
         // 싱글톤 인스턴스 생성
@@ -58,6 +60,12 @@ public class PlayerManager : MonoBehaviour
 
         // 테스트용 초기화
         DataInit();
+    }
+
+    private void Start()
+    {
+        um = UIManager.Instance;
+        Debug.Log($"UM설정 : {um}");
     }
 
     // 플레이어 사망 후 초기 설정으로 리스폰 용도
@@ -87,6 +95,9 @@ public class PlayerManager : MonoBehaviour
     public void CalculateLife(int life)
     {
         this.life += life;
+
+        // 플레이어 라이프 계산 시, UI에 반영
+        um.inGameUI_Instance.ShowPlayerLife();
     }
 
     public void SpeedControl(float moveSpeed, float shotSpeed)
@@ -108,6 +119,7 @@ public class PlayerManager : MonoBehaviour
     public void ScoreUpdate(int score)
     {
         this.score += score;
+        um.inGameUI_Instance.ShowCurrentScore();
     }
 
     
