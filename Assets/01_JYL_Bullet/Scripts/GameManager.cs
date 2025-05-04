@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
         // 씬 큐가 필요 -> stageSceneName
         // TODO: Test ChangeScene by GameManager
         //SceneManager.LoadSceneAsync(stageSceneName.Dequeue());
+        
         MySceneManager.Instance.ChangeScene($"STAGE {stageIndex}");
         stageIndex++;
         // 플레이어 정보를 기준으로 다음 스테이지 씬에서 리스폰 포인트에 생성(씬 자체에 기능적으로 구현 되어 있음)
@@ -174,7 +175,7 @@ public class GameManager : MonoBehaviour
 
         // 1. 게임 오버 UI
         // 게임 오버 UI는 UIManager에서 실행시킨다.
-        UIManager02.Instance.GameOverUIPlay();
+        UIManager.Instance.GameOverUIPlay();
         yield return waitSec;
 
         // 2. 점수 합산 창 씬
