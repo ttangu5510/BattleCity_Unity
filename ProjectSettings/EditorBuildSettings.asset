@@ -18,20 +18,20 @@ EditorBuildSettings:
     path: Assets/02.Scene_LHN/TestScene.unity
     guid: 7bfd351a5d55617429939a5c9eb52547
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/RecordScene.unity
+    guid: 03b959d6c101af448babe3cc63627a95
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/GameClearScene.unity
-    guid: b9480aebd69f4bb419914416285887ab
+    path: Assets/Scenes/GameClearScene.unity
+    guid: 2e6b57d2e6756ee46b778c8aea455904
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/InputRecordScene.unity
+    path: Assets/Scenes/InputRecordScene.unity
     guid: c6b338cd347db2643a8ecdb48c1eb5e7
-  - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/RecordScene.unity
-    guid: 7e2471822dcc3504aa9ec4584c79d857
   - enabled: 1
     path: Assets/Scenes/STAGE 2.unity
     guid: fa3db124283a4ca489d3141250e3cd01
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 0948363bda47b414bbe0a7399c4a1337
   - enabled: 1
     path: Assets/Scenes/STAGE 3.unity
     guid: ce5e394d64c1a6442ad443974ca54c08
@@ -39,9 +39,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ProtoTypeTestScene.unity
     guid: 64f417110d2a6244c9ee8b9fbb5d8657
   - enabled: 1
-    path: Assets/01_JYL_Bullet/Scenes/StageResultScene.unity
+    path: Assets/Scenes/StageResultScene.unity
     guid: 20f5fa580470290458ac04643df9e0fd
-  - enabled: 1
-    path: Assets/03.Scene_LHN/GameOverScene.unity
-    guid: 8d8aee553d7876741b6bedb2115e14f2
   m_configObjects: {}
