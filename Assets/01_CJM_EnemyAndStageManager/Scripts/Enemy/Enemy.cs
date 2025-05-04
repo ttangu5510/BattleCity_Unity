@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
     [SerializeField] public GameObject onTriggerObj;
 
-    //[SerializeField] private Item item;
+    [SerializeField] private GameObject item;
     // Todo 0430
     // 1. 적 이동 로직 (상태에 따른 이동 구현)
     // 2. 범위(콜라이더) 판정으로 상태 업데이트
@@ -119,6 +119,12 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         // 재사용해야한다면 스폰포인트로 위치,각도 조정 후 비활성화
         gameObject.SetActive(false);
         PlayerManager.Instance.ScoreUpdate(scorePoint);
+
+        if (item != null)
+        {
+            Instantiate(item);
+            item.transform.position = body.transform.position;
+        }
 
         StopCoroutine(coroutine_Attack);
         StopCoroutine(coroutine_MovePatter_A);
