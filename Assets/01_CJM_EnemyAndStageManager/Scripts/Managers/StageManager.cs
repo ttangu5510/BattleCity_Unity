@@ -28,6 +28,8 @@ public class StageManager : MonoBehaviour
     [Tooltip("Scores earned on the current stage")]
     [SerializeField] private int sumedScore;
 
+    public int EnemyLifeCount { get { return enemyLifeCount; } }
+
 
     [HideInInspector] public UnityEvent StageStartEvent;
     [HideInInspector] public UnityEvent StageCloseEvent;
@@ -83,10 +85,13 @@ public class StageManager : MonoBehaviour
     public void StageStart(Scene scene, LoadSceneMode mode)
     {
         isStageClose = false;
+
+        StageStartEvent?.Invoke();
+
         if (scene.name.Contains("STAGE"))
         {
             // 스테이지 시작 이벤트 발생
-            StageStartEvent?.Invoke();
+            
             // 이거 리스너는 어디서 초기화할 지 고민 필요.
          
             // TODO : 이거 게임매니저에서 하는걸로 리펙토링 예정
@@ -139,7 +144,6 @@ public class StageManager : MonoBehaviour
     // Enemy Dead() 시 호출
     public void ActiveEnemyListRemove(Enemy instance)
     {
-        
         activateEnemys.Remove(instance);    // 활성화된 적 리스트에서 삭제
         slayedEnemys.Add(instance);         // 죽은 적 리스트에 추가
 
@@ -150,6 +154,9 @@ public class StageManager : MonoBehaviour
             if(!isStageClose)
                 StageClear();
         }
+
+        // UI에 처치한 몬스터 반영하기
+        UIManager02.Instance.ShowEnemyLife();
     }
 
     public int GetSlayeeEnemyCountByGrade(EnemyGrade grade)
