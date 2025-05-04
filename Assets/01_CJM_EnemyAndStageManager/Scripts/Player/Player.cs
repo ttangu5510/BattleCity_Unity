@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using KMS;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     private PlayerManager pm;
     private StageManager sm;
+    private UIManager um;
 
 
     /*private MoveType ontileMove;
@@ -60,13 +62,14 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         // 씬 불러와지고 바로 시작할지, 스테이지 시작 이벤트 받고 시작할지 고민 중
         pm = PlayerManager.Instance;
         sm = StageManager.Instance;
+        um = UIManager.Instance;
 
         // 초기값 그대로
         DamagedCoolTime = pm.DamagedCoolTime;
         respawningTime = pm.RespawningTime;
 
         // 동기화된 초기 설정 UI에 반영
-        UIManager02.Instance.ShowPlayerLife();
+        um.inGameUI_Instance.ShowPlayerLife();
 
 
         // 등급 상태 테스트용.

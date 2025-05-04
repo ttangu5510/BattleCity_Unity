@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/02.Scene_LHN/TestScene.unity
     guid: 7bfd351a5d55617429939a5c9eb52547
-  - enabled: 1
+  - enabled: 0
     path: Assets/03.Scene_LHN/RecordScene.unity
     guid: 03b959d6c101af448babe3cc63627a95
   - enabled: 1
@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/STAGE 3.unity
     guid: ce5e394d64c1a6442ad443974ca54c08
   - enabled: 1
-    path: Assets/Scenes/ProtoTypeTestScene.unity
+    path: Assets/Scenes/ProtoType_STAGE.unity
     guid: 64f417110d2a6244c9ee8b9fbb5d8657
   - enabled: 1
     path: Assets/Scenes/StageResultScene.unity
