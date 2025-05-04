@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3a02c0ecca29ef847952730541e2f3bb, type: 2}
+  - {fileID: 2100000, guid: db96e04f47f6c2a44bc6bb90f93602ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   waveForce: 0
   waveForceHeight: 0
   waveForceSpeed: 0.8
-  autoAddFloat: 1
+  autoAddFloat: 0
   wave: 1
   waveScale: 0
 --- !u!65 &8753660031009480872
