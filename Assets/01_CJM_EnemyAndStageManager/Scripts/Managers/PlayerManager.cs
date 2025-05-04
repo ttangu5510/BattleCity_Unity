@@ -87,6 +87,9 @@ public class PlayerManager : MonoBehaviour
     public void CalculateLife(int life)
     {
         this.life += life;
+
+        // 플레이어 라이프 계산 시, UI에 반영
+        UIManager02.Instance.ShowPlayerLife();
     }
 
     public void SpeedControl(float moveSpeed, float shotSpeed)
@@ -108,6 +111,7 @@ public class PlayerManager : MonoBehaviour
     public void ScoreUpdate(int score)
     {
         this.score += score;
+        UIManager02.Instance.ShowCurrentScore();
     }
 
     

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour, IDamagable, IMovable
 {
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     private PlayerManager pm;
     private StageManager sm;
+
 
     /*private MoveType ontileMove;
     public MoveType moveType { get { return ontileMove; } set { ontileMove = value; } }*/
@@ -63,7 +65,9 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         DamagedCoolTime = pm.DamagedCoolTime;
         respawningTime = pm.RespawningTime;
 
-        //////
+        // 동기화된 초기 설정 UI에 반영
+        UIManager02.Instance.ShowPlayerLife();
+
 
         // 등급 상태 테스트용.
         UpdateRender();

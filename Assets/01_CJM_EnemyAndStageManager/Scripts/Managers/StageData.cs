@@ -22,6 +22,7 @@ public class StageData : MonoBehaviour
         // 스테이지 매니저에 현재 데이터 동기화
         sm.SynchronizeStageData(maxActiveEnemyCount, enemyLifeCount);
 
-        // Todo : 민수님 사용하실 수 있게 처치 해야할 몬스터 수 정보 전달하기
+        // UI에 처치 해야할 몬스터 수 정보 전달하기
+        UIManager02.Instance.ShowEnemyLife();
     }
 }

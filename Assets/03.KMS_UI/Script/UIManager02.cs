@@ -26,6 +26,7 @@ public class UIManager02 : MonoBehaviour
     // 테스트 완료
 
     PlayerManager pm;
+    StageManager sm;
     private int currentIndex = 0;
 
 
@@ -34,6 +35,7 @@ public class UIManager02 : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -46,15 +48,17 @@ public class UIManager02 : MonoBehaviour
     private void Start()
     {
         pm = PlayerManager.Instance;
-        ShowPlayerLife();
-        ShowCurrentScore();
+        sm = StageManager.Instance;
+
+        //ShowPlayerLife();
+        //ShowCurrentScore();
     }
 
     private void Update()
     {
         HandlePauseToggle();
-        ShowPlayerLife();
-        ShowCurrentScore();
+        //ShowPlayerLife();
+        //ShowCurrentScore();
         //ShowHighScore(); //하이스코어 부분은 어디에 저장될건지 이야기해봐야할듯.
 
         //[TEST-ONLY]
@@ -64,11 +68,11 @@ public class UIManager02 : MonoBehaviour
         //    OnEnemyKill();
         //}
     }
-    public void ShowEnemyLife(int count)
+    public void ShowEnemyLife()
     {
         for (int i = 0; i < enemyIcons.Length; i++)
         {
-            enemyIcons[i].sprite = (i < count) ? fullSprite : emptySprite;
+            enemyIcons[i].sprite = (i < sm.EnemyLifeCount) ? fullSprite : emptySprite;
         }
         currentIndex = 0;
     }
