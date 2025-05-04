@@ -70,6 +70,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
         // 동기화된 초기 설정 UI에 반영
         um.inGameUI_Instance.ShowPlayerLife();
+        um.inGameUI_Instance.ShowCurrentScore();
 
 
         // 등급 상태 테스트용.

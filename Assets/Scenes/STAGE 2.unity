@@ -3045,7 +3045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4735326711882194992, guid: 64fbef0e852b251449696696b0cd5af3, type: 3}
       propertyPath: enemyLifeCount
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4735326711882194992, guid: 64fbef0e852b251449696696b0cd5af3, type: 3}
       propertyPath: maxActiveEnemyCount
