@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] float rayFarForwardDistance;
     [SerializeField] float rayForwardDistance;
     [SerializeField] private BulletObjectPool bulletPool;
+    [SerializeField] private GameObject explosionFBX;
+
 
 
     private StageManager sm;
@@ -115,6 +117,10 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     public void Dead()
     {
         sm.ActiveEnemyListRemove(this);
+
+        // 피격 이펙트 instantiate
+        GameObject explosion = Instantiate(explosionFBX);
+        explosion.transform.position = body.transform.position;
 
         // 재사용해야한다면 스폰포인트로 위치,각도 조정 후 비활성화
         gameObject.SetActive(false);

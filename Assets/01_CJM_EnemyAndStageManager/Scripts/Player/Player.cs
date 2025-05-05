@@ -70,6 +70,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
         // 동기화된 초기 설정 UI에 반영
         um.inGameUI_Instance.ShowPlayerLife();
+        um.inGameUI_Instance.ShowCurrentScore();
 
 
         // 등급 상태 테스트용.
@@ -130,7 +131,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         playerController.gameObject.SetActive(false);
 
         // 라이프가 0 아래로 떨어지면 패배 조건 체크
-        if (pm.Life <= 0)
+        if (pm.Life < 0)
         {
             // TODO: For Test of TestScene
             gameObject.SetActive(false);
