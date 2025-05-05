@@ -39,7 +39,8 @@ public class StageManager : MonoBehaviour
 
     //private InGameState inGameState;
 
-    bool isStageClose;
+    bool isStageOpen;
+
 
     private void Awake()
     {
@@ -61,6 +62,11 @@ public class StageManager : MonoBehaviour
     {
         gm = GameManager.Instance;
         um = UIManager.Instance;
+
+        if (isStageOpen)
+        {
+            gm.state = GameState.InGameRun;
+        }
     }
 
     public void StageClear()
@@ -75,29 +81,24 @@ public class StageManager : MonoBehaviour
 
     public void StageFail()
     {
-        if (isStageClose) return;
+        if (!isStageOpen) return;
         
         Debug.Log("스테이지 실패");
         // 이어서 진행할건지 여부 판단 후 안한다면 게임 오버 판정
 
         gm.GameOver();
+        um.GameOverUIPlay();
         StageClose();
     }
 
     public void StageStart(Scene scene, LoadSceneMode mode)
     {
-        isStageClose = false;
-
-        StageStartEvent?.Invoke();
-
         if (scene.name.Contains("STAGE"))
         {
-            // 스테이지 시작 이벤트 발생
+            isStageOpen = true;
+            StageStartEvent?.Invoke();
             
-            // 이거 리스너는 어디서 초기화할 지 고민 필요.
-         
-            // TODO : 이거 게임매니저에서 하는걸로 리펙토링 예정
-            //Time.timeScale = 1;
+            if (gm != null) gm.state = GameState.InGameRun;
         }
     }
 
@@ -106,9 +107,7 @@ public class StageManager : MonoBehaviour
         StageCloseEvent?.Invoke();
         StageCloseEvent.RemoveAllListeners();
 
-        isStageClose = true;
-        // TODO : 이거 게임매니저에서 하는걸로 리펙토링 예정
-        //Time.timeScale = 0;
+        isStageOpen = false;
         
         // TODO : 스테이지 닫을 때,
         // 스테이지 클리어 상태면 -> 다음 스테이지로
@@ -153,7 +152,7 @@ public class StageManager : MonoBehaviour
         // 승리조건 체크
         if (enemyLifeCount <= 0)
         {
-            if(!isStageClose)
+            if(isStageOpen)
                 StageClear();
         }
 

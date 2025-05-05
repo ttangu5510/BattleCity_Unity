@@ -12,13 +12,10 @@ public class GameOverBtn : MonoBehaviour
 
     public void ContinueGame()
     {
-        GameManager.Instance.isChoice = true;
-        GameManager.Instance.isContinue = true;
+        GameManager.Instance.state = GameState.Continue;
     }
     public void QuitGame()
     {
-        GameManager.Instance.isChoice = true;
-
-
+        GameManager.Instance.state = GameState.InGameOver;
     }
 }

@@ -2061,8 +2061,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainImageSet
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5611916572447425201, guid: 94752b289394cd843937b98c24e5438a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6951576107771134906, guid: 94752b289394cd843937b98c24e5438a, type: 3}
