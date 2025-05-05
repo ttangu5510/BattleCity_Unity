@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Test_InputRecord : MonoBehaviour
+public class InputRecord : MonoBehaviour
 {
     ScoreBoard scoreBoard;
     public TMP_Text inputText;
