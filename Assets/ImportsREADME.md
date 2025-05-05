@@ -18,6 +18,7 @@
 - 3D Cartoon Road Warning Sign (경고판) https://assetstore.unity.com/packages/3d/props/exterior/3d-cartoon-road-warning-signs-260531
 - Stylize Water Texture (물 텍스쳐) https://assetstore.unity.com/packages/2d/textures-materials/water/stylize-water-texture-153577
 - Low Poly Buildings 로우폴리 건물 (건물) https://assetstore.unity.com/packages/3d/environments/simplepoly-buildings-low-poly-assets-62637
+- Simple Gems and Items Ultimate Animated Customizable Pack (3d 로우폴리 회전 아이템) https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764
 ---
 
 ## 에셋 추가 후보
