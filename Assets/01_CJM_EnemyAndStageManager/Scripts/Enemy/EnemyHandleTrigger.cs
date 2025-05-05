@@ -13,12 +13,10 @@ public class EnemyHandleTrigger : MonoBehaviour
         enemy = transform.GetComponentInParent<Enemy>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
         {
-            if (enemy.onTriggerObj == null) enemy.RandomDirSet();
-
             enemy.onTriggerObj = other.gameObject;
         }
     }

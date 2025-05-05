@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         CreateSingleTonGM();
 
-        lastStageNum = 3;
+        lastStageNum = 2;
         scores = new ScoreBoard[10];
         for (int i = 0; i < scores.Length; i++)
         {

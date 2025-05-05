@@ -8,6 +8,10 @@ public class EnemyManager : MonoBehaviour
     private static EnemyManager instance;
     public static EnemyManager Instance { get { return instance; } }
 
+    //[Header("Common Setting")]
+    [HideInInspector] public GameObject gameOverFlag;
+
+
     [Header("[Normal] Grade Setting")]
     [SerializeField] public int hp_N;
     [SerializeField] public float moveSpeed_N;

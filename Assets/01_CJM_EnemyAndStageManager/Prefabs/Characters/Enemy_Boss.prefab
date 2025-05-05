@@ -2304,7 +2304,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grade: 2
   state: 0
-  target: {fileID: 0}
   hp: 0
   moveSpeed: 0
   shotSpeed: 0
@@ -2318,8 +2317,10 @@ MonoBehaviour:
   rayForwardDistance: 0.4
   bulletPool: {fileID: 8450548440062074675}
   explosionFBX: {fileID: 1056904543853562, guid: 4cf45cdce36e66e4a93614abb5ae7821, type: 3}
-  seedMin_A: 3
-  seedMax_A: 5
+  dir: {x: 0, y: 0, z: 0}
+  seedMin_DirChangeCycle: 1
+  seedMax_DirChangeCycle: 3
+  Pattern_C_Weight: 40
   onTriggerObj: {fileID: 0}
   item: {fileID: 0}
 --- !u!1 &9062387706269083987
