@@ -10,7 +10,7 @@ public class IngameObjectAction : MonoBehaviour
         {
             Vector3 dir = transform.position - collision.transform.position;
             Destroy(gameObject, 3f);
-            gameObject.GetComponent<Rigidbody>().AddForce(dir * 10, ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody>().AddForce(dir * 15, ForceMode.Impulse);
 
         }
         if(collision.gameObject.tag =="Player"|| collision.gameObject.tag == "Enemy")

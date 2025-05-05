@@ -5,7 +5,7 @@ using UnityEngine;
 public class StageScore : MonoBehaviour
 {
     [SerializeField] TMP_Text[] enemyScore = new TMP_Text[6];
-    
+
     // 적 처치 수
     int n_Enemy_Slayed;
     int nf_Enemy_Slayed;
@@ -48,7 +48,7 @@ public class StageScore : MonoBehaviour
     IEnumerator ScoreAnimation()
     {
         // 텍스트들 초기화
-        for(int i = 0;i<enemyScore.Length;i++)
+        for (int i = 0; i < enemyScore.Length; i++)
         {
             enemyScore[i].text = "";
         }
@@ -80,7 +80,7 @@ public class StageScore : MonoBehaviour
             yield return waitSec;
         }
         yield return new WaitForSecondsRealtime(2f);
-        enemyScore[5].text = $"Total = {n_Enemy_ScoreSum + e_Enemy_ScoreSum + b_Enemy_ScoreSum}";
+        enemyScore[5].text = $"Total = {n_Enemy_ScoreSum + nf_Enemy_ScoreSum + ns_Enemy_ScoreSum + e_Enemy_ScoreSum + b_Enemy_ScoreSum}";
         GameManager.Instance.state = GameState.CaculateScore_Done;
     }
 }
