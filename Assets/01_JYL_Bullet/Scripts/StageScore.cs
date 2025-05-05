@@ -59,12 +59,12 @@ public class StageScore : MonoBehaviour
             enemyScore[0].text = $"[Normal Enemy] X {i + 1} = {EnemyManager.Instance.score_Normal * (i + 1)}";
             yield return waitSec;
         }
-        for (int i = 0; i < n_Enemy_Slayed; i++)
+        for (int i = 0; i < nf_Enemy_Slayed; i++)
         {
             enemyScore[1].text = $"[NormalF Enemy] X {i + 1} = {EnemyManager.Instance.score_Normal_Fast * (i + 1)}";
             yield return waitSec;
         }
-        for (int i = 0; i < n_Enemy_Slayed; i++)
+        for (int i = 0; i < ns_Enemy_Slayed; i++)
         {
             enemyScore[2].text = $"[NormalS Enemy] X {i + 1} = {EnemyManager.Instance.score_Normal_Strong * (i + 1)}";
             yield return waitSec;

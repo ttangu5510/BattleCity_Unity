@@ -22,7 +22,8 @@ public class InputRecord : MonoBehaviour
                 break;
             }
         }
-        
+        // 플레이어 점수가 100점
+        // 1등 1000만 10등 2점
         GameManager.Instance.scores[9] = scoreBoard;
         GameManager.Instance.SortScore();
         for (int i = 0; i < GameManager.Instance.scores.Length; i++)
@@ -48,7 +49,6 @@ public class InputRecord : MonoBehaviour
             // 엔터키 입력 받으면 인풋 상태 종료.
             GameManager.Instance.state = GameState.InputComplete;
         }
-
     }
     private void OnDisable()
     {
