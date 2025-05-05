@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamagable, IMovable
@@ -154,7 +153,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
         int R = Random.Range(0, 3);
         rotDir = directions[R];
-        
+
         if (moveType == MoveType.iceSlide)
         {
             if (rb.velocity.magnitude < 0.1f) dir = rotDir;
@@ -275,7 +274,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
 public enum EnemyGrade
 {
-    normal, elite, boss // 추가 가능
+    normal, normalFast, normalStrong, elite, boss // 추가 가능
 }
 
 public enum EnemyState
