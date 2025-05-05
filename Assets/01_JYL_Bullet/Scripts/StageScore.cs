@@ -59,7 +59,7 @@ public class Test_StageScore : MonoBehaviour
         yield return waitSec;
         yield return waitSec;
         enemyScore[3].text = $"Total = {n_Enemy_ScoreSum + e_Enemy_ScoreSum + b_Enemy_ScoreSum}";
-        GameManager.Instance.isScored = true;
+        GameManager.Instance.state = GameState.CaculateScore_Done;
     }
 }
 //

@@ -44,7 +44,9 @@ public class Test_InputRecord : MonoBehaviour
         if (Input.GetKey(KeyCode.Return))
         {
             GameManager.Instance.scores[rankNum].name = inputText.text;
-            GameManager.Instance.isInput = true;
+
+            // 엔터키 입력 받으면 인풋 상태 종료.
+            GameManager.Instance.state = GameState.InputComplete;
         }
 
     }

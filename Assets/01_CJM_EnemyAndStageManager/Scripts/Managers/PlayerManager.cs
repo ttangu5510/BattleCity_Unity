@@ -44,6 +44,7 @@ public class PlayerManager : MonoBehaviour
     public float ShotSpeed { get { return shotSpeed; } }
 
     private UIManager um;
+    private GameManager gm;
 
     private void Awake()
     {
@@ -65,7 +66,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         um = UIManager.Instance;
-        Debug.Log($"UM설정 : {um}");
+        gm = GameManager.Instance;
     }
 
     // 플레이어 사망 후 초기 설정으로 리스폰 용도
@@ -94,6 +95,9 @@ public class PlayerManager : MonoBehaviour
 
     public void CalculateLife(int life)
     {
+        // 스테이지 클리어 시, 죽어도 목숨에 반영 안함
+        if (gm.state != GameState.InGameRun) return;
+
         this.life += life;
 
         // 플레이어 라이프 계산 시, UI에 반영

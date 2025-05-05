@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Player player;
     private PlayerManager pm;
+    private GameManager gm;
     private Rigidbody rb;
     public Vector3 dir;
 
@@ -27,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         pm = PlayerManager.Instance;
+        gm = GameManager.Instance;
     }
 
     private void Update()
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 얼음장판이면 dir 고정
-        
+
 
         // 입력을 4방향 단위벡터로 연산 후 dir에 저장
         #region dir(입력)
@@ -99,6 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector3 dir)
     {
+        if (gm.state == GameState.InGamePause) return;
         body.LookAt(transform.position + dir);
     }
 
@@ -106,9 +106,9 @@ public class PlayerController : MonoBehaviour
     {
         PooledObject bullet = bulletPool.BulletOut();
         if (bullet == null) return;
-        
+
         // Todo: 플레이어 등급에 따른 총알 타입 구분, 머지 후 활성화 합시다
-        if(pm.Grade == UpgradeType.Grade04)
+        if (pm.Grade == UpgradeType.Grade04)
         {
             bullet.bulletType = PooledObject.BulletType.Type2;
         }
