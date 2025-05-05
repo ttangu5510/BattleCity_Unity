@@ -9,6 +9,7 @@ public class MySceneManager : MonoBehaviour
     //sceneChangeUI_Prefab_PlayerDead; ==> 빨간색 페이드아웃 등등
 
     [SerializeField] private List<GameObject> fadeTransUI_Prefab;
+    [SerializeField] private int index;
     private FadeTransition fadeTransUI_Instance;
 
     private static MySceneManager instance;
@@ -35,7 +36,7 @@ public class MySceneManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // 일단 기본 전환효과로 설정해두고 FadeTransitionSelect()으로 그때그때마다 효과 바꿔주기
-            FadeTransitionSelect(0);
+            FadeTransitionSelect(index);
         }
         else
         {
