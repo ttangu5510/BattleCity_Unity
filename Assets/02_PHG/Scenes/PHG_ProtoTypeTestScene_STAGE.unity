@@ -8940,6 +8940,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
+      propertyPath: standByIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7475879142699254628, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
@@ -9834,11 +9838,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4735326711882194992, guid: 64fbef0e852b251449696696b0cd5af3, type: 3}
       propertyPath: enemyLifeCount
-      value: 4
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4735326711882194992, guid: 64fbef0e852b251449696696b0cd5af3, type: 3}
       propertyPath: maxActiveEnemyCount
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6325053148005216482, guid: 64fbef0e852b251449696696b0cd5af3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16612,6 +16616,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
+      propertyPath: standByIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: standByTimeToSpawn.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -19763,6 +19771,10 @@ PrefabInstance:
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: state
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
+      propertyPath: standByIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: standByTimeToSpawn.Array.size
@@ -25036,6 +25048,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
+      propertyPath: standByIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: standByTimeToSpawn.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -28059,6 +28075,10 @@ PrefabInstance:
     - target: {fileID: 1465201699911725185, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
+      propertyPath: standByIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7475879142699254628, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: m_Name
