@@ -10,6 +10,12 @@ public class GameOverUI : MonoBehaviour
     {
         endPos = movePosition.position;
     }
+
+    private void OnEnable()
+    {
+        //UIManager.Instance.gameOverUI = gameObject;
+    }
+
     private void Update()
     {
         gameOverUI.position = Vector2.MoveTowards(gameOverUI.position, endPos, moveSpeed * Time.deltaTime);

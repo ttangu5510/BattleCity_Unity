@@ -345,9 +345,11 @@ MonoBehaviour:
   rayFarForwardDistance: 10
   rayForwardDistance: 0.4
   bulletPool: {fileID: 2096056296923895494}
+  explosionFBX: {fileID: 1056904543853562, guid: 4cf45cdce36e66e4a93614abb5ae7821, type: 3}
   seedMin_A: 3
   seedMax_A: 5
   onTriggerObj: {fileID: 0}
+  item: {fileID: 0}
 --- !u!1 &4398809596173916687
 GameObject:
   m_ObjectHideFlags: 0

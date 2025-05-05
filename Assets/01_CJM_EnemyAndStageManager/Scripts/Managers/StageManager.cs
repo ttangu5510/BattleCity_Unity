@@ -35,6 +35,7 @@ public class StageManager : MonoBehaviour
     [HideInInspector] public UnityEvent StageCloseEvent;
 
     private GameManager gm;
+    private UIManager um;
 
     //private InGameState inGameState;
 
@@ -59,6 +60,7 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         gm = GameManager.Instance;
+        um = UIManager.Instance;
     }
 
     public void StageClear()
@@ -156,7 +158,7 @@ public class StageManager : MonoBehaviour
         }
 
         // UI에 처치한 몬스터 반영하기
-        UIManager02.Instance.ShowEnemyLife();
+        um.inGameUI_Instance.ShowEnemyLife();
     }
 
     public int GetSlayeeEnemyCountByGrade(EnemyGrade grade)
