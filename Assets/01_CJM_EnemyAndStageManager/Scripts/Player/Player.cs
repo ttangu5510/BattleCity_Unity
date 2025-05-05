@@ -120,18 +120,15 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     // 죽음 => 게임오버 판정
     public void Dead()
     {
-        // 라이프 감소
-        pm.CalculateLife(-1);
-
         // TODO: 펑 터지는 효과 실행 [도전과제]
         // 플레이어 잠깐 비활성화?
-        GameObject explosion =  Instantiate(explosionFBX);
+        GameObject explosion = Instantiate(explosionFBX);
         explosion.transform.position = playerController.transform.position;
         groupRender.gameObject.SetActive(false);
         playerController.gameObject.SetActive(false);
 
         // 라이프가 0 아래로 떨어지면 패배 조건 체크
-        if (pm.Life < 0)
+        if (pm.Life <= 0)
         {
             // TODO: For Test of TestScene
             gameObject.SetActive(false);
@@ -142,6 +139,8 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         else
         {
             Respawn();
+            // 라이프 감소
+            pm.CalculateLife(-1);
         }
     }
 
