@@ -197,8 +197,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(time_ClearScene);    // 게임 클리어 씬 진행 시간
             StartCoroutine(InputRankingBoardRoutine());
         }
-
-
     }
 
     public IEnumerator InputRankingBoardRoutine()

@@ -103,12 +103,12 @@ MonoBehaviour:
   tileMaterial2: 1
   splashPS: {fileID: 100000, guid: 0a5d284add1d6404796c829f19daace5, type: 3}
   ripplePS: {fileID: 100000, guid: 76243b047f615d745a30d2006aa693c9, type: 3}
-  currentMultiplier: 0.23
+  currentMultiplier: 0.1
   _randomizeCurrent: 10
-  maxCurrent: 7
+  maxCurrent: 0.1
   waveForce: 0
   waveForceHeight: 0
-  waveForceSpeed: 0.8
+  waveForceSpeed: 0.1
   autoAddFloat: 0
   wave: 1
   waveScale: 0
