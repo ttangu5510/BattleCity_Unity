@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpinningSign2 : MonoBehaviour
+public class SpinningSign : MonoBehaviour
 {
-   private float rotationSpeed = 50f;
+   private float rotationSpeed = 15f;
 
     private void Update()
     {

@@ -14,7 +14,7 @@ public class TrapTile : TileEnviorment
         ExecuteTrap(rb, damagable);
     }
 
-    private void ExecuteTrap(Rigidbody rb, IDamagable damagable)
+    public void ExecuteTrap(Rigidbody rb, IDamagable damagable)
     {
         hasTriggered = true;
 
