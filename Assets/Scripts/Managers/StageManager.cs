@@ -7,9 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 
-
 public enum InGameState { InGameRun, InGamePause }
-
 
 public class StageManager : MonoBehaviour
 {
@@ -22,12 +20,16 @@ public class StageManager : MonoBehaviour
 
     [SerializeField] private List<Enemy> slayedEnemys;
 
+    // 이거 리팩토링해야함. 일단 급해서 public으로 해두겠습니다.
+    public List<Enemy_BossTurret> bossTurrets;
+    public bool bossSlayed;
+
 
     [Header("Now Stage Info")]
     [Tooltip("Maximum count that can exist in map same time")]
     [SerializeField] private int maxActiveEnemyCount;   // 맵 상에 동시에 존재할 수 있는 최대 적 수
     [Tooltip("Count of lives of the enemy to clear")]
-    [SerializeField] private int enemyLifeCount;        // 남은 적의 목숨
+    public int enemyLifeCount;        // 남은 적의 목숨
     [Tooltip("Scores earned on the current stage")]
     [SerializeField] private int sumedScore;
 
@@ -89,9 +91,8 @@ public class StageManager : MonoBehaviour
         
         Debug.Log("스테이지 실패");
         // 이어서 진행할건지 여부 판단 후 안한다면 게임 오버 판정
-
-        gm.GameOver();
         um.GameOverUIPlay();
+        gm.GameOver();
         StageClose();
     }
 
@@ -101,8 +102,17 @@ public class StageManager : MonoBehaviour
         {
             isStageOpen = true;
             StageStartEvent?.Invoke();
+
+            // 임시, 리팩토링 필요
+            bossSlayed = true;
             
             if (gm != null) gm.state = GameState.InGameRun;
+        }
+
+        // 임시, 리팩토링 필요
+        if (scene.name.Contains("Boss"))
+        {
+            bossSlayed = false;
         }
     }
 
@@ -125,6 +135,7 @@ public class StageManager : MonoBehaviour
         spawners = new List<EnemySpawner>();
         activateEnemys = new List<Enemy>();
         slayedEnemys = new List<Enemy>();
+        bossTurrets = new List<Enemy_BossTurret>();
     }
 
     // 스테이지 씬 불러올 때, StageData에서 동기화
@@ -154,7 +165,7 @@ public class StageManager : MonoBehaviour
 
         enemyLifeCount -= 1;
         // 승리조건 체크
-        if (enemyLifeCount <= 0)
+        if (enemyLifeCount <= 0 && bossSlayed)
         {
             if(isStageOpen)
                 StageClear();

@@ -44,11 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e915b0cb24e60149a5c7bf89d03d91b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverFlag: {fileID: 0}
   hp_N: 1
   moveSpeed_N: 2
   shotSpeed_N: 10
   shotCycleRandomSeed_min_N: 5
   shotCycleRandomSeed_max_N: 2
+  hp_NF: 0
+  moveSpeed_NF: 0
+  shotSpeed_NF: 0
+  shotCycleRandomSeed_min_NF: 0
+  shotCycleRandomSeed_max_NF: 0
+  hp_NS: 0
+  moveSpeed_NS: 0
+  shotSpeed_NS: 0
+  shotCycleRandomSeed_min_NS: 0
+  shotCycleRandomSeed_max_NS: 0
   hp_E: 2
   moveSpeed_E: 3
   shotSpeed_E: 10
@@ -60,5 +71,7 @@ MonoBehaviour:
   shotCycleRandomSeed_min_B: 1
   shotCycleRandomSeed_max_B: 3
   score_Normal: 100
+  score_Normal_Fast: 0
+  score_Normal_Strong: 0
   score_Elite: 200
   score_Boss: 300

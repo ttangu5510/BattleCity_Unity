@@ -4170,7 +4170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
       propertyPath: moveSpeed_E
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1180701441020744563, guid: 8956e7550160fd54ab62d11333e06e85, type: 3}
       propertyPath: moveSpeed_N
@@ -5421,7 +5421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: state
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: standByTimeToSpawn.Array.size
@@ -8070,7 +8070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: state
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: d8d6fa87f418254468a225b5b08ffc14, type: 3}
       propertyPath: standByTimeToSpawn.Array.size
@@ -10842,6 +10842,17 @@ SceneRoots:
   - {fileID: 1617762027}
   - {fileID: 1277443950}
   - {fileID: 1073377914}
+  - {fileID: 589750803}
+  - {fileID: 128735902}
+  - {fileID: 1464968115}
+  - {fileID: 2018623010}
+  - {fileID: 1260254846}
+  - {fileID: 412681865}
+  - {fileID: 662803628}
+  - {fileID: 969017400342595901}
+  - {fileID: 3088556862261005598}
+  - {fileID: 3654161496117164176}
+  - {fileID: 3176637747725303876}
   - {fileID: 380059926}
   - {fileID: 713769031}
   - {fileID: 2114281322}
@@ -10850,14 +10861,3 @@ SceneRoots:
   - {fileID: 2404405117947507069}
   - {fileID: 8712144871461750642}
   - {fileID: 117299728}
-  - {fileID: 969017400342595901}
-  - {fileID: 3088556862261005598}
-  - {fileID: 3654161496117164176}
-  - {fileID: 3176637747725303876}
-  - {fileID: 589750803}
-  - {fileID: 128735902}
-  - {fileID: 1464968115}
-  - {fileID: 2018623010}
-  - {fileID: 1260254846}
-  - {fileID: 412681865}
-  - {fileID: 662803628}
