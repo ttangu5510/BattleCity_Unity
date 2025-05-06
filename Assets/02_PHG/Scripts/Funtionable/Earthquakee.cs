@@ -18,10 +18,11 @@ public class EarthquakeEffect : MonoBehaviour
         originalPos = transform.localPosition;
         seed = Random.Range(0f, 1000f);
 
-        if (quakeAudio != null && !quakeAudio.isPlaying)
+        if (quakeAudio != null)
         {
-            quakeAudio.loop = true;
-            quakeAudio.Play();
+            quakeAudio.Stop();         //  꼬인 상태 초기화
+            quakeAudio.loop = true;    //  먼저 loop 설정
+            quakeAudio.Play();         //  
         }
     }
 
