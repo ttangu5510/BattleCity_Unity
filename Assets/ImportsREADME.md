@@ -13,29 +13,29 @@
 ---
 
 ## 동기화 필요!
-LowPoly Particle (FX 효과모음) https://assetstore.unity.com/packages/vfx/particles/polygon-particle-fx-low-poly-3d-art-by-synty-168372
-Quick Outline (아웃라인 셰이더) https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488?locale=ko-KR&gad_source=1&gad_campaignid=22451834332&gbraid=0AAAAADdkVOse1a4w1_dL9S_H0He53wy0r&gclid=Cj0KCQjwt8zABhDKARIsAHXuD7ZFSD4CWJCxSVwmi45EEPb4G9pcLUM79xs3ir9Lbxpd8pWVGCKQLjYaAopaEALw_wcB&gclsrc=aw.ds
-3D Cartoon Road Warning Sign (경고판) https://assetstore.unity.com/packages/3d/props/exterior/3d-cartoon-road-warning-signs-260531
-Stylize Water Texture (물 텍스쳐) https://assetstore.unity.com/packages/2d/textures-materials/water/stylize-water-texture-153577
+- LowPoly Particle (FX 효과모음) https://assetstore.unity.com/packages/vfx/particles/polygon-particle-fx-low-poly-3d-art-by-synty-168372
+- Quick Outline (아웃라인 셰이더) https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488?locale=ko-KR&gad_source=1&gad_campaignid=22451834332&gbraid=0AAAAADdkVOse1a4w1_dL9S_H0He53wy0r&gclid=Cj0KCQjwt8zABhDKARIsAHXuD7ZFSD4CWJCxSVwmi45EEPb4G9pcLUM79xs3ir9Lbxpd8pWVGCKQLjYaAopaEALw_wcB&gclsrc=aw.ds
+- 3D Cartoon Road Warning Sign (경고판) https://assetstore.unity.com/packages/3d/props/exterior/3d-cartoon-road-warning-signs-260531
+- Stylize Water Texture (물 텍스쳐) https://assetstore.unity.com/packages/2d/textures-materials/water/stylize-water-texture-153577
+- Low Poly Buildings 로우폴리 건물 (건물) https://assetstore.unity.com/packages/3d/environments/simplepoly-buildings-low-poly-assets-62637
+- Simple Gems and Items Ultimate Animated Customizable Pack (3d 로우폴리 회전 아이템) https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764
+- LowPoly Item Icon 로우폴리 (아이콘, 아이템) https://assetstore.unity.com/packages/3d/props/lowpoly-collectible-items-and-icons-191199
 ---
 
 ## 에셋 추가 후보
 
-// 6. Low Poly Buildings 로우폴리 건물 (건물) https://assetstore.unity.com/packages/3d/environments/simplepoly-buildings-low-poly-assets-62637
+
 // 7. Simple Icons 아이콘 https://assetstore.unity.com/packages/3d/props/simple-icons-cartoon-assets-59925
 // 8. Low Poly Cars 자동차 (사물) https://assetstore.unity.com/packages/3d/vehicles/land/low-poly-cars-pack-by-alexander-ivlev-183806
 // 9. Fragmented Objects 부서지는 벽(기능) https://assetstore.unity.com/packages/3d/props/fragmented-objects-25699
 // 10. Toy Pack 사물 모음 (사물) https://assetstore.unity.com/packages/3d/props/toy-pack-230-toys-objects-all-in-one-toy-mega-pack-low-mid-poly-291591
 // 11. Amazing UI (아이콘, UI) https://assetstore.unity.com/packages/2d/gui/amazing-ui-85198
 // 12. Shiny Items (Collectable item VFX) 아이템 https://assetstore.unity.com/packages/vfx/shiny-items-vfx-for-urp-207966
-// 13. LowPoly Item Icon 로우폴리 (아이콘, 아이템) https://assetstore.unity.com/packages/3d/props/lowpoly-collectible-items-and-icons-191199
 // 14. LowPoly Icon 로우폴리 아이콘 https://assetstore.unity.com/packages/2d/gui/icons/low-poly-icon-pack-183824
 // 16. Cube World 마인크래프트 느낌 큐브 (지형) https://assetstore.unity.com/packages/3d/environments/cube-world-proto-series-144159
 // 17. Cube World 마인크래프트 느낌 큐브 (지형) https://assetstore.unity.com/packages/3d/environments/kubikos-3d-cube-world-117341
 // 20. Fog of war 시야제한 (기능) https://assetstore.unity.com/packages/tools/particles-effects/fog-of-war-51344
 // 22. Rocks 단순한 돌 (지형) https://assetstore.unity.com/packages/3d/environments/stylized-rocks-free-sample-283215
- 23. Easy Destrutible Wall (부숴지는 벽) https://assetstore.unity.com/packages/tools/physics/easy-destructible-wall-331
- 24. Quick Outline (아웃라인 그리기) https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488?locale=ko-KR&gad_source=1&gad_campaignid=22451834332&gbraid=0AAAAADdkVOse1a4w1_dL9S_H0He53wy0r&gclid=Cj0KCQjwt8zABhDKARIsAHXuD7ZFSD4CWJCxSVwmi45EEPb4G9pcLUM79xs3ir9Lbxpd8pWVGCKQLjYaAopaEALw_wcB&gclsrc=aw.ds
 ---
 
 ## 필요에셋

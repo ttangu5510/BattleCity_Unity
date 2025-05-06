@@ -1,33 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHandleTrigger : MonoBehaviour
+namespace CJM
 {
-
-    Enemy enemy;
-    //[SerializeField] GameObject onTriggerObj;
-
-    private void Awake()
+    public class EnemyHandleTrigger : MonoBehaviour
     {
-        enemy = transform.GetComponentInParent<Enemy>();
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
+        Enemy enemy;
+        //[SerializeField] GameObject onTriggerObj;
+
+        private void Awake()
         {
-            if (enemy.onTriggerObj == null) enemy.RandomDirSet();
-
-            enemy.onTriggerObj = other.gameObject;
+            enemy = transform.GetComponentInParent<Enemy>();
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
+        private void OnTriggerEnter(Collider other)
         {
-            enemy.onTriggerObj = null;
+            if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
+            {
+                enemy.onTriggerObj = other.gameObject;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Enemy")
+            {
+                enemy.onTriggerObj = null;
+            }
         }
     }
 }

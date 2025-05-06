@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RespawnPoint : MonoBehaviour
+namespace CJM
 {
-    [SerializeField] GameObject respawnFBX_Prefab;
-
-
-    public void PlayerFBX()
+    public class RespawnPoint : MonoBehaviour
     {
-        Instantiate(respawnFBX_Prefab, transform);
-    }
+        [SerializeField] GameObject respawnFBX_Prefab;
 
-    public void StopFBX()
-    {
 
+        public void PlayerFBX()
+        {
+            Instantiate(respawnFBX_Prefab, transform);
+        }
+
+        public void StopFBX()
+        {
+
+        }
     }
 }
