@@ -17,8 +17,6 @@ public class PooledObject : MonoBehaviour
     private void Awake()
     {
         rigid ??= GetComponent<Rigidbody>();
-        rangeLevel1 = new Vector3(5, 5, 0.5f);
-        rangeLevel2 = new Vector3(5, 5, 1.5f);
         Breakable = LayerMask.GetMask("Brick", "SolidBlock");
     }
     private void FixedUpdate()
@@ -84,6 +82,7 @@ public class PooledObject : MonoBehaviour
                 }
             }
         }
+
 
         IDamagable damagable = collision.gameObject.transform.GetComponent<IDamagable>();
         if (damagable != null)

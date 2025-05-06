@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5861139134137603829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2878476232528589979}
+  - component: {fileID: 1180701441020744563}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2878476232528589979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861139134137603829}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.969604, y: -0.041803785, z: -1.7711866}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1180701441020744563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861139134137603829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e915b0cb24e60149a5c7bf89d03d91b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverFlag: {fileID: 0}
+  hp_N: 1
+  moveSpeed_N: 3
+  shotSpeed_N: 10
+  shotCycleRandomSeed_min_N: 0.3
+  shotCycleRandomSeed_max_N: 2
+  hp_NF: 1
+  moveSpeed_NF: 7
+  shotSpeed_NF: 10
+  shotCycleRandomSeed_min_NF: 0.3
+  shotCycleRandomSeed_max_NF: 2
+  hp_NS: 1
+  moveSpeed_NS: 3
+  shotSpeed_NS: 20
+  shotCycleRandomSeed_min_NS: 0.3
+  shotCycleRandomSeed_max_NS: 2
+  hp_E: 4
+  moveSpeed_E: 3
+  shotSpeed_E: 20
+  shotCycleRandomSeed_min_E: 0.3
+  shotCycleRandomSeed_max_E: 3
+  hp_B: 10
+  moveSpeed_B: 3
+  shotSpeed_B: 20
+  shotCycleRandomSeed_min_B: 1
+  shotCycleRandomSeed_max_B: 2
+  score_Normal: 100
+  score_Normal_Fast: 150
+  score_Normal_Strong: 150
+  score_Elite: 300
+  score_Boss: 3000

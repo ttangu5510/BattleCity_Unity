@@ -1,10 +1,14 @@
 using UnityEngine;
 
-public class DamageToParent : MonoBehaviour, IDamagable
+
+namespace CJM
 {
-    public void TakeDamage()
+    public class DamageToParent : MonoBehaviour, IDamagable
     {
-        if (transform.parent.gameObject.activeSelf == true)
-            transform.parent.GetComponentInParent<IDamagable>().TakeDamage();
+        public void TakeDamage()
+        {
+            if (transform.parent.gameObject.activeSelf == true)
+                transform.parent.GetComponentInParent<IDamagable>().TakeDamage();
+        }
     }
 }
