@@ -17,8 +17,11 @@ public class StageManager : MonoBehaviour
     public static StageManager Instance { get { return instance; } }
 
     [SerializeField] private List<EnemySpawner> spawners;
+    public List<Enemy> ActivateEnemys { get { return activateEnemys; } }
     [SerializeField] private List<Enemy> activateEnemys;
+
     [SerializeField] private List<Enemy> slayedEnemys;
+
 
     [Header("Now Stage Info")]
     [Tooltip("Maximum count that can exist in map same time")]

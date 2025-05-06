@@ -7,19 +7,9 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 {
     private float DamagedCoolTime;
     private float respawningTime;
-    [SerializeField] private RespawnPoint respawnPoint;
-
-    [Header("Current Player Data")]
-    //[SerializeField] public UpgradeType grade;
-    //[SerializeField] public PlayerState state;
-    /*[SerializeField] public int Life { get { return life; } }
-    [SerializeField] private int life;
-    [SerializeField] public float MoveSpeed { get { return moveSpeed; } }
-    [SerializeField] private float moveSpeed;
-    [SerializeField] public float ShotSpeed { get { return shotSpeed; } }
-    [SerializeField] private float shotSpeed;*/
 
     [Header("Setting Field")]
+    [SerializeField] private RespawnPoint respawnPoint;
     [SerializeField] private Transform groupRender;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject explosionFBX;
@@ -28,12 +18,8 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     private StageManager sm;
     private UIManager um;
 
-
-    /*private MoveType ontileMove;
-    public MoveType moveType { get { return ontileMove; } set { ontileMove = value; } }*/
     public MoveType moveType { get; set; }
 
-    // private Item itemPossession; 아이템을 소지할 수 있게 만들고 싶다면 사용
     // public UnityEvent PlayerDeadEvent = new UnityEvent(); 게임 오버 이벤트로만 해도 충분할 듯. 플레이어 사망 시 특수 참조 필요할 시 활성화
 
     //*******************************************************//
@@ -42,7 +28,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Upgrade(0, 0, 0);
+            Upgrade(500);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -100,7 +86,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
             UpdateRender();
 
             // 무적 시간 추가
-            StartCoroutine(TakeDamageCooling());
+            StartCoroutine(InvincibleRoutine(DamagedCoolTime));
 
             // 피격 상태 이펙트
 
@@ -108,11 +94,13 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         else Dead();
     }
 
-    public IEnumerator TakeDamageCooling()
+    
+
+    public IEnumerator InvincibleRoutine(float time)
     {
         pm.PlayerStateUpdate(PlayerState.Invincible);
         // TODO : 플레이어 피격 이펙트 or 셰이더 실행
-        yield return new WaitForSeconds(DamagedCoolTime);
+        yield return new WaitForSeconds(time);
         pm.PlayerStateUpdate(PlayerState.General);
         // TODO : 플레이어 피격 이펙트 or 셰이더 초기화
     }
@@ -147,8 +135,6 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     // 리스폰 => 초기 설정값으로 플레이어 초기화, 스폰 포인트로 위치 변경, 리스폰 효과 코루틴 실행
     public void Respawn()
     {
-        
-
         // 플레이어 초기값으로 재설정
         pm.PlayerInit();
 
@@ -209,7 +195,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     #region 아이템 & 환경 사용 호출 함수
 
-    public void Upgrade(float moveSpeed, float shotSpeed, int score)
+    public void Upgrade(int score)
     {
         if (pm.Grade == UpgradeType.Grade04)
         {
@@ -218,15 +204,19 @@ public class Player : MonoBehaviour, IDamagable, IMovable
             // 점수 얻는걸로? 슈퍼마리오 버섯 처럼 이미 최종 단계면 점수로 치환
             return;
         }
-        pm.SpeedControl(moveSpeed, shotSpeed);
         pm.PlayerGradeUpdate(+1);
         UpdateRender();
     }
 
+    public void InvincibleRoutineStart(float time)
+    {
+        StartCoroutine(InvincibleRoutine(time));
+    }
 
-    
 
-    
+
+
+
 
     #endregion
 

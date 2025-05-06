@@ -11,23 +11,25 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] public EnemyState state;
     //[SerializeField] private GameObject target;
 
+    [Header("보유 아이템")]
+    [SerializeField] private Item item; // 보유 아이템
+
     [Header("스펙 (확인용)")]
     [SerializeField] private int hp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float shotSpeed;
     [SerializeField] private int scorePoint;
-    [SerializeField] public float shotCycleRandomSeed_min;
-    [SerializeField] public float shotCycleRandomSeed_max;
+    [SerializeField] private float shotCycleRandomSeed_min;
+    [SerializeField] private float shotCycleRandomSeed_max;
     // Item itmePossession;  // 아이템 소유 정보 추가
+
 
     [Header("세팅")]
     [SerializeField] Transform muzzPoint;
     [SerializeField] Transform body;
-    [SerializeField] Vector3 rayOffset;
-    [SerializeField] float rayFarForwardDistance;
-    [SerializeField] float rayForwardDistance;
     [SerializeField] private BulletObjectPool bulletPool;
     [SerializeField] private GameObject explosionFBX;
+
 
 
 
@@ -52,9 +54,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
     [SerializeField] float Pattern_C_Weight;
 
-    [SerializeField] public GameObject onTriggerObj;
+    [HideInInspector] public GameObject onTriggerObj;
 
-    [SerializeField] private GameObject item;
 
     // Todo 0430
     // 1. 적 이동 로직 (상태에 따른 이동 구현)
@@ -124,8 +125,9 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
         if (item != null)
         {
-            Instantiate(item);
-            item.transform.position = body.transform.position;
+            /*Instantiate(item);
+            item.transform.position = body.transform.position;*/
+            item.DropItem(body.transform.position);
         }
 
         StopCoroutine(coroutine_Attack);
@@ -220,7 +222,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
     public void DirSetByWeight(float Chase_Weight, bool isBlocked)
     {
-        Debug.Log("회전!");
+        //Debug.Log("회전!");
         Transform target = em.gameOverFlag.transform;
         Transform enemyPos = body.transform;
 
@@ -331,7 +333,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     // 코루틴으로 이동
     IEnumerator MovePattern_A(float seed_min, float seed_max)
     {
-        Debug.Log("MovePattern_A 실행됨");
+        //Debug.Log("MovePattern_A 실행됨");
         state = EnemyState.General;
         while (true)
         {
@@ -437,13 +439,13 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
     IEnumerator MovePattern_C(float seed_min, float seed_max)
     {
-        Debug.Log("MovePattern_C 실행됨");
+        //Debug.Log("MovePattern_C 실행됨");
         state = EnemyState.General;
         while (true)
         {
             if (onTriggerObj != null)
             {
-                Debug.Log("벽 충돌 감지됨: " + onTriggerObj.name);
+                //Debug.Log("벽 충돌 감지됨: " + onTriggerObj.name);
                 DirSetByWeight(Pattern_C_Weight, true);
                 //yield return new WaitUntil(() => onTriggerObj == null);
                 yield return null;
@@ -460,7 +462,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
                     // 이 안에서 지속적으로 감시
                     if (onTriggerObj != null)
                     {
-                        Debug.Log("이동 중 충돌 감지됨: " + onTriggerObj.name);
+                        //Debug.Log("이동 중 충돌 감지됨: " + onTriggerObj.name);
                         break;
                     }
 
@@ -507,7 +509,6 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
             Attack();
         }
     }
-    #endregion
 
     // 바닥 타일 연관 함수
     public void MoveTypeUpdate()
@@ -515,48 +516,16 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         // 움직임 타입에 따라 이펙트&효과 업데이트
         // 이펙트는 플레이어 프리펩 안에 자식 오브젝트 폴더로 정리
         // 효과는 케이스별로 수치만 변경하면 됨
-    }
-
-    // EnemyState에 따라서 이동로직 구분
-    /*// 정면 긴 레이 발사, 플레이어or타겟 유무에 따라 EnemyState 스위칭
-    private void TargetChecking()
-    {
-        Vector3 originPos = muzzPoint.position + rayOffset;
-        int layerMask = ~LayerMask.GetMask("PlayerBullet", "EnemyBullet");
-        if (Physics.Raycast(originPos, muzzPoint.forward, out RaycastHit hitInfo, rayFarForwardDistance, layerMask, QueryTriggerInteraction.Ignore))
+        /*if (moveType == MoveType.normal)
         {
-            // 플레이어가 인식된다면
-            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-            {
-                Debug.DrawLine(originPos, hitInfo.point, Color.red);
 
-                target = hitInfo.collider.gameObject;
-                state = EnemyState.ChasingPlayaer;
-            }
-            // Todo : 게임오버조건 레이어 추가 필요합니다
-            // 게임 오버 조건이 인식된다면
-            else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("게임오버조건"))
-            {
-                // 여기는 범위로 설정합시다. ForwardChecking 말고
-                target = hitInfo.collider.gameObject;
-                state = EnemyState.ChasingTarget;
-            }
-            // 아무것도 없다면
-            else
-            {
-                Debug.DrawLine(originPos, hitInfo.point, Color.red);
-
-                target = null;
-                state = EnemyState.General;
-            }
         }
-        else
+        else if (moveType == MoveType.sandSlow)
         {
-            Debug.DrawLine(originPos, hitInfo.point, Color.green);
-        }
-    }
 
-*/
+        }*/
+    }
+    #endregion
 }
 
 public enum EnemyGrade
