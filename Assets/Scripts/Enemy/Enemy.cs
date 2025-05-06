@@ -15,20 +15,20 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private Item item; // 보유 아이템
 
     [Header("스펙 (확인용)")]
-    [SerializeField] private int hp;
+    [SerializeField] protected int hp;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float shotSpeed;
+    [SerializeField] protected float shotSpeed;
     [SerializeField] private int scorePoint;
-    [SerializeField] private float shotCycleRandomSeed_min;
-    [SerializeField] private float shotCycleRandomSeed_max;
+    [SerializeField] protected float shotCycleRandomSeed_min;
+    [SerializeField] protected float shotCycleRandomSeed_max;
     // Item itmePossession;  // 아이템 소유 정보 추가
 
 
     [Header("세팅")]
-    [SerializeField] Transform muzzPoint;
-    [SerializeField] Transform body;
-    [SerializeField] private BulletObjectPool bulletPool;
-    [SerializeField] private GameObject explosionFBX;
+    [SerializeField] protected Transform muzzPoint;
+    [SerializeField] private Transform body;
+    [SerializeField] protected BulletObjectPool bulletPool;
+    [SerializeField] protected GameObject explosionFBX;
 
 
 

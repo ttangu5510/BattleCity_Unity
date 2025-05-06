@@ -16,6 +16,6 @@ public class GameOverBtn : MonoBehaviour
     }
     public void QuitGame()
     {
-        GameManager.Instance.state = GameState.InGameOver;
+        GameManager.Instance.state = GameState.Quit;
     }
 }

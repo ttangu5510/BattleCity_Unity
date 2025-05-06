@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviour
     private float time_RankingBoard;   // 랭킹보드 보여주는 시간
 
 
-
-
     #region 싱글톤 GM 생성
     private static GameManager instance;
     public static GameManager Instance /*{ get { return instance; } }*/
@@ -77,7 +75,7 @@ public class GameManager : MonoBehaviour
         time_ClearScene     : 게임 클리어 씬 진행 시간
         time_RankingBoard   : 랭킹보드 보여주는 시간
         ********************************************/
-        time_AfterStageClear = 1f;
+        time_AfterStageClear = 1f; // 고정
         time_AfterScoreSum = 1f;
         time_ClearScene = 2f;
         time_RankingBoard = 3f;
@@ -149,6 +147,23 @@ public class GameManager : MonoBehaviour
 
         GameState currentState = state;
 
+        if (currentState == GameState.InGameOver)
+        {
+            Debug.Log("게임오버씬 진행");
+            state = GameState.OnGoUIPlayer;
+            yield return new WaitUntil(() => state == GameState.CaculateScore);
+            float a = Time.time;
+            Debug.Log("창 다나옴");
+
+            yield return new WaitForSecondsRealtime(1f);
+            Debug.Log("대기완료");
+
+            float b = Time.time;
+            Debug.Log(a-b);
+
+        }
+        
+
         // 점수 합산 창 씬 시작
         state = GameState.CaculateScore;
         yield return new WaitForSecondsRealtime(time_AfterStageClear);    // 스테이지 클리어 이후 점수 합산 창 대기 시간
@@ -169,7 +184,7 @@ public class GameManager : MonoBehaviour
             MySceneManager.Instance.ChangeScene($"STAGE {stageIndex}");
             stageIndex++;
         }
-        // 3. 게임 오버 씬
+        // 2. 게임 오버 씬
         else if (currentState == GameState.InGameOver)
         {
             SceneManager.LoadSceneAsync("GameOverScene");
@@ -190,7 +205,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(InputRankingBoardRoutine());
             }
         }
-        // 2. 게임 클리어 씬
+        // 3. 게임 클리어 씬
         else if (currentState == GameState.InGameComplete)
         {
             SceneManager.LoadSceneAsync("GameClearScene");
@@ -232,4 +247,4 @@ public class GameManager : MonoBehaviour
     }
 }
 
-public enum GameState { Title, InGameRun, InGamePause, InGameOver, InGameComplete, CaculateScore, CaculateScore_Done, Quit, Continue, InputWaiting, InputComplete }
+public enum GameState { Title, InGameRun, InGamePause, InGameOver, OnGoUIPlayer, InGameComplete, CaculateScore, CaculateScore_Done, Quit, Continue, InputWaiting, InputComplete }
