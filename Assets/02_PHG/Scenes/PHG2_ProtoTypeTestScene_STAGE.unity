@@ -279,6 +279,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1617762028}
     m_Modifications:
+    - target: {fileID: 4242073392027523436, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 8835448005051669881, guid: 2e763f3501a1122418c7e4c28faaca6f, type: 3}
     - target: {fileID: 4244572622945573025, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal (2)
@@ -848,6 +852,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21a3ee2ce2de7304981687f9d4b8dd9a, type: 3}
+--- !u!1001 &79309350
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6077517420192648454, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_Name
+      value: Item_Upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.182634
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.2545185
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613341884784528573, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
 --- !u!4 &81384822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8780622718393841177, guid: 049631ca2be908e41ab01b81a2a10595, type: 3}
@@ -3315,7 +3376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277143696145527861, guid: b7e56294c3927c04083495ee8d225b32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19999999
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3277143696145527861, guid: b7e56294c3927c04083495ee8d225b32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4311,6 +4372,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3477017870999252746, guid: eecb9f0f63807a64ca426735536df706, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 7543338749715160875, guid: f5bb95ff3e374634e9b37741eca4456d, type: 3}
     - target: {fileID: 8408652350813241064, guid: eecb9f0f63807a64ca426735536df706, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6082,6 +6147,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 142979994634857650, guid: 39dd5286107615645b1860a71bb2f9c5, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 1945377708270799442, guid: 39dd5286107615645b1860a71bb2f9c5, type: 3}
       propertyPath: m_Size.x
       value: 1.5
@@ -7100,7 +7169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277143696145527861, guid: b7e56294c3927c04083495ee8d225b32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19999999
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3277143696145527861, guid: b7e56294c3927c04083495ee8d225b32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7726,7 +7795,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 38.2
   m_InnerSpotAngle: 14.6
@@ -7806,11 +7875,11 @@ MonoBehaviour:
   flickerLight: {fileID: 889259532}
   sfxSource: {fileID: 0}
   flickerClip: {fileID: 0}
+  startDelay: 0
   minInterval: 5
   maxInterval: 5
-  startOn: 0
   offDuration: 5
-  startDelay: 0
+  startOn: 0
 --- !u!4 &893798909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6225450506457040735, guid: 52caa78dc78f3794b8564f07173d1a75, type: 3}
@@ -9973,7 +10042,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 36.1
   m_InnerSpotAngle: 10
@@ -10053,11 +10122,11 @@ MonoBehaviour:
   flickerLight: {fileID: 1089967957}
   sfxSource: {fileID: 0}
   flickerClip: {fileID: 0}
+  startDelay: 0
   minInterval: 5
   maxInterval: 5
-  startOn: 0
   offDuration: 5
-  startDelay: 0
+  startOn: 0
 --- !u!1001 &1097870775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10854,6 +10923,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1617762028}
     m_Modifications:
+    - target: {fileID: 4242073392027523436, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 239848824267669246, guid: b524b607f663f5c45861b2f37d55054f, type: 3}
     - target: {fileID: 4244572622945573025, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal (1)
@@ -11112,6 +11185,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9147581650911772851, guid: ab64b704127eb49418656254795ec162, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 239848824267669246, guid: b524b607f663f5c45861b2f37d55054f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11355,6 +11432,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 732578495}
     m_Modifications:
+    - target: {fileID: 4242073392027523436, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 4618440268398663919, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
     - target: {fileID: 4244572622945573025, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal
@@ -11518,11 +11599,11 @@ MonoBehaviour:
   flickerLight: {fileID: 1287819691}
   sfxSource: {fileID: 1531500812}
   flickerClip: {fileID: 8300000, guid: 6fd71d63f279e7043bbc8b6205d2ad21, type: 3}
+  startDelay: 0
   minInterval: 5
   maxInterval: 5
-  startOn: 1
   offDuration: 5
-  startDelay: 0
+  startOn: 1
 --- !u!1001 &1288242596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13439,6 +13520,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9147581650911772851, guid: ab64b704127eb49418656254795ec162, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 5990929712825439581, guid: c96614df32e79ff449b5a38af1714f46, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15617,7 +15702,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 38
   m_InnerSpotAngle: 13
@@ -15697,11 +15782,11 @@ MonoBehaviour:
   flickerLight: {fileID: 1824926404}
   sfxSource: {fileID: 0}
   flickerClip: {fileID: 0}
+  startDelay: 0
   minInterval: 5
   maxInterval: 5
-  startOn: 0
   offDuration: 5
-  startDelay: 0
+  startOn: 0
 --- !u!1001 &1831132858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17473,6 +17558,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1617762028}
     m_Modifications:
+    - target: {fileID: 4242073392027523436, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 4618440268398663919, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
     - target: {fileID: 4244572622945573025, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal
@@ -17767,3 +17856,4 @@ SceneRoots:
   - {fileID: 108115523}
   - {fileID: 284135126}
   - {fileID: 423475410}
+  - {fileID: 79309350}
