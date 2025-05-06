@@ -416,7 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grade: 2
   state: 0
-  target: {fileID: 0}
+  item: {fileID: 0}
   hp: 0
   moveSpeed: 0
   shotSpeed: 0
@@ -425,15 +425,13 @@ MonoBehaviour:
   shotCycleRandomSeed_max: 0
   muzzPoint: {fileID: 8430693032787935907}
   body: {fileID: 8992971360751706498}
-  rayOffset: {x: 0, y: 3, z: 0}
-  rayFarForwardDistance: 10
-  rayForwardDistance: 0.4
   bulletPool: {fileID: 2096056296923895494}
   explosionFBX: {fileID: 1056904543853562, guid: 4cf45cdce36e66e4a93614abb5ae7821, type: 3}
-  seedMin_A: 1
-  seedMax_A: 4
+  dir: {x: 0, y: 0, z: 0}
+  seedMin_DirChangeCycle: 0.5
+  seedMax_DirChangeCycle: 4
+  Pattern_C_Weight: 60
   onTriggerObj: {fileID: 0}
-  item: {fileID: 0}
 --- !u!1 &4398809596173916687
 GameObject:
   m_ObjectHideFlags: 0

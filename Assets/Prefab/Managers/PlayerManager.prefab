@@ -44,8 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c599586d6fec9d643851dd44720924a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life_Init: 10
+  life_Init: 3
   moveSpeed_Init: 5
   shotSpeed_Init: 10
   damagedCoolTime: 2
   respawningTime: 2
+  score: 0
+  grade: 0
+  state: 0
+  life: 0
+  moveSpeed: 0
+  shotSpeed: 0
