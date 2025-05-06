@@ -6,16 +6,19 @@ public class IngameObjectAction : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
+        Rigidbody rig = gameObject.GetComponent<Rigidbody>();
         if(collision.gameObject.tag == "Bullet")
         {
             Vector3 dir = transform.position - collision.transform.position;
-            Destroy(gameObject, 3f);
-            gameObject.GetComponent<Rigidbody>().AddForce(dir * 10, ForceMode.Impulse);
-
+            Destroy(gameObject, 2f);
+            rig.AddForce((dir+Vector3.up) * 15, ForceMode.Impulse);
+            int num = LayerMask.GetMask("Props");
+            //gameObject.layer
         }
         if(collision.gameObject.tag =="Player"|| collision.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 2f);
+            gameObject.layer = LayerMask.NameToLayer("Props");
         }
     }
 }
