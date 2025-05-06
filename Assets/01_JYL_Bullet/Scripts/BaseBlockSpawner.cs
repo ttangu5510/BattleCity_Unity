@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseBlockSpawner : MonoBehaviour
+namespace JYL
 {
-    [SerializeField] GameObject BaseBrickSet;
-    [SerializeField] Transform beforeBlock;
-    private void Update()
+    public class BaseBlockSpawner : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        [SerializeField] GameObject BaseBrickSet;
+        [SerializeField] Transform beforeBlock;
+        private void Update()
         {
-            Destroy(beforeBlock.gameObject);
-            beforeBlock = Instantiate(BaseBrickSet, beforeBlock.position, beforeBlock.rotation).transform;
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Destroy(beforeBlock.gameObject);
+                beforeBlock = Instantiate(BaseBrickSet, beforeBlock.position, beforeBlock.rotation).transform;
+            }
         }
     }
 }
