@@ -1,29 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TakeHIt : MonoBehaviour
+public class TakeHit : MonoBehaviour
 {
-    [SerializeField] private float damageRadius = 1f;
-    [SerializeField] private LayerMask targetLayer; // Player, Enemy 등 감지 대상
-    [SerializeField] private Transform effectOrigin; // 이펙트 발생 위치
+    [SerializeField] private float delayBeforeDamage = 0.5f;
+    [SerializeField] private float damageRadius = 5f;
+    [SerializeField] private Transform effectOrigin;
+    [SerializeField] private LayerMask targetLayers;
+    [SerializeField] private ParticleSystem effect;
 
-    private void OnParticleSystemStopped()
+    private bool hasTriggered = false;
+
+    private void Start()
     {
-        TriggerExplosionDamage();
+        if (effectOrigin == null)
+            effectOrigin = transform;
+
+        // 파티클 시작 후 0.5초 뒤에 폭발 데미지 발생
+        Invoke(nameof(TriggerExplosionDamage), delayBeforeDamage);
     }
+
     private void TriggerExplosionDamage()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(effectOrigin.position, damageRadius, targetLayer);
+        if (hasTriggered) return; // 중복 방지
+        hasTriggered = true;
 
+        Collider[] hitColliders = Physics.OverlapSphere(effectOrigin.position, damageRadius, targetLayers);
         foreach (var hit in hitColliders)
         {
-            IDamagable damagable = hit.GetComponentInParent<IDamagable>();
-            Rigidbody rb = hit.GetComponentInParent<Rigidbody>();
+            IDamagable damagable =
+                hit.GetComponent<IDamagable>() ??
+                hit.GetComponentInParent<IDamagable>() ??
+                hit.transform.root.GetComponent<IDamagable>();
 
             if (damagable != null)
             {
                 damagable.TakeDamage();
+                Debug.Log($"데미지 입힘: {hit.name}");
             }
         }
     }
