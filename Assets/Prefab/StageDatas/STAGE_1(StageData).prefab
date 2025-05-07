@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &215797797137420060
+--- !u!1 &2840271917547018612
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8679250007648254164}
-  - component: {fileID: 4715424937290609186}
+  - component: {fileID: 5852028260094582771}
+  - component: {fileID: 578330209780072399}
   m_Layer: 0
-  m_Name: RespawnPoint
+  m_Name: STAGE_1(StageData)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8679250007648254164
+--- !u!4 &5852028260094582771
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215797797137420060}
+  m_GameObject: {fileID: 2840271917547018612}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.2452497, y: -0.91934365, z: 0.25483516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4715424937290609186
+--- !u!114 &578330209780072399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215797797137420060}
+  m_GameObject: {fileID: 2840271917547018612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c436aae1d78cbde40820698fc4915d88, type: 3}
+  m_Script: {fileID: 11500000, guid: fdcec5c96cff3f24eb747c42f2841858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnFBX_Prefab: {fileID: 1236643204216662, guid: 706333c6431ba8c4ea48f7fe578e3e37, type: 3}
+  stageName: STAGE_1
+  maxActiveEnemyCount: 4
+  enemyLifeCount: 4

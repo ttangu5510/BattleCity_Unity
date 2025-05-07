@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private Transform body;
     [SerializeField] protected BulletObjectPool bulletPool;
     [SerializeField] protected GameObject explosionFBX;
+    [SerializeField] protected GameObject itemPossessFBX;
 
     private StageManager sm;
     private EnemyManager em;
@@ -79,6 +80,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         if (coroutine_Attack == null)
             coroutine_Attack = StartCoroutine(AttackCycle());
 
+        // 특정 이동 패턴을 설정해두면 그에 맞는 패턴으로 이동 진행
         if (coroutine_MovePattern == null)
         {
             if (state == EnemyState.RandomMove) 
@@ -88,7 +90,23 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
             else if (state == EnemyState.General)
                 coroutine_MovePattern = StartCoroutine(MovePattern_C(seedMin_DirChangeCycle, seedMax_DirChangeCycle));
         }
+
+        // 아이템 보유중이라면 => 아이템 보유 효과 실행
+        if (item != null)
+        {
+
+        }
     }
+
+    IEnumerator ItemPossessFBXCycle()
+    {
+        GameObject fbx = Instantiate(itemPossessFBX, body.transform);
+
+        Destroy(fbx);
+        yield return null;
+    }
+
+
     void Update()
     {
         // 이동 로직 여기에

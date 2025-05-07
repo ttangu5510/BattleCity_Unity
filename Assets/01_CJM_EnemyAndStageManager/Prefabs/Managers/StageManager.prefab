@@ -47,12 +47,22 @@ MonoBehaviour:
   spawners: []
   activateEnemys: []
   slayedEnemys: []
+  boss: {fileID: 0}
+  bossTurrets: []
+  bossSlayed: 0
   maxActiveEnemyCount: 0
   enemyLifeCount: 0
   sumedScore: 0
+  stageDatas:
+  - {fileID: 578330209780072399, guid: 01be3c6ab810e7f41b771ff084d16a17, type: 3}
+  - {fileID: 578330209780072399, guid: 74e4d231fa616a0459711396647de467, type: 3}
+  - {fileID: 578330209780072399, guid: 9cd4ff6955fc1df438321973d0105796, type: 3}
+  - {fileID: 578330209780072399, guid: d9056e97aac3a9b47abe1a679555c898, type: 3}
+  - {fileID: 578330209780072399, guid: 12fc23e3be339c144b7545a8242a5f8e, type: 3}
   StageStartEvent:
     m_PersistentCalls:
       m_Calls: []
   StageCloseEvent:
     m_PersistentCalls:
       m_Calls: []
+  baseBlock: {fileID: 0}

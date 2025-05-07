@@ -6,13 +6,16 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour, IDamagable, IMovable
 {
     private float DamagedCoolTime;
-    private float respawningTime;
-
-    [Header("Setting Field")]
+    [Header("Respawn Settings")]
     [SerializeField] private RespawnPoint respawnPoint;
+    [SerializeField] private float respawnEffectStartTime;
+    [SerializeField] private float respawningTime;
+
+    [Header("PreSettings Field")]
     [SerializeField] private Transform groupRender;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject explosionFBX;
+    [SerializeField] private GameObject invincibleFBX;
 
     private PlayerManager pm;
     private StageManager sm;
@@ -57,6 +60,9 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         // 동기화된 초기 설정 UI에 반영
         um.inGameUI_Instance.ShowPlayerLife();
         um.inGameUI_Instance.ShowCurrentScore();
+        um.inGameUI_Instance.ShowEnemyLife();
+
+        pm.PlayerStateUpdate(PlayerState.General);
 
 
         // 등급 상태 테스트용.
@@ -96,14 +102,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     
 
-    public IEnumerator InvincibleRoutine(float time)
-    {
-        pm.PlayerStateUpdate(PlayerState.Invincible);
-        // TODO : 플레이어 피격 이펙트 or 셰이더 실행
-        yield return new WaitForSeconds(time);
-        pm.PlayerStateUpdate(PlayerState.General);
-        // TODO : 플레이어 피격 이펙트 or 셰이더 초기화
-    }
+   
 
     // 죽음 => 게임오버 판정
     public void Dead()
@@ -144,24 +143,25 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         playerController.dir = Vector3.zero;
 
         // 리스폰 이펙트 코루틴 실행
-        StartCoroutine(RespawnEffect());
+        StartCoroutine(RespawnCycle());
     }
-    public IEnumerator RespawnEffect()
+
+    public IEnumerator RespawnCycle()
     {
         // 1초동안 이펙트 실행 or 셰이더 변경 후 코루틴 종료
-
-        // 반짝이는 셰이더();
         pm.PlayerStateUpdate(PlayerState.Respawning);
-        
+        yield return new WaitForSeconds(respawnEffectStartTime);
         respawnPoint.PlayerFBX(); // 이펙트 실행
         yield return new WaitForSeconds(respawningTime);
-        // 셰이더 초기화();
+        respawnPoint.StopFBX();
 
         // 소환
         groupRender.gameObject.SetActive(true);
         playerController.gameObject.SetActive(true);
         //respawnPoint.StopFBX(); // 이펙트 자동 종료 가능하니 주석처리함. 삭제해도 되면 삭제
-        pm.PlayerStateUpdate(PlayerState.General);
+
+        // 스폰 후 무적시간
+        InvincibleRoutineStart(2f);
     }
 
 
@@ -213,7 +213,16 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         StartCoroutine(InvincibleRoutine(time));
     }
 
-
+    public IEnumerator InvincibleRoutine(float time)
+    {
+        pm.PlayerStateUpdate(PlayerState.Invincible);
+        GameObject fbx = Instantiate(invincibleFBX, transform.GetChild(0).transform);
+        // TODO : 플레이어 피격 이펙트 or 셰이더 실행
+        yield return new WaitForSeconds(time);
+        pm.PlayerStateUpdate(PlayerState.General);
+        Destroy(fbx);
+        // TODO : 플레이어 피격 이펙트 or 셰이더 초기화
+    }
 
 
 

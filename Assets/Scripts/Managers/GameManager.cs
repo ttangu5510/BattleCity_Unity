@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(time_AfterScoreSum);    // 점수 계산 완료 후 다음 스테이지로 넘어가기 전 대기시간
 
-            MySceneManager.Instance.ChangeScene($"STAGE {stageIndex}");
+            MySceneManager.Instance.ChangeScene($"STAGE_{stageIndex}");
             stageIndex++;
         }
         // 2. 게임 오버 씬
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
             {
                 PlayerManager.Instance.DataInit();
                 stageIndex--;
-                MySceneManager.Instance.ChangeScene($"STAGE {stageIndex}");
+                MySceneManager.Instance.ChangeScene($"STAGE_{stageIndex}");
                 stageIndex++;
                 state = GameState.InGameRun;
             }
