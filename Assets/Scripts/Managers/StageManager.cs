@@ -48,7 +48,7 @@ public class StageManager : MonoBehaviour
     private GameManager gm;
     private UIManager um;
 
-    public BaseBlockSpawner baseBlock;
+    [HideInInspector] public BaseBlockSpawner baseBlock;
     //private InGameState inGameState;
 
     bool isStageOpen;
