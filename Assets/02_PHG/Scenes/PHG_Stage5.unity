@@ -11024,6 +11024,10 @@ PrefabInstance:
       value: StageManager
       objectReference: {fileID: 0}
     - target: {fileID: 8898735685773761799, guid: 84a54750308aac6499cf19e6983cd829, type: 3}
+      propertyPath: stageDatas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898735685773761799, guid: 84a54750308aac6499cf19e6983cd829, type: 3}
       propertyPath: stageDatas.Array.data[0]
       value: 
       objectReference: {fileID: 578330209780072399, guid: 93cbc6146942c094da079a64a89b97c4, type: 3}
