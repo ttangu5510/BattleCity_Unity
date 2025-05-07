@@ -30,21 +30,13 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     //*******************************************************//
     // 테스트용. 테스트 후 삭제할 예정
-    /*private void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            Upgrade();
+            InvincibleRoutineStart(3f);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            TakeDamage();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Debug.Log( StageManager.Instance.GetSlayeeEnemyCountByGrade(EnemyGrade.normal));
-        }
-    }*/
+    }
     //*****************************************************//
 
     // 스테이지마다 플레이어 오브젝트가 활성화 될 때, 플레이어 데이터를 동기화 시킴
