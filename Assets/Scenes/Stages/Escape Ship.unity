@@ -2898,12 +2898,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: autoRandomSeed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: startDelay.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 199071868289298196, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: m_Materials.Array.size
@@ -4544,6 +4552,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: lengthInSec
       value: 1
       objectReference: {fileID: 0}
@@ -4554,6 +4566,10 @@ PrefabInstance:
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: startDelay.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 199071868289298196, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: m_Materials.Array.size
@@ -6548,6 +6564,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1180701441020744563, guid: 40f7883cbb17ba749a7a32e6f6e19df8, type: 3}
+      propertyPath: hp_B
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2878476232528589979, guid: 40f7883cbb17ba749a7a32e6f6e19df8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.969604
@@ -11555,6 +11575,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: lengthInSec
       value: 5
       objectReference: {fileID: 0}
@@ -11565,6 +11589,10 @@ PrefabInstance:
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: startDelay.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 199071868289298196, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: m_Materials.Array.size
@@ -14058,6 +14086,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: lengthInSec
       value: 1
       objectReference: {fileID: 0}
@@ -14068,6 +14100,10 @@ PrefabInstance:
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: startDelay.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 199071868289298196, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: m_Materials.Array.size
@@ -14375,6 +14411,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: lengthInSec
       value: 4
       objectReference: {fileID: 0}
@@ -14385,6 +14425,10 @@ PrefabInstance:
     - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: startDelay.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198383059990825712, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 199071868289298196, guid: d8628f56ce986894a9be0c0fc92627bd, type: 3}
       propertyPath: m_Materials.Array.size
