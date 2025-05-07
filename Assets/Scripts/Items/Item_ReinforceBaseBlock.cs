@@ -12,8 +12,6 @@ public class Item_ReinforceBaseBlock : Item
 
     private void BaseChange()
     {
-        Debug.Log(StageManager.Instance);
-        Debug.Log(StageManager.Instance.baseBlock);
         StageManager.Instance.baseBlock.ChangeState();
     }
 }

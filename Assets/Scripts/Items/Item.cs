@@ -5,8 +5,11 @@ public abstract class Item : MonoBehaviour
 {
     // 이름 자체는 아이템 프리펩의 이름을 사용
     public Action<Player> effect; //이팩트(실행효과)
-
-    public abstract void SetEffect();
+    public int score = 500;
+    public virtual void SetEffect()
+    {
+        
+    }
 
     private void Awake()
     {

@@ -152,6 +152,13 @@ namespace CJM
 
             GameState currentState = state;
 
+
+
+            /*Debug.Log("게임오버씬 진행");
+            state = GameState.OnGoUIPlayer;
+            yield return new WaitUntil(() => state == GameState.CaculateScore);
+            yield return new WaitForSecondsRealtime(1f);*/
+
             // 점수 합산 창 씬 시작
             state = GameState.CaculateScore;
             yield return new WaitForSecondsRealtime(time_AfterStageClear);    // 스테이지 클리어 이후 점수 합산 창 대기 시간
@@ -172,7 +179,7 @@ namespace CJM
                 MySceneManager.Instance.ChangeScene($"STAGE {stageIndex}");
                 stageIndex++;
             }
-            // 3. 게임 오버 씬
+            // 2. 게임 오버 씬
             else if (currentState == GameState.InGameOver)
             {
                 SceneManager.LoadSceneAsync("GameOverScene");
@@ -193,7 +200,7 @@ namespace CJM
                     StartCoroutine(InputRankingBoardRoutine());
                 }
             }
-            // 2. 게임 클리어 씬
+            // 3. 게임 클리어 씬
             else if (currentState == GameState.InGameComplete)
             {
                 SceneManager.LoadSceneAsync("GameClearScene");
@@ -235,5 +242,5 @@ namespace CJM
         }
     }
 
-    public enum GameState { Title, InGameRun, InGamePause, InGameOver, InGameComplete, CaculateScore, CaculateScore_Done, Quit, Continue, InputWaiting, InputComplete }
+    public enum GameState { Title, InGameRun, InGamePause, OnGoUIPlayer, InGameOver, InGameComplete, CaculateScore, CaculateScore_Done, Quit, Continue, InputWaiting, InputComplete }
 }

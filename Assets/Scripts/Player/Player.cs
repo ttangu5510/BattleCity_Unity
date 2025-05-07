@@ -28,7 +28,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Upgrade(500);
+            Upgrade();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -195,13 +195,13 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     #region 아이템 & 환경 사용 호출 함수
 
-    public void Upgrade(int score)
+    public void Upgrade()
     {
         if (pm.Grade == UpgradeType.Grade04)
         {
             Debug.Log("이미 최고 등급입니다");
-            pm.ScoreUpdate(score);
-            // 점수 얻는걸로? 슈퍼마리오 버섯 처럼 이미 최종 단계면 점수로 치환
+            // pm.ScoreUpdate(score);
+            // 보너스 점수 얻는걸로? 슈퍼마리오 버섯 처럼 이미 최종 단계면 점수로 치환
             return;
         }
         pm.PlayerGradeUpdate(+1);

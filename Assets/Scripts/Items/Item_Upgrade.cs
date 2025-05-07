@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Item_Upgrade : Item
 {
-    [SerializeField] int score_Bonus;
 
     public override void SetEffect()
     {
@@ -13,6 +12,6 @@ public class Item_Upgrade : Item
 
     private void Upgrade(Player player)
     {
-        player.Upgrade(score_Bonus);
+        player.Upgrade();
     }
 }
