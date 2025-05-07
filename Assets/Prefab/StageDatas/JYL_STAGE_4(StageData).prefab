@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdcec5c96cff3f24eb747c42f2841858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageName: STAGE_BOSS
+  stageName: JYL_STAGE_4
   maxActiveEnemyCount: 4
-  enemyLifeCount: 4
+  enemyLifeCount: 8
