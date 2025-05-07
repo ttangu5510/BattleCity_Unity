@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1877563293971297857, guid: 6e735b6ee6d1c5d43b07d05e6d5f384c, type: 3}
+      propertyPath: InvincibleTime
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7892330450655417746, guid: 6e735b6ee6d1c5d43b07d05e6d5f384c, type: 3}
       propertyPath: m_Name
       value: LPolyBrick_Base

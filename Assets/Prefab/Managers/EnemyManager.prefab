@@ -65,10 +65,10 @@ MonoBehaviour:
   shotSpeed_E: 20
   shotCycleRandomSeed_min_E: 0.3
   shotCycleRandomSeed_max_E: 3
-  hp_B: 10
-  moveSpeed_B: 3
+  hp_B: 6
+  moveSpeed_B: 5
   shotSpeed_B: 20
-  shotCycleRandomSeed_min_B: 1
+  shotCycleRandomSeed_min_B: 0.3
   shotCycleRandomSeed_max_B: 2
   score_Normal: 100
   score_Normal_Fast: 150
