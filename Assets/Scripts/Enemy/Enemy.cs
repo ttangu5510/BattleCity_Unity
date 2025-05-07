@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] protected BulletObjectPool bulletPool;
     [SerializeField] protected GameObject explosionFBX;
     [SerializeField] protected GameObject itemPossessFBX;
+    [SerializeField] protected float itemPossessOffsetY;
 
     private StageManager sm;
     private EnemyManager em;
@@ -48,6 +49,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     Coroutine coroutine_MovePattern;
 
     Coroutine coroutine_stopItem;
+    Coroutine coroutine_ItemPossessFBXRun;
+    GameObject fbxInstacne_ItemPossess;
 
     [SerializeField] private float seedMin_DirChangeCycle;
     [SerializeField] private float seedMax_DirChangeCycle;
@@ -94,17 +97,12 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         // 아이템 보유중이라면 => 아이템 보유 효과 실행
         if (item != null)
         {
-
+            fbxInstacne_ItemPossess = Instantiate(itemPossessFBX, body.transform);
+            fbxInstacne_ItemPossess.transform.localPosition = 
+                fbxInstacne_ItemPossess.transform.localPosition + Vector3.up * itemPossessOffsetY;
         }
     }
 
-    IEnumerator ItemPossessFBXCycle()
-    {
-        GameObject fbx = Instantiate(itemPossessFBX, body.transform);
-
-        Destroy(fbx);
-        yield return null;
-    }
 
 
     void Update()
@@ -156,6 +154,9 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
             StopCoroutine(coroutine_Attack);
         if (coroutine_MovePattern != null)
             StopCoroutine(coroutine_MovePattern);
+
+        Destroy(fbxInstacne_ItemPossess);
+
     }
 
     #region 적 이동 관련 로직
