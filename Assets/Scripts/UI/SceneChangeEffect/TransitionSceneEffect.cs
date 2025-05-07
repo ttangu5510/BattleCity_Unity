@@ -20,6 +20,11 @@ public abstract class TransitionSceneEffect : MonoBehaviour
         {
             loadingRoutine = StartCoroutine(TransitionPattern(sceneName));
         }
+        else
+        {
+            StopCoroutine(loadingRoutine);
+            loadingRoutine = StartCoroutine(TransitionPattern(sceneName));
+        }
     }
 
     protected void OnDestroy()

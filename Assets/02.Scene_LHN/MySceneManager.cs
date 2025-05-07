@@ -70,6 +70,7 @@ public class MySceneManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        Debug.Log($"{sceneName}으로 이동 시도.");
         TransSceneEffect_Instance.StartLoading(sceneName);
     }
 
