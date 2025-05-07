@@ -353,6 +353,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e00ee39b900b193459a1fe484d6feeae, type: 3}
+--- !u!1 &111901178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 111901179}
+  m_Layer: 0
+  m_Name: -------------------Managers------------------------------------ (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &111901179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111901178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.952244, y: -1.6384783, z: 12.257519}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &207530297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2532,6 +2563,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8898735685773761799, guid: 171ebb5c539efe449abc4faa280f4440, type: 3}
+      propertyPath: stageDatas.Array.data[0]
+      value: 
+      objectReference: {fileID: 578330209780072399, guid: 12fc23e3be339c144b7545a8242a5f8e, type: 3}
+    - target: {fileID: 8898735685773761799, guid: 171ebb5c539efe449abc4faa280f4440, type: 3}
+      propertyPath: stageDatas.Array.data[1]
+      value: 
+      objectReference: {fileID: 578330209780072399, guid: 01be3c6ab810e7f41b771ff084d16a17, type: 3}
+    - target: {fileID: 8898735685773761799, guid: 171ebb5c539efe449abc4faa280f4440, type: 3}
+      propertyPath: stageDatas.Array.data[2]
+      value: 
+      objectReference: {fileID: 578330209780072399, guid: 9cd4ff6955fc1df438321973d0105796, type: 3}
+    - target: {fileID: 8898735685773761799, guid: 171ebb5c539efe449abc4faa280f4440, type: 3}
+      propertyPath: stageDatas.Array.data[3]
+      value: 
+      objectReference: {fileID: 578330209780072399, guid: 74e4d231fa616a0459711396647de467, type: 3}
+    - target: {fileID: 8898735685773761799, guid: 171ebb5c539efe449abc4faa280f4440, type: 3}
+      propertyPath: stageDatas.Array.data[4]
+      value: 
+      objectReference: {fileID: 578330209780072399, guid: d9056e97aac3a9b47abe1a679555c898, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3830,6 +3881,7 @@ SceneRoots:
   - {fileID: 748455289}
   - {fileID: 2038380158}
   - {fileID: 433931648}
+  - {fileID: 111901179}
   - {fileID: 96074586}
   - {fileID: 207530297}
   - {fileID: 1247149505}

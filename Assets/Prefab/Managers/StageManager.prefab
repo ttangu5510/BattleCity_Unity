@@ -44,15 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975069076abe4ea44868dc736f655dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawners: []
-  activateEnemys: []
-  slayedEnemys: []
+  boss: {fileID: 0}
+  bossTurrets: []
+  bossSlayed: 0
   maxActiveEnemyCount: 0
   enemyLifeCount: 0
-  sumedScore: 0
+  stageDatas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  stageIndex: 0
   StageStartEvent:
     m_PersistentCalls:
       m_Calls: []
   StageCloseEvent:
     m_PersistentCalls:
       m_Calls: []
+  baseBlock: {fileID: 0}
