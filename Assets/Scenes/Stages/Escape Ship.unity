@@ -1517,7 +1517,7 @@ PrefabInstance:
     - target: {fileID: 9147581650911772851, guid: 28df3b0bf8dfb9448a2bd0c02363580d, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 4618440268398663919, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3656,7 +3656,7 @@ PrefabInstance:
     - target: {fileID: 4242073392027523436, guid: 93a2ba4606ce79d49849c820415e6358, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 7543338749715160875, guid: f5bb95ff3e374634e9b37741eca4456d, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4244572622945573025, guid: 93a2ba4606ce79d49849c820415e6358, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal_Strong (1)
@@ -4222,7 +4222,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1578339338}
   - {fileID: 1104123366}
   - {fileID: 1572903407}
   m_Father: {fileID: 0}
@@ -5058,7 +5057,7 @@ PrefabInstance:
     - target: {fileID: 4242073392027523436, guid: fe2f53d825cd1514889088a41e0f67ea, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 239848824267669246, guid: b524b607f663f5c45861b2f37d55054f, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4244572622945573025, guid: fe2f53d825cd1514889088a41e0f67ea, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal_Fast (1)
@@ -6390,7 +6389,7 @@ PrefabInstance:
     - target: {fileID: 3477017870999252746, guid: 577b29010bd825947b3e17e4ab47d7a0, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 4618440268398663919, guid: 4d2d490dfac46a5419200dfc841e014b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8408652350813241064, guid: 577b29010bd825947b3e17e4ab47d7a0, type: 3}
       propertyPath: m_Name
       value: Enemy_Boss
@@ -8008,63 +8007,6 @@ MonoBehaviour:
   effect: {fileID: 1082494102}
   minDelay: 0.5
   maxDelay: 1.5
---- !u!1001 &1098428443
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 525516308}
-    m_Modifications:
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.02507
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.6384783
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.267986
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032202665089740642, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-      propertyPath: m_Name
-      value: Item_AllKill
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
 --- !u!1001 &1099356985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8116,7 +8058,7 @@ PrefabInstance:
     - target: {fileID: 3477017870999252746, guid: 577b29010bd825947b3e17e4ab47d7a0, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 5794279583474300610, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8408652350813241064, guid: 577b29010bd825947b3e17e4ab47d7a0, type: 3}
       propertyPath: m_Name
       value: Enemy_Boss (1)
@@ -8558,7 +8500,7 @@ PrefabInstance:
     - target: {fileID: 9147581650911772851, guid: 28df3b0bf8dfb9448a2bd0c02363580d, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 9079372847131897397, guid: 3f6020100e76909449b09a2777fead49, type: 3}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9729,7 +9671,7 @@ PrefabInstance:
     - target: {fileID: 4242073392027523436, guid: da61e9219fc24ba4fa4b8487c9c162cd, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 8835448005051669881, guid: 2e763f3501a1122418c7e4c28faaca6f, type: 3}
+      objectReference: {fileID: 4184431433901316966, guid: 9a2e2596d67d2ad4ebf7cf526b669517, type: 3}
     - target: {fileID: 4244572622945573025, guid: da61e9219fc24ba4fa4b8487c9c162cd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal (1)
@@ -10596,7 +10538,7 @@ PrefabInstance:
     - target: {fileID: 4242073392027523436, guid: da61e9219fc24ba4fa4b8487c9c162cd, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 5990929712825439581, guid: c96614df32e79ff449b5a38af1714f46, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4244572622945573025, guid: da61e9219fc24ba4fa4b8487c9c162cd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal (4)
@@ -11263,11 +11205,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89188b1386a4be045b45a9a39f345826, type: 3}
---- !u!4 &1578339338 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5569964396757895554, guid: 118994768b3b9c84f925fcbba018f70d, type: 3}
-  m_PrefabInstance: {fileID: 1098428443}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1579865038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5876393954299057526, guid: da61e9219fc24ba4fa4b8487c9c162cd, type: 3}
