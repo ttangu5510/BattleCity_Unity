@@ -107,8 +107,8 @@ public class Enemy_BossTurret : MonoBehaviour, IDamagable
             if (state == EnemyState.Stop) yield return new WaitUntil(() => state != EnemyState.Stop);
 
             yield return new WaitForSeconds(delay);
-            if (transform.rotation.eulerAngles.y > 270 - angleOffset) flag = -1;
-            else if ((transform.rotation.eulerAngles.y < 90 - angleOffset)) flag = 1;
+            if (transform.rotation.eulerAngles.y > 270 + Mathf.Abs(angleOffset)) flag = -1;
+            else if ((transform.rotation.eulerAngles.y < 90 - Mathf.Abs(angleOffset))) flag = 1;
 
             transform.Rotate(Vector3.up, flag * Time.deltaTime * rotateSpeed);
         }
