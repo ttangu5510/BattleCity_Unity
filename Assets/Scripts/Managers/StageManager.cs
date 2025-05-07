@@ -36,10 +36,11 @@ public class StageManager : MonoBehaviour
     private int sumedScore;
 
     [Header("Stages Setting List")]
-    [SerializeField] List<StageData> stageDatas;
+    public List<StageData> stageDatas;
     private Dictionary<string, StageData> stageDatasDic;
 
-
+    [Header("스테이지 관리")]
+    [SerializeField] private int stageIndex;
 
 
     [HideInInspector] public UnityEvent StageStartEvent;
@@ -48,7 +49,7 @@ public class StageManager : MonoBehaviour
     private GameManager gm;
     private UIManager um;
 
-    public BaseBlockSpawner baseBlock;
+    [HideInInspector] public BaseBlockSpawner baseBlock;
     //private InGameState inGameState;
 
     bool isStageOpen;

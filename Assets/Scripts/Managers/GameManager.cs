@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public ScoreBoard[] scores;
 
     public GameState state;
-    public int stageIndex = 2;
+    public int stageIndex = 0;
 
 
     private float time_AfterStageClear;  // 스테이지 클리어 이후 점수 합산 창 대기 시간
@@ -91,8 +91,10 @@ public class GameManager : MonoBehaviour
 
     public void StageComplete()
     {
+        stageIndex++;
+
         // 남은 스테이지가 없을 경우
-        if (stageIndex > lastStageNum)
+        if (stageIndex > StageManager.Instance.stageDatas.Count - 1)
         {
             GameComplete();
         }
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     public void GameComplete()
     {
-        stageIndex = 2;
+        stageIndex = 0;
         state = GameState.InGameComplete;
         StartCoroutine(InGameCloseRoutine());
     }
@@ -180,9 +182,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("스테이지 클리어 코루틴 실행");
 
             yield return new WaitForSecondsRealtime(time_AfterScoreSum);    // 점수 계산 완료 후 다음 스테이지로 넘어가기 전 대기시간
-
-            MySceneManager.Instance.ChangeScene($"STAGE_{stageIndex}");
-            stageIndex++;
+            MySceneManager.Instance.ChangeScene(StageManager.Instance.stageDatas[stageIndex].StageName);
         }
         // 2. 게임 오버 씬
         else if (currentState == GameState.InGameOver)
@@ -194,9 +194,7 @@ public class GameManager : MonoBehaviour
             if (state == GameState.Continue)
             {
                 PlayerManager.Instance.DataInit();
-                stageIndex--;
-                MySceneManager.Instance.ChangeScene($"STAGE_{stageIndex}");
-                stageIndex++;
+                MySceneManager.Instance.ChangeScene(StageManager.Instance.stageDatas[stageIndex].StageName);
                 state = GameState.InGameRun;
             }
             // Quit을 선택 했을 때
@@ -238,7 +236,7 @@ public class GameManager : MonoBehaviour
         PlayerManager.Instance.DataInit();
         SceneManager.LoadSceneAsync("TitleScene");
         state = GameState.Title;
-        stageIndex = 2;
+        stageIndex = 0;
     }
 
     private void OnDestroy()
