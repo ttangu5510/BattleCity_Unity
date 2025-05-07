@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8234328357337897197
+--- !u!1 &2840271917547018612
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3876659326526126017}
-  - component: {fileID: 8898735685773761799}
+  - component: {fileID: 5852028260094582771}
+  - component: {fileID: 578330209780072399}
   m_Layer: 0
-  m_Name: StageManager
+  m_Name: STAGE_1(StageData)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3876659326526126017
+--- !u!4 &5852028260094582771
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8234328357337897197}
+  m_GameObject: {fileID: 2840271917547018612}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.2452497, y: -0.91934365, z: 0.25483516}
@@ -32,37 +32,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8898735685773761799
+--- !u!114 &578330209780072399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8234328357337897197}
+  m_GameObject: {fileID: 2840271917547018612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 975069076abe4ea44868dc736f655dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fdcec5c96cff3f24eb747c42f2841858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 0}
-  bossTurrets: []
-  bossSlayed: 0
-  maxActiveEnemyCount: 0
-  enemyLifeCount: 0
-  stageDatas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  stageIndex: 0
-  StageStartEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  StageCloseEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  baseBlock: {fileID: 0}
+  stageName: STAGE_1
+  maxActiveEnemyCount: 4
+  enemyLifeCount: 4
