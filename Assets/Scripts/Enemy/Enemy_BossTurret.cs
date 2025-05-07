@@ -108,7 +108,7 @@ public class Enemy_BossTurret : MonoBehaviour, IDamagable
 
             yield return new WaitForSeconds(delay);
             if (transform.rotation.eulerAngles.y > 270 - angleOffset) flag = -1;
-            else if ((transform.rotation.eulerAngles.y < 90 - angleOffset)) flag = 1;
+            else if ((transform.rotation.eulerAngles.y < 90 + angleOffset)) flag = 1;
 
             transform.Rotate(Vector3.up, flag * Time.deltaTime * rotateSpeed);
         }
