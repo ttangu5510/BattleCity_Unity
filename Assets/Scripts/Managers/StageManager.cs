@@ -21,6 +21,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private List<Enemy> slayedEnemys;
 
     // 이거 리팩토링해야함. 일단 급해서 public으로 해두겠습니다.
+    public Enemy_Boss boss;
     public List<Enemy_BossTurret> bossTurrets;
     public bool bossSlayed;
 

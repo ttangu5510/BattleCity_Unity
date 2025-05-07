@@ -1,3 +1,4 @@
+using CJM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,9 +31,6 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] protected BulletObjectPool bulletPool;
     [SerializeField] protected GameObject explosionFBX;
 
-
-
-
     private StageManager sm;
     private EnemyManager em;
     private Rigidbody rb;
@@ -48,6 +46,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     Coroutine coroutine_Attack;
     Coroutine coroutine_MovePattern;
 
+    Coroutine coroutine_stopItem;
 
     [SerializeField] private float seedMin_DirChangeCycle;
     [SerializeField] private float seedMax_DirChangeCycle;
@@ -525,6 +524,27 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
         }*/
     }
+    #endregion
+
+    #region 아이템 사용 관련
+
+    public void TimeStopItemEffect(float duration)
+    {
+        if (coroutine_stopItem == null)
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        else
+        {
+            StopCoroutine(coroutine_stopItem);
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        }
+    }
+    IEnumerator TimeStopItemEffectCycle(float duration)
+    {
+        state = EnemyState.Stop;
+        yield return new WaitForSeconds(duration);
+        state = EnemyState.General;
+    }
+
     #endregion
 }
 

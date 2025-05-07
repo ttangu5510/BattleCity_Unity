@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_BossTurret : MonoBehaviour, IDamagable
 {
-    [SerializeField] GameObject turretObject;
     [SerializeField] float rotateSpeed;
     [SerializeField] float shotSpeed;
     [SerializeField] int hp;
@@ -23,6 +21,8 @@ public class Enemy_BossTurret : MonoBehaviour, IDamagable
 
     Coroutine Coroutine_Attack;
     Coroutine Coroutine_Rotate;
+
+    Coroutine coroutine_stopItem;   // 같은부분 리팩토링 필요
 
 
     private void Start()
@@ -56,8 +56,7 @@ public class Enemy_BossTurret : MonoBehaviour, IDamagable
 
             if (StageManager.Instance.enemyLifeCount <= 0)
             {
-                
-                    StageManager.Instance.StageClear();
+                StageManager.Instance.StageClear();
             }
         }
     }
@@ -95,10 +94,11 @@ public class Enemy_BossTurret : MonoBehaviour, IDamagable
     // -1 : 시계반대방향, +1 : 시계방향
     public void Rotate(float rotateState_H)
     {
+        if (state == EnemyState.Stop) return;
         transform.Rotate(Vector3.up, rotateState_H * Time.deltaTime * rotateSpeed);
     }
 
-    public IEnumerator RotateCycle(float angleOffset , int startDir)
+    public IEnumerator RotateCycle(float angleOffset, int startDir)
     {
         int flag = startDir;
         while (true)
@@ -113,6 +113,27 @@ public class Enemy_BossTurret : MonoBehaviour, IDamagable
             transform.Rotate(Vector3.up, flag * Time.deltaTime * rotateSpeed);
         }
     }
+
+
+    #region 일반 몬스터들과 같은 부분. 리팩토링 때 수정하자
+    public void TimeStopItemEffect(float duration)
+    {
+        if (coroutine_stopItem == null)
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        else
+        {
+            StopCoroutine(coroutine_stopItem);
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        }
+    }
+    IEnumerator TimeStopItemEffectCycle(float duration)
+    {
+        state = EnemyState.Stop;
+        yield return new WaitForSeconds(duration);
+        state = EnemyState.General;
+    }
+    #endregion
+
 
     private void OnDisable()
     {
