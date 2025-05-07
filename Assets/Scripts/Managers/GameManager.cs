@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < scores.Length; i++)
         {
             scores[i].name = "BattleCity";
-            scores[i].score = 500 * ((i + 1) * (i + 1));
+            scores[i].score = 3000*i+3000;
         }
         SortScore();
 
