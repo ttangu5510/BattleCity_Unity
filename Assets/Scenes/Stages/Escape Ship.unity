@@ -4439,11 +4439,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[1]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[2]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7475879142699254628, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: m_Name
@@ -10184,7 +10184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[1]
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7475879142699254628, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: m_Name
@@ -10926,23 +10926,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[1]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[2]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[3]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[4]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[5]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7475879142699254628, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: m_Name
@@ -11952,7 +11952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[1]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[2]
@@ -12513,23 +12513,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[1]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[2]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[3]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[4]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[5]
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7475879142699254628, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: m_Name
