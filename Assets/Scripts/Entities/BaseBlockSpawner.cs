@@ -8,11 +8,11 @@ public class BaseBlockSpawner : MonoBehaviour
     [SerializeField] Transform beforeBlock;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        /*if (Input.GetKeyDown(KeyCode.F))
         {
             Destroy(beforeBlock.gameObject);
             beforeBlock = Instantiate(BaseBrickSet, beforeBlock.position, beforeBlock.rotation).transform;
-        }
+        }*/
     }
 
     public void Start()
