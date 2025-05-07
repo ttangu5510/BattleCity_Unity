@@ -2352,6 +2352,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1874324643}
     m_Modifications:
+    - target: {fileID: 4242073392027523436, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 8835448005051669881, guid: 2e763f3501a1122418c7e4c28faaca6f, type: 3}
     - target: {fileID: 4244572622945573025, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal (3)
@@ -6577,6 +6581,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 841134126}
     m_Modifications:
+    - target: {fileID: 4242073392027523436, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 5990929712825439581, guid: c96614df32e79ff449b5a38af1714f46, type: 3}
     - target: {fileID: 4244572622945573025, guid: d5474bb3aa29c704ba9b4b11585e05bd, type: 3}
       propertyPath: m_Name
       value: JYL_Enemy_Nomal (2)
