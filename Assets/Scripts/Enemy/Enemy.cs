@@ -509,7 +509,16 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         PooledObject bullet = bulletPool.BulletOut();
         if (bullet == null) return;
 
-        bullet.bulletType = PooledObject.BulletType.Type1;
+        if (grade == EnemyGrade.elite)
+        {
+            bullet.bulletType = PooledObject.BulletType.Type2;
+        }
+        else
+        {
+            bullet.bulletType = PooledObject.BulletType.Type1;
+        }
+
+
 
         bullet.transform.position = muzzPoint.position;
         bullet.transform.forward = muzzPoint.forward;

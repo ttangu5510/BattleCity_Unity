@@ -1,5 +1,6 @@
 ﻿using KMS;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour, IDamagable, IMovable
     private PlayerManager pm;
     private StageManager sm;
     private UIManager um;
+
+    Coroutine invincibleCycle;
 
     public MoveType moveType { get; set; }
 
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         respawningTime = pm.RespawningTime;
 
         // 동기화된 초기 설정 UI에 반영
+        Debug.Log(um.inGameUI_Instance);
         um.inGameUI_Instance.ShowPlayerLife();
         um.inGameUI_Instance.ShowCurrentScore();
         um.inGameUI_Instance.ShowEnemyLife();
@@ -74,7 +78,8 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     private void OnDestroy()
     {
-
+        if (invincibleCycle != null)
+            StopCoroutine(invincibleCycle);
     }
 
     // 데미지 받음 => 죽음 판정
@@ -210,7 +215,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
 
     public void InvincibleRoutineStart(float time)
     {
-        StartCoroutine(InvincibleRoutine(time));
+        invincibleCycle = StartCoroutine(InvincibleRoutine(time));
     }
 
     public IEnumerator InvincibleRoutine(float time)
@@ -223,8 +228,6 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         Destroy(fbx);
         // TODO : 플레이어 피격 이펙트 or 셰이더 초기화
     }
-
-
 
 
     #endregion
