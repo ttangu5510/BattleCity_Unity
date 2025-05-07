@@ -28,9 +28,13 @@ public class UIManager : MonoBehaviour
         sm = StageManager.Instance;
 
         // 특정 스테이지의 전환 효과 적용 가능 (원하는 스테이지 -1 로 설정)
-        /*if (scene.name.Contains("BOSS"))
+        /*if (scene.name.Contains("Battle"))
         {
             MySceneManager.Instance.FadeTransitionSelect(1);
+        }
+        else if (scene.name.Contains("Title"))
+        {
+            MySceneManager.Instance.FadeTransitionSelect(0);
         }*/
 
         if (sm.stageNames.Contains(scene.name))
