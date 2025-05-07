@@ -66,7 +66,7 @@ public class Enemy_BossTurret : MonoBehaviour, IDamagable
         PooledObject bullet = bulletPool.BulletOut();
         if (bullet == null) return;
 
-        bullet.bulletType = PooledObject.BulletType.Type1;
+        bullet.bulletType = PooledObject.BulletType.Type2;
 
         bullet.transform.position = muzzPoint.position;
         bullet.transform.forward = muzzPoint.forward;
