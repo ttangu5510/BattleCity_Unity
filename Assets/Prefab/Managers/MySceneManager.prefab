@@ -114,7 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da88fe0e7365974eb4dbd80dd9075f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTransUI_Prefab:
+  TransSceneEffect_Prefab:
+  - {fileID: 7490082171074149929, guid: 7d632a374411e1042bb7d9d49d188e59, type: 3}
+  - {fileID: 7490082171074149929, guid: 42f17dbde4fad0a4084386cfb0205bf3, type: 3}
+  - {fileID: 7490082171074149929, guid: 1700f6168a4e2cf4687d4fbc9787206a, type: 3}
   - {fileID: 7490082171074149929, guid: ae161ae52758e384693f3f095bcd8133, type: 3}
-  - {fileID: 2162525388020688127, guid: d4008adcb58cab44a9067f65ee061406, type: 3}
+  - {fileID: 7490082171074149929, guid: bff0b3d77cfaea343bb05ca872549055, type: 3}
   index: 0

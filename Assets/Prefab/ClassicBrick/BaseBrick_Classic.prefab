@@ -4893,7 +4893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockType: 0
-  InvincibleTime: 10
+  InvincibleTime: 7
 --- !u!1 &3546579817140388933
 GameObject:
   m_ObjectHideFlags: 0
@@ -8695,7 +8695,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291490290944944413}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8715,7 +8715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce92d8446d64102489da83144ceb48d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseBrickSet: {fileID: 5125270181699909891, guid: 29e778bc7bd43234aaf186e9e0cdc644, type: 3}
+  BaseBrickSet: {fileID: 5125270181699909891, guid: 2c7b3b12fc098774ea7939ded8b99874, type: 3}
   beforeBlock: {fileID: 7148051729265901861}
 --- !u!1 &5451749798420288268
 GameObject:

@@ -1,30 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
-public class FadeTransition : MonoBehaviour
+public class Transition_Fade : TransitionSceneEffect
 {
     [SerializeField] Image fadeImage;
     [SerializeField] float fadeTime;
-    [SerializeField] public TMP_Text loadingText;
-    // Start is called before the first frame update
 
-    Coroutine loadingRoutine;
-
-    public void StartLoading(string sceneName)
-    {
-        if (loadingRoutine == null)
-        {
-            loadingRoutine = StartCoroutine(LoadingRoutine(sceneName));
-        }
-    }
-
-    public IEnumerator LoadingRoutine(string sceneName)
+    public override IEnumerator TransitionPattern(string sceneName)
     {
         float timer = 0;
         while (timer < fadeTime)
@@ -38,7 +23,7 @@ public class FadeTransition : MonoBehaviour
         }
 
         AsyncOperation oper = SceneManager.LoadSceneAsync(sceneName);
-        Debug.Log($"LoadingText : {loadingText}");
+        // 여기서 커스텀 이름으로 변경
         loadingText.text = $"{sceneName}";
         loadingText.gameObject.SetActive(true);
         yield return null;
@@ -55,8 +40,5 @@ public class FadeTransition : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-
-        loadingRoutine = null;
-
     }
 }
