@@ -4609,6 +4609,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8898735685773761799, guid: 171ebb5c539efe449abc4faa280f4440, type: 3}
+      propertyPath: stageDatas.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898735685773761799, guid: 171ebb5c539efe449abc4faa280f4440, type: 3}
+      propertyPath: stageDatas.Array.data[5]
+      value: 
+      objectReference: {fileID: 578330209780072399, guid: 12fc23e3be339c144b7545a8242a5f8e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
