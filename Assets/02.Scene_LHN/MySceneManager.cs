@@ -8,9 +8,9 @@ public class MySceneManager : MonoBehaviour
     //sceneChangeUI_Prefab_BossStage; ==> Danger!! 느낌의 씬 전환
     //sceneChangeUI_Prefab_PlayerDead; ==> 빨간색 페이드아웃 등등
 
-    [SerializeField] private List<GameObject> fadeTransUI_Prefab;
+    [SerializeField] private List<GameObject> TransSceneEffect_Prefab;
     [SerializeField] private int index;
-    private FadeTransition fadeTransUI_Instance;
+    private TransitionSceneEffect TransSceneEffect_Instance;
 
     private static MySceneManager instance;
     public static MySceneManager Instance { get { return instance; } }
@@ -46,25 +46,36 @@ public class MySceneManager : MonoBehaviour
 
     public void FadeTransitionSelect(int index)
     {
-        if (fadeTransUI_Instance != null)
+        // 현재 인스턴스 존재하는지 체크
+        if (TransSceneEffect_Instance != null)
         {
-            Destroy(fadeTransUI_Instance.gameObject);
-            fadeTransUI_Instance = null;
-        }
+            // 존재한다면? 현재 인스턴스가 내가 표시할 UI프리펩과 같은지 체크
+            if (TransSceneEffect_Instance != TransSceneEffect_Prefab[index])
+            {
+                // 내가 만약 다른 UI페이드를 띄우고 싶을 땐 파괴 후 생성
+                Destroy(TransSceneEffect_Instance.gameObject);
+                TransSceneEffect_Instance = null;
 
-        fadeTransUI_Instance = Instantiate(fadeTransUI_Prefab[index]).GetComponent<FadeTransition>();
-        DontDestroyOnLoad(fadeTransUI_Instance.gameObject);
+                TransSceneEffect_Instance = Instantiate(TransSceneEffect_Prefab[index]).GetComponent<TransitionSceneEffect>();
+                DontDestroyOnLoad(TransSceneEffect_Instance.gameObject);
+            }
+        }
+        else
+        {
+            TransSceneEffect_Instance = Instantiate(TransSceneEffect_Prefab[index]).GetComponent<TransitionSceneEffect>();
+            DontDestroyOnLoad(TransSceneEffect_Instance.gameObject);
+        }
     }
 
 
     public void ChangeScene(string sceneName)
     {
-        fadeTransUI_Instance.StartLoading(sceneName);
+        TransSceneEffect_Instance.StartLoading(sceneName);
     }
 
     public void MoveToFirstStage()
     {
-        MySceneManager.Instance.fadeTransUI_Instance.StartLoading(StageManager.Instance.stageDatas[0].StageName);
+        MySceneManager.Instance.TransSceneEffect_Instance.StartLoading(StageManager.Instance.stageDatas[0].StageName);
     }
 }
 
