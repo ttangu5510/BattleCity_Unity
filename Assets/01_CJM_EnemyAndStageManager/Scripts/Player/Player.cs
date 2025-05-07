@@ -57,7 +57,9 @@ namespace CJM
             // 동기화된 초기 설정 UI에 반영
             um.inGameUI_Instance.ShowPlayerLife();
             um.inGameUI_Instance.ShowCurrentScore();
+            um.inGameUI_Instance.ShowEnemyLife();
 
+            pm.PlayerStateUpdate(PlayerState.General);
 
             // 등급 상태 테스트용.
             UpdateRender();
@@ -96,14 +98,7 @@ namespace CJM
 
 
 
-        public IEnumerator InvincibleRoutine(float time)
-        {
-            pm.PlayerStateUpdate(PlayerState.Invincible);
-            // TODO : 플레이어 피격 이펙트 or 셰이더 실행
-            yield return new WaitForSeconds(time);
-            pm.PlayerStateUpdate(PlayerState.General);
-            // TODO : 플레이어 피격 이펙트 or 셰이더 초기화
-        }
+       
 
         // 죽음 => 게임오버 판정
         public void Dead()
@@ -213,7 +208,14 @@ namespace CJM
             StartCoroutine(InvincibleRoutine(time));
         }
 
-
+        public IEnumerator InvincibleRoutine(float time)
+        {
+            pm.PlayerStateUpdate(PlayerState.Invincible);
+            // TODO : 플레이어 피격 이펙트 or 셰이더 실행
+            yield return new WaitForSeconds(time);
+            pm.PlayerStateUpdate(PlayerState.General);
+            // TODO : 플레이어 피격 이펙트 or 셰이더 초기화
+        }
 
 
 

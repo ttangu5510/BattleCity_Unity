@@ -343,6 +343,8 @@ MonoBehaviour:
   body: {fileID: 8992971360751706498}
   bulletPool: {fileID: 2096056296923895494}
   explosionFBX: {fileID: 1056904543853562, guid: 4cf45cdce36e66e4a93614abb5ae7821, type: 3}
+  itemPossessFBX: {fileID: 1739096776086156, guid: 4d6d0b6c98562024e8896ae6e3312f74, type: 3}
+  itemPossessOffsetY: 2.3
   dir: {x: 0, y: 0, z: 0}
   seedMin_DirChangeCycle: 0.5
   seedMax_DirChangeCycle: 3

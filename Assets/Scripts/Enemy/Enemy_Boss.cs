@@ -11,6 +11,7 @@ public class Enemy_Boss : MonoBehaviour
     [SerializeField] private float moveSpeed;
     public EnemyState state;
 
+    Coroutine coroutine_stopItem;   // 같은부분 리팩토링 필요
 
     // 스테이지 매니저에 참조할 수 있는 공간 만들기. 일시정지용. 터렛들도 같이
 
@@ -18,6 +19,8 @@ public class Enemy_Boss : MonoBehaviour
     Coroutine moveCycle;
     private void Start()
     {
+        StageManager.Instance.boss = this;
+
         SwitchingDir();
         moveCycle = StartCoroutine(MovePattern());
     }
@@ -33,6 +36,8 @@ public class Enemy_Boss : MonoBehaviour
     }
     public void Move(Vector3 dir)
     {
+        if (state == EnemyState.Stop) return;
+
         transform.Translate(Time.deltaTime * moveSpeed * dir);
     }
 
@@ -83,4 +88,25 @@ public class Enemy_Boss : MonoBehaviour
         if (moveCycle != null)
             StopCoroutine(moveCycle);
     }
+
+    #region 일반 몬스터들과 같은 부분. 리팩토링 때 수정하자
+
+    public void TimeStopItemEffect(float duration)
+    {
+        if (coroutine_stopItem == null)
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        else
+        {
+            StopCoroutine(coroutine_stopItem);
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        }
+    }
+    IEnumerator TimeStopItemEffectCycle(float duration)
+    {
+        state = EnemyState.Stop;
+        yield return new WaitForSeconds(duration);
+        state = EnemyState.General;
+    }
+    #endregion
+
 }

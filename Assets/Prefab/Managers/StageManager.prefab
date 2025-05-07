@@ -44,15 +44,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975069076abe4ea44868dc736f655dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawners: []
-  activateEnemys: []
-  slayedEnemys: []
+  boss: {fileID: 0}
+  bossTurrets: []
+  bossSlayed: 0
   maxActiveEnemyCount: 0
   enemyLifeCount: 0
-  sumedScore: 0
+  stageDatas:
+  - {fileID: 578330209780072399, guid: 11025af2f5b43e94d9c2b8ce01364529, type: 3}
+  - {fileID: 578330209780072399, guid: 01be3c6ab810e7f41b771ff084d16a17, type: 3}
+  - {fileID: 578330209780072399, guid: 74e4d231fa616a0459711396647de467, type: 3}
+  - {fileID: 578330209780072399, guid: 03e30122f7bc75a47b71311d94dbc9bd, type: 3}
+  - {fileID: 578330209780072399, guid: 967c23ed18b017c42b7b878668b5dc5d, type: 3}
+  - {fileID: 578330209780072399, guid: f8e941f01ea811f45bfebfd2d4c69008, type: 3}
+  - {fileID: 578330209780072399, guid: f594a60a273174d44a1bc0a009fb1614, type: 3}
+  - {fileID: 578330209780072399, guid: c8265239a5e01024d87862a29fe16a08, type: 3}
+  - {fileID: 578330209780072399, guid: 93cbc6146942c094da079a64a89b97c4, type: 3}
+  stageIndex: 0
   StageStartEvent:
     m_PersistentCalls:
       m_Calls: []
   StageCloseEvent:
     m_PersistentCalls:
       m_Calls: []
+  baseBlock: {fileID: 0}
+  stageNames: []

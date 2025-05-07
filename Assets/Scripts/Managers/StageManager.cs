@@ -14,15 +14,15 @@ public class StageManager : MonoBehaviour
     private static StageManager instance;
     public static StageManager Instance { get { return instance; } }
 
-    [SerializeField] private List<EnemySpawner> spawners;
+    private List<EnemySpawner> spawners = new List<EnemySpawner>();
     public List<Enemy> ActivateEnemys { get { return activateEnemys; } }
-    [SerializeField] private List<Enemy> activateEnemys;
-
-    [SerializeField] private List<Enemy> slayedEnemys;
+    private List<Enemy> activateEnemys = new List<Enemy>();
+    private List<Enemy> slayedEnemys = new List<Enemy>();
 
     // 이거 리팩토링해야함. 일단 급해서 public으로 해두겠습니다.
-    public List<Enemy_BossTurret> bossTurrets;
-    public bool bossSlayed;
+    [HideInInspector] public Enemy_Boss boss;
+    [HideInInspector] public List<Enemy_BossTurret> bossTurrets;
+    [HideInInspector] public bool bossSlayed;
 
 
     [Header("Now Stage Info")]
@@ -30,10 +30,17 @@ public class StageManager : MonoBehaviour
     [SerializeField] private int maxActiveEnemyCount;   // 맵 상에 동시에 존재할 수 있는 최대 적 수
     [Tooltip("Count of lives of the enemy to clear")]
     public int enemyLifeCount;        // 남은 적의 목숨
-    [Tooltip("Scores earned on the current stage")]
-    [SerializeField] private int sumedScore;
-
     public int EnemyLifeCount { get { return enemyLifeCount; } }
+
+    [Tooltip("Scores earned on the current stage")]
+    private int sumedScore;
+
+    [Header("Stages Setting List")]
+    public List<StageData> stageDatas;
+    private Dictionary<string, StageData> stageDatasDic;
+
+    [Header("스테이지 관리")]
+    [SerializeField] private int stageIndex;
 
 
     [HideInInspector] public UnityEvent StageStartEvent;
@@ -42,26 +49,94 @@ public class StageManager : MonoBehaviour
     private GameManager gm;
     private UIManager um;
 
-    public BaseBlockSpawner baseBlock;
+    [HideInInspector] public BaseBlockSpawner baseBlock;
     //private InGameState inGameState;
+
+    [HideInInspector] public List<string> stageNames = new List<string>();
 
     bool isStageOpen;
 
-
     private void Awake()
     {
-        // 싱글톤 인스턴스 생성
+        Debug.Log("awake");
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += StageStart;
+
+            // 스테이지 데이터 리스트 => 스테이지 데이터 딕셔너리로 넣어주기 (스테이지 이름을 키값으로 가짐)
+            stageDatasDic = new Dictionary<string, StageData>();
+            foreach (StageData data in stageDatas)
+            {
+                stageDatasDic[data.StageName] = data;
+            }
+
+            for (int i = 0; i < stageDatas.Count; i++)
+            {
+                stageNames.Add(stageDatas[i].StageName);
+            }
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            Debug.Log("스테이지매니저 싱글톤 생성");
         }
         else
         {
             Destroy(gameObject);
         }
     }
+
+
+    #region 스테이지 데이터 동기화 및 시작 설정
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (stageNames.Contains(scene.name))
+        {
+            // 스테이지 정보 동기화
+            StageDataInit();
+            string key = scene.name;
+            SynchronizeStageData(stageDatasDic[key].MaxActiveEnemyCount, stageDatasDic[key].EnemyLifeCount);
+            
+            isStageOpen = true;
+
+            Debug.Log("스테이지 시작 이벤트 실행");
+            StageStartEvent?.Invoke();
+
+
+
+            // 임시, 리팩토링 필요
+            bossSlayed = true;
+
+            if (gm != null) gm.state = GameState.InGameRun;
+        }
+
+        // 임시, 리팩토링 필요
+        if (scene.name.Contains("Boss"))
+        {
+            bossSlayed = false;
+        }
+    }
+
+    // 스테이지 씬 불러올 때, StageData에서 초기화
+    public void StageDataInit()
+    {
+        // 리스트 초기화
+        spawners = new List<EnemySpawner>();
+        activateEnemys = new List<Enemy>();
+        slayedEnemys = new List<Enemy>();
+        bossTurrets = new List<Enemy_BossTurret>();
+    }
+
+    // 스테이지 씬 불러올 때, StageData에서 동기화
+    public void SynchronizeStageData(int maxActiveEnemyCount, int enemyLifeCount)
+    {
+        this.maxActiveEnemyCount = maxActiveEnemyCount;
+        this.enemyLifeCount = enemyLifeCount;
+    }
+    #endregion
+
+
+    
 
 
     private void Start()
@@ -73,6 +148,8 @@ public class StageManager : MonoBehaviour
         {
             gm.state = GameState.InGameRun;
         }
+
+        
     }
 
     public void StageClear()
@@ -96,30 +173,12 @@ public class StageManager : MonoBehaviour
         StageClose();
     }
 
-    public void StageStart(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name.Contains("STAGE"))
-        {
-            isStageOpen = true;
-            StageStartEvent?.Invoke();
-
-            // 임시, 리팩토링 필요
-            bossSlayed = true;
-            
-            if (gm != null) gm.state = GameState.InGameRun;
-        }
-
-        // 임시, 리팩토링 필요
-        if (scene.name.Contains("Boss"))
-        {
-            bossSlayed = false;
-        }
-    }
+    
 
     public void StageClose()
     {
         StageCloseEvent?.Invoke();
-        StageCloseEvent.RemoveAllListeners();
+        //StageCloseEvent.RemoveAllListeners();
 
         isStageOpen = false;
         
@@ -128,22 +187,7 @@ public class StageManager : MonoBehaviour
         // 스테이지 실패 상태면 -> 게임 매니저.게임 오버 이벤트
     }
 
-    // 스테이지 씬 불러올 때, StageData에서 초기화
-    public void StageDataInit()
-    {
-        // 리스트 초기화
-        spawners = new List<EnemySpawner>();
-        activateEnemys = new List<Enemy>();
-        slayedEnemys = new List<Enemy>();
-        bossTurrets = new List<Enemy_BossTurret>();
-    }
-
-    // 스테이지 씬 불러올 때, StageData에서 동기화
-    public void SynchronizeStageData(int maxActiveEnemyCount, int enemyLifeCount)
-    {
-        this.maxActiveEnemyCount = maxActiveEnemyCount;
-        this.enemyLifeCount = enemyLifeCount;
-    }
+    
 
     // 스테이지에 존재하는 EnemySpawner들을 리스트에 추가
     public void SpawnerAddToList(EnemySpawner spawner)

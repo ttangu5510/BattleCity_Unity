@@ -1,3 +1,4 @@
+using CJM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,9 +30,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     [SerializeField] private Transform body;
     [SerializeField] protected BulletObjectPool bulletPool;
     [SerializeField] protected GameObject explosionFBX;
-
-
-
+    [SerializeField] protected GameObject itemPossessFBX;
+    [SerializeField] protected float itemPossessOffsetY;
 
     private StageManager sm;
     private EnemyManager em;
@@ -48,6 +48,9 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
     Coroutine coroutine_Attack;
     Coroutine coroutine_MovePattern;
 
+    Coroutine coroutine_stopItem;
+    Coroutine coroutine_ItemPossessFBXRun;
+    GameObject fbxInstacne_ItemPossess;
 
     [SerializeField] private float seedMin_DirChangeCycle;
     [SerializeField] private float seedMax_DirChangeCycle;
@@ -80,6 +83,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         if (coroutine_Attack == null)
             coroutine_Attack = StartCoroutine(AttackCycle());
 
+        // 특정 이동 패턴을 설정해두면 그에 맞는 패턴으로 이동 진행
         if (coroutine_MovePattern == null)
         {
             if (state == EnemyState.RandomMove) 
@@ -89,7 +93,18 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
             else if (state == EnemyState.General)
                 coroutine_MovePattern = StartCoroutine(MovePattern_C(seedMin_DirChangeCycle, seedMax_DirChangeCycle));
         }
+
+        // 아이템 보유중이라면 => 아이템 보유 효과 실행
+        if (item != null)
+        {
+            fbxInstacne_ItemPossess = Instantiate(itemPossessFBX, body.transform);
+            fbxInstacne_ItemPossess.transform.localPosition = 
+                fbxInstacne_ItemPossess.transform.localPosition + Vector3.up * itemPossessOffsetY;
+        }
     }
+
+
+
     void Update()
     {
         // 이동 로직 여기에
@@ -139,6 +154,9 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
             StopCoroutine(coroutine_Attack);
         if (coroutine_MovePattern != null)
             StopCoroutine(coroutine_MovePattern);
+
+        Destroy(fbxInstacne_ItemPossess);
+
     }
 
     #region 적 이동 관련 로직
@@ -491,7 +509,16 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
         PooledObject bullet = bulletPool.BulletOut();
         if (bullet == null) return;
 
-        bullet.bulletType = PooledObject.BulletType.Type1;
+        if (grade == EnemyGrade.elite)
+        {
+            bullet.bulletType = PooledObject.BulletType.Type2;
+        }
+        else
+        {
+            bullet.bulletType = PooledObject.BulletType.Type1;
+        }
+
+
 
         bullet.transform.position = muzzPoint.position;
         bullet.transform.forward = muzzPoint.forward;
@@ -525,6 +552,27 @@ public class Enemy : MonoBehaviour, IDamagable, IMovable
 
         }*/
     }
+    #endregion
+
+    #region 아이템 사용 관련
+
+    public void TimeStopItemEffect(float duration)
+    {
+        if (coroutine_stopItem == null)
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        else
+        {
+            StopCoroutine(coroutine_stopItem);
+            coroutine_stopItem = StartCoroutine(TimeStopItemEffectCycle(duration));
+        }
+    }
+    IEnumerator TimeStopItemEffectCycle(float duration)
+    {
+        state = EnemyState.Stop;
+        yield return new WaitForSeconds(duration);
+        state = EnemyState.General;
+    }
+
     #endregion
 }
 

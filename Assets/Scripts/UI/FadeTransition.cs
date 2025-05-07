@@ -26,7 +26,6 @@ public class FadeTransition : MonoBehaviour
 
     public IEnumerator LoadingRoutine(string sceneName)
     {
-        Debug.Log(sceneName);
         float timer = 0;
         while (timer < fadeTime)
         {

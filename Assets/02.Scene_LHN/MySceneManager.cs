@@ -64,7 +64,7 @@ public class MySceneManager : MonoBehaviour
 
     public void MoveToFirstStage()
     {
-        MySceneManager.Instance.fadeTransUI_Instance.StartLoading("STAGE 1");
+        MySceneManager.Instance.fadeTransUI_Instance.StartLoading(StageManager.Instance.stageDatas[0].StageName);
     }
 }
 
