@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
 
     public bool isPaused; // 게임의 Pause 상태를 관리
 
+    private List<string> stageNames = new List<string>();
+
+    StageManager sm;
 
     // 프리펩 인스턴시에이트로 
     [SerializeField] private GameObject inGameUI_Prefab;  // 인게임 UI
@@ -22,14 +25,16 @@ public class UIManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        sm = StageManager.Instance;
+
         // 특정 스테이지의 전환 효과 적용 가능 (원하는 스테이지 -1 로 설정)
         if (scene.name.Contains("BOSS"))
         {
             MySceneManager.Instance.FadeTransitionSelect(1);
         }
-        if (scene.name.Contains("STAGE"))
+
+        if (sm.stageNames.Contains(scene.name))
         {
-            // 스테이지 씬이라면 InGameUI 활성화
             if (inGameUI_Instance != null) return;
             inGameUI_Instance = Instantiate(inGameUI_Prefab).GetComponent<InGameUI>();
             DontDestroyOnLoad(inGameUI_Instance.gameObject);
@@ -57,6 +62,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        
+    }
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;

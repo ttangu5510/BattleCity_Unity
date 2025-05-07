@@ -61,6 +61,7 @@ public class Player : MonoBehaviour, IDamagable, IMovable
         respawningTime = pm.RespawningTime;
 
         // 동기화된 초기 설정 UI에 반영
+        Debug.Log(um.inGameUI_Instance);
         um.inGameUI_Instance.ShowPlayerLife();
         um.inGameUI_Instance.ShowCurrentScore();
         um.inGameUI_Instance.ShowEnemyLife();

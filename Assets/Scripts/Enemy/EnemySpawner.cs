@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform standByGroup;
     [SerializeField] private GameObject EffectPrefab;
     [SerializeField] private List<float> standByTimeToSpawn;
-    [SerializeField] private int standByIndex;
+    private int standByIndex;
 
     Coroutine spPattern;
 

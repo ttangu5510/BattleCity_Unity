@@ -14,10 +14,10 @@ public class StageManager : MonoBehaviour
     private static StageManager instance;
     public static StageManager Instance { get { return instance; } }
 
-    private List<EnemySpawner> spawners;
+    private List<EnemySpawner> spawners = new List<EnemySpawner>();
     public List<Enemy> ActivateEnemys { get { return activateEnemys; } }
-    private List<Enemy> activateEnemys;
-    private List<Enemy> slayedEnemys;
+    private List<Enemy> activateEnemys = new List<Enemy>();
+    private List<Enemy> slayedEnemys = new List<Enemy>();
 
     // 이거 리팩토링해야함. 일단 급해서 public으로 해두겠습니다.
     [HideInInspector] public Enemy_Boss boss;
@@ -52,13 +52,45 @@ public class StageManager : MonoBehaviour
     [HideInInspector] public BaseBlockSpawner baseBlock;
     //private InGameState inGameState;
 
+    [HideInInspector] public List<string> stageNames = new List<string>();
+
     bool isStageOpen;
+
+    private void Awake()
+    {
+        Debug.Log("awake");
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            // 스테이지 데이터 리스트 => 스테이지 데이터 딕셔너리로 넣어주기 (스테이지 이름을 키값으로 가짐)
+            stageDatasDic = new Dictionary<string, StageData>();
+            foreach (StageData data in stageDatas)
+            {
+                stageDatasDic[data.StageName] = data;
+            }
+
+            for (int i = 0; i < stageDatas.Count; i++)
+            {
+                stageNames.Add(stageDatas[i].StageName);
+            }
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            Debug.Log("스테이지매니저 싱글톤 생성");
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
     #region 스테이지 데이터 동기화 및 시작 설정
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name.Contains("STAGE"))
+        if (stageNames.Contains(scene.name))
         {
             // 스테이지 정보 동기화
             StageDataInit();
@@ -66,7 +98,11 @@ public class StageManager : MonoBehaviour
             SynchronizeStageData(stageDatasDic[key].MaxActiveEnemyCount, stageDatasDic[key].EnemyLifeCount);
             
             isStageOpen = true;
+
+            Debug.Log("스테이지 시작 이벤트 실행");
             StageStartEvent?.Invoke();
+
+
 
             // 임시, 리팩토링 필요
             bossSlayed = true;
@@ -100,30 +136,7 @@ public class StageManager : MonoBehaviour
     #endregion
 
 
-    private void Awake()
-    {
-        // 싱글톤 인스턴스 생성
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            
-            // 스테이지 데이터 리스트 => 스테이지 데이터 딕셔너리로 넣어주기 (스테이지 이름을 키값으로 가짐)
-            stageDatasDic = new Dictionary<string, StageData>();
-            foreach (StageData data in stageDatas)
-            {
-                stageDatasDic[data.StageName] = data;
-            }
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            Debug.Log("스테이지매니저 싱글톤 생성");
-
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    
 
 
     private void Start()
@@ -135,6 +148,8 @@ public class StageManager : MonoBehaviour
         {
             gm.state = GameState.InGameRun;
         }
+
+        
     }
 
     public void StageClear()
@@ -163,7 +178,7 @@ public class StageManager : MonoBehaviour
     public void StageClose()
     {
         StageCloseEvent?.Invoke();
-        StageCloseEvent.RemoveAllListeners();
+        //StageCloseEvent.RemoveAllListeners();
 
         isStageOpen = false;
         
