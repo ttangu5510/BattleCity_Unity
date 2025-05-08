@@ -10282,7 +10282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[1]
-      value: 30
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4819136882676850808, guid: ba4b7cf8eb1addc4db993a7e2bfd200b, type: 3}
       propertyPath: standByTimeToSpawn.Array.data[2]
