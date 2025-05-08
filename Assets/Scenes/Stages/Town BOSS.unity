@@ -3052,39 +3052,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0275fdb7179ce434d8fb35414fecc02f, type: 3}
---- !u!1 &189022583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 189022584}
-  m_Layer: 0
-  m_Name: Boss
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &189022584
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189022583}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.232021, y: 1.1024656, z: 11.353754}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2653055671381886010}
-  - {fileID: 7763669685621967654}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191896186
 GameObject:
   m_ObjectHideFlags: 0
@@ -44459,7 +44426,7 @@ Transform:
   m_GameObject: {fileID: 4795489860484563120}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.123998165, y: -2.1024656, z: 0.4618063}
+  m_LocalPosition: {x: 4.1080227, y: -1, z: 11.81556}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44467,7 +44434,7 @@ Transform:
   - {fileID: 7261079418950641475}
   - {fileID: 1668480557437513949}
   - {fileID: 2894724472190118856}
-  m_Father: {fileID: 189022584}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2683828706616578304
 GameObject:
@@ -44647,7 +44614,7 @@ GameObject:
   - component: {fileID: 7763669685621967654}
   - component: {fileID: 47434836617746019}
   m_Layer: 8
-  m_Name: BulletPool_Enemy
+  m_Name: BulletPool_BOSS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48237,11 +48204,11 @@ Transform:
   m_GameObject: {fileID: 2758280924796325447}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.123998165, y: -2.1024656, z: 0.4618063}
+  m_LocalPosition: {x: 4.1080227, y: -1, z: 11.81556}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 189022584}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7772178325704189894
 PrefabInstance:
@@ -49667,7 +49634,8 @@ SceneRoots:
   - {fileID: 1260472093}
   - {fileID: 2041371334}
   - {fileID: 1867091335}
-  - {fileID: 189022584}
+  - {fileID: 7763669685621967654}
+  - {fileID: 2653055671381886010}
   - {fileID: 490467618}
   - {fileID: 1434508142}
   - {fileID: 690796884}
